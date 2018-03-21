@@ -1,0 +1,39 @@
+reservation:
+    resource: "@ReservationBundle/Resources/config/routing.yml"
+    prefix:   /
+
+admin:
+    resource: "@AdminBundle/Resources/config/routing.yml"
+    prefix:   /
+
+privee:
+    resource: "@PriveeBundle/Resources/config/routing.yml"
+    prefix:   /
+
+public:
+    resource: "@PublicBundle/Resources/config/routing.yml"
+    prefix:   /
+
+user:
+    resource: "@UserBundle/Resources/config/routing.yml"
+    prefix:   /
+    
+fos_user_security:
+    resource: "@UserBundle/Resources/config/routing/security.yml"
+    prefix: /
+
+fos_user_profile:
+    resource: "@UserBundle/Resources/config/routing/profil.yml"
+    prefix: /
+
+fos_user_register:
+    resource: "@UserBundle/Resources/config/routing/registration.yml"
+    prefix: /
+
+fos_user_resetting:
+    resource: "@UserBundle/Resources/config/routing/resetting.yml"
+    prefix: /
+
+fos_user_change_password:
+    resource: "@UserBundle/Resources/config/routing/change_password.yml"
+    prefix: /      

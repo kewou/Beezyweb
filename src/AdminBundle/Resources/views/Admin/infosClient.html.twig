@@ -1,0 +1,72 @@
+{% extends "AdminBundle:Admin:index.html.twig" %}
+
+{% block body %} 
+ 		<!-- Page Wrapper -->
+			<div id="page-wrapper">
+				<header id="header">
+					<h1><a href="">Retour</a></h1>
+					<nav>
+						<a href="#menu">Menu</a>
+					</nav>
+				</header>
+				<!-- Menu -->
+					<nav id="menu">
+						<div class="inner">
+							<h2>Menu</h2>
+							<ul class="links">
+								<li id="accueil"><a href="{{ path('Admin_accueil') }}">Accueil</a></li>                      			
+                      			<li id="calendrier"><a href="#" onclick="afficheCalendrierAdmin()">Calendrier</a></li>							
+							</ul>							
+						</div>
+					</nav>
+				    <section id="contenu">
+				    	{% block contenu %} 
+            				<!-- Wrapper -->
+            					<section id="wrapper">
+            						{% block wrapper %}
+            						<!-- One -->
+            							<section id="one" class="wrapper spotlight style1">
+            								<div class="inner">
+            									<a href="#" class="image"><img src="{{ asset('bundles/public/images/pic01.jpg')}}" alt="" /></a>
+            									<div class="content">												
+            										<h2 class="major">Ses informations</a>                                                                		              
+                                                    </h2>                                                                                          																											
+														<div class="wrapperDivContenu">	
+																<div>
+																	<ul>		
+																		<li><span class="thInfos">Nom:</span>  <span class="tdInfos">{{ variables[0].nom }}</span></li>
+																		<li><span class="thInfos">Prénom:</span>  <span class="tdInfos">{{ variables[0].prenom}}</span></li>
+																		<li><span class="tdInfos">0{{ variables[0].telephone }}</span></li>
+																		<li><span class="tdInfos">{{ variables[0].email }}</span></li>
+																		<li><span class="thInfos">Solde:</span>  <span class="tdInfos">{{ variables[0].money}} €</span></li>
+																		<li><span class="thInfos">Quota:</span>  <span class="tdInfos">{{ variables[0].solde }} H</span></li>			
+																	</ul>
+																	 <p hidden id="id">{{ variables[0].id }}</p>             
+																 </div>     
+																 <input type="number" step="50" value="0" min="0" max="1000" id="somme"></input>         
+																 <button type="button" onclick="ajouterArgent()">Ajouter</button>
+																 
+																{% if variables[1]|length > 0 %}
+																<hr>
+																 <h3 class="titreGestion">Ses réservtions</h3>
+																 <div id="rdvUser">
+																	{% set iter = 1 %}
+																	<ul>
+																		{% for resa in variables[1] %}
+																		<li><span class="thInfos">| {{ iter }} |</span>  <span class="tdInfos">{{ resa.dateRservation|date | localizeddate("medium", "none", null, null, "cccc d LLLL à H'h'")}}</span></li>            
+																		{% set iter = iter + 1 %}
+																		{% endfor %}
+																	</ul>
+																 </div>     
+																{% else %}
+																<h3  class="titreGestion">Pas de réservations</h3>
+																{% endif %}             																
+                                                    </div>            										            										            									
+            								</div>
+            							</section>
+            							{% endblock %}
+            					</section>            					
+            			{% endblock %}
+    				</section>					
+		</div>
+{% endblock %} 

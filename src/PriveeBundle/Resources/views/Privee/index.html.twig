@@ -1,0 +1,97 @@
+{% extends "PublicBundle:Public:index.html.twig" %}
+    
+{% block body %}
+ 		<!-- Page Wrapper -->
+			<div id="page-wrapper">
+				{% block header %}
+				<!-- Header -->
+					<header id="header" class="alt">
+						<h1><a href="index.html">Solid State</a></h1>
+						<nav>
+							<a href="#menu">Menu</a>
+						</nav>
+					</header>
+				{% endblock %}
+				<!-- Menu -->
+					<nav id="menu">
+						<div class="inner">
+							<h2>Menu</h2>
+							<ul class="links">
+								<li id="accueil"><a href="{{ path('Privee_accueil') }}">Accueil</a></li>                      			
+                      			<li id="calendrier"><a href="#" onclick="afficheCalendrier()">Calendrier</a></li>
+                      			<li><a href="{{path('fos_user_profile_show')}}">Mon compte</a></li>
+								<li><a href="{{ path('fos_user_profile_edit')}}">Paramètres</a></li>
+                      			<li><a href="{{ path('fos_user_security_logout')}}">Déconnexion</a></li>								
+							</ul>							
+						</div>
+					</nav>
+				    <section id="contenu">
+				    	{% block contenu %} 
+            				<!-- Wrapper -->
+            					<section id="wrapper">
+            						{% block wrapper %}
+            						<!-- One -->
+            							<section id="one" class="wrapper spotlight style1">
+            								<div class="inner">
+            									<a href="#" class="image"><img src="{{ asset('bundles/public/images/pic01.jpg')}}" alt="" /></a>
+            									<div class="content">
+            										<h2><a href="{{path('fos_user_profile_show')}}">{{ app.user.prenom|lower}} {{ app.user.nom }}</a>                                                                		              
+                                                    </h2>
+                                                    <div class="wrapperDivContenu">                                        
+                                                         <ul> 
+                                                             <li><a href="{{ path('fos_user_profile_edit')}}">Paramètres</a></li>
+                                                             <li><a href="{{ path('fos_user_security_logout')}}">Déconnexion</a></li>                                                                                                                                                
+                                                        </ul>
+                                                    </div>            										            										
+            									</div>
+            								</div>
+            							</section>
+            							{% endblock %}
+            					</section>            					
+            			{% endblock %}
+    				</section>
+
+					<!-- Footer -->
+					<section id="footer">
+						{% block footer %}
+						<div class="inner">
+							<h2 class="major">Contact</h2>
+							<p>Cras mattis ante fermentum, malesuada neque vitae, eleifend erat. Phasellus non pulvinar erat. Fusce tincidunt, nisl eget mattis egestas, purus ipsum consequat orci, sit amet lobortis lorem lacus in tellus. Sed ac elementum arcu. Quisque placerat auctor laoreet.</p>
+							<form method="post" action="{{ path('Privee_mail') }}">
+								<div class="field">
+									<label for="sujet">Sujet</label>
+									<input required="required" type="text" name="sujet" id="sujet" />
+								</div>								
+								<div class="field">
+									<label for="message">Message</label>
+									<textarea required="required" name="message" id="message" rows="4"></textarea>
+								</div>
+								<ul class="actions">
+									<li><input type="submit" value="Envoyer" /></li>
+								</ul>
+							</form>
+							<ul class="contact">
+								<li class="fa-home">
+									NOUMIA KEWOU<br />
+									14200 <br />
+									Hérouville Sain-Clair<br />
+									1021
+									Bd des Belles-portes
+								</li>
+								<li class="fa-phone">(+33) 6 15 66 47 58 </li>
+								<li class="fa-envelope"><a href="#">information@untitled.tld</a></li>
+								<li class="fa-twitter"><a href="#">twitter.com/untitled-tld</a></li>
+								<li class="fa-facebook"><a href="#">facebook.com/untitled-tld</a></li>								
+							</ul>
+							<ul class="copyright">
+								<li>&copy; NOUMIA KEWOU. All rights reserved.</li><li>2015-{{ 'now'|date('Y') }}</li>
+							</ul>
+						</div>	
+						{% endblock %}
+					</section>
+		{% block javascripts %}
+		<!-- Scripts -->
+        {{ parent() }}
+        <script type="text/javascript" src="{{ asset('bundles/public/js/displayDivUser.js')}}"></script>            		
+		{% endblock %}
+{% endblock %}
