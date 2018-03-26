@@ -1,0 +1,23 @@
+{% extends "UserBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block header %}
+<!-- Header -->
+	<header id="header">
+		<h1><a href="http://localhost/Beezyweb/web/app_dev.php/">acceuil</a></h1>
+		<nav>
+			<a href="#menu">Menu</a>
+		</nav>
+	</header>
+{% endblock %}
+
+{% block contenu %} 
+    <section id="wrapper">
+        {% block wrapper %}        
+            <section>
+
+            </section>
+        {% endblock %}
+    </section> 
+{% endblock contenu %}

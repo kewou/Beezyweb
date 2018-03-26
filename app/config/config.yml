@@ -4,9 +4,6 @@ imports:
     - { resource: services.yml }
     - { resource: "@UserBundle/Resources/config/services.yml" }
     - { resource: "@PublicBundle/Resources/config/services.yml" }
-    - { resource: "@PriveeBundle/Resources/config/services.yml" }
-    - { resource: "@AdminBundle/Resources/config/services.yml" }
-    - { resource: "@ReservationBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -76,3 +73,21 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: UserBundle\Entity\User
+    service:
+         mailer: fos_user.mailer.default   
+    from_email:
+        address: beezyweb.net@beezyweb.net
+        sender_name: Beezyweb 
+    registration:
+        form:
+            type: autoecole_inscription
+        confirmation:
+            enabled: true
+    resetting:
+        email:
+            from_email:
+                address: beezyweb.net@beezyweb.net
+                sender_name: Beezyweb			
+    profile:
+        form:
+            type: autoecole_edition_profil

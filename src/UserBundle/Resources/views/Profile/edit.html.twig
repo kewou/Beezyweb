@@ -1,0 +1,37 @@
+{% extends "PriveeBundle:Privee:index.html.twig" %}
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block header %}
+<!-- Header -->
+	<header id="header">
+		<h1><a href="{{ path('Public_accueil') }}">Accueil</a></h1>
+		<nav>
+			<a href="#menu">Menu</a>
+		</nav>
+	</header>
+{% endblock %}
+
+{% block contenu%}
+	<section id="wrapper">
+		{% block wrapper %}
+		<!-- One -->
+			<section id="one" class="wrapper spotlight style1">
+				<div class="inner">
+					<a href="#" class="image"><img src="{{ asset('bundles/public/images/pic01.jpg')}}" alt="" /></a>
+					<div class="content">
+						<h2 class="major">Paramètres généraux du compte</h2>                                                
+                    {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
+                        {{ form_widget(form) }}
+                        <div>
+                            <input type="submit" value="{{ 'profile.edit.submit'|trans }}" />
+                        </div>
+                    {{ form_end(form) }}											
+					</div>
+				</div>
+			</section>
+			{% endblock %}
+	</section> 
+
+{% endblock contenu%}
+
+

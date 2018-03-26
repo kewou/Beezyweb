@@ -1,0 +1,178 @@
+#toTopHover {
+	background:url(../js/toTop/img/ui.totop.png) no-repeat left -51px;
+	width:51px;
+	height:40px;
+	display:block;
+	overflow:hidden;
+	opacity: 0;
+	-moz-opacity: 0;
+	filter:alpha(opacity=0);
+}
+
+#toTop:active, #toTop:focus {
+	outline:none;
+}
+#toTop {
+	display:none;
+	text-decoration:none;
+	position:fixed;
+	bottom:100px;
+	right:10px;
+	overflow:hidden;
+	width:51px;
+	height:51px;
+	border:none;
+	text-indent:100%;
+	float:right;
+	background:url(../js/toTop/img/ui.totop.png) no-repeat left top;
+}
+
+/* Calendrier*/
+.dispo{
+	color:black;
+}
+
+.fermee{
+	color:white;
+	background-color:red;
+	cursor:not-allowed;
+}
+.optionMajResa {
+  border-radius: 10px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 22px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+}
+
+.optionMaj:hover {
+  background: #3cb0fd;
+  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  text-decoration: none;
+}
+.valider{
+  background-color:#2E8B57;
+  color:white;
+  cursor:inherit;
+}
+
+.invalider{
+	background-color:silver;
+	color:black;
+}
+
+.affecter{
+  background: #3d9dd1;
+  background-image: -webkit-linear-gradient(top, #3d9dd1, #5087c2);
+  background-image: -moz-linear-gradient(top, #3d9dd1, #5087c2);
+  background-image: -ms-linear-gradient(top, #3d9dd1, #5087c2);
+  background-image: -o-linear-gradient(top, #3d9dd1, #5087c2);
+  background-image: linear-gradient(to bottom, #3d9dd1, #5087c2);
+}
+
+.fermer{
+  background: #db1c1c;
+  background-image: -webkit-linear-gradient(top, #db1c1c, #eb2c46);
+  background-image: -moz-linear-gradient(top, #db1c1c, #eb2c46);
+  background-image: -ms-linear-gradient(top, #db1c1c, #eb2c46);
+  background-image: -o-linear-gradient(top, #db1c1c, #eb2c46);
+  background-image: linear-gradient(to bottom, #db1c1c, #eb2c46);
+}
+
+.resevEnCours{
+	background-color:#0258A3;
+	color:white;
+	cursor:inherit;	
+}
+
+.resevEnCoursAutre{
+	background-color:#837680;
+	color:white;
+	cursor:inherit;	
+}
+
+.resevEnCoursAdmin{
+	background-color:#4285F4;
+	color:white;	
+}
+
+.heureDisponible{
+	color:black;
+}
+
+.resevEnCours:hover{
+	color:black;
+}
+.fermee:hover{
+	color:black;
+}
+.valider:hover{
+	background-color:#2E8B57;
+	cursor: pointer;
+	color:white;
+}
+.invalider:hover{
+	background-color:silver;
+	color:black;
+	cursor: pointer;
+}
+
+/* Connexion */
+
+.error{
+	color:#D2691E;
+}
+
+#formConnection{
+	width:80%;
+	margin-left:20%;
+}
+
+#inscriptionLeft{
+	width:45%;
+	float:left;
+	margin-right:3%;
+}
+#inscriptionRight{
+	width:50%;
+	float:left;
+	margin-left:1%;
+}
+
+#inscriptionBoutton{
+    margin-left: -10%;
+}
+
+#rememberBlock{
+    margin-top: 5%;
+}
+#rememberBlock input{
+    width:5px;
+}
+
+.wrapperDivContenu li{
+	list-style-type:none;
+}
+
+#rdvUser li{
+	list-style-type:none; 
+}
+ul.typeahead strong{
+	color: blue;
+}
+.typeahead a{
+	color:#3658B9;
+}
+ul.typeahead a:hover{
+	color:green;
+}
+#somme{
+	color: black;
+}

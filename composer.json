@@ -4,13 +4,9 @@
 	"type" : "project",
 	"description" : "The \"Symfony Standard Edition\" distribution",
 	"autoload" : {
-		"psr-4" : {
-			"AppBundle\\" : "src/AppBundle",
+		"psr-4" : {			
 			"UserBundle\\" : "src/UserBundle",
-			"PublicBundle\\" : "src/PublicBundle",
-			"PriveeBundle\\" : "src/PriveeBundle",
-			"AdminBundle\\" : "src/AdminBundle",
-			"ReservationBundle\\" : "src/ReservationBundle"
+			"PublicBundle\\" : "src/PublicBundle"		
 		},
 		"classmap" : [
 			"app/AppKernel.php",
