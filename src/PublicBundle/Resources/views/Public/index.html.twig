@@ -1,48 +1,62 @@
 {% extends "::base.html.twig" %}
 
-
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('bundles/public/css/screen.css') }}" type="text/css" media="screen">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
-    <link rel="stylesheet" href="{{ asset('bundles/public/assets/css/main.css') }}" type="text/css" />	
+    <link rel="stylesheet" href="{{ asset('bundles/public/assets/css/main.css')}}" />
+    <link rel="stylesheet" href="{{ asset('bundles/public/css/screen.css') }}" type="text/css" media="screen">
     <!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
-    <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]--> 
+    <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 {% endblock %}
 
 {% block body %}
     <!-- Page Wrapper -->
-    <div id="page-wrapper">
+    <div id="page-wrapper">        
         {% block header %}
             <!-- Header -->
             <header id="header" class="alt">
-                <h1><a href="http://localhost/Beezyweb/web/app_dev.php/">Acceuil</a></h1>
-                <nav>
-                    <a href="#menu">Menu</a>
-                </nav>
+                <h1 id="logo"><a href="{{path("Public_accueil")}}">Accueil</a></h1> 
+                <!-- Menu -->
+                <nav id="nav">
+                    <ul>
+                        <li><a href="{{path("Public_accueil")}}">Accueil</a></li>
+                        <li>
+                            <a href="#">Layouts</a>
+                            <ul>
+                                <li class="nada"><a href="{{path("Public_accueil")}}">Accueil</a></li> 
+                                <li class="nada"><a href="">A Propos</a></li>                                            			
+                                <li id="calendrier"><a href="#" onclick="afficheCalendrier()">Calendrier</a></li>
+                                <li><a href="{{ path('fos_user_security_login')}}">Connexion</a></li>							
+                                <li><a href="{{path('fos_user_registration_register')}}">S'enregistrer</a></li>
+                                <li>
+                                    <a href="#">Submenu</a>
+                                    <ul>
+                                        <li><a href="#">Option 1</a></li>
+                                        <li><a href="#">Option 2</a></li>
+                                        <li><a href="#">Option 3</a></li>
+                                        <li><a href="#">Option 4</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a href="elements.html">Elements</a></li>
+                        <li><a href="#" class="button special">Sign Up</a></li>
+                    </ul>
+                </nav>                    
             </header>
         {% endblock %}
-        <!-- Menu -->
-        <nav id="menu">
-            <div class="inner">
-                <h2>Menu</h2>
-                <ul class="links">
-                    <li class="nada"><a href="http://localhost/Beezyweb/web/app_dev.php/">Accueil</a></li> 
-                    <li class="nada"><a href="">A Propos</a></li>                                            			
-                    <li id="calendrier"><a href="#" onclick="afficheCalendrier()">Calendrier</a></li>
-                    <li><a href="{{ path('fos_user_security_login')}}">Connexion</a></li>							
-                    <li><a href="{{path('fos_user_registration_register')}}">S'enregistrer</a></li>
-                </ul>
-                <a href="#" class="close">Close</a>
-            </div>
-        </nav>
-        <section id="contenu">
+
+
+        <section id="banner">
             {% block contenu %} 
                 <!-- Banner -->
                 <section id="banner">
-                    <div class="inner">
+                    <div class="content">
                         <div class="logo"><span class="icon fa-diamond"></span></div>
                         <h2>Beezyweb</h2>
                         <p>Planning de réservation en ligne.</p>
+                        <span class="image"><img src="images/pic01.jpg" alt="" /></span>
                     </div>
                 </section>
 
@@ -50,7 +64,7 @@
                 <section id="wrapper">
 
                     <!-- One -->
-                    <section id="one" class="wrapper spotlight style1">
+                    <section id="one" class="spotlight style1 bottom">
                         <div class="inner">
                             <a href="#" class="image"><img src="{{ asset('bundles/public/images/pic01.jpg')}}" alt="" /></a>
                             <div class="content">
@@ -72,7 +86,7 @@
 
         <!-- Footer -->
         {% block footer %}
-            <section id="footer">						
+            <section class="major">						
                 <div class="inner">
                     <h2 class="major">Contact</h2>		
                     <form method="post" action="">
@@ -117,33 +131,6 @@
         {% endblock %}
 
     </div>
-    {% block javascripts %}
-        <!-- Scripts -->
-        <script type="text/javascript" src="{{ asset('bundles/public/assets/js/jquery.min.js')}}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/public/bootstrap/js/bootstrap.min.js')}}"></script>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
-        <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/additional-methods.min.js"></script>
-        <script type="text/javascript" src="{{ asset('bundles/public/js/validationForm/valid.js')}}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/public/js/validationForm/messages_fr.js')}}"></script>        	               
-        <script type="text/javascript" src="{{ asset('bundles/reservation/js/calendrier.js')}}"></script>            
-        <script type="text/javascript" src="{{ asset('bundles/public/assets/js/skel.min.js')}}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/public/assets/js/skel.min.js')}}"></script>         	
-        <script type="text/javascript" src="{{ asset('bundles/public/assets/js/jquery.scrollex.min.js')}}"></script>        	               
-        <script type="text/javascript" src="{{ asset('bundles/public/assets/js/util.js')}}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/public/assets/js/main.js')}}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/public/js/toTop/js/easing.js')}}"></script> 
-        <script type="text/javascript" src="{{ asset('bundles/public/js/toTop/js/jquery.ui.totop.js')}}"></script> 
-        <script type="text/javascript">
-                        $(document).ready(function () {
-                            var defaults = {
-                                containerID: 'toTop', // fading element id
-                                containerHoverID: 'toTopHover', // fading element hover id
-                                scrollSpeed: 1200,
-                                easingType: 'linear'};
-                            $().UItoTop({easingType: 'easeOutQuart'});
-                        });
-        </script>                        		
-    {% endblock %}
 {% endblock %}
 
 
