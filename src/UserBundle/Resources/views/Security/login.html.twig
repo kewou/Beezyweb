@@ -1,69 +1,50 @@
-{% extends "UtilisateurBundle::layout.html.twig" %}
+{% extends "UserBundle::layout.html.twig" %}
 
 {% trans_default_domain 'FOSUserBundle' %}
 
-{% block header %}
-<!-- Header -->
-	<header id="header">
-		<h1><a href="{{ path('Public_accueil') }}">Accueil</a></h1>
-		<nav>
-			<a href="#menu">Menu</a>
-		</nav>
-	</header>
-{% endblock %}
 {% block contenu %} 
-	<section id="wrapper">
-		{% block wrapper %}
-		<!-- One -->
-			<section id="one" class="wrapper spotlight style1">
-				<div class="inner">
-					<a href="#" class="image" id="imageBoule"><img src="{{ asset('bundles/public/images/pic01.jpg')}}" alt="" /></a>
-					<div class="content">
-						<h2 class="major">Connexion</h2>
-						        {% block fos_user_content %}
-                                        {% if error %}
-                                            <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                                        {% endif %}
-                                        
-                                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                                            Connecté en tant que {{ app.user.username }}    
-                                            <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
-                                        {% endif %}
-                                        <br>
-                                        <form id="formConnection" action="{{ path("fos_user_security_check") }}" method="post" class="form-vertical">
-                                        	
-                                            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
-                                            <div class="form-group">
-                                                <label>Adresse e-mail</label>
-                                                <div>
-                                                	<div>
-                                                		<input type="text" id="username" name="_username" value="{{ last_username }}" required="required"/>
-                                                	</div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="password">{{ 'security.login.password'|trans }}</label>
-                                                <div>
-                                                	<div>        
-                                                		<input type="password" id="password" name="_password" required="required"/>
-                                                	</div>
-                                                </div>
-                                            </div>
-                                            <div  id="rememberBlock">
-                                                <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-                                                <label for="remember_me" >{{ 'security.login.remember_me'|trans }}</label>
-                                            </div>
-                                            <a href="{{ path("fos_user_resetting_request")}}">Mot de passe oublié</a>
-                                            <br>
-                                        
-                                            <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
-                                        </form>
-                         {% endblock fos_user_content %}						
-					</div>
-				</div>
-			</section>
-			{% endblock %}
-	</section> 
+
+    <h2 class="major">Connexion</h2>
+    {% block fos_user_content %}
+        {% if error %}
+            <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            Connecté en tant que {{ app.user.username }}    
+            <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
+        {% endif %}
+        <br>
+        <form id="formConnection" action="{{ path("fos_user_security_check") }}" method="post" class="form-vertical">
+
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+            <div class="form-group">
+                <label>Adresse e-mail</label>
+                <div>
+                    <div>
+                        <input type="text" id="username" name="_username" value="{{ last_username }}" required="required"/>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password">{{ 'security.login.password'|trans }}</label>
+                <div>
+                    <div>        
+                        <input type="password" id="password" name="_password" required="required"/>
+                    </div>
+                </div>
+            </div>
+            <div  id="rememberBlock">
+                <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+                <label for="remember_me" >{{ 'security.login.remember_me'|trans }}</label>
+            </div>
+            <a href="{{ path("fos_user_resetting_request")}}">Mot de passe oublié</a>
+            <br>
+
+            <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+        </form>
+    {% endblock fos_user_content %}						
+
 
 
 {% endblock contenu %}

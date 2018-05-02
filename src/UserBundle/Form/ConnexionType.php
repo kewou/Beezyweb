@@ -1,6 +1,6 @@
 <?php
 
-namespace AutoEcole\UtilisateurBundle\Form;
+namespace UserBundle\Form;
 
 use Symfony\Component\Form\FormBuilderInterface;
 use FOS\UserBundle\Form\Type\RegistrationFormType;

@@ -7,7 +7,71 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body class="landing">
-        {% block body %}{% endblock %}
+                <!-- Header -->
+        <header id="header" class="alt">
+            <h1 id="logo"><a href="{{path("Public_accueil")}}">Accueil</a></h1>            
+            <!-- Menu -->
+            <nav id="nav">
+                <ul>
+                    <li><a href="{{path("Public_accueil")}}">Accueil</a></li>
+                    <li><a href="{{path("fos_user_security_login")}}">Connexion</a></li>
+                    <li><a href="{{path("fos_user_registration_register")}}" class="button special">Créer un compte</a></li>
+                </ul>
+            </nav>            
+        </header>
+        <div id="page-wrapper">                
+            <div id="main" class="wrapper style1">                     
+                <div class="container">
+                    <div class="logo"><span class="icon fa-diamond"></span></div>                
+        {% block contenu %}{% endblock %}
+                </div>            
+            </div>
+        </div>                
+        <!-- Footer -->
+        <section id="footer">
+            <section class="major">						
+                <div class="inner">
+                    <h2 class="major">Contact</h2>		
+                    <form method="post" action="">
+                        <div class="field">
+                            <label for="name">Nom</label>
+                            <input required="required" type="text" name="nom" id="name" />
+                        </div>
+                        <div class="field">
+                            <label for="email">Email</label>
+                            <input required="required" type="email" name="email" id="email" />
+                        </div>
+                        <div class="field">
+                            <label for="sujet">Sujet</label>
+                            <input required="required" type="text" name="sujet" id="sujet" />
+                        </div>								
+                        <div class="field">
+                            <label for="message">Message</label>
+                            <textarea required="required" name="message" id="message" rows="4"></textarea>
+                        </div>
+                        <ul class="actions">
+                            <li><input type="submit" value="Envoyer" /></li>
+                        </ul>
+                    </form>
+                    <ul class="contact">
+                        <li class="fa-home">
+                            NOUMIA KEWOU<br />
+                            14200 <br />
+                            Hérouville Sain-Clair<br />
+                            1021
+                            Bd des Belles-portes
+                        </li>
+                        <li class="fa-phone">(+33) 6 15 66 47 58 </li>
+                        <li class="fa-envelope"><a href="#">information@untitled.tld</a></li>
+                        <li class="fa-twitter"><a href="#">twitter.com/untitled-tld</a></li>
+                        <li class="fa-facebook"><a href="https://www.facebook.com/Beezy-Start-up-1459462844287068/">facebook.com/untitled-tld</a></li>								
+                    </ul>
+                    <ul class="copyright">
+                        <li>&copy; NOUMIA KEWOU. All rights reserved.</li><li>2015-{{ 'now'|date('Y') }}</li>
+                    </ul>
+                </div>						
+            </section>
+        </section>
         <script src="{{ asset('bundles/public/assets/js/jquery.min.js')}}"></script>
         <script type="text/javascript" src="{{ asset('bundles/public/bootstrap/js/bootstrap.min.js')}}"></script>
         <script src="{{ asset('bundles/public/assets/js/jquery.scrolly.min.js')}}"></script>

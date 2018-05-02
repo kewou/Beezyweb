@@ -35,10 +35,19 @@ class User extends BaseUser {
 	 * @var string
 	 * @ORM\Column(name="nom", type="string",length=255)
 	 * @Assert\Length(
-	 * min = 4,
+	 * min = 3,
 	 * minMessage = "Le nom est court")	 
 	 */
 	protected $nom;
+        
+        /**
+	 * @var string
+	 * @ORM\Column(name="prenom", type="string",length=255)
+	 * @Assert\Length(
+	 * min = 3,
+	 * minMessage = "Le prenom est court")	 
+	 */
+	protected $prenom;
 	
 	/**
 	 * @var integer	 
@@ -73,6 +82,13 @@ class User extends BaseUser {
 	}
 	public function setNom($nom) {
 		$this->nom = $nom;
+		return $this;
+	}
+        public function getPrenom() {
+		return $this->prenom;
+	}
+	public function setPrenom($prenom) {
+		$this->prenom = $prenom;
 		return $this;
 	}
 	public function getSolde() {

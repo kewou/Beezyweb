@@ -1,3 +1,11 @@
 Public_accueil:
     path: /
     defaults: { _controller: PublicBundle:Public:index }
+    
+Public_forum:
+    path: /forum
+    defaults: { _controller: PublicBundle:Public:forum }  
+
+Public_contact:
+    pattern: /contact
+    defaults: { _controller: PublicBundle:Public:contact }

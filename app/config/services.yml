@@ -7,3 +7,15 @@ services:
     #service_name:
     #    class: AppBundle\Directory\ClassName
     #    arguments: ['@another_service_name', 'plain_value', '%parameter_name%']
+
+services:
+    autoecole_utilisateur.form.inscription_type:
+        class: UserBundle\Form\InscriptionType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: autoecole_inscription }
+    autoecole_utilisateur.form.editionProfil_type:
+        class: UserBundle\Form\EditionProfilType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: autoecole_edition_profil }

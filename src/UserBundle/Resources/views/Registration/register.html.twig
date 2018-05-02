@@ -2,22 +2,27 @@
 
 {% trans_default_domain 'FOSUserBundle' %}
 
-{% block header %}
-<!-- Header -->
-	<header id="header">
-		<h1><a href="http://localhost/Beezyweb/web/app_dev.php/">acceuil</a></h1>
-		<nav>
-			<a href="#menu">Menu</a>
-		</nav>
-	</header>
-{% endblock %}
 
-{% block contenu %} 
-    <section id="wrapper">
-        {% block wrapper %}        
-            <section>
 
-            </section>
-        {% endblock %}
-    </section> 
-{% endblock contenu %}
+{% block contenu %}
+    <h3>Crée un compte Beezyweb</h3>
+    <div id="block_inscription">
+        <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST">
+            <div id="civilite">                
+                <input type="text" name="nom" />            
+                <input type="text" name="prenom" />
+            </div>
+            <div>
+                <input type="text" name="email" />
+            </div>
+            <div id="password">                
+                <input type="password" name="pass" />            
+                <input type="password" name="confirmPass" />
+            </div>
+            <div>
+                <input type="submit" value="{{ 'registration.submit'|trans }}" />
+            </div>
+        </form>
+    </div>
+
+{% endblock %}    

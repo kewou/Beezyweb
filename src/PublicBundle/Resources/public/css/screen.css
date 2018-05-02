@@ -1,3 +1,9 @@
+body{
+    color:black;
+}
+
+
+
 #toTopHover {
 	background:url(../js/toTop/img/ui.totop.png) no-repeat left -51px;
 	width:51px;
@@ -122,6 +128,10 @@
 	background-color:silver;
 	color:black;
 	cursor: pointer;
+}
+
+/* Inscription */
+#block_inscription{    
 }
 
 /* Connexion */
