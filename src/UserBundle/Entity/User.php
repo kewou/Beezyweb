@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Constraints\Email;
  * @ORM\Table(name="user")
  * @UniqueEntity(fields="telephone", message="Ce numéro de téléphone existe déja sur un autre compte !")
  */
-class User extends BaseUser {
+class User extends BaseUser {           
 
 	/**
 	 * @var integer	 
@@ -35,7 +35,7 @@ class User extends BaseUser {
 	 * @var string
 	 * @ORM\Column(name="nom", type="string",length=255)
 	 * @Assert\Length(
-	 * min = 3,
+	 * min = 4,
 	 * minMessage = "Le nom est court")	 
 	 */
 	protected $nom;
@@ -110,6 +110,7 @@ class User extends BaseUser {
 	}
 	public function setEmail($email) {
 		$this->email = $email;
+                $this->setUsername($email);
 		return $this;
 	}
 	
