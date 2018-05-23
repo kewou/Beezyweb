@@ -6,35 +6,29 @@
 
 {% block contenu %}
     <h3>Crée un compte Beezyweb</h3>
-    
+
     <div id="block_inscription">
-        <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" id="formInscription" class="form-vertical">        
+        <form {{ form_enctype(form) }} id="formInscription" class="form-vertical">        
             <div class="form-group">        
-                <div>                   
-                    {{ form_row(form.nom,{'attr': {'placeholder': '    Nom', 'required': 'required'}}) }}                    
-                </div>    	
-                <div>
-                    {{ form_row(form.prenom, {'attr': {'placeholder': '    Prénom','required': 'required'}}) }}
-                </div>        
+
+                {{ form_row(form.nom,{'attr': {'placeholder': '    Nom', 'required': 'required'}}) }}                    
+
+                {{ form_row(form.prenom, {'attr': {'placeholder': '    Prénom','required': 'required'}}) }}
+
             </div>  
             <div class="form-group" >        
-                <div>
-                    {{ form_row(form.email, {'attr': {'placeholder': '    joelderrik@...........','required': 'required'}})}}
-                </div>
-                
-                <div>
-                    {{ form_row(form.telephone, {'attr': {'placeholder': '    6 15 66 47 58','required': 'required'}})}}
-                </div> 
-           
-                <div>
-                    {{ form_row(form.plainPassword.first, {'attr': {'placeholder': '    mot de passe','required': 'required'}}) }}
-                    {% for errorItem in form.plainPassword.first.vars.errors %}
-                        <label class="control-label has-error" for="{{ form.plainPassword.vars.id }}">{{ errorItem.message }}</label>
-                    {% endfor %}
-                </div>     	
-                <div>
-                    {{ form_row(form.plainPassword.second, {'attr': {'placeholder': '    Confirmer le mdp','required': 'required'}}) }}
-                </div>
+
+                {{ form_row(form.email, {'attr': {'placeholder': '    joelderrik@...........','required': 'required'}})}}
+
+                {{ form_row(form.telephone, {'attr': {'placeholder': '    6 15 66 47 58','required': 'required'}})}}
+
+                {{ form_row(form.plainPassword.first, {'attr': {'placeholder': '    mot de passe','required': 'required'}}) }}
+                {% for errorItem in form.plainPassword.first.vars.errors %}
+                    <label class="control-label has-error" for="{{ form.plainPassword.vars.id }}">{{ errorItem.message }}</label>
+                {% endfor %}
+
+                {{ form_row(form.plainPassword.second, {'attr': {'placeholder': '    Confirmer le mdp','required': 'required'}}) }}
+
             </div>     
             {{ form_rest(form) }}    
             <div>
