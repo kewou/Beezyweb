@@ -7,7 +7,8 @@ security:
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt|error)|css|images|js)/
-            security: false            
+            security: false    
+        main:
         main:
             pattern: .*
             form_login:
