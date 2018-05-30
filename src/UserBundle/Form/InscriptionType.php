@@ -23,13 +23,13 @@ class InscriptionType extends AbstractType{
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nom','text',array('label'=>'Nom','pattern'=>'.{3,}','max_length'=>'15'))
-            ->add('prenom','text',array('label'=>'Prénom','pattern'=>'.{3,}','max_length'=>'15'))
-            ->add('telephone','number',array('label'=>'Téléphone','pattern'=>'[0-9]*','max_length'=>'9'))                                                                                                                                                          
+            ->add('nom','text',array('label'=>'Nom','pattern'=>'.{2,}','max_length'=>'15'))
+            ->add('prenom','text',array('label'=>'Prénom','pattern'=>'.{2,}','max_length'=>'15'))
+            ->add('telephone','number',array('label'=>'Téléphone','max_length'=>'10'))                                                                                                                                                          
             ->add('plainPassword', 'repeated', array(
                 'type' => 'password',            	                
-                'first_options' => array('label' => 'Mot de passe (mdp)','pattern'=>'.{5,}'),
-                'second_options' => array('label' => 'Confirmation mdp','pattern'=>'.{5,}'),
+                'first_options' => array('label' => 'Mot de passe (mdp)'),
+                'second_options' => array('label' => 'Confirmation mdp'),
                 'invalid_message' => 'fos_user.password.mismatch',
             ));
         $builder->remove('username');

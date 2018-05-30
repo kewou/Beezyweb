@@ -35,7 +35,7 @@ class User extends BaseUser {
 	 * @var string
 	 * @ORM\Column(name="nom", type="string",length=255)
 	 * @Assert\Length(
-	 * min = 4,
+	 * min = 2,
 	 * minMessage = "Le nom est court")	 
 	 */
 	protected $nom;
@@ -44,7 +44,7 @@ class User extends BaseUser {
 	 * @var string
 	 * @ORM\Column(name="prenom", type="string",length=255)
 	 * @Assert\Length(
-	 * min = 3,
+	 * min = 2,
 	 * minMessage = "Le prenom est court")	 
 	 */
 	protected $prenom;
