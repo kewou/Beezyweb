@@ -28,7 +28,7 @@ $(document).ready(function(){
             }else{
                 return false;
             };
-        }, "Veuillez saisir un numéro correct! ex => 0615664758.");
+        }, "Veuillez saisir un numéro correct ! ex => 0615664758.");
          
     var form = $("#formInscription");
     form.validate({
