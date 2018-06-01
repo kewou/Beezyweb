@@ -10,7 +10,6 @@
     <div id="block_inscription">
         <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" id="formInscription" class="form-vertical">        
 
-
             {{ form_row(form.nom,{'attr': {'placeholder': '    Nom'}}) }}                    
 
             {{ form_row(form.prenom, {'attr': {'placeholder': '    Prénom'}}) }}

@@ -6,7 +6,8 @@
 	"autoload" : {
 		"psr-4" : {			
 			"UserBundle\\" : "src/UserBundle",
-			"PublicBundle\\" : "src/PublicBundle"		
+			"PublicBundle\\" : "src/PublicBundle",
+                        "PriveeBundle\\" : "src/PriveeBundle"
 		},
 		"classmap" : [
 			"app/AppKernel.php",

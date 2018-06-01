@@ -10,6 +10,16 @@
     <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 {% endblock %}
 
+{% block menu %}
+    <nav id="nav">
+        <ul>
+            <li><a href="{{path("Public_accueil")}}">Accueil</a></li>
+            <li><a href="{{path("fos_user_security_login")}}">Connexion</a></li>
+            <li><a href="{{path("fos_user_registration_register")}}" class="button special">Créer un compte</a></li>
+        </ul>
+    </nav>  
+{% endblock %}
+
 {% block contenu %}    
 
     <h2 class="major">Beezyweb</h2>

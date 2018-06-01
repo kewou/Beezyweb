@@ -11,13 +11,7 @@
         <header id="header" class="alt">
             <h1 id="logo"><a href="{{path("Public_accueil")}}">Accueil</a></h1>            
             <!-- Menu -->
-            <nav id="nav">
-                <ul>
-                    <li><a href="{{path("Public_accueil")}}">Accueil</a></li>
-                    <li><a href="{{path("fos_user_security_login")}}">Connexion</a></li>
-                    <li><a href="{{path("fos_user_registration_register")}}" class="button special">Créer un compte</a></li>
-                </ul>
-            </nav>            
+            {% block menu %}{% endblock %}         
         </header>
         <div id="page-wrapper">                
             <div id="main" class="wrapper style1">                     
