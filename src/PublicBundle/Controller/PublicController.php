@@ -12,9 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @author noumia
  */
-class PublicController extends Controller {
-    
-    private $securityContext;  
+class PublicController extends Controller {        
     
     function PublicController(){
         $this->securityContext = $this->container->get('security.context');

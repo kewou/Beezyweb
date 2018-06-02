@@ -21,10 +21,9 @@ class EditionProfilType extends ProfileFormType{
     {
         parent::buildForm($builder,$options);
          $builder
-             ->add('nom','text')
-             ->add('prenom','text')
-             ->add('telephone','number',array('label'=>'Téléphone','pattern'=>'[0-9]*','max_length'=>'9'));
-			
+            ->add('nom','text',array('label'=>'Nom','pattern'=>'.{2,}','max_length'=>'15'))
+            ->add('prenom','text',array('label'=>'Prénom','pattern'=>'.{2,}','max_length'=>'15'))
+            ->add('telephone','number',array('label'=>'Téléphone','max_length'=>'10'));			
     }
     
     protected function buildUserForm(FormBuilderInterface $builder, array $options)

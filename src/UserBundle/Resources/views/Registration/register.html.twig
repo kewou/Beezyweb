@@ -1,36 +1,26 @@
 {% extends "UserBundle::layout.html.twig" %}
-
 {% trans_default_domain 'FOSUserBundle' %}
-
-
 
 {% block contenu %}
     <h3>Crée un compte Beezyweb</h3>
 
     <div id="block_inscription">
         <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" id="formInscription" class="form-vertical">        
-
             {{ form_row(form.nom,{'attr': {'placeholder': '    Nom'}}) }}                    
-
             {{ form_row(form.prenom, {'attr': {'placeholder': '    Prénom'}}) }}
-
             {{ form_row(form.email, {'attr': {'placeholder': '    joelderrik@...........'}})}}
-
             {{ form_row(form.telephone, {'attr': {'placeholder': '    6 15 66 47 58'}})}}
-
             {{ form_row(form.plainPassword.first, {'attr': {'placeholder': '    mot de passe'}}) }}
             {% for errorItem in form.plainPassword.first.vars.errors %}
                 <label class="control-label has-error" for="{{ form.plainPassword.vars.id }}">{{ errorItem.message }}</label>
             {% endfor %}
-
             {{ form_row(form.plainPassword.second, {'attr': {'placeholder': '    Confirmer le mdp'}}) }}
-
-    </div>     
-    {{ form_rest(form) }}    
-    <div>
-        <input type="submit" value="{{ 'registration.submit'|trans }}" />
+            </div>     
+            {{ form_rest(form) }}    
+            <div>
+                <input type="submit" value="{{ 'registration.submit'|trans }}" />
+            </div>
+        </form>	
     </div>
-</form>	
-</div>
 
 {% endblock %}    

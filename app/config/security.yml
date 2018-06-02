@@ -29,7 +29,7 @@ security:
                 use_forward:        false
                 check_path:         fos_user_security_check
                 failure_path: null
-                default_target_path: /privee/
+                default_target_path: /privee
                 remember_me: false
             logout:
                 path: fos_user_security_logout
@@ -42,7 +42,7 @@ security:
                 provider:       fos_userbundle
                 login_path:     /admin/login
                 check_path:     /admin/login_check
-                default_target_path: /admin/
+                default_target_path: /admin
             logout:
                 path:           /admin/logout
                 target:         /admin/login

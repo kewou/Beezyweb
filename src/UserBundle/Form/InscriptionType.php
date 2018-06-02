@@ -4,9 +4,6 @@ namespace UserBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use FOS\UserBundle\Form\Type\RegistrationFormType;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
  * Description of InscriptionType
@@ -28,8 +25,8 @@ class InscriptionType extends AbstractType{
             ->add('telephone','number',array('label'=>'Téléphone','max_length'=>'10'))                                                                                                                                                          
             ->add('plainPassword', 'repeated', array(
                 'type' => 'password',            	                
-                'first_options' => array('label' => 'Mot de passe (mdp)'),
-                'second_options' => array('label' => 'Confirmation mdp'),
+                'first_options' => array('label' => 'Mot de passe (mdp)','max_length'=>'20'),
+                'second_options' => array('label' => 'Confirmation mdp'),'max_length'=>'20',
                 'invalid_message' => 'fos_user.password.mismatch',
             ));
         $builder->remove('username');
