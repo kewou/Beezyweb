@@ -23,12 +23,12 @@ class PublicController extends Controller {
             return $this->render("PriveeBundle:Privee:index.html.twig" );
             
         }else{ 
-        	$message= \Swift_Message::newInstance()
+        	/*$message= \Swift_Message::newInstance()
         		->setSubject("test")        		
         		->setTo("beezyweb.net@beezyweb.net")
         		->setBody("Message test 2");
         	$this->get('mailer')->send($message);
-        	
+        	*/
             return $this->render("PublicBundle:Public:index.html.twig" );
         }
     }
