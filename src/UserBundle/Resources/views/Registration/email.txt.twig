@@ -1,0 +1,24 @@
+{% block subject %}
+{% autoescape false %}
+{{ user.nom }} {{ user.prenom }}  Bienvenue chez Beezyweb !
+{% endautoescape %}
+{% endblock %}
+
+{% block body_text %}
+{% autoescape false %}
+{{user.nom }} {{ user.prenom }}
+
+Bravo ! vous etes désormais inscrit chez Beezyweb. Une application qui vous facilitera les échanges avec votre auto-école.
+
+Merci d'activer votre compte en cliquant sur le lien suivant => {{confirmationUrl}} .
+Vous allez allez vite adopter la simplicité d'utilisation et toutes les possibilités offerte par Beezyweb.
+
+Bien cordialement
+L'équipe Beezyweb.
+https://Beezyweb.net
+
+{% endautoescape %}
+{% endblock %}
+
+{% block body_html %}{% endblock %}
+
