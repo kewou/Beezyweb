@@ -8,6 +8,7 @@ class PriveeController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('PriveeBundle:Privee:index.html.twig');
+        $user = $this->getUser();
+        return $this->render('PriveeBundle:Privee:index.html.twig',array('user' => $user,));
     }
 }
