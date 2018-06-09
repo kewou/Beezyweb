@@ -84,8 +84,7 @@ fos_user:
         form:
             type: autoecole_inscription
         confirmation:
-            enabled: true
-            template: '@UserBundle/Registration/email.txt.twig'
+            enabled: true            
     resetting:
         email:
             from_email:
