@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new PriveeBundle\PriveeBundle(),
             new MoniteurBundle\MoniteurBundle(),
             new AdminBundle\AdminBundle(),
+            new ReservationBundle\ReservationBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {
