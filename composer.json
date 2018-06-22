@@ -7,7 +7,9 @@
 		"psr-4" : {			
 			"UserBundle\\" : "src/UserBundle",
 			"PublicBundle\\" : "src/PublicBundle",
-                        "PriveeBundle\\" : "src/PriveeBundle"
+                        "PriveeBundle\\" : "src/PriveeBundle",
+                        "MoniteurBundle\\" : "src/MoniteurBundle",
+                        "AdminBundle\\" : "src/AdminBundle"
 		},
 		"classmap" : [
 			"app/AppKernel.php",

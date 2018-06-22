@@ -1,6 +1,14 @@
+admin:
+    resource: "@AdminBundle/Resources/config/routing.yml"
+    prefix:   /admin
+
+moniteur:
+    resource: "@MoniteurBundle/Resources/config/routing.yml"
+    prefix:   /moniteur
+
 privee:
     resource: "@PriveeBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /privee
 
 public:
     resource: "@PublicBundle/Resources/config/routing.yml"

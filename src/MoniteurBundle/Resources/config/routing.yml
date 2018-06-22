@@ -1,0 +1,3 @@
+moniteur_homepage:
+    path:     /
+    defaults: { _controller: MoniteurBundle:Default:index }

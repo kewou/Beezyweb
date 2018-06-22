@@ -1,3 +1,3 @@
 Privee_accueil:
-    path: /privee
+    path: /
     defaults: { _controller: PriveeBundle:Privee:index }
