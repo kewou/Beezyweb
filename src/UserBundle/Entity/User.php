@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints\Email;
 
 /**
  * User
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="UserBundle\Entity\UserRepository")
  * @ORM\Table(name="user")
  * @UniqueEntity(fields="telephone", message="Ce numéro de téléphone existe déja sur un autre compte !")
  */
