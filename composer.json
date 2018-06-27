@@ -9,8 +9,7 @@
 			"PublicBundle\\" : "src/PublicBundle",
                         "PriveeBundle\\" : "src/PriveeBundle",
                         "MoniteurBundle\\" : "src/MoniteurBundle",
-                        "AdminBundle\\" : "src/AdminBundle",
-                        "ReservationBundle\\" : "src/ReservationBundle"
+                        "AdminBundle\\" : "src/AdminBundle"
 		},
 		"classmap" : [
 			"app/AppKernel.php",
