@@ -9,3 +9,7 @@ Admin_clients:
 Admin_client:
     path: /clients/{id}/compte-client
     defaults: { _controller: AdminBundle:GestionClient:infosClient }
+    
+Admin_client_delete:
+    path: /clients/{id}/supprimer-client
+    defaults: { _controller: AdminBundle:GestionClient:deleteUser }

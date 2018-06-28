@@ -18,10 +18,16 @@ class UserService {
     }
     
     public function getAllUsers(){
-        return $this->entityManager->getRepository('UserBundle:User')->findAll();
+        return $this->entityManager->getRepository('UserBundle:User')->findAllUsers();
     }
     
     public function getUser($id){
         return $this->entityManager->getRepository('UserBundle:User')->findOneById($id);
+    }
+    
+    public function deleteUser($id){ 
+        $user = $this->entityManager->getRepository('UserBundle:User')->findOneById($id);    
+        $this->entityManager->remove($user);
+        $this->entityManager->flush();        
     }
 }
