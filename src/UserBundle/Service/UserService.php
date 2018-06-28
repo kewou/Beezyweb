@@ -20,4 +20,8 @@ class UserService {
     public function getAllUsers(){
         return $this->entityManager->getRepository('UserBundle:User')->findAll();
     }
+    
+    public function getUser($id){
+        return $this->entityManager->getRepository('UserBundle:User')->findOneById($id);
+    }
 }
