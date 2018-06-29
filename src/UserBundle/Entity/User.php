@@ -23,6 +23,28 @@ class User extends BaseUser {
 	 * @ORM\GeneratedValue(strategy="AUTO")
 	 */
 	protected $id;
+        
+        public function __construct()
+        {
+            $this->reservations = new ArrayCollection();
+        }
+        
+        /**
+         * @ORM\OneToMany(targetEntity="UserBundle\Entity\User",mappedBy="moniteur")
+         * @var User 
+         */
+        protected $clients=null;                
+        
+        /**
+         * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User",inversedBy="clients")
+         * @var User 
+        */        
+        protected $moniteur=null;
+        
+        /**
+         * @ORM\OneToMany(targetEntity="ReservationBundle\Entity\Reservation",mappedBy="client")         
+         */
+        protected $reservations=null;
 
 	/**
 	 * @var integer
@@ -67,7 +89,24 @@ class User extends BaseUser {
 	 */
 	protected $email;
 	
-	public function getId() {
+        
+        function getClients() {
+            return $this->clients;
+        }
+
+        function getMoniteur() {
+            return $this->moniteur;
+        }
+
+        function setClients(User $clients) {
+            $this->clients = $clients;
+        }
+
+        function setMoniteur(User $moniteur) {
+            $this->moniteur = $moniteur;
+        }
+
+        public function getId() {
 		return $this->id;
 	}
 	public function getTelephone() {
