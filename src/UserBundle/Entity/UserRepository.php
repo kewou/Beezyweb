@@ -3,6 +3,7 @@
 namespace UserBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use JMS\SecurityExtraBundle\Annotation\Secure;
 
 /**
  * Description of UserRepository
@@ -11,8 +12,20 @@ use Doctrine\ORM\EntityRepository;
  */
 class UserRepository extends EntityRepository{
     
+    /**
+     * @Secure(roles="ROLE_SUPER_ADMIN")
+     */
     public function findAllUsers(){
-        return $this->getEntityManager()->createQuery('SELECT u FROM UserBundle:User u where u.id !=1')->getResult();
+        return $this->getEntityManager()->createQuery('SELECT U FROM UserBundle:User U where U.id !=1 and U.moniteur is not NULL')->getResult();
     }
     
+    
+    /**
+     * @Secure(roles="ROLE_MONITEUR")
+     */
+    /*
+    public function findUsersByMoniteur($idMoniteur){           
+        return $this->getEntityManager()->createQuery('SELECT U FROM UserBundle:User U where U.moniteur.id is not NULL')->getResult();
+    }
+    */
 }

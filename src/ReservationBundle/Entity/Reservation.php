@@ -49,6 +49,32 @@ class Reservation {
    function setClient($client) {
        $this->client = $client;
    }
+   
+   function getId() {
+       return $this->id;
+   }
+
+   function getDateReservation() {
+       return $this->dateReservation;
+   }
+
+   function getEtatReservation() {
+       return $this->etatReservation;
+   }
+
+   function setId($id) {
+       $this->id = $id;
+   }
+
+   function setDateReservation(\DateTime $dateReservation) {
+       $this->dateReservation = $dateReservation;
+   }
+
+   function setEtatReservation($etatReservation) {
+       $this->etatReservation = $etatReservation;
+   }
+
+
 
 
    
