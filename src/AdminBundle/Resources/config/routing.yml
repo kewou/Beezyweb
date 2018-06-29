@@ -1,3 +1,15 @@
-admin_homepage:
-    path:     /
-    defaults: { _controller: AdminBundle:Default:index }
+Admin_homepage:
+    path:  /
+    defaults: { _controller: AdminBundle:GestionClient:index }
+
+Admin_clients:
+    path: /clients
+    defaults: { _controller: AdminBundle:GestionClient:clients }
+    
+Admin_client:
+    path: /clients/{id}/compte-client
+    defaults: { _controller: AdminBundle:GestionClient:infosClient }
+    
+Admin_client_delete:
+    path: /clients/{id}/supprimer-client
+    defaults: { _controller: AdminBundle:GestionClient:deleteUser }

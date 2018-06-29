@@ -1,0 +1,7 @@
+
+<ul>
+    {% for item in clients %}
+        <li><a href="{{path("Admin_client",{"id":item.id})}}">{{item.nom}} {{item.prenom}}</a></li>        
+    {% endfor %}
+</ul>
+    
