@@ -1,7 +1,11 @@
 Admin_homepage:
     path:  /
     defaults: { _controller: AdminBundle:GestionClient:index }
-
+    
+Admin_moniteurs:
+    path: /moniteurs
+    defaults: { _controller: AdminBundle:GestionClient:moniteurs }
+    
 Admin_clients:
     path: /clients
     defaults: { _controller: AdminBundle:GestionClient:clients }

@@ -1,0 +1,6 @@
+<ul>
+    {% for item in moniteurs %}
+        <li><a href="{{path("Admin_moniteurs",{"id":item.id})}}">{{item.nom}} {{item.prenom}}</a></li>        
+    {% endfor %}
+</ul>
+    

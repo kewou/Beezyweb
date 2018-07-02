@@ -21,6 +21,10 @@ class UserService {
         return $this->entityManager->getRepository('UserBundle:User')->findAllUsers();
     }
     
+    public function getAllMoniteurs(){
+        return $this->entityManager->getRepository('UserBundle:User')->findAllMoniteurs();
+    }
+    
     public function getUser($id){
         return $this->entityManager->getRepository('UserBundle:User')->findOneById($id);
     }
@@ -30,4 +34,10 @@ class UserService {
         $this->entityManager->remove($user);
         $this->entityManager->flush();        
     }
+    
+    public function getReservations($user){
+        return $user->getReservations();
+    }
+    
+    
 }

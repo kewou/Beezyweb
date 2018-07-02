@@ -1,0 +1,19 @@
+{% extends "PriveeBundle:Privee:index.html.twig" %}
+
+{% block contenu %}   
+    <h3 class="major">Mon compte</h3>    
+    <div class="wrapperDivContenu">
+        <ul>		
+            <li>{{ user.prenom}} {{ user.nom }}</li>
+            <li>{{ user.email }}</li>
+            <li>0{{ user.telephone }}</li>            
+            <li><span class="thInfos">Solde:&nbsp&nbsp;</span>  <span class="tdInfos">{{ user.money}}€</span></li>
+            <li><span class="thInfos">Quota:&nbsp;&nbsp;</span>  <span class="tdInfos">{{ user.solde }}H</span></li>
+        </ul>            
+    </div>
+     <ul>
+    {% for resa in user.reservations %}
+        <li>{{resa.id}}</li>        
+    {% endfor %}
+    </ul>
+{% endblock contenu %}

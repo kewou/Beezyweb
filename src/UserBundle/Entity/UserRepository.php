@@ -19,6 +19,9 @@ class UserRepository extends EntityRepository{
         return $this->getEntityManager()->createQuery('SELECT U FROM UserBundle:User U where U.id !=1 and U.moniteur is not NULL')->getResult();
     }
     
+    public function findAllMoniteurs(){
+       return $this->getEntityManager()->createQuery('SELECT U FROM UserBundle:User U where U.id !=1 and U.moniteur is  NULL')->getResult(); 
+    }
     
     /**
      * @Secure(roles="ROLE_MONITEUR")

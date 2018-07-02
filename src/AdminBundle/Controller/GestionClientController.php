@@ -15,6 +15,12 @@ class GestionClientController extends Controller{
     public function indexAction() {
         return $this->render('AdminBundle:GestionClient:index.html.twig');
     }
+    
+    public function moniteursAction() {
+        $userService = $this->get('user_service');
+        $moniteurs = $userService->getAllMoniteurs();
+        return $this->render('AdminBundle:GestionClient:moniteurs.html.twig',array('moniteurs' => $moniteurs));
+    }
         
     public function clientsAction() {
         $userService = $this->get('user_service');
