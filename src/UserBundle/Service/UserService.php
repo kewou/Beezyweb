@@ -39,8 +39,8 @@ class UserService {
         $this->entityManager->flush();        
     }
     
-    public function getReservations($user){
-        return $user->getReservations();
+    public function getReservations($idUser){
+        return $this->entityManager->getRepository('UserBundle:User')->findReservations($idUser);
     }
     
     

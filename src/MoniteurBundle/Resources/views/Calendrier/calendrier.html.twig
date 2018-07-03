@@ -1,6 +1,12 @@
+Les clients du moniteurs
 <ul>
     {% for item in clients %}
         <li>{{item.nom}} {{item.prenom}}</li>        
     {% endfor %}
 </ul>
-    
+Toutes les résa   
+<ul>
+    {% for resa in reservations %}
+        <li>{{resa.id}} {{resa.dateReservation}}</li>        
+    {% endfor %}
+</ul>

@@ -30,11 +30,22 @@ class UserRepository extends EntityRepository{
      * @Secure(roles="ROLE_MONITEUR")     
      */
     public function findUsersByMoniteur($idMoniteur){
-        $query = 'SELECT * FROM user U where U.moniteur_id =:idMoniteur;';
+        $query = 'SELECT * FROM user U WHERE U.moniteur_id =:idMoniteur;';
         $statement = $this->getEntityManager()->getConnection()->prepare($query);
         $statement->bindValue('idMoniteur', $idMoniteur);
         $statement->execute();
         return $statement->fetchAll();
+    }
+    
+    /**
+     * @Secure(roles="ROLE_MONITEUR")     
+     */
+    public function findReservations($idUser){
+        $query = 'SELECT * FROM reservation R WHERE R.client_id =:idUser;';
+        $statement = $this->getEntityManager()->getConnection()->prepare($query);
+        $statement->bindValue('idUser', $idUser);
+        $statement->execute();
+        return $statement->fetchAll();        
     }
     
 }
