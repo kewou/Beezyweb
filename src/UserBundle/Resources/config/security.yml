@@ -41,5 +41,6 @@ security:
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }        
         - { path: ^/admin/*, role: ROLE_ADMIN }
         - { path: ^/privee/*, role: ROLE_USER }
+        - { path: ^/moniteur/*, role: ROLE_MONITEUR }
         - { path: ^/admin, ip: 127.0.0.1, requires_channel: https }
         - { path: ^/deconnexion$, role: IS_AUTHENTICATED_FULLY }            

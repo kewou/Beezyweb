@@ -25,6 +25,10 @@ class UserService {
         return $this->entityManager->getRepository('UserBundle:User')->findAllMoniteurs();
     }
     
+    public function getAllUsersMoniteur($idMoniteur){
+        return $this->entityManager->getRepository('UserBundle:User')->findUsersByMoniteur($idMoniteur);
+    }
+    
     public function getUser($id){
         return $this->entityManager->getRepository('UserBundle:User')->findOneById($id);
     }

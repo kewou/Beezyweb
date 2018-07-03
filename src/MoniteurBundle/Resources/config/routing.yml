@@ -1,3 +1,7 @@
 moniteur_homepage:
     path:     /
     defaults: { _controller: MoniteurBundle:Default:index }
+    
+moniteur_calendrier:
+    path:     /calendrier
+    defaults: { _controller: MoniteurBundle:Calendrier:calendrier }
