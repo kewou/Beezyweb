@@ -10,15 +10,23 @@
     <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 {% endblock %}
 
-{% block menu %}
-    <nav id="nav">
-        <ul>
-            <li><a href="{{path("Public_accueil")}}">Accueil</a></li>
-            <li><a href="{{path("fos_user_security_login")}}">Connexion</a></li>
-            <li><a href="{{path("fos_user_registration_register")}}" class="button special">Créer un compte</a></li>
-        </ul>
-    </nav>  
+{% block header %}
+        <header id="header" class="alt">
+            <h1 id="logo"><a href="{{path("Public_accueil")}}">Accueil</a></h1>            
+            <!-- Menu -->
+            {% block menu %}
+                <nav id="nav">
+                    <ul>
+                        <li><a href="{{path("Public_accueil")}}">Accueil</a></li>
+                        <li><a href="{{path("fos_user_security_login")}}">Connexion</a></li>
+                        <li><a href="{{path("fos_user_registration_register")}}" class="button special">Créer un compte</a></li>
+                    </ul>
+                </nav>  
+            {% endblock %}        
+        </header>        
 {% endblock %}
+
+
 
 {% block contenu %}    
 

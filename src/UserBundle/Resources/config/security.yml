@@ -35,12 +35,4 @@ security:
                 path:           /admin/logout
                 target:         /admin/login
             anonymous: true  
-    access_control:
-        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }        
-        - { path: ^/admin/*, role: ROLE_ADMIN }
-        - { path: ^/privee/*, role: ROLE_USER }
-        - { path: ^/moniteur/*, role: ROLE_MONITEUR }
-        - { path: ^/admin, ip: 127.0.0.1, requires_channel: https }
-        - { path: ^/deconnexion$, role: IS_AUTHENTICATED_FULLY }            
+          

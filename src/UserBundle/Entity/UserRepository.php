@@ -16,18 +16,19 @@ class UserRepository extends EntityRepository{
      * @Secure(roles="ROLE_SUPER_ADMIN")
      */
     public function findAllUsers(){
-        return $this->getEntityManager()->createQuery('SELECT U FROM UserBundle:User U where U.id !=4 and U.moniteur is not NULL')->getResult();
+        return $this->getEntityManager()->createQuery("SELECT U FROM UserBundle:User U where U.roles not like '%ROLE_ADMIN%' AND
+                                                                                             U.roles not like '%SUPER_ADMIN%' ")->getResult();
     }
     
     /**
      * @Secure(roles="ROLE_SUPER_ADMIN")
      */
     public function findAllMoniteurs(){
-       return $this->getEntityManager()->createQuery('SELECT U FROM UserBundle:User U where U.moniteur is NULL')->getResult(); 
+       return $this->getEntityManager()->createQuery("SELECT U FROM UserBundle:User U where U.roles like '%ROLE_ADMIN%'")->getResult(); 
     }
     
     /**
-     * @Secure(roles="ROLE_MONITEUR")     
+     * @Secure(roles="ROLE_ADMIN")     
      */
     public function findUsersByMoniteur($idMoniteur){
         $query = 'SELECT * FROM user U WHERE U.moniteur_id =:idMoniteur;';
@@ -38,7 +39,7 @@ class UserRepository extends EntityRepository{
     }
     
     /**
-     * @Secure(roles="ROLE_MONITEUR")     
+     * @Secure(roles="ROLE_ADMIN")     
      */
     public function findReservations($idUser){
         $query = 'SELECT * FROM reservation R WHERE R.client_id =:idUser;';
