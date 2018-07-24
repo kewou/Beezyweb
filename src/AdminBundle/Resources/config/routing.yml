@@ -1,19 +1,23 @@
 Admin_homepage:
     path:  /
-    defaults: { _controller: AdminBundle:GestionClient:index }
-    
-Admin_moniteurs:
-    path: /moniteurs
-    defaults: { _controller: AdminBundle:GestionClient:moniteurs }
+    defaults: { _controller: AdminBundle:GestionClient:index }   
     
 Admin_clients:
     path: /clients
-    defaults: { _controller: AdminBundle:GestionClient:clients }
-    
+    defaults: { _controller: AdminBundle:GestionClient:clients }    
 Admin_client:
     path: /clients/{id}/compte-client
-    defaults: { _controller: AdminBundle:GestionClient:infosClient }
-    
+    defaults: { _controller: AdminBundle:GestionClient:infosClient }    
 Admin_client_delete:
     path: /clients/{id}/supprimer-client
     defaults: { _controller: AdminBundle:GestionClient:deleteUser }
+    
+Admin_moniteurs:
+    path: /moniteurs
+    defaults: { _controller: AdminBundle:GestionMoniteur:moniteurs }
+Admin_moniteur:
+    path: /moniteurs/{id}/compte-moniteur
+    defaults: { _controller: AdminBundle:GestionMoniteur:infosMoniteur }    
+Admin_client_delete:
+    path: /moniteurs/{id}/supprimer-moniteur
+    defaults: { _controller: AdminBundle:GestionMoniteur:deleteUser }    
