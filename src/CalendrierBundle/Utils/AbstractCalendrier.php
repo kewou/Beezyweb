@@ -17,24 +17,38 @@ abstract class AbstractCalendrier {
     protected $tabJour;
     protected $tabMois;
     protected $reservations;
+    protected $userProprietaire;
 
-    function __construct($reservations) {
+    function __construct($reservations,$userProprietaire) {        
         $this->reservations = $reservations;
+        $this->userProprietaire = $userProprietaire;
         $this->dateCourante = new DateTime();
-        $this->tabHeure = array('8h', '9h', '10h', '11h', '14h', '15h', '16h', '17h');
+        $this->tabHeure = array('08h', '09h', '10h', '11h', '14h', '15h', '16h', '17h');
         $this->tabJour = array('Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam');
         $this->tabMois = array("", "Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre");
     }
 
     abstract function display();
     
-    public function caseEstDispo($heure,$reservations){        
-        foreach ($reservations as $resa) {
-            echo $heure;            
-            $heureResa = $this->getHeureFromStringDate($resa['dateReservation'])."h";
+    public function afficheCase($date){ 
+        $estDispo=true;        
+        foreach ($this->reservations as $resa) {                    
+            $heureResa = $resa['dateReservation'];
+            echo $date;
             echo $heureResa;
-            return $heure==$heureResa;
-        }        
+            if($date==$heureResa){ 
+                //echo $this->getUserProprio()->getId();
+                if(($this->getUserProprio()->getId()==$resa['client_id'])){
+                    echo $this->user-getNom();
+                }else{
+                    echo "Réservée";
+                }
+                $estDispo=false;
+            }         
+        }
+        if($estDispo){
+            echo "Dispo";
+        }
     }
     
     public function getHeureFromStringDate($dateString){
@@ -42,18 +56,18 @@ abstract class AbstractCalendrier {
     }
     
     public function headCalendrier(){
-        $this->dateCourante;   
-        echo ($this->tabMois[$this->dateCourante->format('n')] ." ".date("Y"));
+        $dateTemp = clone $this->dateCourante;           
+        echo ($this->tabMois[$dateTemp->format('n')] ." ".date("Y"));
         // Le calendrier
         echo ("<table border='1'>");
         echo ("<tr>\n<th></th>\n");
         for($indiceJour=0 ; $indiceJour<count($this->tabJour); $indiceJour++) {
-            if($this->dateCourante->format('w')=="0"){               
-                $this->dateCourante->add(new DateInterval('P1D'));
+            if($dateTemp->format('w')=="0"){               
+                $dateTemp->add(new DateInterval('P1D'));
                 continue; 
             }
-            echo ("<th class='jourFirstLine'>".$this->tabJour[$this->dateCourante->format('w')]." ".intval($this->dateCourante->format('d'))."</th>\n");	
-            $this->dateCourante->add(new DateInterval('P1D'));           
+            echo ("<th class='jourFirstLine'>".$this->tabJour[$dateTemp->format('w')]." ".intval($dateTemp->format('d'))."</th>\n");	
+            $dateTemp->add(new DateInterval('P1D'));           
         }
     }
     
@@ -82,6 +96,10 @@ abstract class AbstractCalendrier {
 
     function getTabMois() {
         return $this->tabMois;
+    }
+    
+    function getUserProprio(){
+        return $this->userProprietaire;
     }
 
     function getReservations() {

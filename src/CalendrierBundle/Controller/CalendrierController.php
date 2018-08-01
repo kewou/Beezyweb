@@ -23,7 +23,7 @@ class CalendrierController extends Controller{
                 array_push($reservations, $resa );
             }                        
         }
-        $cal = new CalendrierPrivee($reservations);
+        $cal = new CalendrierPrivee($reservations,$user);        
         return $this->render("CalendrierBundle:Calendrier:calendrierPrivee.html.twig",array('cal'=>$cal) );
     }
 }

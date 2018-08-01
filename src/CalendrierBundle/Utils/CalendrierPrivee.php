@@ -12,8 +12,8 @@ use DateInterval;
 class CalendrierPrivee extends AbstractCalendrier{
     
 
-    function __construct($reservations) {
-        parent::__construct($reservations);        
+    function __construct($reservations,$userProprietaire) {
+        parent::__construct($reservations,$userProprietaire);        
     }
     
     
@@ -27,24 +27,22 @@ class CalendrierPrivee extends AbstractCalendrier{
 
     }
     
-    private function corpCalendrier(){
-        $resas=$this->reservations;
+    private function corpCalendrier(){               
+        $dateTemp = clone $this->dateCourante;        
         foreach ($this->tabHeure as $heure){
             echo("<tr>\n<th class='trHeure'>".$heure."</th>\n");
-            foreach ($this->tabJour as $jour) {
-                if($this->dateCourante->format('w')=="0"){               
-                    $this->dateCourante->add(new DateInterval('P1D'));
+            foreach ($this->tabJour as $jour) {                                 
+                if($dateTemp->format('w')=="0"){                     
+                    $dateTemp->add(new DateInterval('P1D'));
                     continue; 
-                }
+                }                                 
                 echo("<td>");
-                if($this->caseEstDispo($heure,$resas)){
-                    echo("elie");
-                    $this->dateCourante->add(new DateInterval('P1D'));
-                }else{
-                    echo "assita";
-                    $this->dateCourante->add(new DateInterval('P1D'));
-                }
-            }
+                // date Case
+                $dateCase=$dateTemp->format('Y-m-d ' .substr($heure, 0, -1).':00:00');
+                $this->afficheCase($dateCase);
+                $dateTemp->add(new DateInterval('P1D'));                
+                                
+            }                        
         }
     }
     
