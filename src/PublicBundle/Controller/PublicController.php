@@ -17,11 +17,7 @@ class PublicController extends Controller {
     function PublicController(){
         $this->securityContext = $this->container->get('security.context');
     }
-    
-    function calendrierAction(){
-        return $this->render("PublicBundle:Public:calendrier.html.php" );
-    }
-
+   
     function indexAction(){        
         if ($this->container->get('security.context')->isGranted('ROLE_USER')) {            
             return $this->render("PriveeBundle:Privee:index.html.twig" );

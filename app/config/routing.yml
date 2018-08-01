@@ -1,3 +1,7 @@
+calendrier:
+    resource: "@CalendrierBundle/Resources/config/routing.yml"
+    prefix:   /calendrier
+
 reservation:
     resource: "@ReservationBundle/Resources/config/routing.yml"
     prefix:   /reservation

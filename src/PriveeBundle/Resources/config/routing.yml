@@ -1,3 +1,7 @@
 Privee_accueil:
     path: /
     defaults: { _controller: PriveeBundle:Privee:index }
+    
+Privee_calendrier:
+    path: /calendrier
+    defaults: {_controller: CalendrierBundle:Calendrier:calendrier }
