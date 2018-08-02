@@ -30,30 +30,15 @@ abstract class AbstractCalendrier {
 
     abstract function display();
     
-    public function afficheCase($date){ 
-        $estDispo=true;        
-        foreach ($this->reservations as $resa) {                    
-            $heureResa = $resa['dateReservation'];
-            echo $date;
-            echo $heureResa;
-            if($date==$heureResa){ 
-                //echo $this->getUserProprio()->getId();
-                if(($this->getUserProprio()->getId()==$resa['client_id'])){
-                    echo $this->user-getNom();
-                }else{
-                    echo "Réservée";
-                }
-                $estDispo=false;
-            }         
-        }
-        if($estDispo){
-            echo "Dispo";
-        }
-    }
+    abstract function afficheCase($date); 
+
     
+    
+    /*
     public function getHeureFromStringDate($dateString){
         return(explode(":",explode(" ",$dateString)[1])[0]);
     }
+    */
     
     public function headCalendrier(){
         $dateTemp = clone $this->dateCourante;           
@@ -68,6 +53,27 @@ abstract class AbstractCalendrier {
             }
             echo ("<th class='jourFirstLine'>".$this->tabJour[$dateTemp->format('w')]." ".intval($dateTemp->format('d'))."</th>\n");	
             $dateTemp->add(new DateInterval('P1D'));           
+        }
+        echo ("</tr>");
+    }
+    
+    public function corpCalendrier(){                               
+        foreach ($this->tabHeure as $heure){
+            echo("<tr>\n<th class='trHeure'>".$heure."</th>\n");
+            $dateTemp = clone $this->dateCourante;
+            foreach ($this->tabJour as $jour) {                
+                if($dateTemp->format('w')=="0"){                     
+                    $dateTemp->add(new DateInterval('P1D'));
+                    continue; 
+                }                                 
+                echo("<td>");
+                // date Case
+                $dateCase=$dateTemp->format('Y-m-d ' .substr($heure, 0, -1).':00:00');
+                $this->afficheCase($dateCase);
+                echo("</td>");
+                $dateTemp->add(new DateInterval('P1D'));                
+            }
+            
         }
     }
     

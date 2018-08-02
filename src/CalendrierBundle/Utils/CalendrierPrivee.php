@@ -26,29 +26,23 @@ class CalendrierPrivee extends AbstractCalendrier{
         $this->paginationCalendrier();
 
     }
-    
-    private function corpCalendrier(){               
-        $dateTemp = clone $this->dateCourante;        
-        foreach ($this->tabHeure as $heure){
-            echo("<tr>\n<th class='trHeure'>".$heure."</th>\n");
-            foreach ($this->tabJour as $jour) {                                 
-                if($dateTemp->format('w')=="0"){                     
-                    $dateTemp->add(new DateInterval('P1D'));
-                    continue; 
-                }                                 
-                echo("<td>");
-                // date Case
-                $dateCase=$dateTemp->format('Y-m-d ' .substr($heure, 0, -1).':00:00');
-                $this->afficheCase($dateCase);
-                $dateTemp->add(new DateInterval('P1D'));                
-                                
-            }                        
+
+    public function afficheCase($date) {
+        $estDispo=true;        
+        foreach ($this->reservations as $resa) {                    
+            $heureResa = $resa['dateReservation']; 
+            if($date==$heureResa){                 
+                if(($this->getUserProprio()->getId()==$resa['client_id'])){
+                    echo $this->userProprietaire->getNom();
+                }else{
+                    echo "Réservée";
+                }
+                $estDispo=false;
+            }         
         }
+        if($estDispo){
+            echo "Dispo";
+        }        
     }
-    
-    
-    
-
-
 
 }
