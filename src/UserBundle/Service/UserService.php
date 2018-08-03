@@ -39,8 +39,33 @@ class UserService {
         $this->entityManager->flush();        
     }
     
-    public function getReservations($idUser){
+    public function getReservationsByClient($idUser){
         return $this->entityManager->getRepository('UserBundle:User')->findReservations($idUser);
+    }
+    
+    public function getAllReservationsFromClient($idClient){
+        $clients = $this->getAllUsersMoniteur($this->getUser($idClient)->getMoniteur()->getId());
+        $reservations = array();
+        foreach ($clients as $client) {                        
+            $lesResas=$this->getReservationsByClient($client['id']);
+            foreach ($lesResas as $resa) { 
+                array_push($reservations, $resa);
+            }
+        }
+        return $reservations;
+    }
+    
+    
+    public function getAllReservationsFromMoniteur($idMoniteur){
+        $clients = $this->getAllUsersMoniteur($idMoniteur);
+        $reservations = array();
+        foreach ($clients as $client) {                        
+            $lesResas=$this->getReservationsByClient($client['id']);
+            foreach ($lesResas as $resa) { 
+                array_push($reservations, $resa );
+            }
+        }
+        return $reservations;
     }
     
     

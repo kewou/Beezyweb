@@ -14,4 +14,18 @@ class CalendrierMoniteur extends AbstractCalendrier{
         
     }
 
+    public function afficheCase($date) {
+        $estDispo=true;        
+        foreach ($this->reservations as $resa) {                    
+            $heureResa = $resa['dateReservation']; 
+            if($date==$heureResa){                                 
+                echo $this->userProprietaire->getNom();                
+                $estDispo=false;
+            }         
+        }
+        if($estDispo){
+            echo "Dispo";
+        }          
+    }
+
 }
