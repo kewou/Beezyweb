@@ -18,6 +18,10 @@ abstract class AbstractCalendrier {
     protected $tabMois;
     protected $reservations;
     protected $userProprietaire;
+    
+    function __contruct(){
+        
+    }
 
     function __construct($reservations,$userProprietaire) {        
         $this->reservations = $reservations;
@@ -73,20 +77,11 @@ abstract class AbstractCalendrier {
                 echo("</td>");
                 $dateTemp->add(new DateInterval('P1D'));                
             }
-            
-        }
+        echo ("</tr>\n");   
+        }        
+        echo ("</table>");        
     }
     
-    public function paginationCalendrier(){
-        echo ("<ul  class='pagination' id='pagerCalendrier'>
-            <li class='page-item'><a class='page-link' href='#' onclick='tab(-7)' aria-label='Previous'>
-                    <span aria-hidden='true'>&laquo; Précédent</span></a>
-            </li>
-                        <li class='page-item'><a class='page-link' href='#' onclick='tab(7)' aria-label='Next'>
-                    <span aria-hidden='true'>Suivant &raquo;</span></a>
-            </li>
-         </ul>");
-    }
 
     function getDateCourante() {
         return $this->dateCourante;

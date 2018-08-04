@@ -1,4 +1,7 @@
+parameters:
+    #calendrier.class: CalendrierBundle\Utils\AbstractCalendrier
+
 services:
-#    calendrier.example:
-#        class: CalendrierBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    calendrier_service:
+        class: CalendrierBundle\Utils\CalendrierService
+        #arguments: [%calendrier.class%]

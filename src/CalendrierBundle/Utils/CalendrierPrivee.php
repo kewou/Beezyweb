@@ -20,11 +20,7 @@ class CalendrierPrivee extends AbstractCalendrier{
     public function display() {
         echo("Calendrier Privée " . "<br>");
         $this->headCalendrier();
-        $this->corpCalendrier();
-        echo ("</tr>\n");
-        echo ("</table>");
-        $this->paginationCalendrier();
-
+        $this->corpCalendrier();        
     }
 
     public function afficheCase($date) {

@@ -5,3 +5,7 @@ Privee_accueil:
 Privee_calendrier:
     path: /calendrier
     defaults: {_controller: CalendrierBundle:Calendrier:calendrier }
+
+Privee_calendrierPagination:
+    path: /calendrier/Pagination
+    defaults: {_controller: CalendrierBundle:Calendrier:pagination }
