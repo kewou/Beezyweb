@@ -37,7 +37,11 @@ class CalendrierPrivee extends AbstractCalendrier{
             }         
         }
         if($estDispo){
-            echo "Dispo";
+            echo "<label class='container'>One
+                    <input type='checkbox' checked='none'>
+                    <span class='checkmark'></span>
+                  </label>"
+            ;
         }        
     }
 
