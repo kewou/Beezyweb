@@ -38,7 +38,7 @@ class CalendrierPrivee extends AbstractCalendrier{
         }
         if($estDispo){
             echo "<label class='container'>One
-                    <input type='checkbox' checked='none'>
+                    <input type='checkbox' value=".$date.">Dispo
                     <span class='checkmark'></span>
                   </label>"
             ;
