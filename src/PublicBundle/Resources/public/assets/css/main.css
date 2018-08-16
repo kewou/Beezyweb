@@ -2242,10 +2242,6 @@
 
 	input[type="checkbox"],
 	input[type="radio"] {
-		display: block;
-		float: left;
-		margin-right: -2em;
-		opacity: 0;
 		width: 1em;
 		z-index: -1;
 	}
@@ -2640,7 +2636,7 @@
 		}
 
 		table th {
-			color: #ffffff;
+			color: pink;
 			font-size: 0.9em;
 			font-weight: 300;
 			padding: 0 0.75em 0.75em 0.75em;
