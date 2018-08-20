@@ -51,6 +51,41 @@
                 });                
             });            
         });
+            $("#reserveDate").css('display','none');    
+            $("input[type='checkbox']").change(function() {
+                if(this.checked) {
+                    $("#reserveDate").css('display','block');
+                }
+            });  
+
+            $("#reserveDate").click(function(){
+                reserver();
+            });
+
+            function reserver(){
+                var tabResa = [];
+                var tabControle= []; 
+                $("input[type='checkbox']:checked").each(function(){
+                    tabResa.push($(this).val());
+                });
+
+                controleReservation(tabResa,tabControle);
+                alert(tabControle.length);
+                if(tabControle.length !==0){
+                    alert(tabControle[0]);
+                }else{
+                    // Réalise réservatoin en Ajax
+                }
+                var tabResa = [];
+                var tabControle= [];
+            }
+
+            function controleReservation(tabResa,tabControle){       
+                if(tabResa.length > 2){
+                    tabControle.push("Pas plus de deux resa");
+                }    
+            }        
+               
         
         Date.prototype.format = function (format){ //author: meizz
             var o = {
@@ -70,6 +105,8 @@
                             RegExp.$1.length === 1 ? o[k] :
                             ("00" + o[k]).substr(("" + o[k]).length));
             return format;
-            }
+            }            
+
+                      
     </script>
 {% endblock %}
