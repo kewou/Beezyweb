@@ -29,6 +29,14 @@ class CalendrierController extends Controller{
         return $this->render("CalendrierBundle:Calendrier:calendrierPrivee.html.twig",array('cal'=>$cal,'user'=>$user) );
     }
     
+    function calendrierContenuAction(){
+        $user = $this->getUser();
+        $userService = $this->get('user_service');                       
+        $reservations = $userService->getAllReservationsFromClient($user->getId());
+        $cal = new CalendrierPrivee($reservations,$user);        
+        return new Response($cal->display());
+    }
+    
     function calendrierMoniteurAction(){
         $user = $this->getUser();
         $userService = $this->get('user_service');

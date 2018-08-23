@@ -18,7 +18,8 @@
 {% endblock %}
 
 {% block contenu %}
-    <div id="calendrier">
+    <input type='button' id='reserveDate' value='Réserver'>
+    <div id="calendrier">        
         {{ cal.display() }}        
     </div>
     <div id='paginationCalendrier'>
@@ -50,7 +51,7 @@
                             $('#calendrier').html(data);
                 });                
             });            
-        });
+       
             $("#reserveDate").css('display','none');    
             $("input[type='checkbox']").change(function() {
                 if(this.checked) {
@@ -69,12 +70,15 @@
                     tabResa.push($(this).val());
                 });
 
-                controleReservation(tabResa,tabControle);
-                alert(tabControle.length);
+                controleReservation(tabResa,tabControle);                
                 if(tabControle.length !==0){
                     alert(tabControle[0]);
                 }else{
-                    // Réalise réservatoin en Ajax
+                    $.post("{{ (path('Privee_reserver'))}}",{lesResaChoisi:tabResa},
+                        function(data){
+                            $('#calendrier').html(data);
+                    });
+                    
                 }
                 var tabResa = [];
                 var tabControle= [];
@@ -85,7 +89,7 @@
                     tabControle.push("Pas plus de deux resa");
                 }    
             }        
-               
+        });      
         
         Date.prototype.format = function (format){ //author: meizz
             var o = {

@@ -46,8 +46,7 @@ abstract class AbstractCalendrier {
     
     public function headCalendrier(){
         $dateTemp = clone $this->dateCourante;           
-        echo ($this->tabMois[$dateTemp->format('n')] ." ".date("Y"));
-        echo ("<input type='button' id='reserveDate' value='Réserver'>");
+        echo ($this->tabMois[$dateTemp->format('n')] ." ".date("Y"));        
         // Le calendrier
         echo ("<table border='1'>");
         echo ("<tr>\n<th></th>\n");
