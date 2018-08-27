@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  */
 class CalendrierController extends Controller {
 
+    /*
     public function calendrierAction() {
         $user = $this->getUser();
         $userService = $this->get('user_service');
@@ -24,5 +25,9 @@ class CalendrierController extends Controller {
         }
         return $this->render('MoniteurBundle:Calendrier:calendrier.html.twig', array('clients' => $clients, 'reservations' => $reservations,'user'=>$user));
     }
-
+    
+    public function calendrierMoniteurAction(){
+        
+    }
+    */
 }

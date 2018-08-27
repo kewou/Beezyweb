@@ -18,7 +18,7 @@ use DateTime;
 class CalendrierController extends Controller{
     
     
-    
+    // Calendrier User
     function calendrierAction(){
         $user = $this->getUser();
         $userService = $this->get('user_service'); 
@@ -29,6 +29,16 @@ class CalendrierController extends Controller{
         return $this->render("CalendrierBundle:Calendrier:calendrierPrivee.html.twig",array('cal'=>$cal,'user'=>$user) );
     }
     
+    // Calendrier Moniteur
+    function calendrierMoniteurAction(){
+        $user = $this->getUser();
+        $userService = $this->get('user_service');
+        $reservations=$userService->getAllReservationsMoniteur($user->getId());
+        $cal = new CalendrierMoniteur($reservations,$user);
+        return $this->render("CalendrierBundle:Calendrier:calendrierMoniteur.html.twig",array('cal'=>$cal,'user'=>$user) );
+    }    
+    
+    // recharge le contenu du calendrier
     function calendrierContenuAction(){
         $user = $this->getUser();
         $userService = $this->get('user_service');                       
@@ -37,14 +47,8 @@ class CalendrierController extends Controller{
         return new Response($cal->display());
     }
     
-    function calendrierMoniteurAction(){
-        $user = $this->getUser();
-        $userService = $this->get('user_service');
-        $reservations=$userService->getAllReservationsMoniteur($user->getId());
-        $cal = new CalendrierMoniteur($reservations,$user);
-        return $this->render("CalendrierBundle:Calendrier:calendrierMoniteur.html.twig",array('cal'=>$cal,'user'=>$user) );
-    }
-    
+
+    // Pagination par semaine du calendrier
     function paginationAction(Request $request){
         $user = $this->getUser();
         $datePivotString=$request->request->get('datePivot'); 
