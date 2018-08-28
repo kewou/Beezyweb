@@ -43,6 +43,8 @@ class UserService {
         return $this->entityManager->getRepository('UserBundle:User')->findReservations($idUser);
     }
     
+    
+    // Retourne toutes les réservations du moniteur de idClient
     public function getAllReservationsFromClient($idClient){
         $clients = $this->getAllUsersMoniteur($this->getUser($idClient)->getMoniteur()->getId());
         $reservations = array();
@@ -55,7 +57,7 @@ class UserService {
         return $reservations;
     }
     
-    
+    // Retourne toutes les réservations d'un moniteur
     public function getAllReservationsFromMoniteur($idMoniteur){
         $clients = $this->getAllUsersMoniteur($idMoniteur);
         $reservations = array();

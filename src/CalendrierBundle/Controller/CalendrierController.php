@@ -33,8 +33,10 @@ class CalendrierController extends Controller{
     function calendrierMoniteurAction(){
         $user = $this->getUser();
         $userService = $this->get('user_service');
-        $reservations=$userService->getAllReservationsMoniteur($user->getId());
+        $calendrierService =$this->get('calendrier_service'); 
+        $reservations=$userService->getAllReservationsFromMoniteur($user->getId());
         $cal = new CalendrierMoniteur($reservations,$user);
+        $cal->setDateCourante($calendrierService->getDatePivot());
         return $this->render("CalendrierBundle:Calendrier:calendrierMoniteur.html.twig",array('cal'=>$cal,'user'=>$user) );
     }    
     

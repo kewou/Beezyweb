@@ -10,21 +10,28 @@ use CalendrierBundle\Utils\AbstractCalendrier;
  * @author joel
  */
 class CalendrierMoniteur extends AbstractCalendrier{
+    
+    
     public function display() {
-        
+       echo("Calendrier Moniteur " . "<br>");
+        $this->headCalendrier();
+        $this->corpCalendrier();        
     }
 
     public function afficheCase($date) {
         $estDispo=true;        
         foreach ($this->reservations as $resa) {                    
             $heureResa = $resa['dateReservation']; 
-            if($date==$heureResa){                                 
-                echo $this->userProprietaire->getNom();                
+            if($date==$heureResa){
+                if($resa['etatReservation']=="Fermer"){
+                    echo ("<input type='checkbox' value='".$date."'>Fermer");
+                }
+                echo ("<input type='checkbox' value='".$date.">".$this->userProprietaire->getNom());                
                 $estDispo=false;
             }         
         }
         if($estDispo){
-            echo "Dispo";
+            echo ("<input type='checkbox' value='".$date."'>Dispo");
         }          
     }
 
