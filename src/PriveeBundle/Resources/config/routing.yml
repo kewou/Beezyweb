@@ -11,7 +11,7 @@ Privee_calendrier:
     defaults: {_controller: CalendrierBundle:Calendrier:calendrierContenu }
     
 Privee_calendrierPagination:
-    path: /calendrier/Pagination
+    path: /calendrier/pagination
     defaults: {_controller: CalendrierBundle:Calendrier:pagination }    
     
 Privee_reserver:

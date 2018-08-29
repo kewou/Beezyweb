@@ -11,9 +11,12 @@ use DateInterval;
  */
 class CalendrierPrivee extends AbstractCalendrier{
     
+    private $userProprietaire;
+    
 
     function __construct($reservations,$userProprietaire) {
-        parent::__construct($reservations,$userProprietaire);        
+        parent::__construct($reservations); 
+        $this->userProprietaire = $userProprietaire;
     }
     
     
@@ -34,11 +37,16 @@ class CalendrierPrivee extends AbstractCalendrier{
                     echo "Réservée";
                 }
                 $estDispo=false;
+                break;
             }         
         }
         if($estDispo){
             echo ("<input type='checkbox' value='".$date."'>Dispo");                                                
         }        
+    }
+    
+    public function getUserProprio(){
+        return $this->userProprietaire;
     }
 
 }

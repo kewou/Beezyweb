@@ -38,7 +38,7 @@
             $('button.nextSevenDay').click(function(){
                 date.setDate(date.getDate() + 7);
                 var dateEnvoyer = date.format("yyyy-MM-dd h:mm:ss");
-                $.post("{{ (path('Privee_calendrierPagination'))}}",{datePivot:dateEnvoyer},
+                $.post("{{ (path('Moniteur_calendrierPagination'))}}",{datePivot:dateEnvoyer},
                         function(data){                            
                             $('#calendrier').html(data);
                 });                
@@ -46,7 +46,7 @@
             $('button.previousSevenDay').click(function(){
                 date.setDate(date.getDate() -7);
                 var dateEnvoyer = date.format("yyyy-MM-dd h:mm:ss");
-                $.post("{{ (path('Privee_calendrierPagination'))}}",{datePivot:dateEnvoyer},
+                $.post("{{ (path('Moniteur_calendrierPagination'))}}",{datePivot:dateEnvoyer},
                         function(data){
                             $('#calendrier').html(data);
                 });                

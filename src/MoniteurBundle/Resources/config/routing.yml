@@ -6,6 +6,10 @@ Moniteur_calendrier:
     path:     /calendrier
     defaults: { _controller: CalendrierBundle:Calendrier:calendrierMoniteur }
     
+Moniteur_calendrierPagination:
+    path: /calendrier/pagination
+    defaults: {_controller: CalendrierBundle:Calendrier:paginationMoniteur }     
+    
     
 fos_moniteur_profile_show:
     pattern: /profil

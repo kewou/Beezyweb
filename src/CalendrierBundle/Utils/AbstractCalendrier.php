@@ -16,16 +16,14 @@ abstract class AbstractCalendrier {
     protected $tabHeure;
     protected $tabJour;
     protected $tabMois;
-    protected $reservations;
-    protected $userProprietaire;
+    protected $reservations;   
     
     function __contruct(){
         
     }
 
-    function __construct($reservations,$userProprietaire) {        
-        $this->reservations = $reservations;
-        $this->userProprietaire = $userProprietaire;
+    function __construct($reservations) {        
+        $this->reservations = $reservations;        
         $this->dateCourante = new DateTime();
         $this->tabHeure = array('08h', '09h', '10h', '11h', '14h', '15h', '16h', '17h');
         $this->tabJour = array('Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam');
@@ -97,12 +95,7 @@ abstract class AbstractCalendrier {
 
     function getTabMois() {
         return $this->tabMois;
-    }
-    
-    function getUserProprio(){
-        return $this->userProprietaire;
-    }
-
+    }    
     function getReservations() {
         return $this->reservations;
     }
