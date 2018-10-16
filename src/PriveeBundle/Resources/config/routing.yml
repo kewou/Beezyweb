@@ -13,12 +13,16 @@ Privee_calendrier:
 Privee_calendrierPagination:
     path: /calendrier/pagination
     defaults: {_controller: CalendrierBundle:Calendrier:pagination }    
+        
+Privee_reserver_controle:
+    path: /calendrier/reserver/controle
+    defaults: {_controller: ReservationBundle:Reservation:controleReservation }
     
 Privee_reserver:
     path: /calendrier/reserver
     defaults: { _controller: ReservationBundle:Reservation:reserver }
     
-Privee_reserver_controle:
-    path: /calendrier/reserver/controle
-    defaults: {_controller: ReservationBundle:Reservation:controleReservation }    
+Privee_annuler:
+    path: /calendrier/annuler
+    defaults: { _controller: ReservationBundle:Reservation:annuler }    
 

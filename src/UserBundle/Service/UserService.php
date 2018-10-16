@@ -3,6 +3,7 @@
 namespace UserBundle\Service;
 
 use Doctrine\ORM\EntityManager as EM;
+use UserBundle\Entity\UserDTO;
 
 /**
  * Description of UserService
@@ -21,6 +22,10 @@ class UserService {
         return $this->entityManager->getRepository('UserBundle:User')->findAllUsers();
     }
     
+    public function getAllUsersByFiltre($filtre){
+        return $this->entityManager->getRepository('UserBundle:User')->findAllUsersByFiltre($filtre);
+    }
+    
     public function getAllMoniteurs(){
         return $this->entityManager->getRepository('UserBundle:User')->findAllMoniteurs();
     }
@@ -33,6 +38,10 @@ class UserService {
         return $this->entityManager->getRepository('UserBundle:User')->findOneById($id);
     }
     
+    public function getUserByName($nom){
+        return $this->entityManager->getRepository('UserBundle:User')->findOneByNom($nom);
+    }
+    
     public function deleteUser($id){ 
         $user = $this->entityManager->getRepository('UserBundle:User')->findOneById($id);    
         $this->entityManager->remove($user);
@@ -41,7 +50,7 @@ class UserService {
     
     public function getReservationsByClient($idUser){
         return $this->entityManager->getRepository('UserBundle:User')->findReservations($idUser);
-    }
+    }        
     
     
     // Retourne toutes les réservations du moniteur de idClient
@@ -68,6 +77,15 @@ class UserService {
             }
         }
         return $reservations;
+    }
+    
+    // Retourne un user DTO
+    public function getUserDTO($client){
+        $userDTO=$client['nom'];
+        //$userDTO=array("id"=>$client['id'],"nom"=>$client['nom'],"prenom"=>$client['prenom']);
+        
+        //$userDTO = new UserDTO($client['id'],$client['nom'],$client['prenom']);
+        return $userDTO;
     }
     
     

@@ -92,6 +92,12 @@ body{
   background-image: linear-gradient(to bottom, #db1c1c, #eb2c46);
 }
 
+.reserver{
+    background-color:#0258A3;
+    color:white;
+    cursor:inherit;	   
+}
+
 .resevEnCours{
 	background-color:#0258A3;
 	color:white;

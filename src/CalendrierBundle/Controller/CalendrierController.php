@@ -24,7 +24,7 @@ class CalendrierController extends Controller{
         $userService = $this->get('user_service'); 
         $calendrierService =$this->get('calendrier_service');        
         $reservations = $userService->getAllReservationsFromClient($user->getId());
-        $cal = new CalendrierPrivee($reservations,$user);
+        $cal = CalendrierPrivee::getInstance($reservations,$user);
         $cal->setDateCourante($calendrierService->getDatePivot());        
         return $this->render("CalendrierBundle:Calendrier:calendrierPrivee.html.twig",array('cal'=>$cal,'user'=>$user) );
     }
@@ -42,16 +42,25 @@ class CalendrierController extends Controller{
         return $this->render("CalendrierBundle:Calendrier:calendrierMoniteur.html.twig",array('cal'=>$cal,'user'=>$user) );
     }    
     
-    // recharge le contenu du calendrier
+    // recharge le contenu du calendrier privee
     function calendrierContenuAction(){
         $user = $this->getUser();
         $userService = $this->get('user_service');                       
         $reservations = $userService->getAllReservationsFromClient($user->getId());
-        $cal = new CalendrierPrivee($reservations,$user);        
+        $cal = CalendrierPrivee::getInstance($reservations,$user);        
         return new Response($cal->display());
     }
     
-
+    // recharge le contenu du calendrier moniteur
+    function calendrierMoniteurContenuAction(){
+        $idMonitieur = $this->getUser()->getId();
+        $userService = $this->get('user_service');
+        $users = $userService->getAllUsersMoniteur($idMonitieur);
+        $reservations=$userService->getAllReservationsFromMoniteur($idMonitieur);
+        $cal = new CalendrierMoniteur($reservations,$users);
+        return new Response($cal->display());
+    }
+    
     // Pagination User par semaine du calendrier
     function paginationAction(Request $request){
         $user = $this->getUser();
@@ -75,6 +84,6 @@ class CalendrierController extends Controller{
         $cal = new CalendrierMoniteur($reservations,$users);
         $cal->setDateCourante($datePivot);
         return new Response($cal->display());
-    }
+    }    
 
 }

@@ -12,7 +12,7 @@ use DateInterval;
 class CalendrierPrivee extends AbstractCalendrier{
     
     private $userProprietaire;
-    
+    private static $cal=null;
 
     function __construct($reservations,$userProprietaire) {
         parent::__construct($reservations); 
@@ -30,23 +30,33 @@ class CalendrierPrivee extends AbstractCalendrier{
         $estDispo=true;        
         foreach ($this->reservations as $resa) {                    
             $heureResa = $resa['dateReservation']; 
-            if($date==$heureResa){                 
+            if($date==$heureResa){
+                $estDispo=false;
                 if(($this->getUserProprio()->getId()==$resa['client_id'])){
-                    echo $this->userProprietaire->getNom();
+                    echo "<input type='checkbox' value='".$date."'>".$this->userProprietaire->getNom();
+                }elseif($resa['etatReservation']=="Fermer"){                    
+                    echo "Fermer";
+                    break;
                 }else{
                     echo "Réservée";
-                }
-                $estDispo=false;
-                break;
+                    break;
+                }                                
             }         
         }
         if($estDispo){
-            echo ("<input type='checkbox' value='".$date."'>Dispo");                                                
+            echo ("<input type='checkbox' value='".$date."' class='libre'>Libre");                                                
         }        
     }
     
     public function getUserProprio(){
         return $this->userProprietaire;
     }
+    
+    public static function getInstance($reservations,$userProprietaire) { 
+        if(is_null(self::$cal)) {
+          self::$cal = new CalendrierPrivee($reservations,$userProprietaire);  
+        } 
+        return self::$cal;
+    }    
 
 }

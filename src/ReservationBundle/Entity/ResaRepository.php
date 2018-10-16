@@ -13,13 +13,4 @@ use JMS\SecurityExtraBundle\Annotation\Secure;
 class ResaRepository extends EntityRepository{
     
     
-     /**
-     * @Secure(roles="ROLE_USER")
-     */
-    public function findResaBydate($date){
-        $query="SELECT R FROM ReservationBundle:Reservation R where R.dateReservation=:date";
-        $statement = $this->getEntityManager()->getConnection()->prepare($query);
-        $statement->bindValue('date', $date);
-        return $statement->fetch();
-    }          
 }

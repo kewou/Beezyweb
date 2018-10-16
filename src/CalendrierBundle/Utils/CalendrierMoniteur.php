@@ -31,17 +31,20 @@ class CalendrierMoniteur extends AbstractCalendrier{
             $heureResa = $resa['dateReservation']; 
             if($date==$heureResa){
                 $estDispo=false;
-                if($resa['etatReservation']=="Fermer"){
-                    echo ("<input type='checkbox' value='".$date."'>Fermer");
+                if($resa['etatReservation']=="Fermer"){                    
+                    echo ("<input type='checkbox' class='fermer' value='".$date."'>Bloqué");
                     break;
                 }elseif($resa['etatReservation']=="Réserver"){                    
-                    echo ("<input type='checkbox' value='".$date."'>".$this->getNomReserveur($this->users, $resa['client_id'])); 
+                    echo ("<input type='checkbox' class='reserver' value='".$date."'>".$this->getNomReserveur($this->users, $resa['client_id'])); 
+                    break;
+                }elseif($resa['etatReservation']=="Valider"){                    
+                    echo ("<input type='checkbox' class='valider' value='".$date."'>".$this->getNomReserveur($this->users, $resa['client_id'])); 
                     break;
                 }
             }         
         }
         if($estDispo){
-            echo ("<input type='checkbox' value='".$date."'>Dispo");
+            echo ("<label class='ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-check ui-state-checked'></label> <input type='checkbox'  class='ui-checkboxradio' value='".$date."'>Libre");
         }          
     }
     
