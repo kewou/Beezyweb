@@ -21,7 +21,10 @@ class CalendrierController extends Controller{
     // Calendrier User
     function calendrierAction(){
         $user = $this->getUser();
-        $userService = $this->get('user_service'); 
+        $userService = $this->get('user_service');        
+        if($user->getMoniteur()==null){
+            $userService->affecteMoniteurDefault($user);
+        }    
         $calendrierService =$this->get('calendrier_service');        
         $reservations = $userService->getAllReservationsFromClient($user->getId());
         $cal = CalendrierPrivee::getInstance($reservations,$user);

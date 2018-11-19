@@ -2,10 +2,9 @@
 
 namespace ReservationBundle\Tests\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use PHPUnit\Framework\TestCase as TestCase;
 
-class DefaultControllerTest extends WebTestCase
-{
+class DefaultControllerTest extends TestCase{
     public function testIndex()
     {
         $client = static::createClient();

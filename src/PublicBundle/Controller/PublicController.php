@@ -32,21 +32,25 @@ class PublicController extends Controller {
             return $this->render("PublicBundle:Public:index.html.twig" );
         }
     }
+    
+    function contactAction(){
+        return $this->render("PublicBundle:Public:contact.html.twig");
+    }
 	
-	function mailAction(){
-		$request = Request::createFromGlobals();
-		$nom=$request->request->get('nom');
-        $subject= $request->request->get('sujet'); 
-		$fromEmail= $request->request->get('email');
-		$body=$request->request->get('message');		   			
-		$to= 'beezyweb.net@beezyweb.net';
-		$headers = 'From: ' .$nom. "\r\n" .
-	   'Reply-To:' .$fromEmail. "\r\n" .
-	   'X-Mailer: PHP/' . phpversion();
-		mail($to, $subject, $body,$headers);
-		
-		return $this->render("PublicBundle:Public:index.html.twig" );
-	}
+    function mailAction(){
+            $request = Request::createFromGlobals();
+            $nom=$request->request->get('nom');
+    $subject= $request->request->get('sujet'); 
+            $fromEmail= $request->request->get('email');
+            $body=$request->request->get('message');		   			
+            $to= 'beezyweb.net@beezyweb.net';
+            $headers = 'From: ' .$nom. "\r\n" .
+       'Reply-To:' .$fromEmail. "\r\n" .
+       'X-Mailer: PHP/' . phpversion();
+            mail($to, $subject, $body,$headers);
+
+            return $this->render("PublicBundle:Public:index.html.twig" );
+    }
     
     function codeAction(){
         if ($this->container->get('security.context')->isGranted('ROLE_USER')) {            

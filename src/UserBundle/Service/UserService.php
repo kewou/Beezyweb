@@ -50,7 +50,20 @@ class UserService {
     
     public function getReservationsByClient($idUser){
         return $this->entityManager->getRepository('UserBundle:User')->findReservations($idUser);
-    }        
+    }
+    
+    public function affecteMoniteurDefault($user){
+        $moniteur=$this->getUser(1);
+        $user->setMoniteur($moniteur);        
+        $this->entityManager->flush();
+    }
+    
+    public function affecteMoniteur($user,$idMoniteur){
+        $moniteur=$this->getUser($idMoniteur);
+        $user->setMoniteur($moniteur);        
+        $this->entityManager->flush();
+    }
+    
     
     
     // Retourne toutes les réservations du moniteur de idClient
