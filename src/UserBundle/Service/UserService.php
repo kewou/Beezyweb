@@ -92,6 +92,10 @@ class UserService {
         return $reservations;
     }
     
+    public function getEM(){
+        return $this->entityManager;
+    }
+    
     // Retourne un user DTO
     public function getUserDTO($client){
         $userDTO=$client['nom'];

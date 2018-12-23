@@ -1,7 +1,28 @@
+{% extends "AdminBundle:Admin:index.html.twig" %}
 
-<ul>
-    {% for item in clients %}
-        <li><a href="{{path("Admin_client",{"id":item.id})}}">{{item.nom}} {{item.prenom}}</a></li>        
-    {% endfor %}
-</ul>
+
+{% block header %}
+        <header id="header" class="alt">
+        <div id="div_logo">
+            <h1 id="logo"><a href="{{path("Admin_accueil")}}"><img src="{{ asset('bundles/public/assets/css/images/logo.jpg')}}" alt="logo" height="60" width="60"/></a></h1>
+        </div>          
+            <!-- Menu -->
+            {% block menu %}
+                <nav>
+                    <a href="{{path("Admin_accueil")}}">Accueil</a> 
+                    <a href="{{path("fos_user_security_logout")}}"  id="deconnexionBouton">Deconnexion</a>                    
+                </nav>  
+            {% endblock %}        
+        </header>        
+{% endblock %}
+
+
+{% block contenu %}
+    <h2 class="major">Les clients inscrits</h2>
+    <ul>
+        {% for item in clients %}
+            <li><a href="{{path("Admin_client",{"id":item.id})}}">{{item.nom}} {{item.prenom}}</a></li>        
+        {% endfor %}
+    </ul>
+ {% endblock contenu %}
     

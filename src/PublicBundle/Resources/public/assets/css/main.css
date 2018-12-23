@@ -3292,11 +3292,12 @@
                     transition: color 0.3s ease;                    
                 }
                 
-                #header nav #creerCompte{
+                #header nav #creerCompte,#deconnexionBouton{
                     background-color:#e44c65;
                     color: #fff;
                     text-decoration:none;
                 }
+                
                
                 #creerCompteBis{
                     background-color:#e44c65;

@@ -15,3 +15,5 @@ class MoniteurController extends Controller{
         return $this->render('MoniteurBundle:Moniteur:index.html.twig',array('user' => $user));
     }
 }
+
+?>

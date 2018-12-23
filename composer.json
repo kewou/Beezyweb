@@ -38,8 +38,8 @@
 		"twig/twig": "^1.0||^2.0"
 	},
 	"require-dev" : {
-		"sensio/generator-bundle" : "~3.0",
-		"symfony/phpunit-bridge" : "~2.7"
+		"sensio/generator-bundle": "~3.0",
+		"symfony/phpunit-bridge": "^4.2"
 	},
 	"scripts" : {
 		"symfony-scripts" : [
@@ -57,7 +57,7 @@
 		"bin-dir" : "bin",
 		"platform" : {
 			"php" : "5.3.9"
-		},
+		},		
 		"sort-packages" : true
 	},
 	"extra" : {

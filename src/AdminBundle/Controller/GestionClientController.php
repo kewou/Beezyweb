@@ -10,16 +10,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  * @author frup73532
  */
 class GestionClientController extends Controller{
-    
-    
-    public function indexAction() {
-        return $this->render('AdminBundle:GestionClient:index.html.twig');
-    }    
+     
         
     public function clientsAction() {
+        $user=$this->getUser();
         $userService = $this->get('user_service');
         $clients = $userService->getAllUsers();
-        return $this->render('AdminBundle:GestionClient:clients.html.twig',array('clients' => $clients));
+        return $this->render('AdminBundle:GestionClient:clients.html.twig',array('clients' => $clients,'user' => $user));
     }
         
     public function infosClientAction($id){

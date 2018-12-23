@@ -1,4 +1,5 @@
-{% extends "AdminBundle:Admin:index.html.twig" %}
+{% extends "PriveeBundle:Privee:index.html.twig" %}
+
 
 
 {% block header %}
@@ -8,22 +9,18 @@
         </div>          
             <!-- Menu -->
             {% block menu %}
-                <nav>
-                    <a href="{{path("Admin_accueil")}}">Accueil</a> 
+                <nav>                                                            
                     <a href="{{path("fos_user_security_logout")}}"  id="deconnexionBouton">Deconnexion</a>                    
                 </nav>  
             {% endblock %}        
         </header>        
 {% endblock %}
 
-
 {% block contenu %}
-    <h2 class="major">Les moniteurs inscrits</h2>
-    <ul>
-        {% for item in moniteurs %}
-            <li><a href="{{path("Admin_moniteur",{"id":item.id})}}">{{item.nom}} {{item.prenom}}</a></li>        
-        {% endfor %}
-    </ul>
- {% endblock contenu %}
+    <h2 class="major">Administration Beezyweb</h2>
 
-
+    <div>
+        <a href="{{path("Admin_clients")}}">Les clients</a>
+        <a href="{{path("Admin_moniteurs")}}">Les moniteurs</a>        
+    </div>
+{% endblock contenu %}

@@ -1,6 +1,6 @@
-Admin_homepage:
+Admin_accueil:
     path:  /
-    defaults: { _controller: AdminBundle:GestionClient:index }   
+    defaults: { _controller: AdminBundle:Admin:index }   
     
 Admin_clients:
     path: /clients

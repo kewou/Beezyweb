@@ -12,3 +12,11 @@ services:
     user_service:
         class: UserBundle\Service\UserService
         arguments: ["@doctrine.orm.entity_manager"]
+        
+    my.handler.session_idle:
+        class: UserBundle\Handler\SessionHandler
+        arguments: ["@session", "@security.context", "@router", %session_max_idle_time%]
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+        
+        
