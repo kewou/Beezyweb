@@ -20,7 +20,7 @@ class PublicController extends Controller {
    
     function indexAction(){        
         if ($this->container->get('security.context')->isGranted('ROLE_USER')) {            
-            return $this->render("PriveeBundle:Privee:index.html.twig" );
+            return $this->render("PriveeBundle:Privee:index.html.twig",array('user' => $this->getUser()));
             
         }else{ 
         	/*$message= \Swift_Message::newInstance()
