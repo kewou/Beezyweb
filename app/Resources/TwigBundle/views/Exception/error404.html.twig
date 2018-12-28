@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+    <link rel="stylesheet" href="{{ asset('bundles/public/assets/css/main.css')}}" />
+    <link rel="stylesheet" href="{{ asset('bundles/public/css/screen.css') }}" type="text/css" media="screen">
+    <!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+    <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+{% endblock %}
+
+{% block header %}
+    <header id="header">
+        <div id="div_logo">
+            <h1 id="logo"><a href="{{path("Public_accueil")}}"><img src="{{ asset('bundles/public/assets/css/images/logo.jpg')}}" alt="logo" height="60" width="60"/></a></h1>
+        </div>
+        <!-- Menu -->
+        {% block menu %}
+        <nav>
+            <a href="{{path("Public_contact")}}">Contact</a>
+            <a href="{{path("fos_user_security_login")}}">Connexion</a>            
+            <a href="{{path("fos_user_registration_register")}}" id="creerCompte">Créer un compte</a>
+        <nav>             
+        {% endblock %}        
+    </header>        
+{% endblock %}
+
+
+
+{% block contenu %}
+    <div>
+        <h2 id="titreAccueil">Beezyweb</h2>
+        <div class="messageCentral">
+            <p id="presBeezyweb">Cette page n'existe pas !!.</p>
+        </div>
+        <a href="{{path("Public_accueil")}}" id="creerCompteBis">Accueil</a>
+    </div>
+{% endblock %}
