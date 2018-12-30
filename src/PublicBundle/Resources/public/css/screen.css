@@ -143,35 +143,10 @@ body{
 /* Connexion */
 
 .error{
-	color:#D2691E;
+	color:red;
 }
 
-#formConnection{
-	width:80%;
-	margin-left:20%;
-}
 
-#inscriptionLeft{
-	width:45%;
-	float:left;
-	margin-right:3%;
-}
-#inscriptionRight{
-	width:50%;
-	float:left;
-	margin-left:1%;
-}
-
-#inscriptionBoutton{
-    margin-left: -10%;
-}
-
-#rememberBlock{
-    margin-top: 5%;
-}
-#rememberBlock input{
-    width:5px;
-}
 
 .wrapperDivContenu li{
 	list-style-type:none;

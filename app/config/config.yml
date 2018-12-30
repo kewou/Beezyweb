@@ -101,3 +101,4 @@ fos_user:
     profile:
         form:
             type: autoecole_edition_profil
+            

@@ -2167,8 +2167,7 @@
 		color: #ffffff;
 		display: block;
 		font-size: 0.9em;
-		font-weight: 300;
-		margin: 0 0 1em 0;
+		font-weight: 300;		
 	}
 
 	input[type="text"],
@@ -2179,16 +2178,14 @@
 		display: block;
 		outline: 0;
 		padding: 0 1em;
-		text-decoration: none;
-		width: 100%;
+		text-decoration: none;		
 	}
 
 		input[type="text"]:invalid,
 		input[type="password"]:invalid,
 		input[type="email"]:invalid,
 		select:invalid,
-		textarea:invalid {
-			box-shadow: none;
+		textarea:invalid {			
 		}
 
 		input[type="text"]:focus,
@@ -2196,7 +2193,7 @@
 		input[type="email"]:focus,
 		select:focus,
 		textarea:focus {
-			border-color: #e44c65;
+			
 		}
 
 	.select-wrapper {
@@ -2317,28 +2314,28 @@
 	}
 
 	::-webkit-input-placeholder {
-		color: rgba(255, 255, 255, 0.5) !important;
-		opacity: 1.0;
+		color: #D3D3D3;		
+                font-size:15px;
 	}
 
 	:-moz-placeholder {
-		color: rgba(255, 255, 255, 0.5) !important;
-		opacity: 1.0;
+		color: #D3D3D3;		
+                font-size:15px;
 	}
 
 	::-moz-placeholder {
-		color: rgba(255, 255, 255, 0.5) !important;
-		opacity: 1.0;
+		color: #D3D3D3;		
+                font-size:15px;
 	}
 
 	:-ms-input-placeholder {
-		color: rgba(255, 255, 255, 0.5) !important;
-		opacity: 1.0;
+		color: #D3D3D3;		
+                font-size:15px;
 	}
 
 	.formerize-placeholder {
-		color: rgba(255, 255, 255, 0.5) !important;
-		opacity: 1.0;
+		color: #D3D3D3;		
+                font-size:15px;
 	}
 
 /* Box */
@@ -3312,6 +3309,166 @@
                     text-transform: uppercase;
                     transition: color 0.3s ease;                    
                 }
+                h2.major {
+                        margin: 0 auto;
+                        width: 35%;
+                        display: block;
+                        margin-top: 0px;
+                        margin-bottom: 20px;
+                }
+
+                .login_msg_error_label {
+                        margin-left: 15px;
+                        color: #e44c65;
+                        vertical-align: middle
+                }
+
+                .login_msg_error_button {
+                        margin-left: 70px;
+                        border: none;
+                        color: #e44c65;
+                        background-color: #e2c4c9;
+                        vertical-align: middle;
+                        font-size: 29px;
+                        margin-bottom: 3px;
+                }
+
+                .login_msg_error_button:hover {
+                        color: red;
+                }
+                
+                .block_form{
+                    margin: 0 auto;
+                    padding-top: 30px;
+                    padding-left: 30px;
+                    padding-bottom: 5px;
+                    background-color: #F0FFFF;                        
+                    box-sizing: border-box                    
+                }
+
+                #form_contenair_login {
+                    width: 40%;                       
+                }
+                
+                .label_connexion{
+                    position: static;
+                    display: block;
+                    margin-bottom: 5px;
+                    text-align: left;
+                    color: #24292e;
+                    font-size: 16px!important;
+                    line-height: 1.5;
+                    box-sizing: border-box;                    
+                }
+                
+                .input_form{                    
+                    font-size: 16px;
+                    min-height: 46px;
+                    background-color: #F8F8FF; 
+                    border: 1px solid #d1d5da;
+                    padding: 10px;
+                    margin-bottom: 20px;                    
+                    box-shadow: inset 0 1px 2px rgba(27,31,35,.075);
+                    width: 300px;                    
+                    color: #24292e;
+                    line-height: 20px;
+                    vertical-align: middle;
+                }
+                
+                .input_form:focus{
+                    border: 1px solid DodgerBlue;
+                    background-color: white;
+                }
+                
+                #rememberBlock{
+                    clear: both;
+                }
+                
+                #label_remember{
+                    float: right;
+                    width: 93%;
+                    color: #24292e;
+                    font-size: 13px;
+                    margin-top: 2px;
+                }
+                
+                #forget_password a{
+                    color:black;                    
+                    border-bottom: dotted 1px black;
+                    font-size:12px;                   
+                }
+                
+                #forget_password{                    
+                    margin-bottom: 20px;
+                    margin-top: 10px;
+                }
+                
+                #form_contact{
+                    width: 60%;
+                    margin-top: -30px;
+                }
+
+                .form_label {
+                        font-size: 18px;
+                        display: inline;
+                        color: #768594;
+                        font-weight: inherit;
+                        text-align: left;
+                }
+                               
+
+                .form_textarea {
+                        color: black;
+                        border: 1px solid #c3c9ce;
+                        border-radius: 5px;
+                        margin-bottom: 26px;
+                        margin-top: 15px;
+                        width: 90%
+                }
+
+
+                #register_form_contenair {
+                        width: 80%;
+                        clear: both;
+                }
+
+                .register_form_left_side {
+                        float: left;
+                        width: 48%
+                }
+
+                .register_form_right_side {
+                    float: right;
+                    width: 52%
+                }
+                
+                #register_Bouton{
+                    width: 25%;
+                    margin-top: 3%;
+                    margin-left: 30%;
+                }
+
+                .register_form_input {
+                    border: 1px solid #c3c9ce;
+                    border-radius: 5px;
+                    width: 80%;
+                    margin-top: 10px;
+                    background-color: #F8F8FF; 
+                    border: 1px solid #d1d5da;
+                }
+                
+                .register_form_input:focus{
+                    border: 1px solid DodgerBlue;
+                    background-color: white;                    
+                }
+
+                .register_error_label {
+                        color: red;
+                        width: 100%;
+                        margin-top: 5px;
+                        display: block;
+                        height: 10px;
+                }                
 
 
 			#header nav ul {
