@@ -21,13 +21,15 @@
 
 
 {% block contenu %}
-    <h2 class="major">Paramètres généraux du compte</h2>                                                
-    <form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
-        {{ form_widget(form) }}
-        <div>
-            <input type="submit" value="{{ 'profile.edit.submit'|trans({}, 'FOSUserBundle') }}" />
-        </div>
-    </form>
+    
+    <div id="form_parametre" class="block_form">
+        <form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
+            {{ form_widget(form) }}
+            <div>
+                <input id="update_Param" type="submit" value="{{ 'profile.edit.submit'|trans({}, 'FOSUserBundle') }}" />
+            </div>
+        </form>
+    </div>
     											
 {% endblock contenu %}
 

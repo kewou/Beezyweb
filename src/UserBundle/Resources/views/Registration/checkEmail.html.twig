@@ -3,5 +3,5 @@
 
 
 {% block contenu %}
-    <p>{{ 'registration.check_email'|trans({'%email%': user.email}, 'FOSUserBundle') }}</p>
+    <p id="msg_check_mail">{{ 'registration.check_email'|trans({'%email%': user.email}, 'FOSUserBundle') }}</p>
 {% endblock %}   

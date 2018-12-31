@@ -3240,6 +3240,16 @@
 	body.landing .dropotron.level-0 {
 		margin-top: 0;
 	}
+        
+        #msg_check_mail{
+            color: white;
+            width: 55%;
+            margin-left: 10%;
+            font-size: 26px;
+            font-weight: BOLD;
+            margin-top: 5%;
+            line-height: 35px;
+        }
 
 /* Header */
 
@@ -3295,6 +3305,11 @@
                     text-decoration:none;
                 }
                 
+                #icon_user{
+                    margin-left: -35px;
+                    margin-bottom: -20px;
+                }
+                
                
                 #creerCompteBis{
                     background-color:#e44c65;
@@ -3347,7 +3362,7 @@
                 }
 
                 #form_contenair_login {
-                    width: 40%;                       
+                    width: 35%;                       
                 }
                 
                 .label_connexion{
@@ -3391,6 +3406,33 @@
                     font-size: 13px;
                     margin-top: 2px;
                 }
+                
+                #form_parametre{
+                    width:55%;
+                }
+                
+                #form_parametre input{
+                    margin-left:21%;
+                    margin-bottom: 5px;                    
+                    width: 300px;
+                }
+                
+                #form_parametre label{
+                    color: #24292e;
+                    display: block;
+                    margin-bottom: 5px;
+                    margin-left:21%;
+                }
+                
+                #form_parametre input:focus{
+                    border: 1px solid DodgerBlue;
+                    background-color: white;
+                }
+                
+                #update_Param{
+                    width:20%;
+                    margin-top:30px;
+                }                
                 
                 #forget_password a{
                     color:black;                    
