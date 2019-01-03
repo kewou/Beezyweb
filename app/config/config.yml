@@ -102,3 +102,9 @@ fos_user:
         form:
             type: autoecole_edition_profil
             
+assetic:
+    debug:          '%kernel.debug%'
+    use_controller: '%kernel.debug%'
+    filters:
+        cssrewrite: ~            
+            

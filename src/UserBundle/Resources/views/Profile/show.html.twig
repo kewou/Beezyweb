@@ -19,20 +19,26 @@
 {% endblock %}
 
 
-{% block contenu %}   
-    <h3 class="major">Mon compte</h3>    
-    <div class="wrapperDivContenu">
-        <ul>		
-            <li>{{ user.prenom}} {{ user.nom }}</li>
-            <li>{{ user.email }}</li>
-            <li>0{{ user.telephone }}</li>            
-            <li><span class="thInfos">Solde:&nbsp&nbsp;</span>  <span class="tdInfos">{{ user.money}}€</span></li>
-            <li><span class="thInfos">Quota:&nbsp;&nbsp;</span>  <span class="tdInfos">{{ user.solde }}H</span></li>
-        </ul>            
+{% block contenu %}       
+    <div id="mesInfosCompte">
+        <table>
+            <th>Mes informations</th>
+            <tr><td>Solde</td><td>{{ user.money}} €</td></tr>
+            <tr><td>Jeton (s)</td><td>{{ user.solde}}</td></tr>
+            <tr><td>Identité</td><td>{{ user.prenom}} {{ user.nom }}</td></tr>
+            <tr><td>Email</td><td>{{ user.email }}</td></tr>
+            <tr><td>Téléphone</td><td>0{{ user.telephone }}</td></tr>
+            <th>Mes réservations</th>
+            {% if user.reservations|length > 0 %}
+                {% set iter=1 %}
+                {% for resa in user.reservations %}
+                <tr class="idResa"><td>{{iter}}</td><td>{{resa.dateReservation|date("d-m H")}} H</td>
+                    {% set iter=iter + 1 %}
+                {% endfor %}
+            {% else %}
+                <tr><td>Vous n'avez pas de réservations en cours</td></tr>
+            {% endif %}                         
+        </table>      
     </div>
-     <ul>
-    {% for resa in user.reservations %}
-        <li>{{resa.id}}</li>        
-    {% endfor %}
-    </ul>
+
 {% endblock contenu %}
