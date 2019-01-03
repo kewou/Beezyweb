@@ -10,8 +10,9 @@
         </div>            
             <!-- Menu -->
             {% block menu %}
-                <nav>                    
-                    <a href="{{path("fos_user_profile_show")}}">{{user.nom}} {{user.prenom}}</a>
+                <nav>
+                    <a href="{{path("Privee_accueil")}}">Accueil</a>
+                    <a href="{{path("fos_user_profile_show")}}">{{user.nom}}<img src="{{ asset('bundles/public/assets/css/images/icon_user.png')}}" id="icon_user" alt="icon_user" height="15" width="20"/></a>
                     <a href="{{path("Privee_calendrier")}}">Calendrier</a>
                     <a href="{{path("fos_user_security_logout")}}"  id="deconnexionBouton">Deconnexion</a>                   
                 </nav>  
