@@ -32,8 +32,8 @@ install:
   - php app/console doctrine:schema:create --env=test  
   
 # Run script
-script:
-  - phpunit  
+#script:
+# - phpunit  
 
 # branche Ok
 branches:
