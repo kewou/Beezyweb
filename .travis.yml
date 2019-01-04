@@ -32,8 +32,8 @@ install:
   - php app/console doctrine:schema:create --env=test  
   
 # Run script
-#script:
-# - phpunit  
+script:
+  - phpunit  tests/UserBundle/DAO/UserTest.php
 
 # branche Ok
 branches:

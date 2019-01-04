@@ -2,9 +2,7 @@
 
 namespace UserBundle\Tests\DAO;
 
-use Doctrine\Common\Persistence\ObjectRepository;
 use PHPUnit\Framework\TestCase as TestCase;
-use UserBundle\Entity\User;
 
 /**
  * Description of UserTest
