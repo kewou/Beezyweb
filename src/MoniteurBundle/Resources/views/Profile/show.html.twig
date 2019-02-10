@@ -2,35 +2,33 @@
 
 {% block header %}
         <header id="header" class="alt">
-            <h1 id="logo"><a href="{{path("Moniteur_accueil")}}">Accueil</a></h1>            
+        <div id="div_logo">
+            <h1 id="logo">
+                <a href="{{path("Moniteur_accueil")}}">
+                    <img src="{{ asset('bundles/public/assets/css/images/logo.jpg')}}" title="Accueil" alt="logo" height="60" width="60"/>
+                </a>
+            </h1>
+        </div>          
             <!-- Menu -->
             {% block menu %}
-                <nav id="nav">
-                    <ul>
-                        <li><a href="{{path("fos_moniteur_profile_show")}}">{{user.nom}} {{user.prenom}}</a></li>
-                        <li><a href="{{path("Moniteur_calendrier")}}">Calendrier</a></li>
-                        <li><a href="{{path("fos_moniteur_profile_edit")}}">Paramètres</a></li>
-                        <li><a href="{{path("fos_user_security_logout")}}" class="button special">Deconnexion</a></li>
-                    </ul>
+                <nav>
+                    <a href="{{path("Moniteur_accueil")}}">Accueil</a>
+                    <a href="{{path("Moniteur_calendrier")}}">Calendrier</a>
+                    <a href="{{path("fos_moniteur_profile_edit")}}">Paramètres</a>
+                    <a href="{{path("fos_user_security_logout")}}"  id="deconnexionBouton">Deconnexion</a>                    
                 </nav>  
             {% endblock %}        
         </header>        
 {% endblock %}
 
 {% block contenu %}   
-    <h3 class="major">Mon compte</h3>    
-    <div class="wrapperDivContenu">
-        <ul>		
-            <li>{{ user.prenom}} {{ user.nom }}</li>
-            <li>{{ user.email }}</li>
-            <li>0{{ user.telephone }}</li>            
-            <li><span class="thInfos">Solde:&nbsp&nbsp;</span>  <span class="tdInfos">{{ user.money}}€</span></li>
-            <li><span class="thInfos">Quota:&nbsp;&nbsp;</span>  <span class="tdInfos">{{ user.solde }}H</span></li>
-        </ul>            
+    <div id="mesInfosCompte">
+        <table>
+            <th>Mes informations</th>
+            <tr><td>Statut</td><td>Moniteur</td></tr>            
+            <tr><td>Identité</td><td>{{ user.prenom}} {{ user.nom }}</td></tr>
+            <tr><td>Email</td><td>{{ user.email }}</td></tr>
+            <tr><td>Téléphone</td><td>0{{ formatPhone(user.telephone) }}</td></tr>
+        </table>      
     </div>
-     <ul>
-    {% for resa in user.reservations %}
-        <li>{{resa.id}}</li>        
-    {% endfor %}
-    </ul>
 {% endblock contenu %}
