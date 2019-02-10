@@ -29,15 +29,15 @@ class ReservationController extends Controller{
         return new Response($cal->display());                              
     }
     
-    function annulerAction(){        
-        $tabDate=$this->getDatesChoisi();
-        $resaService = $this->get('reservation_service'); 
-        $resaService->annuleDates($this->getUser(),$tabDate);       
-        $user = $this->getUser();
-        $userService = $this->get('user_service');                       
-        $reservations = $userService->getAllReservationsFromClient($user->getId());
-        $cal = new CalendrierPrivee($reservations,$user);                
-        return new Response($cal->display());                              
+    function annulerAction(){
+        $request = Request::createFromGlobals();               
+        $idResa= $request->request->get('idResa');
+        $resaService = $this->get('reservation_service');        
+        $resaService->annuleDate($this->getUser(),$idResa);               
+        //$userService = $this->get('user_service');                       
+        //$reservations = $userService->getAllReservationsFromClient($user->getId());
+        //$cal = new CalendrierPrivee($reservations,$user);                
+        return new Response("");                              
     }
     
     function annulerMoniteurAction(){        

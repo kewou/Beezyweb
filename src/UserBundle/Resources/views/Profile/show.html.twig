@@ -4,8 +4,10 @@
         <header id="header" class="alt">
         <div id="div_logo">
             <h1 id="logo">
-            <a href="{{path("Privee_accueil")}}">
-            <img src="{{ asset('bundles/public/assets/css/images/logo.jpg')}}" alt="logo" height="60" width="60"/></a></h1>
+                <a href="{{path("Privee_accueil")}}">
+                    <img src="{{ asset('bundles/public/assets/css/images/logo.jpg')}}" title="Accueil" alt="logo" height="60" width="60"/>
+                </a>
+            </h1>
         </div>          
             <!-- Menu -->
             {% block menu %}
@@ -23,23 +25,50 @@
 {% block contenu %}       
     <div id="mesInfosCompte">
         <table>
+            <th>Mes réservations</th>
+            {% set iter=1 %} 
+            {% for resa in user.reservations %}
+                {% if resa.dateReservation > date() and resa.etatReservation=="Valider"%}                                                      
+                <tr class="idResa">
+                    <td>{{iter}}</td>
+                    <td>{{ fortmatDate(resa.dateReservation)}} 
+                        <a class="annuleResa" id="{{resa.id}}"><img src="{{ asset('bundles/public/assets/css/images/cancel.jpg')}}" alt="Annuler" title="Annuler" height="20" width="20"/></a></td>
+                </tr>
+                    {% set iter=iter + 1 %}                                                        
+                {% endif %}
+            {% endfor %}
+            {% if iter==1 %}
+                <tr><td>Vous n'avez pas de réservations en cours</td></tr>
+            {% endif %}
             <th>Mes informations</th>
             <tr><td>Solde</td><td>{{ user.money}} €</td></tr>
             <tr><td>Jeton (s)</td><td>{{ user.solde}}</td></tr>
             <tr><td>Identité</td><td>{{ user.prenom}} {{ user.nom }}</td></tr>
             <tr><td>Email</td><td>{{ user.email }}</td></tr>
-            <tr><td>Téléphone</td><td>0{{ user.telephone }}</td></tr>
-            <th>Mes réservations</th>
-            {% if user.reservations|length > 0 %}
-                {% set iter=1 %}
-                {% for resa in user.reservations %}
-                <tr class="idResa"><td>{{iter}}</td><td>{{resa.dateReservation|date("d-m H")}} H</td>
-                    {% set iter=iter + 1 %}
-                {% endfor %}
-            {% else %}
-                <tr><td>Vous n'avez pas de réservations en cours</td></tr>
-            {% endif %}                         
+            <tr><td>Téléphone</td><td>0{{ formatPhone(user.telephone) }}</td></tr>
+
         </table>      
     </div>
+            
+    <script>
+        $(".annuleResa").click(function(){
+            idResa=$(this).attr('id');
+            annuler(idResa);
+        });
+        
+        function annuler(idResa){            
+            $.ajax({
+                type:"POST",
+                url:"{{ (path('Privee_annuler'))}}",
+                data:{idResa:idResa},
+                success: function (data) {                    
+                }
+            });
+        }
+        
+        $(document).ajaxStop(function(){
+            window.location.reload();
+        });
+    </script>
 
 {% endblock contenu %}

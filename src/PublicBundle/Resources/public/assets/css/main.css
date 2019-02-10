@@ -1608,9 +1608,7 @@
 		font-style: italic;
 	}
 
-	p {
-		margin: 0 0 2em 0;
-	}
+
 
 	h1, h2, h3, h4, h5, h6 {
 		color: #ffffff;
@@ -2630,11 +2628,7 @@
 		width: 100%;
 	}
 
-		table tbody tr {
-			border: solid 1px rgba(255, 255, 255, 0.3);
-			border-left: 0;
-			border-right: 0;
-		}
+
 
 			table tbody tr:nth-child(2n + 1) {
 				background-color: rgba(255, 255, 255, 0.075);
@@ -2644,13 +2638,7 @@
 			padding: 0.75em 0.75em;
 		}
 
-		table th {
-			color: pink;
-			font-size: 0.9em;
-			font-weight: 300;
-			padding: 0 0.75em 0.75em 0.75em;
-			text-align: left;
-		}
+
 
 		table thead {
 			border-bottom: solid 1px rgba(255, 255, 255, 0.3);
@@ -3646,7 +3634,7 @@
             -moz-background-size: cover;
             -o-background-size: cover;
             background-size: cover;
-            min-height: 608px;
+            min-height: 641px;
         }
 
 /* Footer */
@@ -3760,8 +3748,7 @@
 
 		/* Footer */
 
-			#footer {
-				padding: 4.5em 0;
+			#footer {				
 			}
 
 	}
@@ -3842,7 +3829,7 @@
 		/* Footer */
 
 			#footer {
-				padding: 4.5em 0;
+				
 			}
 
 	}
@@ -4141,7 +4128,7 @@
 		/* Footer */
 
 			#footer {
-				padding: 3.25em 1.5em;
+				
 			}
 
 	}

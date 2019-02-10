@@ -32,14 +32,11 @@ class ReservationService {
         }         
     }
     
-    public function annuleDates($client,$tabDate){
-        $client->setSolde($client->getSolde()+sizeof($tabDate));
-        foreach ($tabDate as $dateString){            
-            $date = DateTime::createFromFormat('Y-m-d H:i:s', $dateString);            
-            $resa = $this->entityManager->getRepository("ReservationBundle:Reservation")->findOneByDateReservation($date);
-            $this->entityManager->remove($resa);
-            $this->entityManager->flush();
-        }         
+    public function annuleDate($client,$id){
+        $client->setSolde($client->getSolde()+1);
+        $resa = $this->entityManager->getRepository("ReservationBundle:Reservation")->findOneById($id);
+        $this->entityManager->remove($resa);
+        $this->entityManager->flush();        
     }
     
     public function valideDates($lesResasChoisi){
