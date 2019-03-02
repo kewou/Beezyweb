@@ -29,25 +29,23 @@ class ReservationController extends Controller{
         return new Response($cal->display());                              
     }
     
-    function annulerAction(){
+    function annulerUserAction(){
         $request = Request::createFromGlobals();               
         $idResa= $request->request->get('idResa');
         $resaService = $this->get('reservation_service');        
-        $resaService->annuleDate($this->getUser(),$idResa);               
-        //$userService = $this->get('user_service');                       
-        //$reservations = $userService->getAllReservationsFromClient($user->getId());
-        //$cal = new CalendrierPrivee($reservations,$user);                
+        $resaService->annuleDate($this->getUser(),$idResa);                            
         return new Response("");                              
     }
     
-    function annulerMoniteurAction(){        
+    function annulerMoniteurAction(){
+        $user = $this->getUser();
         $tabDate=$this->getDatesChoisi();
+        $userService = $this->get('user_service'); 
         $resaService = $this->get('reservation_service'); 
         $resaService->annuleDates($this->getUser(),$tabDate);       
-        $user = $this->getUser();
-        $userService = $this->get('user_service');                       
+        $users = $userService->getAllUsersMoniteur($user->getId());                              
         $reservations = $userService->getAllReservationsFromClient($user->getId());
-        $cal = new CalendrierMoniteur($reservations,$user);                
+        $cal = new CalendrierMoniteur($reservations,$users);                
         return new Response($cal->display());                              
     }
     
@@ -85,7 +83,7 @@ class ReservationController extends Controller{
         $userService = $this->get('user_service');  
         $resaService = $this->get('reservation_service');
         $client=$userService->getUserByName($nomClient);
-        $resaService->reserveDates($client,$tabDate);
+        $resaService->affecteDates($client,$tabDate);
         $idMonitieur = $this->getUser()->getId();
         $users = $userService->getAllUsersMoniteur($idMonitieur);
         $reservations=$userService->getAllReservationsFromMoniteur($idMonitieur);

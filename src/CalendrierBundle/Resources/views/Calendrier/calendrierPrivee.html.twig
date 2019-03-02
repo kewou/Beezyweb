@@ -20,8 +20,7 @@
 {% endblock %}
 
 {% block contenu %}
-    <input type='button' id='reserveDate' value='Réserver'>
-    <input type='button' id='annuleDate' value='Annuler'>
+    <input type='button' id='reserveDate' value='Réserver'>    
     <div id="calendrier">        
         {{ cal.display() }}        
     </div>
@@ -36,11 +35,9 @@
         </ul>
     </div>
     
-    <script>
-                            $("#annuleDate").css('display','none');
-                    $("#reserveDate").css('display','none');
-            $(document).on('change',"input[type='checkbox']",function(){
-                 
+    <script>            
+            $("#reserveDate").css('display','none');
+            $(document).on('change',"input[type='checkbox']",function(){                 
                 cocheCase();
                     if(this.checked) {
                         cocher=true;
@@ -99,12 +96,8 @@
 
             $("#reserveDate").click(function(){
                 reserver();
-            });
-            $("#annuleDate").click(function(){
-                annuler();
-            });            
+            });          
             
-
             function reserver(){
                 var tabResa = [];
                 var tabControle=[]; 
@@ -140,46 +133,7 @@
                 var tabControle= [];
             }
             
-            function annuler(){
-                var tabResa = [];
-                var tabControle=[]; 
-                $("input[type='checkbox']:checked").each(function(){
-                    tabResa.push($(this).val());
-                });
-                
-                // Ajouter les controle Front
-                //controleReservation(tabResa,tabControle);
-                /*
-                if(tabControle.length !==0){
-                    alert(tabControle[0]);
-                }else{               
-                    $.ajax({
-                        type:"POST",
-                        url:"{{ (path('Privee_reserver_controle'))}}",
-                        data:{lesResaChoisi:tabResa},                    
-                        async:false,
-                        complete: function(data){                        
-                                    if(data["responseText"]!==""){
-                                        alert(data["responseText"]);
-                                    }else{
-                                        $.post("{{ (path('Privee_annuler'))}}",{lesResaChoisi:tabResa},
-                                            function(data){
-                                                $('#calendrier').html(data);
-                                        });
-
-                                    }
-                       }
-                    });
-                }*/
-                
-                $.post("{{ (path('Privee_annuler'))}}",{lesResaChoisi:tabResa},
-                    function(data){
-                        $('#calendrier').html(data);
-                });
-
-                var tabResa = [];
-                var tabControle= [];
-            }            
+         
             
             function controleReservation(tabResa,tabControle){                
                 if(tabResa.length > 2){

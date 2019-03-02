@@ -32,6 +32,17 @@ class ReservationService {
         }         
     }
     
+    public function annuleDates($client,$tabDate){
+        $client->setSolde($client->getSolde()+sizeof($tabDate));
+        foreach ($tabDate as $dateString){            
+            $date = DateTime::createFromFormat('Y-m-d H:i:s', $dateString);            
+            $resa = $this->entityManager->getRepository("ReservationBundle:Reservation")->findOneByDateReservation($date);
+            $this->entityManager->remove($resa);
+            $this->entityManager->flush();
+        }
+    }
+    
+    
     public function annuleDate($client,$id){
         $client->setSolde($client->getSolde()+1);
         $resa = $this->entityManager->getRepository("ReservationBundle:Reservation")->findOneById($id);
@@ -53,6 +64,20 @@ class ReservationService {
             //echo($client->getNom()+"");
         }
         //return $tabAssociatifUserResa;
+    }
+    
+    public function affecteDates($client,$tabDate){
+        $client->setSolde($client->getSolde()-sizeof($tabDate));
+        foreach ($tabDate as $dateString){            
+            $dateTime = DateTime::createFromFormat('Y-m-d H:i:s', $dateString);            
+            $resa = new Reservation();
+            $resa->setClient($client);
+            $resa->setEtatReservation("Valider");
+            $resa->setDateReservation($dateTime);
+            $this->entityManager->persist($resa);
+            $this->entityManager->flush();
+        }        
+        
     }
     
     public function fermeDates($moniteur,$lesResasChoisi){

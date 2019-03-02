@@ -63,11 +63,7 @@ body{
   background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
   text-decoration: none;
 }
-.valider{
-  background-color:#2E8B57;
-  color:white;
-  cursor:inherit;
-}
+
 
 .invalider{
 	background-color:silver;
@@ -92,11 +88,6 @@ body{
   background-image: linear-gradient(to bottom, #db1c1c, #eb2c46);
 }
 
-.reserver{
-    background-color:#0258A3;
-    color:white;
-    cursor:inherit;	   
-}
 
 .resevEnCours{
 	background-color:#0258A3;
@@ -111,8 +102,8 @@ body{
 }
 
 .resevEnCoursAdmin{
-	background-color:#4285F4;
-	color:white;	
+    background-color:#4285F4;
+    color:white;	
 }
 
 .heureDisponible{
@@ -122,13 +113,18 @@ body{
 .resevEnCours:hover{
 	color:black;
 }
-.fermee:hover{
-	color:black;
+.fermer{
+    background-color:red;
+    color:white;
 }
-.valider:hover{
-	background-color:#2E8B57;
-	cursor: pointer;
-	color:white;
+.valider{    
+    background-color:#3CB371;
+    color:white;
+}
+
+.reserver{
+    background-color: #4169E1;
+    color:white;
 }
 .invalider:hover{
 	background-color:silver;
@@ -205,4 +201,13 @@ ul.typeahead a:hover{
 }
 #somme{
 	color: black;
+}
+
+#calendrier table{
+    background-color: white;
+}
+
+#calendrier table td{
+    border: 1px solid ;
+    text-align: center;
 }

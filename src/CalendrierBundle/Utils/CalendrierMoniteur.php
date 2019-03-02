@@ -32,19 +32,19 @@ class CalendrierMoniteur extends AbstractCalendrier{
             if($date==$heureResa){
                 $estDispo=false;
                 if($resa['etatReservation']=="Fermer"){                    
-                    echo ("<input type='checkbox' class='fermer' value='".$date."'>Bloqué");
+                    echo ("<td class='fermer'><input type='checkbox' value='".$date."'> <p class='fermer'>Bloqué</p></td>");
                     break;
                 }elseif($resa['etatReservation']=="Réserver"){                    
-                    echo ("<input type='checkbox' class='reserver' value='".$date."'>".$this->getNomReserveur($this->users, $resa['client_id'])); 
+                    echo ("<td class='reserver'><input type='checkbox'  value='".$date."'>".'<p class=reserver>' . strtoupper($this->getNomReserveur($this->users, $resa['client_id'])) .'</p></td>');
                     break;
                 }elseif($resa['etatReservation']=="Valider"){                    
-                    echo ("<input type='checkbox' class='valider' value='".$date."'>".$this->getNomReserveur($this->users, $resa['client_id'])); 
+                    echo ("<td class='valider'><input type='checkbox' class='valider' value='".$date."'>".'<p class=valider>'.strtoupper($this->getNomReserveur($this->users, $resa['client_id'])).'</p></td>');
                     break;
                 }
             }         
         }
         if($estDispo){
-            echo ("<label class='ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-check ui-state-checked'></label> <input type='checkbox'  class='ui-checkboxradio' value='".$date."'>Libre");
+            echo ("<td><label class='ui-checkboxradio-icon ui-corner-all ui-icon ui-icon-background ui-icon-check ui-state-checked'></label> <input type='checkbox'  class='ui-checkboxradio' value='".$date."'>Libre</td>");
         }          
     }
     

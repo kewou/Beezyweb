@@ -67,12 +67,10 @@ abstract class AbstractCalendrier {
                 if($dateTemp->format('w')=="0"){                     
                     $dateTemp->add(new DateInterval('P1D'));
                     continue; 
-                }                                 
-                echo("<td>");
+                }                                                 
                 // date Case
                 $dateCase=$dateTemp->format('Y-m-d ' .substr($heure, 0, -1).':00:00');
-                $this->afficheCase($dateCase);
-                echo("</td>");
+                $this->afficheCase($dateCase);                
                 $dateTemp->add(new DateInterval('P1D'));                
             }
         echo ("</tr>\n");   

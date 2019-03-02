@@ -6,8 +6,8 @@
 {% block contenu %}      
     
     {% if error %}
-        <div id="login_msg_error"  style="width:40%;margin:0 auto;margin-bottom: 10px;border:1px solid #e44c65;border-radius:5px;background-color:#e2c4c9;padding-top:10px;padding-bottom:10px;" >
-            <span class="login_msg_error_label" >{{ error|trans({}, 'FOSUserBundle') }} </span>
+        <div id="login_msg_error"  style="width:35%;margin:0 auto;margin-bottom: 10px;border:1px solid #e44c65;border-radius:5px;background-color:#e2c4c9;padding-top:10px;padding-bottom:10px;" >
+            <span class="login_msg_error_label" >{{ error.messageKey|trans(error.messageData, 'security') }} </span>
             <button id="login_msg_error_button" class="login_msg_error_button" type="button" >x</button>
         </div>
     {% endif %}

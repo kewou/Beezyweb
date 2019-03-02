@@ -20,8 +20,7 @@ class CalendrierPrivee extends AbstractCalendrier{
     }
     
     
-    public function display() {
-        echo("Calendrier Privée " . "<br>");
+    public function display() {        
         $this->headCalendrier();
         $this->corpCalendrier();        
     }
@@ -32,19 +31,31 @@ class CalendrierPrivee extends AbstractCalendrier{
             $heureResa = $resa['dateReservation']; 
             if($date==$heureResa){
                 $estDispo=false;
-                if(($this->getUserProprio()->getId()==$resa['client_id'])){
-                    echo "<input type='checkbox' value='".$date."'>".$this->userProprietaire->getNom();
+                if($resa['etatReservation']=="Réserver"){
+                    if($this->getUserProprio()->getId()==$resa['client_id']){
+                        echo "<td class='reserver'><p class='reserver'>".$this->userProprietaire->getNom()."<p></td>";
+                        break;
+                    }else{
+                        echo "<td>Réservée</td>";
+                        break;
+                    } 
+                }
+                elseif($resa['etatReservation']=="Valider"){                    
+                    if($this->getUserProprio()->getId()==$resa['client_id']){
+                        echo "<td class='valider'><p class='valider'>".$this->userProprietaire->getNom()."<p></td>";
+                        break;
+                    }else{
+                        echo "<td>Réservée</td>";
+                        break;
+                    }                    
                 }elseif($resa['etatReservation']=="Fermer"){                    
-                    echo "Fermer";
+                    echo "<td class='fermer'><p class='Fermer'>Fermer<p></td>";
                     break;
-                }else{
-                    echo "Réservée";
-                    break;
-                }                                
+                }                               
             }         
         }
         if($estDispo){
-            echo ("<input type='checkbox' value='".$date."' class='libre'>Libre");                                                
+            echo ("<td><input type='checkbox' value='".$date."' class='libre'>Libre</td>");                                                
         }        
     }
     

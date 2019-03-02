@@ -2636,6 +2636,7 @@
 
 		table td {
 			padding: 0.75em 0.75em;
+                        width: 160px;
 		}
 
 
@@ -3327,7 +3328,7 @@
                 }
 
                 .login_msg_error_button {
-                        margin-left: 70px;
+                        margin-left: 160px;
                         border: none;
                         color: #e44c65;
                         background-color: #e2c4c9;
