@@ -64,10 +64,19 @@ body{
   text-decoration: none;
 }
 
+#titreCalendrier{
+    color:white;
+    font-size:25px;    
+}
+
 
 .invalider{
 	background-color:silver;
 	color:black;
+}
+
+.indispo{
+   background-color:silver;   
 }
 
 .affecter{

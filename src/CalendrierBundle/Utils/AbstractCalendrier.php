@@ -36,15 +36,10 @@ abstract class AbstractCalendrier {
 
     
     
-    /*
-    public function getHeureFromStringDate($dateString){
-        return(explode(":",explode(" ",$dateString)[1])[0]);
-    }
-    */
     
     public function headCalendrier(){
         $dateTemp = clone $this->dateCourante;           
-        echo ($this->tabMois[$dateTemp->format('n')] ." ".date("Y"));        
+        echo ("<p id=titreCalendrier>".$this->tabMois[$dateTemp->format('n')] ." ".date("Y")."</p>");        
         // Le calendrier
         echo ("<table border='1'>");
         echo ("<tr>\n<th></th>\n");
