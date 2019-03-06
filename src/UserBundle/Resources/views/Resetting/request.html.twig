@@ -1,0 +1,7 @@
+{% extends "UserBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block contenu %}   
+    {% include "@FOSUser/Resetting/request_content.html.twig" %}
+{% endblock contenu %} 
