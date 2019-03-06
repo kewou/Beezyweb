@@ -17,11 +17,13 @@
         </div>
         <!-- Menu -->
         {% block menu %}
-        <nav>
+        <nav id="nav">
+            
             <a href="{{path("Public_contact")}}">Contact</a>
-            <a href="{{path("fos_user_security_login")}}">Connexion</a>            
+            <a href="{{path("fos_user_security_login")}}">Connexion</a>    
             <a href="{{path("fos_user_registration_register")}}" id="creerCompte">Créer un compte</a>
-        <nav>             
+            
+        </nav>            
         {% endblock %}        
     </header>        
 {% endblock %}
