@@ -103,17 +103,19 @@ input[type=submit] {
                     <div class="logo"><span class="icon fa-diamond"></span></div>
                     <!-- Contenu -->
                     <section id="contenu">
-                    {% block contenu %}{% endblock %}
+                        <div>
+                        {% block contenu %}{% endblock %}
+                        </div>
                     </section>
-                </div>            
+                </div>
             </div>
-        </div>                
+        </div>            
         <!-- Footer -->
-        <section id="footer">
+        <footer id="footer">
             <p>
                 &copy; NOUMIA KEWOU. All rights reserved. 2015-{{ 'now'|date('Y') }}
             </p>
-        </section>        
+        </footer>       
         <script type="text/javascript" src="{{ asset('bundles/public/bootstrap/js/bootstrap.min.js')}}"></script>
         
         <script type="text/javascript" src="{{ asset('bundles/public/js/toTop/js/easing.js')}}"></script> 
