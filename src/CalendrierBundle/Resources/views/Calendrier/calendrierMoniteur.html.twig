@@ -19,11 +19,13 @@
         </header>        
 {% endblock %}
 
-{% block contenu %}    
-    <button type="button" id='valideDate' class="btn btn-success btn-lg">Valider</button>
-    <button type="button" id='annuleDate' class="btn-default btn-lg">Annuler</button>
-    <button type="button"  class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Affecter</button>
-    <button type="button" id='fermeDate' class="btn btn-danger btn-lg" >Bloquer</button> 
+{% block contenu %}
+    <ul id="commandeCalendrier">
+        <li><button type="button" id='valideDate' class="btn btn-success btn-lg">Valider</button></li>
+        <li><button type="button" id='annuleDate' class="btn-default btn-lg">Annuler</button></li>
+        <li><button type="button"  id='affecteModal' class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Affecter</button></li>
+        <li><button type="button" id='fermeDate' class="btn btn-danger btn-lg" >Bloquer</button></li>
+    </ul>
     
   <!-- MODAL -->
   <div class="modal fade" id="myModal" role="dialog">
@@ -45,32 +47,91 @@
         </div>
       </div>      
     </div>
-  </div>    
-              
+  </div> 
+  
+    <div id='paginationCalendrier'>
+        <ul class="pagination">
+            <li class="page-item">                
+                <a id="previousSevenDay" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only ">Previous</span>
+                </a>
+            </li>
+            <li class="page-item">
+                <a id="nextSevenDay" href="#" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                  <span class="sr-only">Next</span>
+                </a>
+            </li>
+        </ul>
+    </div>              
     <div id="calendrier">        
         {{ cal.display() }}        
     </div>
-    <div id='paginationCalendrier'>
-        <ul>
-            <li>
-                <button class='nextSevenDay'>Suivant</button>                    
-            </li>
-            <li>
-                <button class='previousSevenDay'>Précédent</button>                    
-            </li>  
-        </ul>
-    </div>
+
+    
+    <script>
+        
+        $("#valideDate").css('display','none');
+        $("#annuleDate").css('display','none');
+        $("#fermeDate").css('display','none');        
+        $("#affecteModal").css('display','none');
+        $(document).on('change',"input[type='checkbox']",function(){                                 
+            if(this.checked) {                    
+                if(this.className==="fermer"){
+                    $("#annuleDate").css('display','block');
+                    $("#affecteDate").css('display','block');
+                }else if(this.className==="valider"){
+                    $("#annuleDate").css('display','block');
+                    $("#fermeDate").css('display','block'); 
+                }else if(this.className==="ui-checkboxradio"){
+                    $("#affecteModal").css('display','block');
+                    $("#fermeDate").css('display','block'); 
+                }else if(this.className==="reserver"){
+                    $("#annuleDate").css('display','block');
+                    $("#valideDate").css('display','block'); 
+                }                
+            }else{
+                if($("input:checked").length===0){
+                    $("#valideDate").css('display','none');
+                    $("#annuleDate").css('display','none');
+                    $("#fermeDate").css('display','none');        
+                    $("#affecteModal").css('display','none');                    
+                }
+            }
+
+          });                                                                              
+    </script>
     <script>
         var date = new Date();
-        $(document).ready(function(){            
-               
-            $("#reserveDate").css('display','none');    
-            $("input[type='checkbox']").change(function() {
-                if(this.checked) {
-                    $("#reserveDate").css('display','block');
-                }
-            });  
-
+        $(document).ready(function(){
+                                        
+            function existeDeja(val,tab){
+               exist=false;
+               for(var iter=0;iter<tab.length;iter++){
+                   if(val===tab[iter]){
+                       exist=true;
+                   }
+               }
+               return exist;
+            }
+            
+            function controleCaseMemeEtat(tabControle){
+                var tabEtat=[];                                  
+                $("input:checked").each(function () {
+                    var etat = $(this).attr('class');                    
+                    if(!existeDeja(etat,tabEtat)){
+                        tabEtat.push(etat);
+                    }
+                });                   
+                if(tabEtat.length>1){
+                   tabControle.push("Veuillez sélectionner uniquement des cases de même couleur svp !");
+                }           
+            }
+            
+            function controleReservation(tabResa,tabControle){         
+            }            
+            
             $("#valideDate").click(function(){
                 valider();
             });
@@ -82,6 +143,7 @@
             $("#affecteDate").click(function(){
                 affecter();
             });
+            
             
             $("#annuleDate").click(function(){
                 annuler();
@@ -96,24 +158,30 @@
                 
                 // Ajouter les controle Front
                 controleReservation(tabResa,tabControle);
-                // Ajouter confirmation action                 
-                $.ajax({
-                    type:"POST",
-                    url:"{{ (path('Moniteur_action_controle'))}}",
-                    data:{lesResaChoisi:tabResa},                    
-                    async:false,
-                    complete: function(data){                        
-                                if(data["responseText"]!==""){
-                                    alert(data["responseText"]);
-                                }else{
-                                    $.post("{{ (path('Moniteur_valider'))}}",{lesResaChoisi:tabResa},
-                                        function(data){
-                                            $('#calendrier').html(data);
-                                    });
+                controleCaseMemeEtat(tabControle);
+                // Ajouter confirmation action 
+                if(tabControle.length !==0){
+                    alert(tabControle[0]);                    
+                    $('#myModal').modal('hide');
+                }else{
+                    $.ajax({
+                        type:"POST",
+                        url:"{{ (path('Moniteur_action_controle'))}}",
+                        data:{lesResaChoisi:tabResa},                    
+                        async:false,
+                        complete: function(data){                        
+                                    if(data["responseText"]!==""){
+                                        alert(data["responseText"]);
+                                    }else{
+                                        $.post("{{ (path('Moniteur_valider'))}}",{lesResaChoisi:tabResa},
+                                            function(data){
+                                                $('#calendrier').html(data);
+                                        });
 
-                                }
-                   }
-                });                
+                                    }
+                       }
+                    });
+                }
 
                 var tabResa = [];
                 var tabControle= [];
@@ -128,24 +196,29 @@
                 
                 // Ajouter les controle Front
                 controleReservation(tabResa,tabControle);
-                // Ajouter confirmation action                 
-                $.ajax({
-                    type:"POST",
-                    url:"{{ (path('Moniteur_action_controle'))}}",
-                    data:{lesResaChoisi:tabResa},                    
-                    async:false,
-                    complete: function(data){                        
-                                if(data["responseText"]!==""){
-                                    alert(data["responseText"]);
-                                }else{
-                                    $.post("{{ (path('Moniteur_fermer'))}}",{lesResaChoisi:tabResa},
-                                        function(data){
-                                            $('#calendrier').html(data);
-                                    });
+                controleCaseMemeEtat(tabControle);
+                // Ajouter confirmation action
+                if(tabControle.length !==0){
+                    alert(tabControle[0]);
+                }else{
+                    $.ajax({
+                        type:"POST",
+                        url:"{{ (path('Moniteur_action_controle'))}}",
+                        data:{lesResaChoisi:tabResa},                    
+                        async:false,
+                        complete: function(data){                        
+                                    if(data["responseText"]!==""){
+                                        alert(data["responseText"]);
+                                    }else{
+                                        $.post("{{ (path('Moniteur_fermer'))}}",{lesResaChoisi:tabResa},
+                                            function(data){
+                                                $('#calendrier').html(data);
+                                        });
 
-                                }
-                   }
-                });                
+                                    }
+                       }
+                    });
+                }
 
                 var tabResa = [];
                 var tabControle= [];
@@ -155,30 +228,35 @@
                 var tabResa = [];
                 var tabControle=[]; 
                 $("input[type='checkbox']:checked").each(function(){
-                    tabResa.push($(this).val());
+                    tabResa.push($(this).val());                    
                 });
                 
                 // Ajouter les controle Front
                 controleReservation(tabResa,tabControle);
                 // Ajouter confirmation action
-                var nom=$("#myInput").val();
-                $.ajax({
-                    type:"POST",
-                    url:"{{ (path('Moniteur_action_controle'))}}",
-                    data:{lesResaChoisi:tabResa},                    
-                    async:false,
-                    complete: function(data){                        
-                                if(data["responseText"]!==""){
-                                    alert(data["responseText"]);
-                                }else{
-                                    $.post("{{ (path('Moniteur_affecter'))}}",{lesResaChoisi:tabResa,nom:nom},
-                                        function(data){
-                                            $('#calendrier').html(data);
-                                    });
+                controleCaseMemeEtat(tabControle);
+                if(tabControle.length !==0){                                        
+                    alert(tabControle[0]);
+                }else{
+                    var nom=$("#myInput").val();
+                    $.ajax({
+                        type:"POST",
+                        url:"{{ (path('Moniteur_action_controle'))}}",
+                        data:{lesResaChoisi:tabResa},                    
+                        async:false,
+                        complete: function(data){                        
+                                    if(data["responseText"]!==""){
+                                        alert(data["responseText"]);
+                                    }else{
+                                        $.post("{{ (path('Moniteur_affecter'))}}",{lesResaChoisi:tabResa,nom:nom},
+                                            function(data){
+                                                $('#calendrier').html(data);
+                                        });
 
-                                }
-                   }
-                });                
+                                    }
+                       }
+                    });
+                }
 
                 var tabResa = [];
                 var tabControle= [];
@@ -193,38 +271,34 @@
                 
                 // Ajouter les controle Front
                 controleReservation(tabResa,tabControle);
-                // Ajouter confirmation action                
-                $.ajax({
-                    type:"POST",
-                    url:"{{ (path('Moniteur_action_controle'))}}",
-                    data:{lesResaChoisi:tabResa},                    
-                    async:false,
-                    complete: function(data){                        
-                                if(data["responseText"]!==""){
-                                    alert(data["responseText"]);
-                                }else{
-                                    $.post("{{ (path('Moniteur_annuler'))}}",{lesResaChoisi:tabResa},
-                                        function(data){
-                                            $('#calendrier').html(data);
-                                    });
+                // Ajouter confirmation action
+                controleCaseMemeEtat(tabControle);
+                if(tabControle.length !==0){
+                    alert(tabControle[0]);
+                }else{
+                    $.ajax({
+                        type:"POST",
+                        url:"{{ (path('Moniteur_action_controle'))}}",
+                        data:{lesResaChoisi:tabResa},                    
+                        async:false,
+                        complete: function(data){                        
+                                    if(data["responseText"]!==""){
+                                        alert(data["responseText"]);
+                                    }else{
+                                        $.post("{{ (path('Moniteur_annuler'))}}",{lesResaChoisi:tabResa},
+                                            function(data){
+                                                $('#calendrier').html(data);
+                                        });
 
-                                }
-                   }
-                });                
-
+                                    }
+                       }
+                    });                
+                }
                 var tabResa = [];
                 var tabControle= [];
-            }               
+            }                                                            
             
-            
-            
-            function controleReservation(tabResa,tabControle){                
-                if(tabResa.length > 2){
-                    tabControle.push("Pas plus de deux resa");
-                }            
-            }
-            
-            $('button.nextSevenDay').click(function(){
+            $('#nextSevenDay').click(function(){
                 date.setDate(date.getDate() + 7);
                 var dateEnvoyer = date.format("yyyy-MM-dd h:mm:ss");
                 $.post("{{ (path('Moniteur_calendrierPagination'))}}",{datePivot:dateEnvoyer},
@@ -232,7 +306,7 @@
                             $('#calendrier').html(data);
                 });                
             });
-            $('button.previousSevenDay').click(function(){
+            $('#previousSevenDay').click(function(){
                 date.setDate(date.getDate() -7);
                 var dateEnvoyer = date.format("yyyy-MM-dd h:mm:ss");
                 $.post("{{ (path('Moniteur_calendrierPagination'))}}",{datePivot:dateEnvoyer},
@@ -241,7 +315,10 @@
                 });                
             });               
             
-        });      
+        });
+        $('#myModal').on('shown.bs.modal', function () {
+            $('#myInput').focus();
+        }) 
         
         Date.prototype.format = function (format){ //author: meizz
             var o = {
@@ -376,5 +453,6 @@ var users= $.parseJSON($.ajax({
     async: false
 }).responseText);
 autocomplete(document.getElementById("myInput"),users);
+$("#myInputautocomplete-list").css("display":"none"); 
 </script>
 {% endblock %}

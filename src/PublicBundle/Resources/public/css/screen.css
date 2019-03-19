@@ -66,7 +66,26 @@ body{
 
 #titreCalendrier{
     color:white;
-    font-size:25px;    
+    font-size:25px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    margin-top: -5px;
+}
+
+.pagination{
+    padding: 0px;
+    margin-left: 14%;
+    margin-bottom: -18px;
+}
+
+#commandeCalendrier{
+    margin-left: 25%;
+    list-style-type: none;
+    margin-bottom: 0px; 
+}
+
+#commandeCalendrier li{
+    display:inline-block
 }
 
 
@@ -139,6 +158,11 @@ body{
 	background-color:silver;
 	color:black;
 	cursor: pointer;
+}
+
+#reserveDate{
+    background-color: #4169E1;
+    margin-left:41%;
 }
 
 /* Inscription */
@@ -220,3 +244,52 @@ ul.typeahead a:hover{
     border: 1px solid ;
     text-align: center;
 }
+
+@media screen and (max-width: 736px) {
+    
+    /* profil version téléphone */
+    #mesInfosCompte{
+        width:100%;
+        margin:0px;
+        font-size:12px;
+        padding:0px;
+    }
+    
+    table th{
+        padding:16px;
+        font-size:17px;
+    }
+    #mesInfosCompte table tr{
+        width:80%;
+    }
+    
+    #mesInfosCompte table td{
+       padding: 15px 0.75em; 
+    }
+    
+    /* Mot de pase oublié version téléphone */    
+    .fos_user_resetting_request{
+        margin-top:50px;
+    }
+    .fos_user_resetting_request label{
+        font-size:18px;
+        font-weight: bold;
+    }    
+    .fos_user_resetting_request input{
+        width:300px;
+        margin-top:15px;
+    }
+    
+    /* check_email register oublié version téléphone */
+    .msg_info_generale{
+        width:100%;
+        font-size:25px;
+    }
+    
+    #reserveDate{
+        background-color: #4169E1;
+        margin-left:50%;
+        width:100px;
+    }
+        
+}    

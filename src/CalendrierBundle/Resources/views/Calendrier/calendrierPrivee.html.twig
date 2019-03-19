@@ -20,61 +20,47 @@
 {% endblock %}
 
 {% block contenu %}
-    <input type='button' id='reserveDate' value='Réserver'>    
+    <input type='button' id='reserveDate' value='Réserver'>
+    
+    <div id='paginationCalendrier'>
+        <ul class="pagination">
+            <li class="page-item">                
+                <a id="previousSevenDay" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only ">Previous</span>
+                </a>
+            </li>
+            <li class="page-item">
+                <a id="nextSevenDay" href="#" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                  <span class="sr-only">Next</span>
+                </a>
+            </li>
+        </ul>
+    </div>
     <div id="calendrier">        
         {{ cal.display() }}        
     </div>
-    <div id='paginationCalendrier'>
-        <ul>
-            <li>
-                <button class='nextSevenDay'>Suivant</button>                    
-            </li>
-            <li>
-                <button class='previousSevenDay'>Précédent</button>                    
-            </li>  
-        </ul>
-    </div>
+
     
     <script>            
-            $("#reserveDate").css('display','none');
-            $(document).on('change',"input[type='checkbox']",function(){                 
-                cocheCase();
-                    if(this.checked) {
-                        cocher=true;
-                        if(this.className==='libre'){
-                            $("#reserveDate").css('display','block');
-                            $("#annuleDate").css('display','none');
-                        }else{
-                            $("#annuleDate").css('display','block');
-                            $("#reserveDate").css('display','none');
-                        }
-                    }else{
-                        if(this.className==='libre'){
-                            $("#reserveDate").css('display','block');
-                            $("#annuleDate").css('display','none');
-                        }else{
-                            $("#annuleDate").css('display','block');
-                            $("#reserveDate").css('display','none');
-                        }
-                    }
-                    
-              });
-             
-             
-            function cocheCase(){
-            var cocher=false;
+        $("#reserveDate").css('display','none');
+        $(document).on('change',"input[type='checkbox']",function(){                                 
+            if(this.checked) {                    
+                $("#reserveDate").css('display','block');                                                                        
+            }else{
+                if($("input:checked").length===0){
+                    $("#reserveDate").css('display','none');
+                }
+            }
 
-               
- 
-               
-               
-        }
+          });                                                                              
     </script>
          
     <script>        
         var date = new Date();
         $(document).ready(function(){            
-            $('button.nextSevenDay').click(function(){
+            $('#.nextSevenDay').click(function(){
                 date.setDate(date.getDate() + 7);
                 var dateEnvoyer = date.format("yyyy-MM-dd h:mm:ss");
                 $.post("{{ (path('Privee_calendrierPagination'))}}",{datePivot:dateEnvoyer},
@@ -82,7 +68,7 @@
                             $('#calendrier').html(data);
                 });                
             });
-            $('button.previousSevenDay').click(function(){
+            $('#previousSevenDay').click(function(){
                 date.setDate(date.getDate() -7);
                 var dateEnvoyer = date.format("yyyy-MM-dd h:mm:ss");
                 $.post("{{ (path('Privee_calendrierPagination'))}}",{datePivot:dateEnvoyer},
@@ -135,7 +121,7 @@
             
          
             
-            function controleReservation(tabResa,tabControle){                
+            function controleReservation(tabResa,tabControle){
                 if(tabResa.length > 2){
                     tabControle.push("Pas plus de deux resa");
                 }            

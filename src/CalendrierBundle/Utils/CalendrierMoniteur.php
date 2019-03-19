@@ -19,8 +19,7 @@ class CalendrierMoniteur extends AbstractCalendrier{
     }
     
     
-    public function display() {
-       echo("Calendrier Moniteur " . "<br>");
+    public function display() {      
         $this->headCalendrier();
         $this->corpCalendrier();        
     }
@@ -32,10 +31,10 @@ class CalendrierMoniteur extends AbstractCalendrier{
             if($date==$heureResa){
                 $estDispo=false;
                 if($resa['etatReservation']=="Fermer"){                    
-                    echo ("<td class='fermer'><input type='checkbox' value='".$date."'> <p class='fermer'>Bloqué</p></td>");
+                    echo ("<td class='fermer'><input type='checkbox' class='fermer' value='".$date."'> <p>Bloqué</p></td>");
                     break;
                 }elseif($resa['etatReservation']=="Réserver"){                    
-                    echo ("<td class='reserver'><input type='checkbox'  value='".$date."'>".'<p class=reserver>' . strtoupper($this->getNomReserveur($this->users, $resa['client_id'])) .'</p></td>');
+                    echo ("<td class='reserver'><input type='checkbox' class='reserver' value='".$date."'>".'<p class=reserver>' . strtoupper($this->getNomReserveur($this->users, $resa['client_id'])) .'</p></td>');
                     break;
                 }elseif($resa['etatReservation']=="Valider"){                    
                     echo ("<td class='valider'><input type='checkbox' class='valider' value='".$date."'>".'<p class=valider>'.strtoupper($this->getNomReserveur($this->users, $resa['client_id'])).'</p></td>');

@@ -4084,11 +4084,11 @@
 					color: rgba(255, 255, 255, 0.75);
 					display: block;				
 					text-decoration: none;
-                                        padding-left: 25px;
+                                        padding-left: 32px;
                                         padding-bottom: 5px;
                                         padding-top: 5px;
                                         line-height: 2em;
-}
+
 				}
 
 					#navPanel .link:hover {
@@ -4155,6 +4155,93 @@
 			#footer {
 				
 			}
+                        
+                /* Inscription version téléphone */
+                
+                #formInscription input{
+                    width:250px;
+                }
+               #register_form_contenair{
+                    width:100%;
+                }
+                #register_form_contenair label{
+                    display:none;
+                }
+                
+                .register_form_left_side{
+                    width:100%;
+                    float: none;
+                }
+                
+                .register_form_right_side{
+                    width:100%;
+                    float: none;
+                }
+                
+                #register_Bouton {
+                    margin-left:0px;
+                }
+                
+                
+                /* Connexion version téléphone */
+                
+                #form_contenair_login{
+                    width:100%;
+                }
+                
+                #form_contenair_login input[type="text"]{
+                    width:250px;
+                }
+                
+                #form_contenair_login input[type="password"]{
+                    width:250px;
+                }
+                
+                #form_contenair_login input[type="submit"]{
+                    width:90%;
+                }
+                
+                /* Contact version téléphone */
+                
+                #form_contact{
+                    width:100%;
+                    margin:0px;
+                }
+                
+                #form_contact .form_label{
+                    display:none;
+                }
+                
+                #form_contact .input_form{
+                    width:250px;                    
+                }
+                
+                #form_contact #envoiMail{
+                    width:250px;                    
+                } 
+                
+                /* Parametre version téléphone */
+                #form_parametre{
+                    width:100%;
+                }
+                
+                #form_parametre input{
+                    margin:0px;
+                    margin-top:10px;
+                    width:255px;
+                }
+                
+                #form_parametre label{
+                    margin-left:15px;
+                    margin-top:10px;                    
+                }
+                
+
+                
+
+                
+        }
+                
 
 	
 

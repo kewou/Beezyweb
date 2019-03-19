@@ -8,7 +8,7 @@
             <h1 id="logo"><a href="{{path("Public_accueil")}}"><img src="{{ asset('bundles/public/assets/css/images/logo.jpg')}}" alt="logo" height="60" width="60"/></a></h1>
         </div>
         {% block menu %}
-        <nav>
+        <nav id="nav">
             <a href="{{path("Public_accueil")}}">Accueil</a>
             <a href="{{path("fos_user_security_login")}}">Connexion</a>            
             <a href="{{path("fos_user_registration_register")}}" id="creerCompte">Créer un compte</a>
@@ -22,11 +22,11 @@
         <div id="form_contact" class="block_form">	
         <form method="post" action="">
                 <label class="form_label" for="name">Nom</label>
-                <input class="input_form" required="required" type="text" name="nom" id="name" />
+                <input class="input_form" required="required" type="text" name="nom" id="name" placeholder="Nom" />
                 <label class="form_label" for="email">Email</label>
-                <input class="input_form" required="required" type="email" name="email" id="email" />
+                <input class="input_form" required="required" type="email" name="email" id="email" placeholder="Email" />
                 <label class="form_label" for="sujet">Sujet</label>
-                <input class="input_form" required="required" type="text" name="sujet" id="sujet" />
+                <input class="input_form" required="required" type="text" name="sujet" id="sujet" placeholder="Sujet" />
                 <label class="form_label" for="message">Message</label>
                 <textarea class="form_textarea" required="required" name="message" id="message" rows="4"></textarea>
                 
