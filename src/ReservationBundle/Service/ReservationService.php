@@ -27,22 +27,26 @@ class ReservationService {
             $resa->setClient($client);
             $resa->setEtatReservation("Réserver");
             $resa->setDateReservation($dateTime);
-            $this->entityManager->persist($resa);
-            $this->entityManager->flush();
-        }         
+            $this->entityManager->persist($resa);            
+        }
+        $this->entityManager->flush();
     }
     
+    //Par le moniteur
     public function annuleDates($client,$tabDate){
+        $dateTime = DateTime::createFromFormat('Y-m-d H:i:s', $tabDate[0]);
+        $uneResa=$this->getResaByDate($dateTime);
+        $client=$uneResa->getClient();
         $client->setSolde($client->getSolde()+sizeof($tabDate));
         foreach ($tabDate as $dateString){            
             $date = DateTime::createFromFormat('Y-m-d H:i:s', $dateString);            
             $resa = $this->entityManager->getRepository("ReservationBundle:Reservation")->findOneByDateReservation($date);
-            $this->entityManager->remove($resa);
-            $this->entityManager->flush();
+            $this->entityManager->remove($resa);            
         }
+        $this->entityManager->flush();
     }
     
-    
+    // Par le client
     public function annuleDate($client,$id){
         $client->setSolde($client->getSolde()+1);
         $resa = $this->entityManager->getRepository("ReservationBundle:Reservation")->findOneById($id);
@@ -56,14 +60,13 @@ class ReservationService {
         foreach($tabAssociatifUserResa as $clientId => $sesResa){
             foreach($sesResa as $resa){                                               
                 $resa->setEtatReservation("Valider"); 
-                $this->entityManager->persist($resa);
-                $this->entityManager->flush();
+                $this->entityManager->persist($resa);                
             }
             $client=$this->entityManager->getRepository("UserBundle:User")->findOneById($clientId);
             // Notifier client
             //echo($client->getNom()+"");
         }
-        //return $tabAssociatifUserResa;
+        $this->entityManager->flush();        
     }
     
     public function affecteDates($client,$tabDate){
@@ -74,10 +77,9 @@ class ReservationService {
             $resa->setClient($client);
             $resa->setEtatReservation("Valider");
             $resa->setDateReservation($dateTime);
-            $this->entityManager->persist($resa);
-            $this->entityManager->flush();
-        }        
-        
+            $this->entityManager->persist($resa);            
+        }
+        $this->entityManager->flush();        
     }
     
     public function fermeDates($moniteur,$lesResasChoisi){
@@ -87,9 +89,9 @@ class ReservationService {
             $resa->setClient($moniteur);
             $resa->setEtatReservation("Fermer");
             $resa->setDateReservation($dateTime);
-            $this->entityManager->persist($resa);
-            $this->entityManager->flush();
-        }          
+            $this->entityManager->persist($resa);           
+        }
+        $this->entityManager->flush();
     }
     
     public function disponible($dateString){
