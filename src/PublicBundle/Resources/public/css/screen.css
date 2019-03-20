@@ -288,8 +288,44 @@ ul.typeahead a:hover{
     
     #reserveDate{
         background-color: #4169E1;
-        margin-left:50%;
-        width:100px;
+        margin-left:18%;
+        width:75px;
+    }
+    
+    /* calendrier privee  version telephone */
+    
+    .pagination {
+        margin-left: 48%;            
+    }
+    
+    #calendrier th{
+        padding: 0px;
+        font-size:14px;
+    }
+    
+    #calendrier p {
+        font-size: 9px;        
+    }
+    
+    #calendrier td {
+        padding: 0px;        
+    }
+    
+    #calendrier #titreCalendrier{
+        font-size:22px;
+    }
+    
+    /* calendrier moniteur  version telephone */
+    
+    #commandeCalendrier button{
+        font-size:10px;
+    }
+    
+    .annuleResa {    
+        top: -14px;    
+        position: relative;
+        right: 30px;
+        margin:0px;
     }
         
-}    
+}

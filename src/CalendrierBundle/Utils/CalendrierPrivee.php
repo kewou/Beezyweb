@@ -45,7 +45,7 @@ class CalendrierPrivee extends AbstractCalendrier{
                         echo "<td class='valider'><p class='valider'>".$this->userProprietaire->getNom()."<p></td>";
                         break;
                     }else{
-                        echo "<td class='indispo'>Réservée</td>";
+                        echo "<td class='indispo'><p>Réservée</p></td>";
                         break;
                     }                    
                 }elseif($resa['etatReservation']=="Fermer"){                    

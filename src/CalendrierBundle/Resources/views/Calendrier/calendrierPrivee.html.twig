@@ -9,7 +9,7 @@
         </div>            
             <!-- Menu -->
             {% block menu %}
-                <nav>
+                <nav id="nav">
                     <a href="{{path("Privee_accueil")}}">Accueil</a>
                     <a href="{{path("fos_user_profile_show")}}">{{firstLetter(user.prenom)}}. {{user.nom}}<img src="{{ asset('bundles/public/assets/css/images/icon_user.png')}}" id="icon_user" alt="icon_user" height="15" width="20"/></a>                    
                     <a href="{{path("fos_user_profile_edit")}}">Paramètres</a>
@@ -60,7 +60,7 @@
     <script>        
         var date = new Date();
         $(document).ready(function(){            
-            $('#.nextSevenDay').click(function(){
+            $('#nextSevenDay').click(function(){
                 date.setDate(date.getDate() + 7);
                 var dateEnvoyer = date.format("yyyy-MM-dd h:mm:ss");
                 $.post("{{ (path('Privee_calendrierPagination'))}}",{datePivot:dateEnvoyer},
