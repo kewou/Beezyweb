@@ -169,6 +169,15 @@ body{
 #block_inscription{    
 }
 
+.checkCase{    
+    background-repeat: no-repeat;
+    background-color:#F5F5DC;    
+}
+
+.checkCase input{
+    display:none;
+}
+
 /* Connexion */
 
 .error{
@@ -313,6 +322,14 @@ ul.typeahead a:hover{
     
     #calendrier #titreCalendrier{
         font-size:22px;
+    }
+    
+    .checkCase{
+        line-height: 45px;
+    }
+    
+    table td{
+        width:auto;
     }
     
     /* calendrier moniteur  version telephone */
