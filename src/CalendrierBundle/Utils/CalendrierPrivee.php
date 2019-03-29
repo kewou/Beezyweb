@@ -36,7 +36,7 @@ class CalendrierPrivee extends AbstractCalendrier{
                         echo "<td class='reserver'><p class='reserver'>".$this->userProprietaire->getNom()."<p></td>";
                         break;
                     }else{
-                        echo "<td class='indispo'>Réservée</td>";
+                        echo "<td class='indispo'>Réservé</td>";
                         break;
                     } 
                 }
@@ -45,17 +45,17 @@ class CalendrierPrivee extends AbstractCalendrier{
                         echo "<td class='valider'><p class='valider'>".$this->userProprietaire->getNom()."<p></td>";
                         break;
                     }else{
-                        echo "<td class='indispo'><p>Réservée</p></td>";
+                        echo "<td class='indispo'><p>Réservé</p></td>";
                         break;
                     }                    
                 }elseif($resa['etatReservation']=="Fermer"){                    
-                    echo "<td class='fermer'><p class='Fermer'>Fermer<p></td>";
+                    echo "<td class='fermer'><p class='Fermer'>Fermé<p></td>";
                     break;
                 }                               
             }         
         }
         if($estDispo){
-            echo ("<td><input type='checkbox' value='".$date."' class='libre'>Libre</td>");                                                
+            echo ("<td class='checkCase'><input type='checkbox' value='".$date."' class='libre'/><p>Libre</p></td>");                                                
         }        
     }
     

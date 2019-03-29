@@ -41,22 +41,32 @@
     <div id="calendrier">        
         {{ cal.display() }}        
     </div>
-
     
-    <script>            
+    <script>
         $("#reserveDate").css('display','none');
-        $(document).on('change',"input[type='checkbox']",function(){                                 
-            if(this.checked) {                    
-                $("#reserveDate").css('display','block');                                                                        
+        $(".checkCase").css("background-image","none");
+        $(".checkCase").css("background-color","white");
+        $(document).on("click",".checkCase",function(){
+            if(!this.firstChild.checked){
+                $("#reserveDate").css('display','block');
+                $(this).css("background-image","url({{ asset('bundles/public/assets/css/images/checked.png')}})");                
+                $(this).css("background-repeat","no-repeat");
+                $(this).css("background-position","right");
+                $(this).css("background-color","#ADD8E6");
+                this.firstChild.checked=true;                
             }else{
+                this.firstChild.checked=false;
+                $(this).css("background-image","none");
+                $(this).css("background-color","white");
                 if($("input:checked").length===0){
                     $("#reserveDate").css('display','none');
-                }
+                }                
             }
-
-          });                                                                              
+        });
     </script>
          
+    
+    <!-- Pagination -->
     <script>        
         var date = new Date();
         $(document).ready(function(){            
@@ -77,8 +87,7 @@
                 });                
             });            
                    
-            
-
+        <!-- Action Réserver -->    
 
             $("#reserveDate").click(function(){
                 reserver();
@@ -89,8 +98,7 @@
                 var tabControle=[]; 
                 $("input[type='checkbox']:checked").each(function(){
                     tabResa.push($(this).val());
-                });
-                
+                });                
                 // Ajouter les controle Front
                 controleReservation(tabResa,tabControle);
                 if(tabControle.length !==0){
@@ -113,8 +121,7 @@
                                     }
                        }
                     });
-                }
-                checkCase();
+                }                
                 var tabResa = [];
                 var tabControle= [];
             }
