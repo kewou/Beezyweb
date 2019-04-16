@@ -33,7 +33,7 @@ security:
                 remember_me: false
             logout:
                 path: fos_user_security_logout
-                target: /
+                target: /connexion
             anonymous: true 
         admin:
             pattern: /admin(.*)
