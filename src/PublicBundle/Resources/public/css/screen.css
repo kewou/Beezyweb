@@ -181,7 +181,7 @@ body{
 /* Connexion */
 
 .error{
-	color:red;
+    color:red;
 }
 
 
@@ -197,6 +197,49 @@ body{
     border-top: none;
 }
 
+#mesInfosPerso{
+    background-color: white;
+    display:inline-block;
+    width:100%;
+}
+
+#mesInfosPerso ul li{    
+    border-top: #837680 0.5px;
+    border-style: ridge;
+    padding: 8px;
+}
+
+#mesInfosCompte h3{    
+    color: #2F4F4F;
+    font-weight: bold;
+    font-family: initial;
+    padding-top:10px;
+}
+
+#infosKey{
+    width:48%;
+    float:left;
+}
+
+#infosValue{
+    width:48%;
+    float:right;
+}
+
+.clearer{
+    clear:both;
+}
+
+#mesInfosCompte ul li{
+    list-style-type: none;
+}
+
+#mesInfosCompte p{
+    display:inline-block
+}
+
+
+
 table tbody tr {
     border: solid 1px;
     border-left: 0;
@@ -208,7 +251,7 @@ table th {
     color: #e44c65;;
     font-size: 25px;    
     padding: 0.5em 0.75em 0.75em 0.75em;
-    text-align: left;
+    text-align: center;
     font-family: fantasy;
 }
 
@@ -254,27 +297,79 @@ ul.typeahead a:hover{
     text-align: center;
 }
 
+#mesResa{
+    margin-left:25%;
+}
+
+.numResaReserver{
+    width: 35px;
+    background-color: #4169E1;
+    text-align: center;
+    color:white;
+    margin-right: 20px;
+}
+
+.numResaValider{
+    width: 35px;
+    background-color: #90EE90;
+    text-align: center;
+    margin-right: 20px;
+}
+
+.dateResaShow{
+    margin-right: 20px;
+    margin-left: 15px;
+    width: 150px;
+}
+
+.idResa{
+    margin-bottom: 10px;
+}
+
+#mesInfosPerso #infosKey li {
+    color: black;
+    font-family: monospace;
+    font-weight: bold;
+}
+
+#mesInfosPerso #infosValue li{
+    color:#2F4F4F;;    
+}
+
 @media screen and (max-width: 736px) {
     
     /* profil version téléphone */
+    
+    .container{
+        margin:0px;
+    }
     #mesInfosCompte{
         width:100%;
         margin:0px;
         font-size:12px;
         padding:0px;
+        min-height:395px;
     }
     
-    table th{
-        padding:16px;
-        font-size:17px;
-    }
-    #mesInfosCompte table tr{
-        width:80%;
+    #mesInfosCompte h3{
+        font-size:20px;
+        padding:10px;
     }
     
-    #mesInfosCompte table td{
-       padding: 15px 0.75em; 
+    #mesResa{
+        margin-left: 15px;
     }
+    .numResaReserver {
+        margin-right:5px;
+    }
+    
+    .dateResaShow{
+        font-size:16px;
+        margin-right: 0px;
+        width:120px;
+    }    
+    
+
     
     /* Mot de pase oublié version téléphone */    
     .fos_user_resetting_request{
@@ -339,10 +434,7 @@ ul.typeahead a:hover{
     }
     
     .annuleResa {    
-        top: -14px;    
-        position: relative;
-        right: 30px;
-        margin:0px;
+        margin-right:10px;
     }
         
 }

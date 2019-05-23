@@ -29,6 +29,7 @@
         
         #titreAccueil{
             font-size:40px;
+            color:white;
         }
 
 	article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
@@ -1610,8 +1611,7 @@
 
 
 
-	h1, h2, h3, h4, h5, h6 {
-		color: #ffffff;
+	h1, h2, h3, h4, h5, h6 {		
 		font-weight: 300;
 		line-height: 1em;
 		margin: 0 0 1em 0;
@@ -2501,8 +2501,6 @@
 
 	ul {
 		list-style: disc;
-		margin: 0 0 2em 0;
-		padding-left: 1em;
 	}
 
 		ul li {

@@ -34,14 +34,14 @@ class BeezyExtension extends AbstractExtension{
     }
     
     public function formatDateInFrench($date){
-        $nom_jour_fr = array("dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi");
+        $nom_jour_fr = array("Dimanche", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam");
         $mois_fr = Array("", "janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", 
                 "septembre", "octobre", "novembre", "décembre");
         // on extrait la date du jour
         list($nom_jour, $jour, $mois, $annee) = explode('/', date_format($date,("w/d/n/Y")));        
 
-        return $nom_jour_fr[$nom_jour].' '. $this->enleveZero($jour).' '.$mois_fr[$mois]. '  =>  ' . 
-                $this->enleveZero(date_format($date,('H'))) .'H';        
+        return $nom_jour_fr[$nom_jour].' '. $this->enleveZero($jour).' '.$mois_fr[$mois] . ' '.
+                $this->enleveZero(date_format($date,('H'))) .'h';        
     }
     
     public function enleveZero($chaine){
