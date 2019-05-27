@@ -35,8 +35,8 @@ install:
 script:
   - phpunit  tests/UserBundle/DAO/UserTest.php
 
-# branche Ok
-branches:
-    only:    
-    - develop
+deploy:
+    provider: script
+    script: bash deploy.sh
+    
 
