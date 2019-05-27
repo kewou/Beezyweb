@@ -34,11 +34,7 @@ install:
 # Run script
 script:
   - phpunit  tests/UserBundle/DAO/UserTest.php
-
-deploy:    
-    provider: script
-    script: ./deploy.sh
-    on:
-      branch: feature/automatic_deploy    
+  - ./deploy.sh
+  
     
 
