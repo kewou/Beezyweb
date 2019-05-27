@@ -1,10 +1,10 @@
 calendrier:
     resource: "@CalendrierBundle/Resources/config/routing.yml"
-    prefix:   /calendrier
+    prefix:   /privee/calendrier
 
 reservation:
     resource: "@ReservationBundle/Resources/config/routing.yml"
-    prefix:   /reservation
+    prefix:   /privee/reservation
 
 admin:
     resource: "@AdminBundle/Resources/config/routing.yml"
@@ -31,7 +31,7 @@ fos_user_security:
 
 fos_user_profile:
     resource: "@FOSUserBundle/Resources/config/routing/profil.yml"
-    prefix: /profile
+    prefix: /privee/profile
 
 fos_user_register:
     resource: "@FOSUserBundle/Resources/config/routing/registration.yml"
@@ -43,4 +43,4 @@ fos_user_resetting:
 
 fos_user_change_password:
     resource: "@FOSUserBundle/Resources/config/routing/change_password.yml"
-    prefix: /profile    
+    prefix: /privee/profile    

@@ -327,15 +327,28 @@ ul.typeahead a:hover{
 }
 
 #mesInfosPerso #infosKey li {
-    color: black;
-    font-family: monospace;
+    color: black;    
     font-weight: bold;
+    text-align: right;
 }
 
 #mesInfosPerso #infosValue li{
     color:#2F4F4F;;    
 }
 
+/* update password */
+
+#updatePassword{
+    margin-left: 20%;
+}
+
+#updatePassword input{
+    width:50%;
+}
+
+#updatePassword input[type=submit]{
+    margin-top:10px;
+}
 @media screen and (max-width: 736px) {
     
     /* profil version téléphone */
