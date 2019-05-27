@@ -36,6 +36,8 @@ script:
   - phpunit  tests/UserBundle/DAO/UserTest.php
 
 deploy:
+    branches:
+       only: feature/automatic_deploy
     provider: script
     script: bash deploy.sh
     
