@@ -338,6 +338,12 @@ ul.typeahead a:hover{
 
 /* update password */
 
+#form_parametre p{
+    margin-left: 24%;
+    font-size: 13px;
+    margin-top: -18px;
+}
+
 #updatePassword{
     margin-left: 20%;
 }
@@ -350,6 +356,12 @@ ul.typeahead a:hover{
     margin-top:10px;
 }
 @media screen and (max-width: 736px) {
+    
+ #form_parametre p{
+    margin-left: 0px;
+    font-size: 13px;
+    margin-top: -18px;
+}
     
     /* profil version téléphone */
     

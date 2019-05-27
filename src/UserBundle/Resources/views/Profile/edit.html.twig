@@ -23,10 +23,9 @@
 
 {% block contenu %}
     
-    <div id="form_parametre" class="block_form">
-        
+    <div id="form_parametre" class="block_form">        
         <form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
-            {{ form_widget(form) }}
+            {{ form_widget(form) }}            
             <div>
                 <input id="update_Param" type="submit" value="{{ 'profile.edit.submit'|trans({}, 'FOSUserBundle') }}" />
             </div>
