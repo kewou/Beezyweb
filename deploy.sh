@@ -7,8 +7,9 @@ PASSWORD=delphine12
 PORT=22
 
 echo "Connection FTP"
-ftp -inv $HOST $PORT << EOF
+ftp -in $HOST << EOF
 user $LOGIN $PASSWORD
-ls
+mdelete app/*
+rmdir app
 bye
 EOF
