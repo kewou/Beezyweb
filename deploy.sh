@@ -7,9 +7,8 @@ PASSWORD=delphine12
 PORT=22
 
 echo "Connection FTP"
-ftp -i -n $HOST $PORT << END_SCRIPT
-quote USER $LOGIN
-quote PASS $PASSWORD
-END_SCRIPT
-
-echo "Connection ok"
+ftp -inv $HOST $PORT << EOF
+user $LOGIN $PASSWORD
+ls
+bye
+EOF
