@@ -4100,6 +4100,7 @@
 					#navPanel .link.depth-0 {
 						color: #ffffff;
 						font-weight: 300;
+                                                width:230px;
 					}
 
 					#navPanel .link .indent-1 {
@@ -4157,7 +4158,7 @@
                 /* Inscription version téléphone */
                 
                 #formInscription input{
-                    width:250px;
+                    width:235px;
                 }
                #register_form_contenair{
                     width:100%;
@@ -4188,11 +4189,11 @@
                 }
                 
                 #form_contenair_login input[type="text"]{
-                    width:250px;
+                    width:235px;
                 }
                 
                 #form_contenair_login input[type="password"]{
-                    width:250px;
+                    width:235px;
                 }
                 
                 #form_contenair_login input[type="submit"]{
@@ -4211,11 +4212,11 @@
                 }
                 
                 #form_contact .input_form{
-                    width:250px;                    
+                    width:235px;                    
                 }
                 
                 #form_contact #envoiMail{
-                    width:250px;                    
+                    width:235px;                    
                 } 
                 
                 /* Parametre version téléphone */
@@ -4226,11 +4227,11 @@
                 #form_parametre input{
                     margin:0px;
                     margin-top:10px;
-                    width:255px;
+                    width:235px;
                 }
                 
                 #form_parametre label{
-                    margin-left:15px;
+                    margin-left:3px;
                     margin-top:10px;                    
                 }
                 

@@ -358,9 +358,13 @@ ul.typeahead a:hover{
 @media screen and (max-width: 736px) {
     
  #form_parametre p{
-    margin-left: 0px;
-    font-size: 13px;
+    margin-left: 5px;
+    font-size: 11px;
     margin-top: -18px;
+}
+
+#form_parametre p a{
+    color: blue;
 }
     
     /* profil version téléphone */
@@ -383,6 +387,10 @@ ul.typeahead a:hover{
     
     #mesResa{
         margin-left: 15px;
+    }
+    
+    #mesInfosTitre{
+        margin-top:25px;
     }
     .numResaReserver {
         margin-right:5px;
