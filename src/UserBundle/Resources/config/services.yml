@@ -12,7 +12,9 @@ services:
     user_service:
         class: UserBundle\Service\UserService
         arguments: ["@doctrine.orm.entity_manager"]
-        
+    mail_service:
+        class: UserBundle\Service\MailService
+        arguments: ["@mailer"]
     my.handler.session_idle:
         class: UserBundle\Handler\SessionHandler
         arguments: ["@session", "@security.context", "@router", %session_max_idle_time%]

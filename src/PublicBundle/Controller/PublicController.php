@@ -36,11 +36,23 @@ class PublicController extends Controller {
     function contactAction(){
         return $this->render("PublicBundle:Public:contact.html.twig");
     }
-	
+    
+    function mailContactAction(){
+        $mailService = $this->get('mail_service');
+        $request = Request::createFromGlobals();
+        $nom=$request->request->get('nom');
+        $subject= $request->request->get('sujet'); 
+        $from= $request->request->get('email');
+        $body=$request->request->get('message');
+        $to='beezyweb.net@beezyweb.net';
+        $mailService->sendMail($from,$to,$subject,$body);
+    }
+    
+    /*
     function mailAction(){
             $request = Request::createFromGlobals();
             $nom=$request->request->get('nom');
-    $subject= $request->request->get('sujet'); 
+            $subject= $request->request->get('sujet'); 
             $fromEmail= $request->request->get('email');
             $body=$request->request->get('message');		   			
             $to= 'beezyweb.net@beezyweb.net';
@@ -50,7 +62,7 @@ class PublicController extends Controller {
             mail($to, $subject, $body,$headers);
 
             return $this->render("PublicBundle:Public:index.html.twig" );
-    }
+    }*/
     
     function codeAction(){
         if ($this->container->get('security.context')->isGranted('ROLE_USER')) {            

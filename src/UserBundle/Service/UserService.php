@@ -3,7 +3,6 @@
 namespace UserBundle\Service;
 
 use Doctrine\ORM\EntityManager as EM;
-use UserBundle\Entity\UserDTO;
 
 /**
  * Description of UserService
