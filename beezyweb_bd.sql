@@ -1,11 +1,16 @@
+INSERT INTO `user` (`id`, `username`, `username_canonical`, `email`, `email_canonical`, `enabled`, `salt`, `password`, `last_login`, `confirmation_token`, `password_requested_at`, `roles`,`telephone`, `nom`, `prenom`, `solde`, `money`, `moniteur_id`) VALUES
+(1, 'joelderrik@gmail.com', 'joelderrik@gmail.com', 'joelderrik@gmail.com', 'joelderrik@gmail.com', 1, '5yjd1f1k3e88osokk0wo8wccso04gsw', '7+Bp/S7kwDZYvgelj8GgdNGKi1Adwaymbpb05C4M/HpNlvVQa0N2GVXnMeVxUpw+03jdHhzmbtmZngqgrWQtZg==', '2018-10-16 21:06:38','kOAUvpu-WIIdaC2tqO-af1neHxPzwXudKCM7bJwT_Xk', NULL, 'a:1:{i:0;s:10:\"ROLE_ADMIN\";}', 658745893, 'NOUMIA', 'KEWOU', 4, 0, 1),
 
+(3, 'kewou.noumia@gmail.com', 'kewou.noumia@gmail.com', 'kewou.noumia@gmail.com', 'kewou.noumia@gmail.com', 1, 'pild664lglcw8kc0g84o8wgokcw0kgs', 'Thtu+44VB8kPWm1G79iL74ubNZ+YE96MFEO7cbBkj+PTJ7nxgf73dJG31I9eUZN4AQMR/ck6p6m3guucETwj1Q==', '2018-07-27 08:19:13','02waTfxz2Wc0RzkBoNnXvzhlvp0OSV7iN8bG4jyjnAw', NULL, 'a:1:{i:0;s:16:\"ROLE_SUPER_ADMIN\";}', 782651265, 'test', 'test', 0, 0, 1),
 
-CREATE USER 'dev'@'localhost' IDENTIFIED BY 'dev';
-GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP ON *.* TO 'dev'@'localhost';
+(4, 'joel.noumia@gfi.fr', 'joel.noumia@gfi.fr', 'joel.noumia@gfi.fr', 'joel.noumia@gfi.fr', 1, 'jk08wzu2y7co84gc0ks4g4cw00kk4o4', '5Ud7xZEXGOOeebijUc7+bd5WWNx6VRds0vpdMQ9/EoahjXDmo7OI2ycBmYg4te+eSX2VvBcNywGs5z6KC03AQQ==', '2018-07-24 11:05:24','KZTgx_xZ0S_bAPk5yzZYLtG8PMkHgv-mj23onQN8xLk', NULL, 'a:0:{}', 748565265, 'toto', 'toto', 50, 0, 1),
 
---
--- Déchargement des données de la table `reservation`
---
+(5, 'joel.noumia@adventiel.fr', 'joel.noumia@adventiel.fr', 'joel.noumia@adventiel.fr', 'joel.noumia@adventiel.fr', 1, 'ptjf4ze8c3kwsocogwc4g0og8kgcsog', 'nKvyu9RmE+X1g+Er8JQLDVaJ3xODD4JM/+SKPOrygs7glFPyqsRAadKv5QsyHnHzp5KCkuGHVMppDdvm0zngrA==', '2018-09-12 11:19:15', 'fiAS3JIiH0wzPRmdxG00Ocse5Gyy0YpE52A_0aYQBoM', NULL, 'a:0:{}', 684781541, 'User 2', 'sbeezy', 94, 0, 1),
+
+(6, 'djodjoman@yahoo.fr', 'djodjoman@yahoo.fr', 'djodjoman@yahoo.fr', 'djodjoman@yahoo.fr', 1, 'joltaxb8zo08gsow4wsw8o8ocwog00w', 'PetwFpTwW6ROSOnYcWMAy12xI5jN5H/WH/+44j7BC3VyyuiGVwwcsfhqokuHD9yrdKvWDZYI9d6gILQsSCUb5w==', '2018-10-16 07:57:55','cZ4kJA9T6MStct_NJKpjTdR7P35jYxVtMZOSQA_8dhc', NULL, 'a:0:{}',745295145, 'Ashur', 'user', 79, 0, 1),
+
+(7, 'damailas@hotmail.com', 'damailas@hotmail.com', 'damailas@hotmail.com', 'damailas@hotmail.com', 1, 'qf4n6u23on40c8ow4g8wscs88w0kog0', '5Cb1h+jZ9gYazn4f8DfYzMaIPDcDfFlKg+C3on0t7IXtNaRrIbH1xJunPTvyUzv2J4fEzammpJkjjIG6Cs8l6g==', '2018-09-22 12:52:12', 'dlt4vXM_uTAUkH89fWM_XWNxw5HY9MTlkjJu-YkC0lw', NULL, 'a:0:{}',624573985, 'AHMED-ELIE', 'Assita', 190, 0, 1);
+
 
 INSERT INTO `reservation` (`id`, `client_id`, `dateReservation`, `etatReservation`) VALUES
 (48, 6, '2018-08-27 08:00:00', 'Réserver'),
@@ -73,16 +78,4 @@ INSERT INTO `reservation` (`id`, `client_id`, `dateReservation`, `etatReservatio
 (125, 6, '2018-10-18 15:00:00', 'Réserver');
 
 
-
---
--- Déchargement des données de la table `user`
---
-
-INSERT INTO `user` (`id`, `username`, `username_canonical`, `email`, `email_canonical`, `enabled`, `salt`, `password`, `last_login`, `locked`, `expired`, `expires_at`, `confirmation_token`, `password_requested_at`, `roles`, `credentials_expired`, `credentials_expire_at`, `telephone`, `nom`, `prenom`, `solde`, `money`, `moniteur_id`) VALUES
-(1, 'joelderrik@gmail.com', 'joelderrik@gmail.com', 'joelderrik@gmail.com', 'joelderrik@gmail.com', 1, '5yjd1f1k3e88osokk0wo8wccso04gsw', '7+Bp/S7kwDZYvgelj8GgdNGKi1Adwaymbpb05C4M/HpNlvVQa0N2GVXnMeVxUpw+03jdHhzmbtmZngqgrWQtZg==', '2018-10-16 21:06:38', 0, 0, NULL, 'kOAUvpu-WIIdaC2tqO-af1neHxPzwXudKCM7bJwT_Xk', NULL, 'a:1:{i:0;s:10:\"ROLE_ADMIN\";}', 0, NULL, 658745893, 'NOUMIA', 'KEWOU', 4, 0, 1),
-(3, 'kewou.noumia@gmail.com', 'kewou.noumia@gmail.com', 'kewou.noumia@gmail.com', 'kewou.noumia@gmail.com', 1, 'pild664lglcw8kc0g84o8wgokcw0kgs', 'Thtu+44VB8kPWm1G79iL74ubNZ+YE96MFEO7cbBkj+PTJ7nxgf73dJG31I9eUZN4AQMR/ck6p6m3guucETwj1Q==', '2018-07-27 08:19:13', 0, 0, NULL, '02waTfxz2Wc0RzkBoNnXvzhlvp0OSV7iN8bG4jyjnAw', NULL, 'a:1:{i:0;s:16:\"ROLE_SUPER_ADMIN\";}', 0, NULL, 782651265, 'test', 'test', 0, 0, 1),
-(4, 'joel.noumia@gfi.fr', 'joel.noumia@gfi.fr', 'joel.noumia@gfi.fr', 'joel.noumia@gfi.fr', 1, 'jk08wzu2y7co84gc0ks4g4cw00kk4o4', '5Ud7xZEXGOOeebijUc7+bd5WWNx6VRds0vpdMQ9/EoahjXDmo7OI2ycBmYg4te+eSX2VvBcNywGs5z6KC03AQQ==', '2018-07-24 11:05:24', 0, 0, NULL, 'KZTgx_xZ0S_bAPk5yzZYLtG8PMkHgv-mj23onQN8xLk', NULL, 'a:0:{}', 0, NULL, 748565265, 'toto', 'toto', 50, 0, 1),
-(5, 'joel.noumia@adventiel.fr', 'joel.noumia@adventiel.fr', 'joel.noumia@adventiel.fr', 'joel.noumia@adventiel.fr', 1, 'ptjf4ze8c3kwsocogwc4g0og8kgcsog', 'nKvyu9RmE+X1g+Er8JQLDVaJ3xODD4JM/+SKPOrygs7glFPyqsRAadKv5QsyHnHzp5KCkuGHVMppDdvm0zngrA==', '2018-09-12 11:19:15', 0, 0, NULL, 'fiAS3JIiH0wzPRmdxG00Ocse5Gyy0YpE52A_0aYQBoM', NULL, 'a:0:{}', 0, NULL, 684781541, 'User 2', 'sbeezy', 94, 0, 1),
-(6, 'djodjoman@yahoo.fr', 'djodjoman@yahoo.fr', 'djodjoman@yahoo.fr', 'djodjoman@yahoo.fr', 1, 'joltaxb8zo08gsow4wsw8o8ocwog00w', 'PetwFpTwW6ROSOnYcWMAy12xI5jN5H/WH/+44j7BC3VyyuiGVwwcsfhqokuHD9yrdKvWDZYI9d6gILQsSCUb5w==', '2018-10-16 07:57:55', 0, 0, NULL, 'cZ4kJA9T6MStct_NJKpjTdR7P35jYxVtMZOSQA_8dhc', NULL, 'a:0:{}', 0, NULL, 745295145, 'Ashur', 'user', 79, 0, 1),
-(7, 'damailas@hotmail.com', 'damailas@hotmail.com', 'damailas@hotmail.com', 'damailas@hotmail.com', 1, 'qf4n6u23on40c8ow4g8wscs88w0kog0', '5Cb1h+jZ9gYazn4f8DfYzMaIPDcDfFlKg+C3on0t7IXtNaRrIbH1xJunPTvyUzv2J4fEzammpJkjjIG6Cs8l6g==', '2018-09-22 12:52:12', 0, 0, NULL, 'dlt4vXM_uTAUkH89fWM_XWNxw5HY9MTlkjJu-YkC0lw', NULL, 'a:0:{}', 0, NULL, 624573985, 'AHMED-ELIE', 'Assita', 190, 0, 1);
 
