@@ -26,7 +26,7 @@ class UserRepositoryFunctionalTest extends WebTestCase {
     
     public function testAllUsers(){
         // Il ya 6 utilisateurs dans la base de données                              
-        $this->assertCount(6, $this->service->getAllUsers());
+        $this->assertCount(4, $this->service->getAllUsers());
     }
     
     public function testAllMoniteurs(){
