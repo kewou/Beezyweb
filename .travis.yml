@@ -29,11 +29,12 @@ install:
   - composer install
   - cp app/config/parameters.yml.dist app/config/parameters.yml
   - php app/console doctrine:database:create --env=test
-  - php app/console doctrine:schema:create --env=test  
+  - php app/console doctrine:schema:create --env=test 
+  - mysql -u root --password="" < beezyweb_bd.sql
   
 # Run script
 script:
-  - phpunit  tests/UserBundle/DAO/UserTest.php
+  - ./bin/simple-phpunit  -c app
 
 # branche Ok
 branches:
