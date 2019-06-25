@@ -3,7 +3,6 @@
 namespace UserBundle\Tests\Repository;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use UserBundle\Entity\User;
 
 /**
  * Description of UserServiceTest
@@ -25,7 +24,7 @@ class UserRepositoryFunctionalTest extends WebTestCase {
     }    
     
     public function testAllUsers(){
-        // Il ya 6 utilisateurs dans la base de données                              
+        // Il ya 4 utilisateurs dans la base de données                              
         $this->assertCount(4, $this->service->getAllUsers());
     }
     

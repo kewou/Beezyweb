@@ -41,7 +41,7 @@ class BeezyExtension extends AbstractExtension{
         list($nom_jour, $jour, $mois, $annee) = explode('/', date_format($date,("w/d/n/Y")));        
 
         return $nom_jour_fr[$nom_jour].' '. $this->enleveZero($jour).' '.$mois_fr[$mois] . ' '.
-                $this->enleveZero(date_format($date,('H'))) .'h';        
+                $this->enleveZero(date_format($date,('H'))) .'h00';        
     }
     
     public function enleveZero($chaine){

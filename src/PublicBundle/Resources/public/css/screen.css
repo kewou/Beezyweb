@@ -256,7 +256,7 @@ table th {
 }
 
 .annuleResa{
-    margin-left: 15px;
+    margin-left: 25px;
     top: 2px;
     position: relative;
 }
@@ -317,9 +317,9 @@ ul.typeahead a:hover{
 }
 
 .dateResaShow{
-    margin-right: 20px;
+    margin-right: 10px;
     margin-left: 15px;
-    width: 150px;
+    width: 170px;
 }
 
 .idResa{
@@ -399,7 +399,7 @@ ul.typeahead a:hover{
     .dateResaShow{
         font-size:16px;
         margin-right: 0px;
-        width:120px;
+        width:140px;
     }    
     
 

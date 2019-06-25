@@ -7,11 +7,11 @@
 		"psr-4" : {			
 			"UserBundle\\" : "src/UserBundle",
 			"PublicBundle\\" : "src/PublicBundle",
-                        "PriveeBundle\\" : "src/PriveeBundle",
-                        "MoniteurBundle\\" : "src/MoniteurBundle",
-                        "AdminBundle\\" : "src/AdminBundle",
-                        "ReservationBundle\\" : "src/ReservationBundle",
-                        "CalendrierBundle\\" : "src/CalendrierBundle"
+			"PriveeBundle\\" : "src/PriveeBundle",
+			"MoniteurBundle\\" : "src/MoniteurBundle",
+			"AdminBundle\\" : "src/AdminBundle",
+			"ReservationBundle\\" : "src/ReservationBundle",
+			"CalendrierBundle\\" : "src/CalendrierBundle"
 		},
 		"classmap" : [
 			"app/AppKernel.php",

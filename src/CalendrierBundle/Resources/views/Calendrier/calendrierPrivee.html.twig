@@ -9,8 +9,7 @@
         </div>            
             <!-- Menu -->
             {% block menu %}
-                <nav id="nav">
-                    <a href="{{path("Privee_accueil")}}">Accueil</a>
+                <nav id="nav">                    
                     <a href="{{path("fos_user_profile_show")}}">{{firstLetter(user.prenom)}}. {{user.nom}}<img src="{{ asset('bundles/public/assets/css/images/icon_user.png')}}" id="icon_user" alt="icon_user" height="15" width="20"/></a>                    
                     <a href="{{path("fos_user_profile_edit")}}">Paramètres</a>
                     <a href="{{path("fos_user_security_logout")}}"  id="deconnexionBouton">Deconnexion</a>                   
@@ -67,7 +66,9 @@
          
     
     <!-- Pagination -->
-    <script>        
+    <script>   
+        
+
         var date = new Date();
         $(document).ready(function(){            
             $('#nextSevenDay').click(function(){
@@ -87,13 +88,23 @@
                 });                
             });            
                    
-        <!-- Action Réserver -->    
+        <!-- Action Réserver --> 
 
             $("#reserveDate").click(function(){
                 reserver();
-            });          
+            });
+            var $reserveDate = $('#reserveDate').hide();
+            $(document)            
+            .ajaxStart(function() {
+                $reserveDate.show();
+            })
+            .ajaxStop(function() {
+                $reserveDate.hide();
+            });
+            
             
             function reserver(){
+                $('.loader').show();
                 var tabResa = [];
                 var tabControle=[]; 
                 $("input[type='checkbox']:checked").each(function(){
@@ -111,10 +122,12 @@
                         async:false,
                         complete: function(data){                        
                                     if(data["responseText"]!==""){
+                                        $('.loader').hide();
                                         alert(data["responseText"]);
-                                    }else{
+                                    }else{                                        
                                         $.post("{{ (path('Privee_reserver'))}}",{lesResaChoisi:tabResa},
                                             function(data){
+                                                $('.loader').hide();
                                                 $('#calendrier').html(data);
                                         });
 
