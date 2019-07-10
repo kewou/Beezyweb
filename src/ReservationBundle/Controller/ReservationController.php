@@ -37,6 +37,14 @@ class ReservationController extends Controller{
         return new Response("");                              
     }
     
+    function annulerContenuAction(){
+        $request = Request::createFromGlobals();               
+        $idResa= $request->request->get('idResa');
+        $resaService = $this->get('reservation_service');        
+        $resaService->annuleDate($this->getUser(),$idResa);
+        return $this->render("PriveeBundle:Privee:mesResa.html.twig",array('user' => $this->getUser()));
+    }
+    
     function annulerMoniteurAction(){
         $user = $this->getUser();
         $tabDate=$this->getDatesChoisi();

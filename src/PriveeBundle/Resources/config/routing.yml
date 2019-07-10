@@ -24,5 +24,9 @@ Privee_reserver:
     
 Privee_annuler:
     path: /calendrier/annuler
-    defaults: { _controller: ReservationBundle:Reservation:annulerUser }    
+    defaults: { _controller: ReservationBundle:Reservation:annulerUser }
+    
+Privee_annuler_contenu:
+    path: /calendrier/annuler/contenu
+    defaults: { _controller: ReservationBundle:Reservation:annulerContenu }
 

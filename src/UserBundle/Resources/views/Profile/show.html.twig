@@ -76,33 +76,30 @@
             annuler(idResa);
         });
         
-        function annuler(idResa){            
-            $.ajax({
-                type:"POST",
-                url:"{{ (path('Privee_annuler'))}}",
-                data:{idResa:idResa},
-                success: function (data) {                    
-                }
-            });
-        }
-        
-        $(document).ajaxStop(function(){
-            window.location.reload();
-        });
-    </script>
-    
-    <script>
-        $(document).ready(function(){
-          $('.menu-tab').click(function(){              
-            $('.menu-hide').toggleClass('show');
-            $('.menu-tab').toggleClass('active');
-          });
-          $('a').click(function(){
-            $('.menu-hide').removeClass('show');
-            $('.menu-tab').removeClass('active');
-          });
-        });        
-    </script>
+        function annuler(idResa){
+            Swal.fire({
+                title: "Confirmez l'annulation",                                                                
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Retour',
+                confirmButtonText: 'Ok'
+              }).then(result => {
+                  if (result.value) {
+                                  $.ajax({
+                                type:"POST",
+                                url:"{{ (path('Privee_annuler_contenu'))}}",
+                                data:{idResa:idResa},
+                                success: function (data) {
+                                    $("#mesInfosCompte").html(data);
+                                }
+                            });
+                  }else{
+                    return;
+                  }
+              });            
+        }       
+    </script>   
     
     
 
