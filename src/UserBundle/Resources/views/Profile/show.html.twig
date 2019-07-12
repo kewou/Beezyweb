@@ -86,14 +86,18 @@
                 confirmButtonText: 'Ok'
               }).then(result => {
                   if (result.value) {
-                                  $.ajax({
-                                type:"POST",
-                                url:"{{ (path('Privee_annuler_contenu'))}}",
-                                data:{idResa:idResa},
-                                success: function (data) {
-                                    $("#mesInfosCompte").html(data);
-                                }
-                            });
+                        $.ajax({
+                            type:"POST",
+                            url:"{{ (path('Privee_annuler_contenu'))}}",
+                            data:{idResa:idResa},
+                            success: function (data) {
+                                $("#mesInfosCompte").html(data);
+                            }        
+                        });
+                        Swal.fire({
+                            type: 'success',
+                            text: 'Votre annulation a été prise en compte'                                                
+                        })
                   }else{
                     return;
                   }
