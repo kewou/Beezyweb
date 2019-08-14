@@ -7,12 +7,12 @@
         <title>{% block title %}Beezyweb{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-        <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+        <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 
         <style>
             
 
-* {
+*{
   box-sizing: border-box;
 }
 
@@ -117,8 +117,6 @@ input[type=submit] {
                 &copy; NOUMIA KEWOU. All rights reserved. 2015-{{ 'now'|date('Y') }}
             </p>
         </footer>                        
-        
-        <script type="text/javascript" src="{{ asset('bundles/public/bootstrap/js/bootstrap.min.js')}}"></script>
         
         <script type="text/javascript" src="{{ asset('bundles/public/js/toTop/js/easing.js')}}"></script> 
         <script type="text/javascript" src="{{ asset('bundles/public/js/toTop/js/jquery.ui.totop.js')}}"></script>
