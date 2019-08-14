@@ -48,7 +48,7 @@ class User extends BaseUser {
     protected $reservations = null;
     
      /**
-     * @ORM\ManyToOne(targetEntity="EntrepriseBundle\Entity\Entreprise")         
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\Entreprise")         
      */
     protected $entreprise = null;    
 
