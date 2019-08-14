@@ -41,12 +41,18 @@ class User extends BaseUser {
      * @var User 
      */
     protected $moniteur = null;
-
+        
     /**
      * @ORM\OneToMany(targetEntity="ReservationBundle\Entity\Reservation",mappedBy="client")         
      */
     protected $reservations = null;
+    
+     /**
+     * @ORM\ManyToOne(targetEntity="EntrepriseBundle\Entity\Entreprise")         
+     */
+    protected $entreprise = null;    
 
+    
     /**
      * @var integer
      * @ORM\Column(name="telephone", type="integer")
@@ -172,5 +178,13 @@ class User extends BaseUser {
     function setReservations($reservations) {
         $this->reservations = $reservations;
     }
+    
+    function getEntreprise() {
+        return $this->entreprise;
+    }
+
+    function setEntreprise($entreprise) {
+        $this->entreprise = $entreprise;
+    }    
 
 }

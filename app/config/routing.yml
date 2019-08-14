@@ -1,3 +1,7 @@
+entreprise:
+    resource: "@EntrepriseBundle/Resources/config/routing.yml"
+    prefix:   /
+
 calendrier:
     resource: "@CalendrierBundle/Resources/config/routing.yml"
     prefix:   /privee/calendrier

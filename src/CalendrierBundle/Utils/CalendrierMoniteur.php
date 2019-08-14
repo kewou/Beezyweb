@@ -12,9 +12,10 @@ use CalendrierBundle\Utils\AbstractCalendrier;
 class CalendrierMoniteur extends AbstractCalendrier{
     
     private $users;
+    private $moniteur;
     
-    function __construct($reservations,$users) {
-        parent::__construct($reservations);
+    function __construct($reservations,$moniteur,$users) {
+        parent::__construct($reservations,$moniteur);
         $this->users = $users;
     }
     

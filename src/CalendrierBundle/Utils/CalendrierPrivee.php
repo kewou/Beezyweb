@@ -10,13 +10,11 @@ use DateInterval;
  * @author joel
  */
 class CalendrierPrivee extends AbstractCalendrier{
-    
-    private $userProprietaire;
+        
     private static $cal=null;
 
     function __construct($reservations,$userProprietaire) {
-        parent::__construct($reservations); 
-        $this->userProprietaire = $userProprietaire;
+        parent::__construct($reservations,$userProprietaire);         
     }
     
     

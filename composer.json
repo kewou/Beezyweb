@@ -11,7 +11,8 @@
 			"MoniteurBundle\\" : "src/MoniteurBundle",
 			"AdminBundle\\" : "src/AdminBundle",
 			"ReservationBundle\\" : "src/ReservationBundle",
-			"CalendrierBundle\\" : "src/CalendrierBundle"
+			"CalendrierBundle\\" : "src/CalendrierBundle",
+                        "EntrepriseBundle\\" : "src/EntrepriseBundle"
 		},
 		"classmap" : [
 			"app/AppKernel.php",

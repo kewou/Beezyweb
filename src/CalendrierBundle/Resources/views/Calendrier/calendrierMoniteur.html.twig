@@ -251,7 +251,6 @@
                                             function(data){
                                                 $('#calendrier').html(data);
                                         });
-
                                     }
                        }
                     });
@@ -452,6 +451,7 @@ var users= $.parseJSON($.ajax({
     async: false
 }).responseText);
 autocomplete(document.getElementById("myInput"),users);
-$("#myInputautocomplete-list").css("display":"none"); 
+
+/*$("#myInputautocomplete-list").css("display":"none"); */
 </script>
 {% endblock %}

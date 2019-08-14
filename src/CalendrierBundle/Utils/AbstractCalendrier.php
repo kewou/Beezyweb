@@ -16,23 +16,34 @@ abstract class AbstractCalendrier {
     protected $tabHeure;
     protected $tabJour;
     protected $tabMois;
-    protected $reservations;   
+    protected $reservations;
+    protected $userProprietaire;
     
     function __contruct(){
         
     }
 
-    function __construct($reservations) {        
+    function __construct($reservations,$userProprietaire) {        
         $this->reservations = $reservations;        
         $this->dateCourante = new DateTime();
-        $this->tabHeure = array('08h', '09h', '10h', '11h', '14h', '15h', '16h', '17h');
+        $this->userProprietaire = $userProprietaire;        
+        $this->tabHeure = $this->getTabHeure($userProprietaire->getEntreprise()->getTypePlageHoraire());
+        //$this->tabHeure = array('08h', '09h', '10h', '11h', '14h', '15h', '16h', '17h');
         $this->tabJour = array('Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam');
         $this->tabMois = array("", "Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre");
     }
 
     abstract function display();
     
-    abstract function afficheCase($date); 
+    abstract function afficheCase($date);
+    
+    public function getTabHeure($typePlageHoraire){
+        if($typePlageHoraire == 1){
+            return array('08h', '09h', '10h', '11h', '14h', '15h', '16h', '17h');
+        }else if($typePlageHoraire == 2){
+            return array('11h', '12h', '13h', '14h', '15h','16h','17h','18h');
+        }
+    }
 
     
     
@@ -78,9 +89,6 @@ abstract class AbstractCalendrier {
         return $this->dateCourante;
     }
 
-    function getTabHeure() {
-        return $this->tabHeure;
-    }
 
     function getTabJour() {
         return $this->tabJour;
