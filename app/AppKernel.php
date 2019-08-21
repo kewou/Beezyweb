@@ -23,8 +23,7 @@ class AppKernel extends Kernel
             new MoniteurBundle\MoniteurBundle(),
             new AdminBundle\AdminBundle(),
             new ReservationBundle\ReservationBundle(),
-            new CalendrierBundle\CalendrierBundle(),
-            new EntrepriseBundle\EntrepriseBundle(),
+            new CalendrierBundle\CalendrierBundle(),            
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {

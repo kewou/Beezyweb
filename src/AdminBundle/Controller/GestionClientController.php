@@ -3,6 +3,7 @@
 
 namespace AdminBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Description of GestionClientController
@@ -25,7 +26,29 @@ class GestionClientController extends Controller{
         return $this->render('AdminBundle:GestionClient:compteClient.html.twig',array('client' => $client));        
     }
     
-    public function updateSolde($solde){
+    public function infosClientByNomAction(){
+        $request = Request::createFromGlobals();
+        $nomClient = $request->request->get('nom');
+        $userService = $this->get('user_service');
+        $client = $userService->getUserByName($nomClient);
+        return $this->render('AdminBundle:GestionClient:unClient.html.twig',array('user' => $client));
+    }
+    
+    public function removeJetonAction(){
+        $request = Request::createFromGlobals();
+        $nomClient = $request->request->get('nom');
+        $userService = $this->get('user_service');        
+        $client=$userService->removeJeton($nomClient);        
+        return $this->render('AdminBundle:GestionClient:unClient.html.twig',array('user' => $client));
+        
+    }    
+    
+    public function addJetonAction(){
+        $request = Request::createFromGlobals();
+        $nomClient = $request->request->get('nom');
+        $userService = $this->get('user_service');
+        $client=$userService->addJeton($nomClient); 
+        return $this->render('AdminBundle:GestionClient:unClient.html.twig',array('user' => $client));
         
     }
     

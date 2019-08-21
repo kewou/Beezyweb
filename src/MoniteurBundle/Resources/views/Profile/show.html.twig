@@ -29,6 +29,38 @@
             <tr><td>Identité</td><td>{{ user.prenom}} {{ user.nom }}</td></tr>
             <tr><td>Email</td><td>{{ user.email }}</td></tr>
             <tr><td>Téléphone</td><td>0{{ formatPhone(user.telephone) }}</td></tr>
-        </table>      
+        </table>
+        <button type="button"  id='mesClientsMoniteur' class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Mes clients</button></li>
     </div>
+    
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog">    
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>          
+            <h4 class='modal-title' id='myModalLabel'>Entrer le nom d'une personne</h4>
+          </div>
+          <div class="modal-body">
+                <div class="autocomplete" style="width:300px;">
+                  <input id="myInput" type="text" name="nom_client" placeholder="Saisit un nom">                  
+                  <button type="button" id='rechercherClient'class="btn btn-success btn" data-dismiss="modal">Ok</button>                  
+                </div>            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+          </div>
+        </div>      
+      </div>
+    </div>
+            
+    <script>
+
+            $("#rechercherClient").click(function(){
+                var nom = $("#myInput").val();
+                $.post("{{ (path('Moniteur_client'))}}",{nom:nom},function( data ) {
+                    $("#contenu").html(data);
+                });
+            });
+    </script>
 {% endblock contenu %}

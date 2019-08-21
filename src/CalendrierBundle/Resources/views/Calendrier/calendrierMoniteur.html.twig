@@ -74,7 +74,7 @@
         $("#valideDate").css('display','none');
         $("#annuleDate").css('display','none');
         $("#fermeDate").css('display','none');        
-        $("#affecteModal").css('display','none');
+        $("#affecteModal").css('display','none');        
         $(document).on('change',"input[type='checkbox']",function(){                                 
             if(this.checked) {                    
                 if(this.className==="fermer"){
@@ -139,7 +139,7 @@
                 fermer();
             });
             
-            $("#affecteDate").click(function(){
+            $("#affecteDate").click(function(){                
                 affecter();
             });
             
@@ -223,7 +223,7 @@
                 var tabControle= [];
             }
             
-            function affecter(){                
+            function affecter(){           
                 var tabResa = [];
                 var tabControle=[]; 
                 $("input[type='checkbox']:checked").each(function(){
@@ -452,6 +452,5 @@ var users= $.parseJSON($.ajax({
 }).responseText);
 autocomplete(document.getElementById("myInput"),users);
 
-/*$("#myInputautocomplete-list").css("display":"none"); */
 </script>
 {% endblock %}

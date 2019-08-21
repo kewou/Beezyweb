@@ -47,6 +47,16 @@ body{
 	background:url(../js/toTop/img/ui.totop.png) no-repeat left top;
 }
 
+#retourProfilMoniteur{
+    margin-left:10%;
+    margin-top:45px;
+}
+
+#mesClientsMoniteur{
+    margin-left:10%;
+    margin-top:10%;   
+}
+
 /* Calendrier*/
 .dispo{
 	color:black;
@@ -121,14 +131,7 @@ body{
   background-image: linear-gradient(to bottom, #3d9dd1, #5087c2);
 }
 
-.fermer{
-  background: #db1c1c;
-  background-image: -webkit-linear-gradient(top, #db1c1c, #eb2c46);
-  background-image: -moz-linear-gradient(top, #db1c1c, #eb2c46);
-  background-image: -ms-linear-gradient(top, #db1c1c, #eb2c46);
-  background-image: -o-linear-gradient(top, #db1c1c, #eb2c46);
-  background-image: linear-gradient(to bottom, #db1c1c, #eb2c46);
-}
+
 
 
 .resevEnCours{
@@ -156,7 +159,7 @@ body{
 	color:black;
 }
 .fermer{
-    background-color:red;
+    background-color:black;
     color:white;
 }
 .valider{    

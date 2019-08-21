@@ -51,6 +51,21 @@ class UserService {
         return $this->entityManager->getRepository('UserBundle:User')->findReservations($idUser);
     }
     
+    
+    public function removeJeton($nom){
+       $user=$this->getUserByName($nom);
+       $user->setSolde($user->getSolde()-1);
+       $this->entityManager->flush();
+       return $user;
+    }
+    
+    public function addJeton($nom){
+       $user=$this->getUserByName($nom);
+       $user->setSolde($user->getSolde()+1);
+       $this->entityManager->flush();
+       return $user;
+    }
+    
     public function affecteMoniteurDefault($user){
         $moniteur=$this->getUser(1);
         $user->setMoniteur($moniteur);        

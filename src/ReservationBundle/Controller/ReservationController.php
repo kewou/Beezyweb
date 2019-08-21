@@ -53,7 +53,7 @@ class ReservationController extends Controller{
         $resaService->annuleDates($this->getUser(),$tabDate);       
         $users = $userService->getAllUsersMoniteur($user->getId());                              
         $reservations = $userService->getAllReservationsFromClient($user->getId());
-        $cal = new CalendrierMoniteur($reservations,$users);                
+        $cal = new CalendrierMoniteur($reservations,$user,$users);                
         return new Response($cal->display());                              
     }
     
@@ -65,7 +65,7 @@ class ReservationController extends Controller{
         $idMonitieur = $this->getUser()->getId();
         $users = $userService->getAllUsersMoniteur($idMonitieur);
         $reservations=$userService->getAllReservationsFromMoniteur($idMonitieur);
-        $cal = new CalendrierMoniteur($reservations,$users);
+        $cal = new CalendrierMoniteur($reservations,$this->getUser(),$users);
         return new Response($cal->display());                  
     }
     

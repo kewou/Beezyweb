@@ -3,18 +3,20 @@
         <ul>            
             {% set iter=1 %} 
             {% for resa in user.reservations %}               
-                {% if resa.dateReservation > date() %}                                                      
-                <li class="idResa">                    
-                    {% if resa.etatReservation=="Valider" %}
-                       <p class="numResaValider">{{iter}}</p>
-                    {% else %}
-                        <p class="numResaReserver">{{iter}}</p>
-                    {% endif %}
+                {% if resa.dateReservation > date() %}
+                    {% if resa.etatReservation!="Fermer" %} 
+                        <li class="idResa">                    
+                            {% if resa.etatReservation=="Valider" %}
+                               <p class="numResaValider">{{iter}}</p>
+                            {% else %}
+                                <p class="numResaReserver">{{iter}}</p>
+                            {% endif %}
 
-                    <p class="dateResaShow">{{ fortmatDate(resa.dateReservation)}} </p>
-                    <a class="annuleResa" id="{{resa.id}}"><img src="{{ asset('bundles/public/assets/css/images/cancel.jpg')}}" alt="Annuler" title="Annuler" height="20" width="20"/></a></td>
-                </li>
-                    {% set iter=iter + 1 %}                                                        
+                            <p class="dateResaShow">{{ fortmatDate(resa.dateReservation)}} </p>
+                            <a class="annuleResa" id="{{resa.id}}"><img src="{{ asset('bundles/public/assets/css/images/cancel.jpg')}}" alt="Annuler" title="Annuler" height="20" width="20"/></a></td>
+                        </li>
+                    {% set iter=iter + 1 %}
+                    {% endif %}
                 {% endif %}
             {% endfor %}
             {% if iter==1 %}

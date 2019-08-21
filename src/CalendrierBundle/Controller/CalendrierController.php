@@ -81,7 +81,7 @@ class CalendrierController extends Controller{
         $idMonitieur = $this->getUser()->getId();
         $users = $userService->getAllUsersMoniteur($idMonitieur);
         $reservations=$userService->getAllReservationsFromMoniteur($idMonitieur);
-        $cal = new CalendrierMoniteur($reservations,$users);
+        $cal = new CalendrierMoniteur($reservations,$this->getUser(),$users);
         $cal->setDateCourante($datePivot);
         return new Response($cal->display());
     }    
