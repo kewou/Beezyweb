@@ -3902,6 +3902,10 @@
                         footer p{
                             font-size:14px;
                         }
+                        
+                        #page-wrapper{
+                            min-height: 522px;
+                        }
 
 		/* Goto Next */
 
