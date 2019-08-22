@@ -3634,7 +3634,7 @@
             -moz-background-size: cover;
             -o-background-size: cover;
             background-size: cover;
-            min-height: 641px;
+            min-height: 573px;
         }
 
 /* Footer */
@@ -3900,7 +3900,7 @@
 				margin: 0 0 2em 0;
 			}
                         footer p{
-                            font-size:15px;
+                            font-size:14px;
                         }
 
 		/* Goto Next */
