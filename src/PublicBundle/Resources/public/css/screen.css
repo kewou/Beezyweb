@@ -324,20 +324,18 @@ ul.typeahead a:hover{
     background-color: #4169E1;
     text-align: center;
     color:white;
-    margin-right: 20px;
 }
 
 .numResaValider{
     width: 35px;
     background-color: #90EE90;
-    text-align: center;
-    margin-right: 20px;
+    text-align: center;    
 }
 
 .dateResaShow{
     margin-right: 10px;
     margin-left: 15px;
-    width: 170px;
+    width: 175px;
 }
 
 .idResa{
@@ -388,7 +386,7 @@ ul.typeahead a:hover{
     /* profil version téléphone */
     
     .container{
-        margin:0px;
+        padding:0px;
     }
     #mesInfosCompte{
         width:100%;

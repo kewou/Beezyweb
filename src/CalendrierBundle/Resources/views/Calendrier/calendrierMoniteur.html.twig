@@ -160,7 +160,10 @@
                 controleCaseMemeEtat(tabControle);
                 // Ajouter confirmation action 
                 if(tabControle.length !==0){
-                    alert(tabControle[0]);                    
+                    Swal.fire({
+                        type: 'error',
+                        text: tabControle[0]
+                    });                   
                     $('#myModal').modal('hide');
                 }else{
                     $.ajax({
@@ -170,7 +173,10 @@
                         async:false,
                         complete: function(data){                        
                                     if(data["responseText"]!==""){
-                                        alert(data["responseText"]);
+                                        Swal.fire({
+                                            type: 'error',
+                                            text: data["responseText"]
+                                        });
                                     }else{
                                         $.post("{{ (path('Moniteur_valider'))}}",{lesResaChoisi:tabResa},
                                             function(data){
@@ -198,7 +204,10 @@
                 controleCaseMemeEtat(tabControle);
                 // Ajouter confirmation action
                 if(tabControle.length !==0){
-                    alert(tabControle[0]);
+                    Swal.fire({
+                        type: 'error',
+                        text: tabControle[0]
+                    });
                 }else{
                     $.ajax({
                         type:"POST",
@@ -207,7 +216,10 @@
                         async:false,
                         complete: function(data){                        
                                     if(data["responseText"]!==""){
-                                        alert(data["responseText"]);
+                                          Swal.fire({
+                                            type: 'error',
+                                            text: data["responseText"]
+                                        });
                                     }else{
                                         $.post("{{ (path('Moniteur_fermer'))}}",{lesResaChoisi:tabResa},
                                             function(data){
@@ -235,7 +247,10 @@
                 // Ajouter confirmation action
                 controleCaseMemeEtat(tabControle);
                 if(tabControle.length !==0){                                        
-                    alert(tabControle[0]);
+                    Swal.fire({
+                        type: 'error',
+                        text: tabControle[0]
+                    });
                 }else{
                     var nom=$("#myInput").val();
                     $.ajax({
@@ -245,7 +260,10 @@
                         async:false,
                         complete: function(data){                        
                                     if(data["responseText"]!==""){
-                                        alert(data["responseText"]);
+                                        Swal.fire({
+                                            type: 'error',
+                                            text: data["responseText"]
+                                        });
                                     }else{
                                         $.post("{{ (path('Moniteur_affecter'))}}",{lesResaChoisi:tabResa,nom:nom},
                                             function(data){
@@ -272,7 +290,10 @@
                 // Ajouter confirmation action
                 controleCaseMemeEtat(tabControle);
                 if(tabControle.length !==0){
-                    alert(tabControle[0]);
+                    Swal.fire({
+                        type: 'error',
+                        text: tabControle[0]
+                    });
                 }else{
                     $.ajax({
                         type:"POST",
@@ -281,7 +302,10 @@
                         async:false,
                         complete: function(data){                        
                                     if(data["responseText"]!==""){
-                                        alert(data["responseText"]);
+                                        Swal.fire({
+                                            type: 'error',
+                                            text: data["responseText"]
+                                        });
                                     }else{
                                         $.post("{{ (path('Moniteur_annuler'))}}",{lesResaChoisi:tabResa},
                                             function(data){
