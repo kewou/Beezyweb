@@ -4,6 +4,7 @@ namespace PriveeBundle\Twig;
 
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
+use DateTime;
 
 
 
@@ -19,6 +20,7 @@ class BeezyExtension extends AbstractExtension{
             new TwigFunction('formatPhone', array($this, 'formatNumberPhone')),
             new TwigFunction('firstLetter', array($this, 'firstLetterOfChaine')),
             new TwigFunction('fortmatDate', array($this, 'formatDateInFrench')),
+			new TwigFunction('triTableauDate', array($this ,'sortReservations')),			
         );
     }
     
@@ -35,8 +37,8 @@ class BeezyExtension extends AbstractExtension{
     
     public function formatDateInFrench($date){
         $nom_jour_fr = array("Dimanche", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam");
-        $mois_fr = Array("", "janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", 
-                "septembre", "octobre", "novembre", "décembre");
+        $mois_fr = Array("", "janv.", "févr.", "mars", "avril", "mai", "juin", "juill.", "août", 
+                "sept.", "octo.", "novem.", "décem.");
         // on extrait la date du jour
         list($nom_jour, $jour, $mois, $annee) = explode('/', date_format($date,("w/d/n/Y")));        
 
@@ -50,4 +52,19 @@ class BeezyExtension extends AbstractExtension{
         }
         return $chaine;
     }
+
+	
+    public function sortReservations($tabResa){
+		foreach($tabResa as $key => $resa){			
+			if($resa->getEtatReservation()=="Fermer" or $resa->getDateReservation() < new DateTime('now')){				
+				unset($tabResa[$key]);
+			}			
+		}
+		return $tabResa;
+    }
+	
+
+	
+
+	
 }

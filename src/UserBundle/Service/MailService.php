@@ -10,20 +10,18 @@ namespace UserBundle\Service;
  */
 class MailService {
     
-    private $mailer;
+    //private $mailer;
     
+	/*
     public function __construct(\Swift_Mailer $mailer) {
         $this->mailer = $mailer;        
-    }
+    }*/
     
-    public function sendMail($from,$to,$body,$subject){
-        $message = ( new \Swift_Message())
-            ->setFrom($from)
-            ->setTo($to)
-            ->setSubject($subject)    
-            ->setBody($body);
-        
-        $this->mailer->send($message);
+    public function receiveMessageContact($subject,$message,$from){
+		$headers = 'From:' . $from  . "\r\n" .
+		'Reply-To: ' . $from . "\r\n" .
+		'X-Mailer: PHP/' . phpversion();
+        mail('beezyweb.net@beezyweb.net', $subject, $message, $headers);                
     }
     
 

@@ -1,3 +1,84 @@
+{
+  box-sizing: border-box;
+}
+
+body {
+  font: 16px Arial;  
+}
+
+#iciLink{
+	color:yellow;
+	text-decoration:underline;
+}
+
+.autocomplete {
+  /*the container must be positioned relative:*/
+  position: relative;
+  display: inline-block;
+}
+msg
+
+input[type=submit] {
+  background-color: DodgerBlue;
+  color: #fff;
+  cursor: pointer;
+}
+
+.autocomplete-items {
+    display:block;
+}
+
+.depth-0:hover{
+    color:gray;
+    background-color: white;
+}
+
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: bisque; 
+  border-bottom: 1px solid #d4d4d4; 
+}
+
+.autocomplete-items div:hover {
+  /*when hovering an item:*/
+  background-color: #e9e9e9; 
+}
+
+.autocomplete-active {
+  /*when navigating through the items using the arrow keys:*/
+  background-color: DodgerBlue !important; 
+  color: #ffffff; 
+}
+
+
+
+
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
 .loader {
     display:    none;
     position:   fixed;
@@ -99,7 +180,7 @@ body{
 
 .pagination{
     padding: 0px;
-    margin-left: 14%;
+    margin-left: 20%;
     margin-bottom: -18px;
 }
 
@@ -249,14 +330,12 @@ body{
 }
 
 #mesInfosCompte ul li{
-    list-style-type: none;
+list-style-type: none;
 }
 
 #mesInfosCompte p{
-    display:inline-block
+display:inline-block
 }
-
-
 
 table tbody tr {
     border: solid 1px;
@@ -335,7 +414,7 @@ ul.typeahead a:hover{
 .dateResaShow{
     margin-right: 10px;
     margin-left: 15px;
-    width: 175px;
+    width: 180px;
 }
 
 .idResa{
@@ -365,7 +444,7 @@ ul.typeahead a:hover{
 }
 
 #updatePassword input{
-    width:50%;
+    width:240px;;
 }
 
 #updatePassword input[type=submit]{
@@ -374,13 +453,13 @@ ul.typeahead a:hover{
 @media screen and (max-width: 736px) {
     
  #form_parametre p{
-    margin-left: 5px;
-    font-size: 11px;
+    margin-left: 30px;
+    font-size: 12px;
     margin-top: -18px;
 }
 
 #form_parametre p a{
-    color: blue;
+    color: red;
 }
     
     /* profil version téléphone */
@@ -409,13 +488,17 @@ ul.typeahead a:hover{
         margin-top:25px;
     }
     .numResaReserver {
-        margin-right:5px;
+        margin-right:7px;
     }
+	
+    .numResaValider {
+        margin-right:7px;
+    }	
     
     .dateResaShow{
         font-size:16px;
         margin-right: 0px;
-        width:140px;
+        width:177px;
     }    
     
 
@@ -438,6 +521,7 @@ ul.typeahead a:hover{
         width:100%;
         font-size:25px;
     }
+	
     
     #reserveDate{
         background-color: #4169E1;
@@ -448,13 +532,16 @@ ul.typeahead a:hover{
     /* calendrier privee  version telephone */
     
     .pagination {
-        margin-left: 48%;            
+        margin-left: 55%;            
     }
+	
     
     #calendrier th{
-        padding: 0px;
-        font-size:14px;
+        padding: 5px;
+        font-size:20px;		
     }
+	
+
     
     #calendrier p {
         font-size: 9px;        
@@ -473,8 +560,10 @@ ul.typeahead a:hover{
     }
     
     table td{
-        width:auto;
+        width:46px;
     }
+	
+
     
     /* calendrier moniteur  version telephone */
     
@@ -485,5 +574,7 @@ ul.typeahead a:hover{
     .annuleResa {    
         margin-right:10px;
     }
+	
+
         
 }

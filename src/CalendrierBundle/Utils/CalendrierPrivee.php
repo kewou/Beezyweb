@@ -31,16 +31,16 @@ class CalendrierPrivee extends AbstractCalendrier{
                 $estDispo=false;
                 if($resa['etatReservation']=="Réserver"){
                     if($this->getUserProprio()->getId()==$resa['client_id']){
-                        echo "<td class='reserver'><p class='reserver'>".$this->userProprietaire->getNom()."<p></td>";
+                        echo "<td class='reserver'><p class='reserver'>".$this->formatName($this->userProprietaire->getNom())."<p></td>";
                         break;
                     }else{
-                        echo "<td class='indispo'>Réservé</td>";
+                        echo "<td class='indispo'><p>Réservé</p></td>";
                         break;
                     } 
                 }
                 elseif($resa['etatReservation']=="Valider"){                    
                     if($this->getUserProprio()->getId()==$resa['client_id']){
-                        echo "<td class='valider'><p class='valider'>".$this->userProprietaire->getNom()."<p></td>";
+                        echo "<td class='valider'><p class='valider'>".$this->formatName($this->userProprietaire->getNom())."<p></td>";
                         break;
                     }else{
                         echo "<td class='indispo'><p>Réservé</p></td>";
@@ -56,6 +56,14 @@ class CalendrierPrivee extends AbstractCalendrier{
             echo ("<td class='checkCase'><input type='checkbox' value='".$date."' class='libre'/><p>Libre</p></td>");                                                
         }        
     }
+	
+	public function formatName($name){		
+		if(strlen($name) > 6){
+			return strtolower(substr($name,0,6)) . ".";
+		}else{
+			return strtolower($name);
+		}
+	}
     
     public function getUserProprio(){
         return $this->userProprietaire;

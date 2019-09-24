@@ -5,6 +5,7 @@ namespace ReservationBundle\Service;
 use Doctrine\ORM\EntityManager as EM;
 use DateTime;
 use ReservationBundle\Entity\Reservation;
+use UserBundle\Service\MailService as MailService;
 
 /**
  * Description of ReservationService
@@ -14,9 +15,11 @@ use ReservationBundle\Entity\Reservation;
 class ReservationService {
     
     private $entityManager;
+	private $mailService;
     
-    public function __construct(EM $em) {
-        $this->entityManager = $em;        
+    public function __construct(EM $em,MailService $mailService) {
+        $this->entityManager = $em; 
+		$this->mailService = $mailService;
     }
     
     public function reserveDates($client,$tabDate){
@@ -29,7 +32,8 @@ class ReservationService {
             $resa->setDateReservation($dateTime);
             $this->entityManager->persist($resa);            
         }
-        $this->entityManager->flush();
+        $this->entityManager->flush();		
+		
     }
     
     //Par le moniteur
@@ -63,10 +67,9 @@ class ReservationService {
                 $this->entityManager->persist($resa);                
             }
             $client=$this->entityManager->getRepository("UserBundle:User")->findOneById($clientId);
-            // Notifier client
-            //echo($client->getNom()+"");
         }
-        $this->entityManager->flush();        
+        $this->entityManager->flush();
+		$this->notifyValidation($client);
     }
     
     public function affecteDates($client,$tabDate){
@@ -127,4 +130,25 @@ class ReservationService {
         }
         return $tabAssociatifUserResa;
     }
+	
+    public function notifyValidation($client){
+		$message = "Bonjour " . $client->getPrenom() . ",<br>" .
+		"<br>" .
+		"Une de vos réservations vient d'être validé. <br> Veuillez consulter votre calendrier des rendez-vous en cliquant sur le lien suivant : 
+		 https://beezyweb.net/privee/calendrier" ."<br>".
+		"<br>" .
+		"Bien cordialement" . "<br>" .
+		"<br>" .
+		"L'équipe Beezyweb." . "<br>" .
+		"<br>" .
+		"https://beezyweb.net";
+		$subject = 'Reservation validee';
+		$headers = 'From: beezyweb.net@beezyweb.net'  . "\r\n" .
+		'Reply-To: beezyweb.net@beezyweb.net' . "\r\n" .
+		'Content-Type: text/html; charset=\"utf-8"' .
+		'X-Mailer: PHP/' . phpversion();
+        mail($client->getEmail(), $subject, $message, $headers);
+	}
+	
+
 }

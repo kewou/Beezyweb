@@ -68,7 +68,9 @@ class UserService {
     
     public function affecteMoniteurDefault($user){
         $moniteur=$this->getUser(1);
-        $user->setMoniteur($moniteur);        
+		$entreprise=$this->getUser(1)->getEntreprise();
+        $user->setMoniteur($moniteur);
+		$user->setEntreprise($entreprise);
         $this->entityManager->flush();
     }
     
