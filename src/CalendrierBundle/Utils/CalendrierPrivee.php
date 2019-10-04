@@ -59,9 +59,10 @@ class CalendrierPrivee extends AbstractCalendrier{
 	
 	public function formatName($name){		
 		if(strlen($name) > 6){
-			return strtolower(substr($name,0,6)) . ".";
+			$res= strtolower(substr($name,0,6)) . ".";
+			return ucfirst($res);
 		}else{
-			return strtolower($name);
+			return ucfirst(strtolower($name));
 		}
 	}
     
