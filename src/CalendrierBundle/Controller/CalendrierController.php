@@ -18,7 +18,7 @@ use DateTime;
 class CalendrierController extends Controller{
     
     
-    // Calendrier User
+    // Calendrier Privee
     function calendrierAction(){
         $user = $this->getUser();
         $userService = $this->get('user_service');          
@@ -33,14 +33,28 @@ class CalendrierController extends Controller{
     function calendrierMoniteurAction(){        
         $userService = $this->get('user_service');
         $calendrierService =$this->get('calendrier_service');
-        $idMonitieur = $this->getUser()->getId();
-        $user=$this->getUser();
-        $users = $userService->getAllUsersMoniteur($idMonitieur);
-        $reservations=$userService->getAllReservationsFromMoniteur($idMonitieur);
+		$user=$this->getUser();
+        $idMoniteur = $user->getId();        
+        $users = $userService->getAllUsersMoniteur($idMoniteur);
+        $reservations=$userService->getAllReservationsFromMoniteur($idMoniteur);
         $cal = new CalendrierMoniteur($reservations,$this->getUser(),$users);
         $cal->setDateCourante($calendrierService->getDatePivot());
-        return $this->render("CalendrierBundle:Calendrier:calendrierMoniteur.html.twig",array('cal'=>$cal,'user'=>$user) );
-    }    
+        return $this->render("CalendrierBundle:Calendrier:calendrierMoniteur.html.twig",array('cal'=>$cal,'user'=>$user,'idMoniteur'=>$idMoniteur) );
+    }
+	
+    // Calendrier Admin
+    function calendrierAdminAction($idMoniteur){		
+        $userService = $this->get('user_service');
+        $calendrierService =$this->get('calendrier_service');        
+        $user=$userService->getUser($idMoniteur);
+        $users = $userService->getAllUsersMoniteur($idMoniteur);
+        $reservations=$userService->getAllReservationsFromMoniteur($idMoniteur);
+        $cal = new CalendrierMoniteur($reservations,$this->getUser(),$users);
+        $cal->setDateCourante($calendrierService->getDatePivot());
+        return $this->render("CalendrierBundle:Calendrier:calendrierAdmin.html.twig",array('cal'=>$cal,'user'=>$user,'idMoniteur'=>$idMoniteur) );
+    }	
+
+	 
     
     // recharge le contenu du calendrier privee
     function calendrierContenuAction(){

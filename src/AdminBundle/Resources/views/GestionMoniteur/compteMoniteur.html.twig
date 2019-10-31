@@ -9,7 +9,7 @@
         </div>          
             <!-- Menu -->
             {% block menu %}
-                <nav>          
+                <nav id="nav">         
                     <a href="{{path("Admin_accueil")}}">Accueil</a>
                     <a href="{{path("Admin_moniteurs")}}">Moniteurs</a> 
                     <a href="{{path("fos_user_security_logout")}}"  id="deconnexionBouton">Deconnexion</a>                    
@@ -19,5 +19,13 @@
 {% endblock %}
 
 {% block contenu %}
-   {{ moniteur.nom }}  
+        <ul id="mesInfosPerso">
+            <li id="infosValue">
+                <ul>                                               
+                    <li>{{ moniteur.prenom}} {{ moniteur.nom }}  </li>                    
+                    <li>0{{ formatPhone(moniteur.telephone) }}</li>
+					<li><a href="{{path("Admin_moniteur_calendrier",{"idMoniteur":moniteur.id})}}">Calendrier</a>
+                </ul>
+            </li> 
+        </ul>    
 {% endblock contenu %}

@@ -12,6 +12,7 @@ use Doctrine\ORM\EntityManager as EM;
 class UserService {
     
     private $entityManager;
+	private $prixHeureConduite =40;
     
     public function __construct(EM $em) {
         $this->entityManager = $em;        
@@ -21,12 +22,12 @@ class UserService {
         return $this->entityManager->getRepository('UserBundle:User')->findAllUsers();
     }
     
-    public function getAllUsersByFiltre($filtre){
-        return $this->entityManager->getRepository('UserBundle:User')->findAllUsersByFiltre($filtre);
+    public function getAllUsersByFiltre($nomClient){
+        return $this->entityManager->getRepository('UserBundle:User')->findAllUsersByFiltre($nomClient);
     }
     
-    public function getAllMoniteurs(){
-        return $this->entityManager->getRepository('UserBundle:User')->findAllMoniteurs();
+    public function getAllMoniteurs($idEntreprise){
+        return $this->entityManager->getRepository('UserBundle:User')->findAllMoniteurs($idEntreprise);
     }
     
     public function getAllUsersMoniteur($idMoniteur){
@@ -50,21 +51,46 @@ class UserService {
     public function getReservationsByClient($idUser){
         return $this->entityManager->getRepository('UserBundle:User')->findReservations($idUser);
     }
+
+    public function switchMoniteur($user,$moniteur){
+		$user->setMoniteur($moniteur);
+		$this->entityManager->flush();
+	}
     
-    
-    public function removeJeton($nom){
+    public function addArgent($nom,$sommeArgent){
+		$user=$this->getUserByName($nom); 
+		$money=$user->getMoney();
+	   if($money>=0){
+		   $moneyUpdate=$money+$sommeArgent;
+		   $nbJeton = intdiv($moneyUpdate,$this->prixHeureConduite);
+		   $resteArgent = $moneyUpdate % $this->prixHeureConduite;		   
+		   $user->setSolde($user->getSolde()+$nbJeton);
+		   $user->setMoney($resteArgent);	   		   
+		}else{
+			$moneyUpdate=$money+$sommeArgent;
+			// Il rembourse se qu'il devait
+			if($moneyUpdate<=0){
+				$user->setMoney($moneyUpdate);
+			}else{
+			// Il rembourse et il achète des jetons				
+				$nbJeton = intdiv($moneyUpdate,$this->prixHeureConduite);				
+				$resteArgent = $moneyUpdate % $this->prixHeureConduite;				
+				$user->setSolde($user->getSolde()+$nbJeton);
+				$user->setMoney($resteArgent);
+			}
+		}
+		$this->entityManager->flush();
+        return $user;
+    }
+	
+    public function removeArgent($nom,$sommeArgent){
+	   $nbJeton = intdiv($sommeArgent,$this->prixHeureConduite);
        $user=$this->getUserByName($nom);
-       $user->setSolde($user->getSolde()-1);
+       $user->setSolde($user->getSolde()+$nbJeton);
+	   $user->setMoney($user->getMoney()-$sommeArgent);
        $this->entityManager->flush();
        return $user;
-    }
-    
-    public function addJeton($nom){
-       $user=$this->getUserByName($nom);
-       $user->setSolde($user->getSolde()+1);
-       $this->entityManager->flush();
-       return $user;
-    }
+    }	
     
     public function affecteMoniteurDefault($user){
         $moniteur=$this->getUser(1);

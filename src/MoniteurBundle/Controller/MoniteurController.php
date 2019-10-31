@@ -12,7 +12,11 @@ class MoniteurController extends Controller{
     
     public function indexAction(){
         $user = $this->getUser();
-        return $this->render('MoniteurBundle:Moniteur:index.html.twig',array('user' => $user));
+		if($user->hasRole('ROLE_SUPER_ADMIN')){
+			return $this->redirectToRoute('Admin_accueil');
+		}else{
+			return $this->render('MoniteurBundle:Moniteur:index.html.twig',array('user' => $user));
+		}
     }
 }
 

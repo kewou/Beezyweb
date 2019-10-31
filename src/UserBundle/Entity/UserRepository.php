@@ -25,10 +25,10 @@ class UserRepository extends EntityRepository{
     /**
      * @Secure(roles="ROLE_SUPER_ADMIN")
      */
-    public function findAllUsersByFiltre($filtre){       
-        $query = "SELECT * FROM user U where U.roles not like '%ROLE_ADMIN%' AND U.roles not like '%SUPER_ADMIN%' AND U.nom like :filtre";
+    public function findAllUsersByFiltre($nomClient){		
+        $query = "SELECT * FROM user U where U.roles not like '%ROLE_ADMIN%' AND U.roles not like '%SUPER_ADMIN%' AND U.nom like :filtre";		                  
         $statement = $this->getEntityManager()->getConnection()->prepare($query);
-        $statement->bindValue('filtre', '%'.$filtre.'%');
+        $statement->bindValue('filtre', '%'.$nomClient.'%');		
         $statement->execute();        
         return $statement->fetchAll();
     }    
@@ -36,9 +36,11 @@ class UserRepository extends EntityRepository{
     /**
      * @Secure(roles="ROLE_SUPER_ADMIN")
      */
-    public function findAllMoniteurs(){
-        $query = "SELECT * FROM user U where U.roles like '%ROLE_ADMIN%'";
+    public function findAllMoniteurs($idEntreprise){		
+        $query = "SELECT * FROM user U where U.entreprise_id =:idEntreprise AND (U.roles like '%ROLE_SUPER_ADMIN%' 
+		          or U.roles like '%ROLE_ADMIN%') ";
         $statement = $this->getEntityManager()->getConnection()->prepare($query);
+		$statement->bindValue('idEntreprise', $idEntreprise);
         $statement->execute();
         return $statement->fetchAll();        
     }   

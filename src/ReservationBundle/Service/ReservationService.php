@@ -97,9 +97,11 @@ class ReservationService {
         $this->entityManager->flush();
     }
     
-    public function disponible($dateString){
+    public function disponible($dateString,$client){
         $date=DateTime::createFromFormat('Y-m-d H:i:s', $dateString);
-        return $this->entityManager->getRepository("ReservationBundle:Reservation")->findOneByDateReservation($date) ==null;
+		$criteres = array('dateReservation' => $date, 'client' => $client);
+		$res=$this->entityManager->getRepository("ReservationBundle:Reservation")->findBy($criteres);		
+        return count($res)==0;
     }
     
     public function getResaByDate($date){

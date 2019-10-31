@@ -32,6 +32,10 @@ class Entreprise {
      * @ORM\Column(name="typePlageHoraire", type="integer", length=255)
      */
     private $typePlageHoraire;
+	
+	function getId(){
+		return $this->id;
+	}
     
    
    function getNom() {

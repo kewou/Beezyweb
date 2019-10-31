@@ -34,18 +34,11 @@ class PublicController extends Controller {
 
         $this->securityContext = $this->container->get('security.context');
 
-    }
-
-   
+    }  
 
     function indexAction(){        
-
         if ($this->container->get('security.context')->isGranted('ROLE_USER')) {            
-
-            return $this->render("PriveeBundle:Privee:index.html.twig",array('user' => $this->getUser()));
-
-            
-
+            return $this->render("PriveeBundle:Privee:index.html.twig",array('user' => $this->getUser()));           
         }else{ 
             return $this->render("PublicBundle:Public:index.html.twig" );
         }

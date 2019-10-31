@@ -8,7 +8,7 @@ Moniteur_calendrier:
     
 Moniteur_calendrier:
     path: /calendrierMoniteurContenu
-    defaults: {_controller: CalendrierBundle:Calendrier:calendrierMoniteurContenu }    
+    defaults: {_controller: CalendrierBundle:Calendrier:calendrierContenu }    
     
 Moniteur_calendrierPagination:
     path: /calendrier/pagination
@@ -48,15 +48,7 @@ fos_moniteur_profile_edit:
     
 Moniteur_client:
     path: /moniteur/fiche-client
-    defaults: { _controller: AdminBundle:GestionClient:infosClientByNom }
-    
-Moniteur_client_add_jeton:
-    path: /moniteur/client/add-jeton
-    defaults: { _controller: AdminBundle:GestionClient:addJeton }  
-    
-Moniteur_client_remove_jeton:
-    path: /moniteur/client/remove-jeton
-    defaults: { _controller: AdminBundle:GestionClient:removeJeton}  
+    defaults: { _controller: AdminBundle:GestionClient:infosClientByNom }    
     
     
 

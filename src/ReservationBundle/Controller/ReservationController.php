@@ -18,8 +18,8 @@ use Symfony\Component\HttpFoundation\Response;
 class ReservationController extends Controller{
     
             
-    function reserverAction(){        
-        $tabDate=$this->getDatesChoisi();
+    function reserverAction(Request $request){        
+        $tabDate=$request->request->get('lesResaChoisi');
         $resaService = $this->get('reservation_service'); 
         $resaService->reserveDates($this->getUser(),$tabDate);       
         $user = $this->getUser();
@@ -29,93 +29,78 @@ class ReservationController extends Controller{
         return new Response($cal->display());                              
     }
     
-    function annulerUserAction(){
-        $request = Request::createFromGlobals();               
+    function annulerUserAction(Request $request){                     
         $idResa= $request->request->get('idResa');
         $resaService = $this->get('reservation_service');        
         $resaService->annuleDate($this->getUser(),$idResa);                            
         return new Response("");                              
     }
     
-    function annulerContenuAction(){
-        $request = Request::createFromGlobals();               
+    function annulerContenuAction(Request $request){                      
         $idResa= $request->request->get('idResa');
         $resaService = $this->get('reservation_service');        
         $resaService->annuleDate($this->getUser(),$idResa);
         return $this->render("PriveeBundle:Privee:mesResa.html.twig",array('user' => $this->getUser()));
     }
     
-    function annulerMoniteurAction(){
-        $user = $this->getUser();
-        $tabDate=$this->getDatesChoisi();
+    function annulerMoniteurAction(Request $request){        
+		$idMoniteur=$this->getMoniteurId($request);
+        $tabDate=$request->request->get('lesResaChoisi');
         $userService = $this->get('user_service'); 
         $resaService = $this->get('reservation_service'); 
         $resaService->annuleDates($this->getUser(),$tabDate);       
-        $users = $userService->getAllUsersMoniteur($user->getId());                              
-        $reservations = $userService->getAllReservationsFromClient($user->getId());
-        $cal = new CalendrierMoniteur($reservations,$user,$users);                
+        $users = $userService->getAllUsersMoniteur($idMoniteur);                              
+        $reservations = $userService->getAllReservationsFromClient($idMoniteur);
+        $cal = new CalendrierMoniteur($reservations,$this->getUser(),$users);                
         return new Response($cal->display());                              
     }
     
-    function validerAction(){
-        $tabDate=$this->getDatesChoisi();
+    function validerAction(Request $request){
+        $tabDate=$request->request->get('lesResaChoisi');
         $userService = $this->get('user_service');  
         $resaService = $this->get('reservation_service');        
         $resaService->valideDates($tabDate);
-        $idMonitieur = $this->getUser()->getId();
-        $users = $userService->getAllUsersMoniteur($idMonitieur);
-        $reservations=$userService->getAllReservationsFromMoniteur($idMonitieur);
+        $idMoniteur=$this->getMoniteurId($request);
+        $users = $userService->getAllUsersMoniteur($idMoniteur);
+        $reservations=$userService->getAllReservationsFromMoniteur($idMoniteur);
         $cal = new CalendrierMoniteur($reservations,$this->getUser(),$users);
         return new Response($cal->display());                  
     }
     
-    function fermerAction(){
-        $tabDate=$this->getDatesChoisi();
+    function fermerAction(Request $request){        
+        $idMoniteur=$this->getMoniteurId($request);		
+        $tabDate=$request->request->get('lesResaChoisi');
         $userService = $this->get('user_service');  
         $resaService = $this->get('reservation_service');        
-        $resaService->fermeDates($this->getUser(),$tabDate);
-        $idMonitieur = $this->getUser()->getId();
-        $users = $userService->getAllUsersMoniteur($idMonitieur);
-        $reservations=$userService->getAllReservationsFromMoniteur($idMonitieur);        
-        $users = $userService->getAllUsersMoniteur($idMonitieur);
-        $reservations=$userService->getAllReservationsFromMoniteur($idMonitieur);
+        $resaService->fermeDates($userService->getUser($idMoniteur),$tabDate);				
+        $users = $userService->getAllUsersMoniteur($idMoniteur);
+        $reservations=$userService->getAllReservationsFromMoniteur($idMoniteur);              
         $cal = new CalendrierMoniteur($reservations,$this->getUser(),$users);        
         return new Response($cal->display());        
     }
     
-    function affecterAction(){
-        $request = Request::createFromGlobals();
+    function affecterAction(Request $request){        
+		$idMoniteur=$this->getMoniteurId($request);		
         $tabDate=$request->request->get('lesResaChoisi');
         $nomClient=$request->request->get('nom');
         $userService = $this->get('user_service');  
         $resaService = $this->get('reservation_service');
         $client=$userService->getUserByName($nomClient);
-        $resaService->affecteDates($client,$tabDate);
-        $idMonitieur = $this->getUser()->getId();
-        $users = $userService->getAllUsersMoniteur($idMonitieur);
-        $reservations=$userService->getAllReservationsFromMoniteur($idMonitieur);
+        $resaService->affecteDates($client,$tabDate);        
+        $users = $userService->getAllUsersMoniteur($idMoniteur);		
+        $reservations=$userService->getAllReservationsFromMoniteur($idMoniteur);
         $cal = new CalendrierMoniteur($reservations,$this->getUser(),$users);
         return new Response($cal->display());  
     }  
     
-    private function getDatesChoisi(){
-        $request = Request::createFromGlobals();
-        $tabDate = $request->request->get('lesResaChoisi');
-        return $tabDate;
-        
-    }
-    
-    
-  
-    
-    function  controleReservationAction(){
-        $request = Request::createFromGlobals();
+            
+    function  controleReservationAction(Request $request){        
         $dates = $request->request->get('lesResaChoisi');        
-        $client = $this->getUser();
+        $client = $this->getUser();		
         $tabControle="";
-        $resaService = $this->get('reservation_service');
+        $resaService = $this->get('reservation_service'); 
         foreach($dates as $date){
-            if(!$resaService->disponible($date)){
+            if(!$resaService->disponible($date,$client)){
                 $tabControle="Vous avez essayer de choisir une date déja réservée !";
                 return new Response($tabControle);
             }
@@ -135,20 +120,31 @@ class ReservationController extends Controller{
         return new Response($tabControle);
     }
     
-    // Liste nom clients
+    // Liste nom clients par moniteur
     function listeNomClientAction(Request $request){
-        $filtre=$request->query->get('term');                
+        $nomClient=$request->query->get('term'); 
+        $idMoniteur = intval($request->query->get('idMoniteur'));		
         $tabUserDTO=array();
         $userService = $this->get('user_service'); 
-        $users=$userService->getAllUsersByFiltre($filtre);        
+        $users=$userService->getAllUsersByFiltre($nomClient,$idMoniteur);        
         
-        foreach($users as $user){                        
-            array_push($tabUserDTO,$userService->getUserDTO($user));            
+        foreach($users as $user){
+			if($user['moniteur_id'] == $idMoniteur){
+				array_push($tabUserDTO,$userService->getUserDTO($user));
+			}
         }        
         return new JsonResponse($tabUserDTO);
     }
-    
-
-    
-    
+	
+	// Détermine le moniteur pour la construction du calendrier
+	function getMoniteurId($request){
+		$idMoniteur = $request->query->get('idMoniteur');		
+		if($idMoniteur == null){		
+			$idMoniteur = $this->getUser()->getId();		
+		}else{
+			$idMoniteur=intval($idMoniteur);
+		}
+		return $idMoniteur;
+	}
+			   
 }

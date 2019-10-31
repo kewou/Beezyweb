@@ -54,15 +54,17 @@
                     <li>Identité</li>
                     <li>Email</li>
                     <li>Téléphone</li>
+					<li>Moniteur</li>
                 </ul>
             </li>
             <li id="infosValue">
-                <ul>                           
+                <ul>                            
                     <li>{{ user.money}} €  </li>
                     <li>{{ user.solde}}</li>
                     <li>{{ user.prenom}} {{ user.nom }}</li>
                     <li>{{ user.email }}</li>
                     <li>0{{ formatPhone(user.telephone) }}</li>
+					<li>{{user.moniteur.nom}} : 0{{formatPhone(user.moniteur.telephone)}}</li>
                 </ul>
             </li> 
         </ul>      

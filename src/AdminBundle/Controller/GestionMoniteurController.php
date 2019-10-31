@@ -11,8 +11,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class GestionMoniteurController extends Controller {    
     
     public function moniteursAction() {
-        $userService = $this->get('user_service');
-        $moniteurs = $userService->getAllMoniteurs();
+        $userService = $this->get('user_service');		
+        $moniteurs = $userService->getAllMoniteurs($this->getUser()->getEntreprise()->getId());
         return $this->render('AdminBundle:GestionMoniteur:moniteurs.html.twig',array('moniteurs' => $moniteurs));
     }
     

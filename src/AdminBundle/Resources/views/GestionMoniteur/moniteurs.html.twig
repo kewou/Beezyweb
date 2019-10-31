@@ -8,7 +8,7 @@
         </div>          
             <!-- Menu -->
             {% block menu %}
-                <nav>
+                <nav id="nav">	
                     <a href="{{path("Admin_accueil")}}">Accueil</a> 
                     <a href="{{path("fos_user_security_logout")}}"  id="deconnexionBouton">Deconnexion</a>                    
                 </nav>  
@@ -18,10 +18,13 @@
 
 
 {% block contenu %}
-    <h2 class="major">Les moniteurs inscrits</h2>
-    <ul>
+    <h2 id="titreAdmin">Les moniteurs</h2>
+    <ul id="administrationMenu">
         {% for item in moniteurs %}
-            <li><a href="{{path("Admin_moniteur",{"id":item.id})}}">{{item.nom}} {{item.prenom}}</a></li>        
+            <li><form action="{{path("Admin_moniteur",{"id":item.id})}}")}}">
+					<input type="submit" value="{{item.nom}} {{item.prenom}}" />
+				</form>
+			</li>        
         {% endfor %}
     </ul>
  {% endblock contenu %}
