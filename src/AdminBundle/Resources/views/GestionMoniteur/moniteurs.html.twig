@@ -18,15 +18,14 @@
 
 
 {% block contenu %}
-    <h2 id="titreAdmin">Les moniteurs</h2>
-    <ul id="administrationMenu">
-        {% for item in moniteurs %}
-            <li><form action="{{path("Admin_moniteur",{"id":item.id})}}")}}">
-					<input type="submit" value="{{item.nom}} {{item.prenom}}" />
-				</form>
-			</li>        
-        {% endfor %}
-    </ul>
+    <div id="globalAdmin">
+		<h2 id="titreAdmin">Les moniteurs</h2>
+		<div id="administrationMenu">
+			{% for item in moniteurs %}
+				<a href="{{path("Admin_moniteur_calendrier",{"idMoniteur":item.id})}}">{{item.nom}} {{item.prenom}}</a>
+			{% endfor %}
+		</div>
+	</div>
  {% endblock contenu %}
 
 
