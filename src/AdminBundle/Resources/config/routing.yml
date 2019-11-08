@@ -29,7 +29,10 @@ Admin_moniteur_calendrier:
     defaults: {_controller: CalendrierBundle:Calendrier:calendrierAdmin }	
 Admin_client_delete: 
     path: /moniteurs/{id}/supprimer-moniteur
-    defaults: { _controller: AdminBundle:GestionMoniteur:deleteUser }
+    defaults: { _controller: AdminBundle:GestionMoniteur:deleteUser }    
+Admin_controle_switch_moniteur:
+    path: /controle/changement-moniteur
+    defaults: { _controller: AdminBundle:GestionClient:controleSwitchMoniteur }
 Admin_switch_moniteur:
     path: /clients/client/change-moniteur
     defaults: { _controller: AdminBundle:GestionClient:switchMoniteur }

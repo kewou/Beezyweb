@@ -70,28 +70,38 @@ class GestionClientController extends Controller{
         $clients = $userService->getAllUsers();
         return $this->render('AdminBundle:GestionClient:clients.html.twig',array('clients' => $clients));
     }
+    
+    public function controleSwitchMoniteurAction(Request $request){
+        $idUser=$request->request->get('idUser');        
+        $userService = $this->get('user_service');
+        if(sizeof($userService->getReservationsByClient($idUser)) != 0){
+            return new Response("Impossible de changer de moniteur car cet élève a des réservations en cours");
+        }else{
+            return new Response("");
+        }
+    }
 	
-	public function switchMoniteurAction(Request $request){
-		$idMoniteur=$request->request->get('idMoniteur');
-		$idUser=$request->request->get('idUser');
-		$userService = $this->get('user_service');
-		$moniteur=$userService->getUser($idMoniteur);
-		$client=$userService->getUser($idUser);
-		$userService->switchMoniteur($client,$moniteur);
-		$moniteurs = $userService->getAllMoniteurs($this->getUser()->getEntreprise()->getId());
-		return $this->render('AdminBundle:GestionClient:unClientAdmin.html.twig',array('user' => $client,'moniteurs' => $moniteurs));
-	}
-	
-	// Liste tous les clients
-	function rechercheClientAction(Request $request){
-        $nomClient=$request->query->get('term');         	
-        $tabUserDTO=array();
-        $userService = $this->get('user_service'); 
-        $users=$userService->getAllUsersByFiltre($nomClient);        
-        
-        foreach($users as $user){			
-			array_push($tabUserDTO,$userService->getUserDTO($user));			
-        }        
-        return new JsonResponse($tabUserDTO);
-	}
+    public function switchMoniteurAction(Request $request){
+        $idMoniteur=$request->request->get('idMoniteur');
+        $idUser=$request->request->get('idUser');
+        $userService = $this->get('user_service');
+        $moniteur=$userService->getUser($idMoniteur);
+        $client=$userService->getUser($idUser);
+        $userService->switchMoniteur($client,$moniteur);
+        $moniteurs = $userService->getAllMoniteurs($this->getUser()->getEntreprise()->getId());
+        return $this->render('AdminBundle:GestionClient:unClientAdmin.html.twig',array('user' => $client,'moniteurs' => $moniteurs));
+    }
+
+    // Liste tous les clients
+    function rechercheClientAction(Request $request){
+    $nomClient=$request->query->get('term');         	
+    $tabUserDTO=array();
+    $userService = $this->get('user_service'); 
+    $users=$userService->getAllUsersByFiltre($nomClient);        
+
+    foreach($users as $user){			
+        array_push($tabUserDTO,$userService->getUserDTO($user));			
+    }        
+    return new JsonResponse($tabUserDTO);
+    }
 }

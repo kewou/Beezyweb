@@ -44,7 +44,7 @@ class ReservationController extends Controller{
     }
     
     function annulerMoniteurAction(Request $request){        
-		$idMoniteur=$this->getMoniteurId($request);
+	$idMoniteur=$this->getMoniteurId($request);
         $tabDate=$request->request->get('lesResaChoisi');
         $userService = $this->get('user_service'); 
         $resaService = $this->get('reservation_service'); 

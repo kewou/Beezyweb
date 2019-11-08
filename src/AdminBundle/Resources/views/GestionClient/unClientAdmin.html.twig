@@ -43,10 +43,26 @@
  <script>
           $(document).on("click",".moniteurSelected",function(){  
 			var idMoniteur=$(this).attr('id');
-			$.post("{{path('Admin_switch_moniteur')}}",{idMoniteur:idMoniteur,idUser:"{{user.id}}"},function(data){
-				$("#contenu").html(data);
-			}); 
-		});
+                        
+                        $.ajax({
+                            type:"POST",
+                            url:"{{ (path('Admin_controle_switch_moniteur'))}}",
+                            data:{idUser:"{{user.id}}"},                    
+                            async:false,
+                            complete: function(data){                        
+                                if(data["responseText"]!==""){
+                                    Swal.fire({
+                                        icon: 'error',
+                                        text: data["responseText"]
+                                    });
+                                }else{
+                                    $.post("{{path('Admin_switch_moniteur')}}",{idMoniteur:idMoniteur,idUser:"{{user.id}}"},function(data){
+                                            $("#contenu").html(data);
+                                    }); 
+                                }
+                           }
+                        });                                                
+	    });
  </script> 
     
  <script>

@@ -59,7 +59,7 @@
                                     }else{
                                         $.post("{{ (path('Admin_client_admin'))}}",{nom:nom},
                                             function(data){
-                                                $('#calendrier').html(data);
+                                                $('#contenu').html(data);
                                         });
 
                                     }

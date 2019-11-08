@@ -166,28 +166,12 @@
                     });                   
                     $('#myModal').modal('hide');
                 }else{
-                    $.ajax({
-                        type:"POST",
-                        url:"{{ (path('Moniteur_controle_nom_client'))}}",
-                        data:{lesResaChoisi:tabResa},                    
-                        async:false,
-                        complete: function(data){                        
-                                    if(data["responseText"]!==""){
-                                        Swal.fire({
-                                            icon: 'error',
-                                            text: data["responseText"]
-                                        });
-                                    }else{
-                                        $.post("{{ (path('Moniteur_valider',{"idMoniteur":idMoniteur}))}}",{lesResaChoisi:tabResa},
-                                            function(data){
-                                                $('#calendrier').html(data);
-                                        });
 
-                                    }
-                       }
+                    $.post("{{ (path('Moniteur_valider',{"idMoniteur":idMoniteur}))}}",{lesResaChoisi:tabResa},
+                        function(data){
+                            $('#calendrier').html(data);
                     });
                 }
-
                 var tabResa = [];
                 var tabControle= [];
             }
@@ -209,26 +193,11 @@
                         text: tabControle[0]
                     });
                 }else{
-                    $.ajax({
-                        type:"POST",
-                        url:"{{ (path('Moniteur_controle_nom_client'))}}",
-                        data:{lesResaChoisi:tabResa},                    
-                        async:false,
-                        complete: function(data){                        
-                                    if(data["responseText"]!==""){
-                                          Swal.fire({
-                                            icon: 'error',
-                                            text: data["responseText"]
-                                        });
-                                    }else{
-                                        $.post("{{ path('Moniteur_fermer',{"idMoniteur":idMoniteur})}}",{lesResaChoisi:tabResa},
-                                            function(data){
-                                                $('#calendrier').html(data);
-                                        });
- 
-                                    }
-                       }
+                    $.post("{{ path('Moniteur_fermer',{"idMoniteur":idMoniteur})}}",{lesResaChoisi:tabResa},
+                        function(data){
+                            $('#calendrier').html(data);
                     });
+ 
                 }
 
                 var tabResa = [];
@@ -294,28 +263,12 @@
                         icon: 'error',
                         text: tabControle[0]
                     });
-                }else{
-                    $.ajax({
-                        type:"POST",
-                        url:"{{ (path('Moniteur_controle_nom_client'))}}",
-                        data:{lesResaChoisi:tabResa},                    
-                        async:false,
-                        complete: function(data){                        
-                                    if(data["responseText"]!==""){
-                                        Swal.fire({
-                                            icon: 'error',
-                                            text: data["responseText"]
-                                        });
-                                    }else{
-                                        $.post("{{ (path('Moniteur_annuler',{"idMoniteur":idMoniteur}))}}",{lesResaChoisi:tabResa},
-                                            function(data){
-                                                $('#calendrier').html(data);
-                                        });
-
-                                    }
-                       }
-                    });                
-                }
+                }else{                   
+                        $.post("{{ (path('Moniteur_annuler',{"idMoniteur":idMoniteur}))}}",{lesResaChoisi:tabResa},
+                            function(data){
+                                $('#calendrier').html(data);
+                        });                                   
+                }                                                  
                 var tabResa = [];
                 var tabControle= [];
             }                                                            
