@@ -14,9 +14,9 @@ Moniteur_calendrierPagination:
     path: /calendrier/pagination
     defaults: {_controller: CalendrierBundle:Calendrier:paginationMoniteur }
     
-Moniteur_action_controle:
+Moniteur_controle_nom_client:
     path: /calendrier/action/controle
-    defaults: {_controller: ReservationBundle:Reservation:controleActionMoniteur}
+    defaults: {_controller: ReservationBundle:Reservation:controleNomClient}
     
 Moniteur_valider:
     path: /calendrier/moniteur/valider

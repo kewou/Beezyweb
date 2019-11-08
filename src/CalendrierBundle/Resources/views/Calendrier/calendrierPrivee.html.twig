@@ -139,7 +139,7 @@
                 controleReservation(tabResa,tabControle);
                 if(tabControle.length !==0){                    
                     Swal.fire({
-                        type: 'error',
+                        icon: 'error',
                         text: tabControle[0]
                     });
                 }else{
@@ -153,7 +153,7 @@
                                     if(data["responseText"]!==""){
                                         $('.loader').hide();
                                         Swal.fire({
-                                            type: 'error',
+                                            icon: 'error',
                                             text: data["responseText"]
                                         });
                                         $("#reserveDate").css('display','block');
@@ -164,7 +164,7 @@
                                                 $('#calendrier').html(data);
                                         });
                                             Swal.fire({
-                                                type: 'success',
+                                                icon: 'success',
                                                 text: 'Votre réservation a bien été prise en compte!'                                                
                                             })
                                     }

@@ -5,6 +5,7 @@ namespace AdminBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Description of GestionClientController
@@ -35,12 +36,12 @@ class GestionClientController extends Controller{
         return $this->render('AdminBundle:GestionClient:unClient.html.twig',array('user' => $client));
     }
 	
-	public function infosClientByNomAdminAction(Request $request){        
+    public function infosClientByNomAdminAction(Request $request){        
         $nomClient = $request->request->get('nom');
         $userService = $this->get('user_service');
-		$moniteurs = $userService->getAllMoniteurs($this->getUser()->getEntreprise()->getId());
-        $user = $userService->getUserByName($nomClient);
-        return $this->render('AdminBundle:GestionClient:unClientAdmin.html.twig',array('user' => $user,'moniteurs' => $moniteurs));			
+	$moniteurs = $userService->getAllMoniteurs($this->getUser()->getEntreprise()->getId());
+        $user = $userService->getUserByName($nomClient);      
+        return $this->render('AdminBundle:GestionClient:unClientAdmin.html.twig',array('user' => $user,'moniteurs' => $moniteurs));        
     }
 	
 	public function addArgentAction(Request $request){        

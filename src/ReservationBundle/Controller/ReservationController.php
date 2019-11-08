@@ -80,7 +80,7 @@ class ReservationController extends Controller{
     }
     
     function affecterAction(Request $request){        
-		$idMoniteur=$this->getMoniteurId($request);		
+	$idMoniteur=$this->getMoniteurId($request);		
         $tabDate=$request->request->get('lesResaChoisi');
         $nomClient=$request->request->get('nom');
         $userService = $this->get('user_service');  
@@ -115,9 +115,16 @@ class ReservationController extends Controller{
         return new Response($tabControle);
     }
     
-    function controleActionMoniteurAction(){
-        $tabControle="";
-        return new Response($tabControle);
+    function controleNomClientAction(Request $request){        
+        $nomClient = $request->request->get('nom');
+        $userService = $this->get('user_service');
+        $client=$userService->getUserByName($nomClient);
+        if($client==null){
+            $erreur="Erreur sur le nom de l'élève recherché !";
+        }else{
+            $erreur="";
+        }                
+        return new Response($erreur);
     }
     
     // Liste nom clients par moniteur

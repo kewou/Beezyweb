@@ -18,7 +18,7 @@
 
 
 {% block contenu %}    
-	<button type="button"  id='mesClientsMoniteur' class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Rechercher un élève</button>
+	<button type="button"  id='mesClientsMoniteur' class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Rechercher un ï¿½lï¿½ve</button>
      <div class="modal fade" id="myModal" role="dialog">
       <div class="modal-dialog">    
         <!-- Modal content-->
@@ -29,7 +29,7 @@
           </div>
           <div class="modal-body">
                 <div class="autocomplete" style="width:300px;">
-                  <input id="myInput" type="text" name="nom_client" placeholder="Saisir le nom de l'élève" autocomplete=off>                                                    
+                  <input id="myInput" type="text" name="nom_client" placeholder="Saisir le nom de l'ï¿½lï¿½ve" autocomplete=off>                                                    
                 </div>            
           </div>
           <div class="modal-footer">
@@ -44,9 +44,27 @@
 
             $("#rechercherClient").click(function(){
                 var nom = $("#myInput").val();
-                $.post("{{ (path('Admin_client_admin'))}}",{nom:nom},function( data ) {
-                    $("#contenu").html(data);
-                });
+                
+                        $.ajax({
+                        type:"POST",
+                        url:"{{ (path('Moniteur_controle_nom_client'))}}",
+                        data:{nom:nom},                    
+                        async:false,
+                        complete: function(data){                        
+                                    if(data["responseText"]!==""){
+                                        Swal.fire({
+                                            icon: 'error',
+                                            text: data["responseText"]
+                                        });
+                                    }else{
+                                        $.post("{{ (path('Admin_client_admin'))}}",{nom:nom},
+                                            function(data){
+                                                $('#calendrier').html(data);
+                                        });
+
+                                    }
+                       }
+                    });                                 
             });
     </script>	
 	

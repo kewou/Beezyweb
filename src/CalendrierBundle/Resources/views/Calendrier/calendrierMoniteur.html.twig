@@ -161,20 +161,20 @@
                 // Ajouter confirmation action 
                 if(tabControle.length !==0){
                     Swal.fire({
-                        type: 'error',
+                        icon: 'error',
                         text: tabControle[0]
                     });                   
                     $('#myModal').modal('hide');
                 }else{
                     $.ajax({
                         type:"POST",
-                        url:"{{ (path('Moniteur_action_controle'))}}",
+                        url:"{{ (path('Moniteur_controle_nom_client'))}}",
                         data:{lesResaChoisi:tabResa},                    
                         async:false,
                         complete: function(data){                        
                                     if(data["responseText"]!==""){
                                         Swal.fire({
-                                            type: 'error',
+                                            icon: 'error',
                                             text: data["responseText"]
                                         });
                                     }else{
@@ -205,19 +205,19 @@
                 // Ajouter confirmation action
                 if(tabControle.length !==0){
                     Swal.fire({
-                        type: 'error',
+                        icon: 'error',
                         text: tabControle[0]
                     });
                 }else{
                     $.ajax({
                         type:"POST",
-                        url:"{{ (path('Moniteur_action_controle'))}}",
+                        url:"{{ (path('Moniteur_controle_nom_client'))}}",
                         data:{lesResaChoisi:tabResa},                    
                         async:false,
                         complete: function(data){                        
                                     if(data["responseText"]!==""){
                                           Swal.fire({
-                                            type: 'error',
+                                            icon: 'error',
                                             text: data["responseText"]
                                         });
                                     }else{
@@ -248,20 +248,20 @@
                 controleCaseMemeEtat(tabControle);
                 if(tabControle.length !==0){                                        
                     Swal.fire({
-                        type: 'error',
+                        icon: 'error',
                         text: tabControle[0]
                     });
                 }else{
                     var nom=$("#myInput").val();
                     $.ajax({
                         type:"POST",
-                        url:"{{ (path('Moniteur_action_controle'))}}",
-                        data:{lesResaChoisi:tabResa},                    
+                        url:"{{ (path('Moniteur_controle_nom_client'))}}",
+                        data:{lesResaChoisi:tabResa,nom:nom},                    
                         async:false,
                         complete: function(data){                        
                                     if(data["responseText"]!==""){
                                         Swal.fire({
-                                            type: 'error',
+                                            icon: 'error',
                                             text: data["responseText"]
                                         });
                                     }else{
@@ -291,19 +291,19 @@
                 controleCaseMemeEtat(tabControle);
                 if(tabControle.length !==0){
                     Swal.fire({
-                        type: 'error',
+                        icon: 'error',
                         text: tabControle[0]
                     });
                 }else{
                     $.ajax({
                         type:"POST",
-                        url:"{{ (path('Moniteur_action_controle'))}}",
+                        url:"{{ (path('Moniteur_controle_nom_client'))}}",
                         data:{lesResaChoisi:tabResa},                    
                         async:false,
                         complete: function(data){                        
                                     if(data["responseText"]!==""){
                                         Swal.fire({
-                                            type: 'error',
+                                            icon: 'error',
                                             text: data["responseText"]
                                         });
                                     }else{
