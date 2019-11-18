@@ -59,12 +59,16 @@
             </li>
             <li id="infosValue">
                 <ul>                            
-                    <li>{{ user.money}} €  </li>
+                    {% if user.money<0 %}
+                        <tr><td> Solde </td><td id="soldeDecouvert">{{ user.money}} €</td></tr>
+                    {% else %}
+                        <tr><td> Solde </td><td>{{ user.money}}</td></tr>
+                    {% endif %} 
                     <li>{{ user.solde}}</li>
                     <li>{{ user.prenom}} {{ user.nom }}</li>
                     <li>{{ user.email }}</li>
                     <li>0{{ formatPhone(user.telephone) }}</li>
-					<li>{{user.moniteur.nom}} : 0{{formatPhone(user.moniteur.telephone)}}</li>
+		    <li>{{user.moniteur.nom}} : 0{{formatPhone(user.moniteur.telephone)}}</li>
                 </ul>
             </li> 
         </ul>      

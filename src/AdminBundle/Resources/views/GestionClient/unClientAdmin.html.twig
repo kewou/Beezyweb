@@ -3,23 +3,27 @@
         <th id="identiteUser">{{ user.prenom}} {{ user.nom }}</th>                                 
         <tr><td>Email</td><td>{{ user.email }}</td></tr>
         <tr><td>Téléphone</td><td>0{{ formatPhone(user.telephone) }}</td></tr>
-		<tr><td> Solde</td><td>{{ user.money}}</td></tr>
+	{% if user.money<0 %}
+            <tr><td> Solde </td><td id="soldeDecouvert">{{ user.money}} €</td></tr>
+        {% else %}
+            <tr><td> Solde </td><td>{{ user.money}}</td></tr>
+        {% endif %} 
         <tr><td> Jeton (s) </td><td>{{ user.solde}}</td></tr>
         <tr><td> Gestion des jetons </td><td>
-											<div id="handleJeton">
-												<div id="handleSomme">
-													<input type="text" id="sommeArgent" autocomplete=off>
-												</div>
-												<div id="handleAction">
-													<a href="#" id="removeJeton">
-														<img src="{{ asset('bundles/public/assets/css/images/remove_icon.jpg')}}" alt="Enlever" height="20" width="20"/>
-													</a>
-													&nbsp;&nbsp;                                           
-													<a href="#" id="addJeton">
-														<img src="{{ asset('bundles/public/assets/css/images/add_icon.png')}}" alt="Ajouter" height="20" width="20"/>
-													</a>													
-												</div>
-											</div>
+                                            <div id="handleJeton">
+                                                    <div id="handleSomme">
+                                                            <input type="text" id="sommeArgent" autocomplete=off>
+                                                    </div>
+                                                    <div id="handleAction">
+                                                            <a href="#" id="removeJeton">
+                                                                    <img src="{{ asset('bundles/public/assets/css/images/remove_icon.jpg')}}" alt="Enlever" height="20" width="20"/>
+                                                            </a>
+                                                            &nbsp;&nbsp;                                           
+                                                            <a href="#" id="addJeton">
+                                                                    <img src="{{ asset('bundles/public/assets/css/images/add_icon.png')}}" alt="Ajouter" height="20" width="20"/>
+                                                            </a>													
+                                                    </div>
+                                            </div>
                                         </td>                                                
         </tr>
 		<tr><td>Moniteurs</td>

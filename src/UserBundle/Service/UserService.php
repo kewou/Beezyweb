@@ -93,7 +93,7 @@ class UserService {
     }	
     
     public function affecteMoniteurDefault($user){
-        $moniteur=$this->getUser(1);
+        $moniteur=$this->getUser(15);
 		$entreprise=$this->getUser(1)->getEntreprise();
         $user->setMoniteur($moniteur);
 		$user->setEntreprise($entreprise);

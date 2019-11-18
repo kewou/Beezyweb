@@ -34,6 +34,10 @@ input[type=submit] {
     background-color: white;
 }
 
+#soldeDecouvert{
+    color:red;
+}
+
 .autocomplete-items div {
   padding: 10px;
   cursor: pointer;
@@ -592,7 +596,7 @@ ul.typeahead a:hover{
 	}
 
 	#handleAction{
-		width: 35%;
+		width: 40%;
 		float: left;
 		margin-top: 10px;
 		margin-right: 10px;

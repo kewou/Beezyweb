@@ -1,15 +1,15 @@
 <?php
 
-namespace UserBundle\Controller;
+namespace Tests\UserBundle\Controller;
 
-use PHPUnit\Framework\TestCase as TestCase;
-use src\UserBundle\Entity\User;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class DefaultControllerTest extends TestCase {
+
+class DefaultControllerTest extends WebTestCase {
 
     public function testIndex()
     {
-        $user = new User();
+        //$user = new User();
         $client = static::createClient();
 
         $crawler = $client->request('GET', '/');
