@@ -1,0 +1,9 @@
+{% extends "UserBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block contenu %} 
+<p class="msg_info_generale">
+{{ 'resetting.check_email'|trans({'%tokenLifetime%': tokenLifetime})|nl2br }}
+</p>
+{% endblock contenu %} 

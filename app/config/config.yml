@@ -5,6 +5,10 @@ imports:
     - { resource: "@UserBundle/Resources/config/services.yml" }
     - { resource: "@PublicBundle/Resources/config/services.yml" }
     - { resource: "@PriveeBundle/Resources/config/services.yml" }
+    - { resource: "@MoniteurBundle/Resources/config/services.yml" }
+    - { resource: "@AdminBundle/Resources/config/services.yml" }
+    - { resource: "@ReservationBundle/Resources/config/services.yml" }
+    - { resource: "@CalendrierBundle/Resources/config/services.yml" }   
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -93,3 +97,10 @@ fos_user:
     profile:
         form:
             type: autoecole_edition_profil
+            
+assetic:
+    debug:          '%kernel.debug%'
+    use_controller: '%kernel.debug%'
+    filters:
+        cssrewrite: ~            
+            

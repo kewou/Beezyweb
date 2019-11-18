@@ -4,18 +4,14 @@ parameters:
     #parameter_name: value
 
 services:
-    #service_name:
-    #    class: AppBundle\Directory\ClassName
-    #    arguments: ['@another_service_name', 'plain_value', '%parameter_name%']
-
-services:
-    autoecole_utilisateur.form.inscription_type:
-        class: UserBundle\Form\InscriptionType
-        arguments: [%fos_user.model.user.class%]
+    twig.extension.intl:
+        class: Twig_Extensions_Extension_Intl
         tags:
-            - { name: form.type, alias: autoecole_inscription }
-    autoecole_utilisateur.form.editionProfil_type:
-        class: UserBundle\Form\EditionProfilType
-        arguments: [%fos_user.model.user.class%]
+            - { name: twig.extension }
+    app.twig_extension:
+        class: PriveeBundle\Twig\BeezyExtension
+        public: false
         tags:
-            - { name: form.type, alias: autoecole_edition_profil }
+            - { name: twig.extension }
+          
+        

@@ -9,3 +9,7 @@ Public_forum:
 Public_contact:
     pattern: /contact
     defaults: { _controller: PublicBundle:Public:contact }
+    
+Public_mailContat:
+    pattern: /contact/send-mail
+    defaults: { _controller: PublicBundle:Public:mailContact }

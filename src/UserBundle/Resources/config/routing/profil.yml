@@ -1,9 +1,9 @@
 fos_user_profile_show:
-    pattern: /privee/profil
+    pattern: profil
     defaults: { _controller: FOSUserBundle:Profile:show }
     
 fos_user_profile_edit:
-    pattern: /privee/gestion-profil
+    pattern: /gestion-profil
     defaults: { _controller: FOSUserBundle:Profile:edit}
     
     

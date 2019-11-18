@@ -1,0 +1,7 @@
+services:
+    reservation_service:
+        class: ReservationBundle\Service\ReservationService
+        arguments: ["@doctrine.orm.entity_manager","@mail_service"]    
+#    reservation.example:
+#        class: ReservationBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

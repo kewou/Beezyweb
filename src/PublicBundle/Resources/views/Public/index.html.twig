@@ -10,24 +10,29 @@
     <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 {% endblock %}
 
-{% block menu %}
-    <nav id="nav">
-        <ul>
-            <li><a href="{{path("Public_accueil")}}">Accueil</a></li>
-            <li><a href="{{path("fos_user_security_login")}}">Connexion</a></li>
-            <li><a href="{{path("fos_user_registration_register")}}" class="button special">Créer un compte</a></li>
-        </ul>
-    </nav>  
+{% block header %}
+    <header id="header">
+        <div id="div_logo">
+            <h1 id="logo"><a href="{{path("Public_accueil")}}"><img src="{{ asset('bundles/public/assets/css/images/logo.jpg')}}" alt="logo" height="60" width="60"/></a></h1>
+        </div>
+        <!-- Menu -->
+        {% block menu %}
+        <nav id="nav">            
+            <a href="{{path("Public_contact")}}">Contact</a>
+            <a href="{{path("fos_user_security_login")}}">Connexion</a>    
+            <a href="{{path("fos_user_registration_register")}}" id="creerCompte">Créer un compte</a>            
+        </nav>            
+        {% endblock %}        
+    </header>        
 {% endblock %}
 
-{% block contenu %}    
 
-    <h2 class="major">Beezyweb</h2>
-    <p>Planning de réservation en ligne.</p>                        
-    <p><strong>Beezweb</strong> c’est avant tout VOTRE plateforme de gestion des prises de rendez vous entièrement en ligne.
-        Notre volonté ? Un suivi instantané de vos réservations d'heures de conduite en temps et en heure depuis votre espace personnel.														
-        Terminé les appels, texto vers votre agence auto-école pour réserver une heure de conduite.
-        Faite le désormais à l' aide de votre ordinateur,tablette ou smartphone depuis votre canapé.
-    </p>
 
+{% block contenu %}
+    <div>
+        <h2 id="titreAccueil">Beezyweb</h2>    
+        <p id="presBeezyweb">Votre plateforme de prises de rendez-vous entièrement en ligne.</p>
+        <a href="{{path("fos_user_registration_register")}}" id="creerCompteBis">Créer un compte</a>
+    </div>
 {% endblock %}
+

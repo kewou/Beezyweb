@@ -7,7 +7,11 @@
 		"psr-4" : {			
 			"UserBundle\\" : "src/UserBundle",
 			"PublicBundle\\" : "src/PublicBundle",
-                        "PriveeBundle\\" : "src/PriveeBundle"
+			"PriveeBundle\\" : "src/PriveeBundle",
+			"MoniteurBundle\\" : "src/MoniteurBundle",
+			"AdminBundle\\" : "src/AdminBundle",
+			"ReservationBundle\\" : "src/ReservationBundle",
+			"CalendrierBundle\\" : "src/CalendrierBundle"                        
 		},
 		"classmap" : [
 			"app/AppKernel.php",
@@ -20,21 +24,23 @@
 		]
 	},
 	"require" : {
-		"php" : ">=5.3.9",
-		"doctrine/doctrine-bundle" : "~1.4",
-		"doctrine/orm" : "^2.4.8",
-		"friendsofsymfony/user-bundle" : "~2.0",
-		"incenteev/composer-parameter-handler" : "~2.0",
-		"sensio/distribution-bundle" : "~4.0",
-		"sensio/framework-extra-bundle" : "^3.0.2",
-		"symfony/monolog-bundle" : "^3.0.2",
-		"symfony/swiftmailer-bundle" : "~2.3,>=2.3.10",
-		"symfony/symfony" : "2.8.*",
-		"twig/twig" : "^1.0||^2.0"
+		"php": "^5.5.9 || ^7.0",
+		"doctrine/doctrine-bundle": "~1.4",
+		"doctrine/orm": "^2.4.8",
+		"friendsofsymfony/user-bundle": "~2.0@dev",
+		"incenteev/composer-parameter-handler": "~2.0",
+		"sensio/distribution-bundle": "~4.0",
+		"sensio/framework-extra-bundle": "^3.0.2",
+		"symfony/assetic-bundle": "^2.8",
+		"symfony/monolog-bundle": "^3.0.2",
+		"symfony/swiftmailer-bundle": "~2.3,>=2.3.10",
+		"symfony/symfony": "2.8.*",
+		"twig/extensions": "^1.5",
+		"twig/twig": "^1.0||^2.0"
 	},
 	"require-dev" : {
-		"sensio/generator-bundle" : "~3.0",
-		"symfony/phpunit-bridge" : "~2.7"
+		"sensio/generator-bundle": "~3.0",
+		"symfony/phpunit-bridge": "^4.3"
 	},
 	"scripts" : {
 		"symfony-scripts" : [
@@ -49,10 +55,8 @@
 		"post-update-cmd" : "@symfony-scripts"
 	},
 	"config" : {
-		"bin-dir" : "bin",
-		"platform" : {
-			"php" : "5.3.9"
-		},
+                "preferred-install": "dist",
+		"bin-dir" : "bin",		
 		"sort-packages" : true
 	},
 	"extra" : {

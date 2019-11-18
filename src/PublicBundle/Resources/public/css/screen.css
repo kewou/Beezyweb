@@ -1,6 +1,165 @@
+﻿{
+  box-sizing: border-box;
+}
+
+body {
+  font: 16px Arial;  
+}
+
+#iciLink{
+	color:yellow;
+	text-decoration:underline;
+}
+
+.autocomplete {
+  /*the container must be positioned relative:*/
+  position: relative;
+  display: inline-block;
+}
+msg
+
+input[type=submit] {
+  background-color: DodgerBlue;
+  color: #fff;
+  cursor: pointer;
+}
+
+.autocomplete-items {
+    display:block;
+	width:200px;
+}
+
+.depth-0:hover{
+    color:gray;
+    background-color: white;
+}
+
+#soldeDecouvert{
+    color:red;
+}
+
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #5cb85c; 
+  border-bottom: 1px solid #d4d4d4; 
+}
+
+.autocomplete-items div:hover {
+  /*when hovering an item:*/
+  background-color: #e44c65; 
+}
+
+.autocomplete-active {
+  /*when navigating through the items using the arrow keys:*/
+  background-color: DodgerBlue !important; 
+  color: #ffffff; 
+}
+
+#globalAdmin{
+    background-color: white;
+    width: 60%;    
+    margin-left: 20%;
+    min-height: 340px;	
+}
+#titreAdmin{
+	font-size:40px;	
+	margin-left:33%;
+	padding-top:20px;
+}
+
+#administrationMenu{
+	margin-left:36%;
+}
+
+#administrationMenu a{
+	display:block;
+	margin-bottom:10px;
+}
+
+#administrationMenu a:hover{
+	background-color: #e44c65;
+}		
+
+#administrationMenu a{
+background-color: #2F4F4F;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    width: 215px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}	
+
+
+#handleSomme{
+	width: 40%;
+	float: left;
+}
+
+#handleAction{
+	width: 35%;
+	float: left;
+	margin-top: 10px;
+	margin-right: 10px;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: gray;
+  opacity: 1; /* Firefox */
+}
+
+
+
+
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.loader {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 ) 
+                url('http://i.stack.imgur.com/FhHRx.gif') 
+                50% 50% 
+                no-repeat;
+}
+
 body{
     color:black;
 }
+
+
 
 
 
@@ -33,6 +192,23 @@ body{
 	background:url(../js/toTop/img/ui.totop.png) no-repeat left top;
 }
 
+#retourProfilMoniteur{
+    margin-left:10%;
+    margin-top:45px;
+}
+
+#mesClientsMoniteur{
+    margin-left: 10%;
+    margin-top: 5%;
+    margin-bottom: 10%;
+    text-align: center;
+    width: 290px;
+    position: relative;
+    top: 20px;
+    left: 20%;
+    line-height: 35px;
+}
+
 /* Calendrier*/
 .dispo{
 	color:black;
@@ -63,15 +239,39 @@ body{
   background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
   text-decoration: none;
 }
-.valider{
-  background-color:#2E8B57;
-  color:white;
-  cursor:inherit;
+
+#titreCalendrier{
+    color:white;
+    font-size:25px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    margin-top: -5px;
 }
+
+.pagination{
+    padding: 0px;
+    margin-left: 20%;
+    margin-bottom: -18px;
+}
+
+#commandeCalendrier{
+    margin-left: 25%;
+    list-style-type: none;
+    margin-bottom: 0px; 
+}
+
+#commandeCalendrier li{
+    display:inline-block
+}
+
 
 .invalider{
 	background-color:silver;
 	color:black;
+}
+
+.indispo{
+   background-color:silver;   
 }
 
 .affecter{
@@ -83,14 +283,8 @@ body{
   background-image: linear-gradient(to bottom, #3d9dd1, #5087c2);
 }
 
-.fermer{
-  background: #db1c1c;
-  background-image: -webkit-linear-gradient(top, #db1c1c, #eb2c46);
-  background-image: -moz-linear-gradient(top, #db1c1c, #eb2c46);
-  background-image: -ms-linear-gradient(top, #db1c1c, #eb2c46);
-  background-image: -o-linear-gradient(top, #db1c1c, #eb2c46);
-  background-image: linear-gradient(to bottom, #db1c1c, #eb2c46);
-}
+
+
 
 .resevEnCours{
 	background-color:#0258A3;
@@ -105,8 +299,8 @@ body{
 }
 
 .resevEnCoursAdmin{
-	background-color:#4285F4;
-	color:white;	
+    background-color:#4285F4;
+    color:white;	
 }
 
 .heureDisponible{
@@ -116,13 +310,18 @@ body{
 .resevEnCours:hover{
 	color:black;
 }
-.fermee:hover{
-	color:black;
+.fermer{
+    background-color:black;
+    color:white;
 }
-.valider:hover{
-	background-color:#2E8B57;
-	cursor: pointer;
-	color:white;
+.valider{    
+    background-color:#3CB371;
+    color:white;
+}
+
+.reserver{
+    background-color: #4169E1;
+    color:white;
 }
 .invalider:hover{
 	background-color:silver;
@@ -130,42 +329,111 @@ body{
 	cursor: pointer;
 }
 
+#reserveDate{
+    background-color: #4169E1;
+    margin-left:41%;
+}
+
 /* Inscription */
 #block_inscription{    
+}
+
+.checkCase{    
+    background-repeat: no-repeat;
+    background-color:#F5F5DC;    
+}
+
+.checkCase input{
+    display:none;
 }
 
 /* Connexion */
 
 .error{
-	color:#D2691E;
+    color:red;
 }
 
-#formConnection{
-	width:80%;
-	margin-left:20%;
+
+#mesInfosCompte{
+    width:62%;
+    background-color: white;
+    border: 1px solid;
+    padding-left: 20px;
+    padding-right: 20px;
+    color:black;
+    font-size: 20px;
+    margin-left: 15%;
+    border-top: none;
 }
 
-#inscriptionLeft{
-	width:45%;
-	float:left;
-	margin-right:3%;
-}
-#inscriptionRight{
-	width:50%;
-	float:left;
-	margin-left:1%;
+#mesInfosPerso{
+    background-color: white;
+    display:inline-block;
+    width:100%;
 }
 
-#inscriptionBoutton{
-    margin-left: -10%;
+#mesInfosPerso ul li{    
+    border-top: #837680 0.5px;
+    border-style: ridge;
+    padding: 8px;
 }
 
-#rememberBlock{
-    margin-top: 5%;
+#mesInfosCompte h3{    
+    color: #2F4F4F;
+    font-weight: bold;
+    font-family: initial;
+    padding-top:10px;
 }
-#rememberBlock input{
-    width:5px;
+
+#infosKey{
+    width:48%;
+    float:left;
 }
+
+#infosValue{
+    width:48%;
+    float:right;
+}
+
+.clearer{
+    clear:both;
+}
+
+#mesInfosCompte ul li{
+list-style-type: none;
+}
+
+#mesInfosCompte p{
+display:inline-block
+}
+
+table tbody tr {
+    border: solid 1px;
+    border-left: 0;
+    border-right: 0;
+}
+
+
+table th {
+    color: #e44c65;;
+    font-size: 25px;    
+    padding: 0.5em 0.75em 0.75em 0.75em;
+    text-align: center;
+    font-family: fantasy;
+}
+
+.annuleResa{
+    margin-left: 25px;
+    top: 2px;
+    position: relative;
+}
+
+.annuleResa :hover{
+    cursor:pointer
+}
+
+
+
 
 .wrapperDivContenu li{
 	list-style-type:none;
@@ -185,4 +453,257 @@ ul.typeahead a:hover{
 }
 #somme{
 	color: black;
+}
+
+#calendrier table{
+    background-color: white;
+}
+
+#calendrier table td{
+    border: 1px solid ;
+    text-align: center;
+}
+
+#mesResa{
+    margin-left:25%;
+}
+
+.numResaReserver{
+    width: 35px;
+    background-color: #4169E1;
+    text-align: center;
+    color:white;
+}
+
+.numResaValider{
+    width: 35px;
+    background-color: #90EE90;
+    text-align: center;    
+}
+
+.dateResaShow{
+    margin-right: 10px;
+    margin-left: 15px;
+    width: 180px;
+}
+
+.idResa{
+    margin-bottom: 10px;
+}
+
+#mesInfosPerso #infosKey li {
+    color: black;    
+    font-weight: bold;
+    text-align: right;
+}
+
+#mesInfosPerso #infosValue li{
+    color:#2F4F4F;;    
+}
+
+/* update password */
+
+#form_parametre p{
+    margin-left: 24%;
+    font-size: 13px;
+    margin-top: -18px;
+}
+
+#updatePassword{
+    margin-left: 20%;
+}
+
+#updatePassword input{
+    width:240px;;
+}
+
+#updatePassword input[type=submit]{
+    margin-top:10px;
+}
+@media screen and (max-width: 736px) {
+    
+ #form_parametre p{
+    margin-left: 30px;
+    font-size: 12px;
+    margin-top: -18px;
+}
+
+#form_parametre p a{
+    color: red;
+}
+    
+    /* profil version téléphone */
+    
+    .container{
+        padding:0px;
+    }
+    #mesInfosCompte{
+        width:100%;
+        margin:0px;
+        font-size:12px;
+        padding:0px;
+        min-height:395px;
+    }
+    
+    #mesInfosCompte h3{
+        font-size:20px;
+        padding:10px;
+    }
+    
+    #mesResa{
+        margin-left: 15px;
+    }
+    
+    #mesInfosTitre{
+        margin-top:25px;
+    }
+    .numResaReserver {
+        margin-right:7px;
+    }
+	
+    .numResaValider {
+        margin-right:7px;
+    }	
+    
+    .dateResaShow{
+        font-size:16px;
+        margin-right: 0px;
+        width:177px;
+    }    
+    
+
+    
+    /* Mot de pase oublié version téléphone */    
+    .fos_user_resetting_request{
+        margin-top:50px;
+    }
+    .fos_user_resetting_request label{
+        font-size:18px;
+        font-weight: bold;
+    }    
+    .fos_user_resetting_request input{
+        width:300px;
+        margin-top:15px;
+    }
+	
+	#handleSomme{
+		width: 40%;
+		float: left;
+	}
+	
+	#handleSomme input{
+		width: 130px;
+	}
+
+	#handleAction{
+		width: 40%;
+		float: left;
+		margin-top: 10px;
+		margin-right: 10px;
+	}
+	
+	#mesClientsMoniteur {
+		margin-left: 10%;
+		margin-top: 5%;
+		margin-bottom: 10%;
+		text-align: center;
+		width: 245px;
+		position: relative;
+		top: 60px;
+		left: 0%;
+		line-height: 35px;
+	}
+	
+    
+    /* check_email register oublié version téléphone */
+    .msg_info_generale{
+        width:100%;
+        font-size:25px;
+    }
+	
+    
+    #reserveDate{
+        background-color: #4169E1;
+        margin-left:18%;
+        width:75px;
+    }
+    
+    /* calendrier privee  version telephone */
+    
+    .pagination {
+        margin-left: 55%;            
+    }
+	
+    
+    #calendrier th{
+        padding: 5px;
+        font-size:20px;		
+    }
+	
+
+    
+    #calendrier p {
+        font-size: 9px;        
+    }
+    
+    #calendrier td {
+        padding: 0px;        
+    }
+    
+    #calendrier #titreCalendrier{
+        font-size:22px;
+    }
+    
+    .checkCase{
+        line-height: 45px;
+    }
+    
+    table td{
+        width:46px;
+    }
+	
+
+    
+    /* calendrier moniteur  version telephone */
+    
+    #commandeCalendrier button{
+        font-size:10px;
+    }
+    
+    .annuleResa {    
+        margin-right:10px;
+    }
+	
+	/* Administration */
+	
+	#globalAdmin{
+		background-color: white;
+		width: 80%;
+		margin-left: 11%;
+		min-height: 340px;
+	}
+	
+	#titreAdmin{
+		font-size: 30px;
+		margin-left: 18%;
+		padding-top: 20px;
+	}
+
+	#administrationMenu{
+		margin-left:15%;
+	}
+
+	#administrationMenu a{
+		display: block;
+		margin-bottom: 20px;
+		width: 166px;
+		margin-left: 17px;
+	}
+
+	#administrationMenu a:hover{
+		background-color: #e44c65;
+	}
+	
+
+        
 }

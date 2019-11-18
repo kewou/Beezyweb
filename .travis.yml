@@ -1,0 +1,43 @@
+language: php
+
+sudo: false
+# Start mysql service
+services:
+  - mysql
+  
+php:
+  - 7.2
+  #- hhvm # on Trusty only
+  #- nightly
+  
+# Define an environment variable
+env:
+  - SYMFONY_VERSION="2.8.*" DB=mysql
+  
+# Cache composer packages so "composer install" is faster
+cache:
+  directories:
+    - $HOME/.composer/cache/files  
+
+# Update composer
+before-install:
+  - composer self-update
+
+# Install composer dependencies,
+# Create database, schema and fixtures
+install:
+  - composer install
+  - cp app/config/parameters.yml.dist app/config/parameters.yml
+  - php app/console doctrine:database:create --env=test
+  - php app/console doctrine:schema:create --env=test 
+  - mysql -u root symfony < beezyweb_bd.sql
+  
+# Run script
+script:
+  - ./bin/simple-phpunit  -c app
+
+# branche Ok
+branches:
+    only:    
+    - develop
+
