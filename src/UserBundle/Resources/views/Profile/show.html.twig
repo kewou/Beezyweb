@@ -60,9 +60,9 @@
             <li id="infosValue">
                 <ul>                            
                     {% if user.money<0 %}
-                        <tr><td> Solde </td><td id="soldeDecouvert">{{ user.money}} €</td></tr>
+                        <li style="color:red">{{ user.money}} €</li>
                     {% else %}
-                        <tr><td> Solde </td><td>{{ user.money}}</td></tr>
+                        <li>{{ user.money}}</li>
                     {% endif %} 
                     <li>{{ user.solde}}</li>
                     <li>{{ user.prenom}} {{ user.nom }}</li>
@@ -93,7 +93,7 @@
 						/* A faire plustard
 						if(!peutAnnuler){
 						    Swal.fire({
-								type: 'error',
+								icon: 'error',
 								text: 'Votre réservation à été validé, veuillez contacter votre responsable'
 							});
 						}else{	*/					

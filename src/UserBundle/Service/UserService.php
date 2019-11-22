@@ -83,6 +83,20 @@ class UserService {
         return $user;
     }
 	
+    public function removeUnArgent($nom){	   
+       $user=$this->getUserByName($nom);
+       $user->setSolde($user->getSolde()-1);	   
+       $this->entityManager->flush();
+       return $user;
+    }
+
+    public function addUnArgent($nom){	   
+       $user=$this->getUserByName($nom);
+       $user->setSolde($user->getSolde()+1);	   
+       $this->entityManager->flush();
+       return $user;
+    }
+
     public function removeArgent($nom,$sommeArgent){
 	   $nbJeton = intdiv($sommeArgent,$this->prixHeureConduite);
        $user=$this->getUserByName($nom);
@@ -90,7 +104,7 @@ class UserService {
 	   $user->setMoney($user->getMoney()-$sommeArgent);
        $this->entityManager->flush();
        return $user;
-    }	
+    }		
     
     public function affecteMoniteurDefault($user){
         $moniteur=$this->getUser(15);

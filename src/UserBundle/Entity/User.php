@@ -59,6 +59,32 @@ class User extends BaseUser {
         $this->reservations = new ArrayCollection();
 
     }
+    
+    /**
+
+     * @ORM\OneToMany(targetEntity="UserBundle\Entity\User",mappedBy="administrateur")
+
+     * @var User 
+
+     */
+
+    protected $moniteurs = null;
+
+
+
+    /**
+
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User",inversedBy="moniteurs")
+
+     * @var User 
+
+     */
+
+    protected $administrateur = null;  
+    
+  
+    
+    
 
 
 
@@ -376,6 +402,10 @@ class User extends BaseUser {
         $this->entreprise = $entreprise;
 
     }    
+    
+    function getMoniteurs(){
+        return $this->moniteurs;
+    }
 
 
 
