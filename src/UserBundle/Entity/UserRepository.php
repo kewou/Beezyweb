@@ -20,15 +20,17 @@ class UserRepository extends EntityRepository{
         $statement = $this->getEntityManager()->getConnection()->prepare($query);
         $statement->execute();
         return $statement->fetchAll();
-    }
+    }   
     
     /**
      * @Secure(roles="ROLE_SUPER_ADMIN")
      */
-    public function findAllUsersByFiltre($nomClient){		
-        $query = "SELECT * FROM user U where U.roles not like '%ROLE_ADMIN%' AND U.roles not like '%SUPER_ADMIN%' AND U.nom like :filtre";		                  
+    public function findAllUsersByFiltre($nomClient,$idAdmin){		
+        $query = "SELECT * FROM user U where U.roles not like '%ROLE_ADMIN%' AND U.roles not like '%SUPER_ADMIN%' AND U.nom like :filtre AND
+                 U.administrateur_id=:idAdmin";		                  
         $statement = $this->getEntityManager()->getConnection()->prepare($query);
-        $statement->bindValue('filtre', '%'.$nomClient.'%');		
+        $statement->bindValue('filtre', '%'.$nomClient.'%');
+        $statement->bindValue('idAdmin', $idAdmin);
         $statement->execute();        
         return $statement->fetchAll();
     }    

@@ -235,6 +235,14 @@ class User extends BaseUser {
         return $this->moniteur;
 
     }
+    
+    function getAdministrateur(){
+        return $this->administrateur;
+    }
+    
+    function setAdministrateur(User $admin){
+        $this->administrateur=$admin;
+    }
 
 
 

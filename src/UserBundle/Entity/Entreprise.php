@@ -31,19 +31,7 @@ class Entreprise {
      *
      * @ORM\Column(name="typePlageHoraire", type="integer", length=255)
      */
-    private $typePlageHoraire;
-    
-    /**        
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="administrateur")
-     * @ORM\JoinColumn(nullable=false)
-     */	
-    private $boss;
-    
-    
-    function getBoss(){
-        return $this->boss;
-    }
-    
+    private $typePlageHoraire;        
     
     function getId(){
             return $this->id;

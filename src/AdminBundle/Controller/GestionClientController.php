@@ -17,9 +17,9 @@ class GestionClientController extends Controller{
      
         
     public function clientsAction() {
-        $user=$this->getUser();
+        $user=$this->getUser();        
         $userService = $this->get('user_service');
-        $clients = $userService->getAllUsers();
+        $clients = $userService->getAllUsers();        
         return $this->render('AdminBundle:GestionClient:clients.html.twig',array('clients' => $clients,'user' => $user));
     }
         
@@ -111,11 +111,12 @@ class GestionClientController extends Controller{
     }
 
     // Liste tous les clients
-    function rechercheClientAction(Request $request){
-    $nomClient=$request->query->get('term');         	
+    // Fonction utilisé par un administrateur
+    public function rechercheClientAction(Request $request){
+    $nomClient=$request->query->get('term');
     $tabUserDTO=array();
     $userService = $this->get('user_service'); 
-    $users=$userService->getAllUsersByFiltre($nomClient);        
+    $users=$userService->getAllUsersByFiltre($nomClient,$this->getUser()->getId());        
 
     foreach($users as $user){			
         array_push($tabUserDTO,$userService->getUserDTO($user));			

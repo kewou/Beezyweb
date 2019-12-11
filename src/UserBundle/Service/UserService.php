@@ -19,11 +19,11 @@ class UserService {
     }
     
     public function getAllUsers(){
-        return $this->entityManager->getRepository('UserBundle:User')->findAllUsers();
-    }
-    
-    public function getAllUsersByFiltre($nomClient){
-        return $this->entityManager->getRepository('UserBundle:User')->findAllUsersByFiltre($nomClient);
+        return $this->entityManager->getRepository('UserBundle:User')->findAllUsers();        
+    }    
+
+    public function getAllUsersByFiltre($nomClient,$idAdmin){
+        return $this->entityManager->getRepository('UserBundle:User')->findAllUsersByFiltre($nomClient,$idAdmin);
     }
     
     public function getAllMoniteurs($idEntreprise){
@@ -106,11 +106,19 @@ class UserService {
        return $user;
     }		
     
-    public function affecteMoniteurDefault($user){
-        $moniteur=$this->getUser(15);
-		$entreprise=$this->getUser(1)->getEntreprise();
+    public function affecteDefault($user){
+        // Grande Delle
+        if($user->getEntreprise()=="Auto-Ecole Grande Delle"){
+            $moniteur=$this->getUser(15);            
+            $entreprise=$moniteur->getEntreprise();
+        // Mark coiffure
+        }else if($user->getEntreprise()=="Marco Coiffure"){
+            $moniteur=$this->getUser(30);
+            $entreprise=$moniteur->getEntreprise();
+        }        
         $user->setMoniteur($moniteur);
-		$user->setEntreprise($entreprise);
+        $user->setAdministrateur($moniteur);
+	$user->setEntreprise($entreprise);
         $this->entityManager->flush();
     }
     
