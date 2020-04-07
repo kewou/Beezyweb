@@ -74,9 +74,6 @@ abstract class AbstractCalendrier {
                     $dateTemp->add(new DateInterval('P1D'));
                     continue; 
                 }
-                //var_dump($this->getDateCase($heure));
-                // date Case                
-                //$dateCase=$dateTemp->format('Y-m-d ' .substr($heure, 0, -1).':00:00');
                 $dateCase=$dateTemp->format('Y-m-d ' .$this->getDateCase($heure));
                 $this->afficheCase($dateCase);                
                 $dateTemp->add(new DateInterval('P1D'));                

@@ -105,8 +105,7 @@ class ReservationController extends Controller{
             if(!$resaService->disponible($date,$client)){
                 $tabControle="Vous avez essayer de choisir une date déja réservée !";
                 return new Response($tabControle);
-            }
-            $dateNow=date("Y-m-d H:i:s");
+            }            
             if($date < date("Y-m-d H:i:s")){
                 $tabControle="Vous avez essayer de choisir une date déja passée !";
                 return new Response($tabControle);
