@@ -4,6 +4,7 @@ namespace ReservationBundle\Service;
 
 use Doctrine\ORM\EntityManager as EM;
 use DateTime;
+use DateInterval;
 use ReservationBundle\Entity\Reservation;
 use UserBundle\Service\MailService as MailService;
 
@@ -22,16 +23,51 @@ class ReservationService {
 		$this->mailService = $mailService;
     }
     
-    public function reserveDates($client,$tabDate){
+    public function reserveDates($client,$tabDate,$color){
         $client->setSolde($client->getSolde()-sizeof($tabDate));
-        foreach ($tabDate as $dateString){            
-            $dateTime = DateTime::createFromFormat('Y-m-d H:i:s', $dateString);            
-            $resa = new Reservation();
-            $resa->setClient($client);
-            $resa->setEtatReservation("Réserver");
-            $resa->setDateReservation($dateTime);
-            $this->entityManager->persist($resa);            
+        // Réservation Coiffeur
+        if($client->getEntreprise()->getId()==1){
+            if($color=="2"){
+                $dateTime = DateTime::createFromFormat('Y-m-d H:i:s', $tabDate[0]);
+                $resa = new Reservation();
+                $resa->setClient($client);
+                $resa->setEtat("Réserver");
+                $resa->setDateDebut($dateTime);
+                $resa->setDuree(60);
+                $this->entityManager->persist($resa);            
+                $dateTime2= clone $dateTime;
+                $dateTime2->add(new DateInterval('PT30M'));           
+                $resa2 = new Reservation();
+                $resa2->setClient($client);
+                $resa2->setEtat("Réserver");
+                $resa2->setDateDebut($dateTime2);
+                $resa2->setDuree(0);
+                $this->entityManager->persist($resa2);                        
+            }elseif($color==1){
+                $dateTime = DateTime::createFromFormat('Y-m-d H:i:s', $tabDate[0]);
+                $resa = new Reservation();
+                $resa->setClient($client);
+                $resa->setEtat("Réserver");
+                $resa->setDateDebut($dateTime);
+                $resa->setDuree(30);
+                $this->entityManager->persist($resa); 
+            }
         }
+        else{
+            // Résevation Auto-école
+            foreach ($tabDate as $dateString){            
+                $dateTime = DateTime::createFromFormat('Y-m-d H:i:s', $dateString);            
+                $resa = new Reservation();
+                $resa->setClient($client);
+                $resa->setEtat("Réserver");
+                $resa->setDateDebut($dateTime);
+                $dateFin= clone $dateTime;
+                $dateFin->add(new DateInterval('PT1H')); 
+                $resa->setDateFin($dateFin);
+                $this->entityManager->persist($resa);            
+            }            
+        }
+
         $this->entityManager->flush();		
 		
     }
@@ -44,7 +80,7 @@ class ReservationService {
         $client->setSolde($client->getSolde()+sizeof($tabDate));
         foreach ($tabDate as $dateString){            
             $date = DateTime::createFromFormat('Y-m-d H:i:s', $dateString);            
-            $resa = $this->entityManager->getRepository("ReservationBundle:Reservation")->findOneByDateReservation($date);
+            $resa = $this->entityManager->getRepository("ReservationBundle:Reservation")->findOneByDateDebut($date);
             $this->entityManager->remove($resa);            
         }
         $this->entityManager->flush();
@@ -63,23 +99,40 @@ class ReservationService {
         $tabAssociatifUserResa=$this->associeResaEtUser($reservations);        
         foreach($tabAssociatifUserResa as $clientId => $sesResa){
             foreach($sesResa as $resa){                                               
-                $resa->setEtatReservation("Valider"); 
+                $resa->setEtat("Valider"); 
                 $this->entityManager->persist($resa);                
             }
             $client=$this->entityManager->getRepository("UserBundle:User")->findOneById($clientId);
+            //$this->notifyValidation($client);
         }
         $this->entityManager->flush();
-		$this->notifyValidation($client);
+        
     }
     
-    public function affecteDates($client,$tabDate){
-        $client->setSolde($client->getSolde()-sizeof($tabDate));
-        foreach ($tabDate as $dateString){            
-            $dateTime = DateTime::createFromFormat('Y-m-d H:i:s', $dateString);            
-            $resa = new Reservation();
-            $resa->setClient($client);
-            $resa->setEtatReservation("Valider");
-            $resa->setDateReservation($dateTime);
+    public function affecteDates($client,$tabDate,$plusDemiehre){
+        $client->setSolde($client->getSolde()-sizeof($tabDate));        
+        foreach ($tabDate as $dateString){
+            if($dateString==="on"){
+                continue;
+            }else{
+                $resa = new Reservation();
+                $resa->setClient($client);
+                $resa->setEtat("Valider");
+                $dateDebut = DateTime::createFromFormat('Y-m-d H:i:s', $dateString);
+                $resa->setDateDebut($dateDebut);
+                $dateFin=clone $dateDebut;
+                if($plusDemiehre!="false"){
+                    //array_shift($tabDate); // On enlève le premier élément du tableau car il prend l'input du modal "affecter".
+                    $dateFin->add(new DateInterval('PT1H30M'));                
+                    $resa->setDateFin($dateFin);
+                    $client->setSolde($client->getSolde()-0.5);
+                }else{
+                    $dateDebut = DateTime::createFromFormat('Y-m-d H:i:s', $dateString);
+                    $dateFin=clone $dateDebut;
+                    $dateFin->add(new DateInterval('PT1H'));                 
+                    $resa->setDateFin($dateFin);
+                }
+            }
             $this->entityManager->persist($resa);            
         }
         $this->entityManager->flush();        
@@ -90,22 +143,23 @@ class ReservationService {
             $dateTime = DateTime::createFromFormat('Y-m-d H:i:s', $dateString);            
             $resa = new Reservation();
             $resa->setClient($moniteur);
-            $resa->setEtatReservation("Fermer");
-            $resa->setDateReservation($dateTime);
+            $resa->setEtat("Fermer");
+            $resa->setDateDebut($dateTime);
+            $resa->setDateFin($dateTime);
             $this->entityManager->persist($resa);           
         }
         $this->entityManager->flush();
     }
     
     public function disponible($dateString,$client){
-        $date=DateTime::createFromFormat('Y-m-d H:i:s', $dateString);
-		$criteres = array('dateReservation' => $date, 'client' => $client);
+        $dateDebut=DateTime::createFromFormat('Y-m-d H:i:s', $dateString);
+		$criteres = array('dateDebut' => $dateDebut, 'client' => $client);
 		$res=$this->entityManager->getRepository("ReservationBundle:Reservation")->findBy($criteres);		
         return count($res)==0;
     }
     
     public function getResaByDate($date){
-        return $this->entityManager->getRepository("ReservationBundle:Reservation")->findOneByDateReservation($date);
+        return $this->entityManager->getRepository("ReservationBundle:Reservation")->findOneByDateDebut($date);
     } 
     
     private function getResaAvalider($lesResasChoisi){
@@ -136,7 +190,7 @@ class ReservationService {
     public function notifyValidation($client){
 		$message = "Bonjour " . $client->getPrenom() . ",<br>" .
 		"<br>" .
-		"Une de vos réservations vient d'être validé. <br> Veuillez consulter votre calendrier des rendez-vous en cliquant sur le lien suivant : 
+		"Votre planning a été mis à jour. <br> Veuillez consulter votre calendrier des rendez-vous en cliquant sur le lien suivant : 
 		 https://beezyweb.net/privee/calendrier" ."<br>".
 		"<br>" .
 		"Bien cordialement" . "<br>" .

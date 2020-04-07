@@ -25,8 +25,12 @@ class CalendrierController extends Controller{
         $calendrierService =$this->get('calendrier_service');        
         $reservations = $userService->getAllReservationsFromClient($user->getId());
         $cal = CalendrierPrivee::getInstance($reservations,$user);
-        $cal->setDateCourante($calendrierService->getDatePivot());        
-        return $this->render("CalendrierBundle:Calendrier:calendrierPrivee.html.twig",array('cal'=>$cal,'user'=>$user) );
+        $cal->setDateCourante($calendrierService->getDatePivot());
+        if($user->getEntreprise()->getId()==2){
+            return $this->render("CalendrierBundle:Calendrier:calendrierPriveeAutoEcole.html.twig",array('cal'=>$cal,'user'=>$user) );
+        }else{
+            return $this->render("CalendrierBundle:Calendrier:calendrierPriveeCoiffeur.html.twig",array('cal'=>$cal,'user'=>$user) );                
+        }
     }
     
     // Calendrier Moniteur

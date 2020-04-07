@@ -1,0 +1,27 @@
+Entreprise     =>   iD : 1     Mark-coiffeur
+                    iD : 2     Auto-Ecole Grande Delle
+
+               
+Administrateur =>   iD : 24    kewou.noumia@gmail.com    => Admin ( 1 ) 
+
+               =>   iD : 15    stephaneromain@hotmail.fr => Admin ( 2 ) 
+
+Compte User
+1- id(25) - djodjoman@yahoo.fr delphine12   Admin => (24) Entreprise => (1)
+1- id(26) - joel.noumia@gfi.fr testtest     Admin => (15) Entreprise => (2)
+
+
+Jmeter:
+ - Lancement : Dans le dossier bin, double cliquer sur ApacheJMeter.jar
+
+ - Lancement des test => Requete sql => : id_annule_resa =  select max(id) from beezyweb_bd.reservation;
+                                        : delete from beezyweb_bd.reservation where client_id in(15,26); 
+						 calendrier_reserver : mettre la date du jour + 1 jour 8h
+						 annuler_resa        : mettre comme id resa => id_annule_resa +1
+						 admin_fermer        : on ferme date du jour 14h
+						 admin_annuler       : on annule date du jour 14h
+						 admin_valider       : on valide la dernier résa : j+1 8h
+						 admin_affecter      : on affecte J+1 16h
+						 admin_affecter+30min: J+1 17h
+						 
+		

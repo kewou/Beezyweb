@@ -20,8 +20,9 @@ class ReservationController extends Controller{
             
     function reserverAction(Request $request){        
         $tabDate=$request->request->get('lesResaChoisi');
+        $color=$request->request->get('color');
         $resaService = $this->get('reservation_service'); 
-        $resaService->reserveDates($this->getUser(),$tabDate);       
+        $resaService->reserveDates($this->getUser(),$tabDate,$color);       
         $user = $this->getUser();
         $userService = $this->get('user_service');                       
         $reservations = $userService->getAllReservationsFromClient($user->getId());
@@ -83,10 +84,11 @@ class ReservationController extends Controller{
 	$idMoniteur=$this->getMoniteurId($request);		
         $tabDate=$request->request->get('lesResaChoisi');
         $nomClient=$request->request->get('nom');
+        $plusDemiehre=$request->request->get('plusDemiHeure');
         $userService = $this->get('user_service');  
         $resaService = $this->get('reservation_service');
         $client=$userService->getUserByName($nomClient);
-        $resaService->affecteDates($client,$tabDate);        
+        $resaService->affecteDates($client,$tabDate,$plusDemiehre);        
         $users = $userService->getAllUsersMoniteur($idMoniteur);		
         $reservations=$userService->getAllReservationsFromMoniteur($idMoniteur);
         $cal = new CalendrierMoniteur($reservations,$this->getUser(),$users);
@@ -104,6 +106,7 @@ class ReservationController extends Controller{
                 $tabControle="Vous avez essayer de choisir une date déja réservée !";
                 return new Response($tabControle);
             }
+            $dateNow=date("Y-m-d H:i:s");
             if($date < date("Y-m-d H:i:s")){
                 $tabControle="Vous avez essayer de choisir une date déja passée !";
                 return new Response($tabControle);

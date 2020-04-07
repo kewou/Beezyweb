@@ -39,7 +39,7 @@ abstract class AbstractCalendrier {
     
     public function getTabHeure($typePlageHoraire){
         if($typePlageHoraire == 1){
-            return array('8h','9h','10h','11h', '12h', '13h', '14h', '15h','16h','17h','18h','19h');
+            return array('08h','09h','10h','11h', '12h', '13h', '14h', '15h','16h','17h','18h','19h');
         }else if($typePlageHoraire == 2){
             return array('11h','11h30', '12h','12h30','13h','13h30','14h','14h30','15h','15h30','16h','16h30','17h','17h30','18h','18h30');
         }
@@ -73,15 +73,28 @@ abstract class AbstractCalendrier {
                 if($dateTemp->format('w')=="0"){                     
                     $dateTemp->add(new DateInterval('P1D'));
                     continue; 
-                }                                                 
-                // date Case
-                $dateCase=$dateTemp->format('Y-m-d ' .substr($heure, 0, -1).':00:00');
+                }
+                //var_dump($this->getDateCase($heure));
+                // date Case                
+                //$dateCase=$dateTemp->format('Y-m-d ' .substr($heure, 0, -1).':00:00');
+                $dateCase=$dateTemp->format('Y-m-d ' .$this->getDateCase($heure));
                 $this->afficheCase($dateCase);                
                 $dateTemp->add(new DateInterval('P1D'));                
             }
         echo ("</tr>\n");   
         }        
         echo ("</table>");        
+    }
+    
+    function getDateCase($heure){        
+        $ch=explode('h',$heure);        
+        if(strlen($heure)==3){
+            return $ch[0].':00:00';
+        }else{
+            // heure avec 30 min
+            return $ch[0].":".$ch[1].":00";
+        }
+        
     }
     
 

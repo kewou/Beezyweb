@@ -20,7 +20,7 @@ class BeezyExtension extends AbstractExtension{
             new TwigFunction('formatPhone', array($this, 'formatNumberPhone')),
             new TwigFunction('firstLetter', array($this, 'firstLetterOfChaine')),
             new TwigFunction('fortmatDate', array($this, 'formatDateInFrench')),
-			new TwigFunction('triTableauDate', array($this ,'sortReservations')),			
+	    new TwigFunction('triTableauDate', array($this ,'sortReservations')),			
         );
     }
     
@@ -35,15 +35,19 @@ class BeezyExtension extends AbstractExtension{
               ." ".$number[5].$number[6]." ".$number[7].$number[8];
     }
     
-    public function formatDateInFrench($date){
+    public function formatDateInFrench($datDebut,$dateFin){
         $nom_jour_fr = array("Dimanche", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam");
         $mois_fr = Array("", "janv.", "févr.", "mars", "avril", "mai", "juin", "juill.", "août", 
                 "sept.", "octo.", "novem.", "décem.");
         // on extrait la date du jour
-        list($nom_jour, $jour, $mois, $annee) = explode('/', date_format($date,("w/d/n/Y")));        
+        list($nom_jour, $jour, $mois, $annee) = explode('/', date_format($datDebut,("w/d/n/Y")));        
 
         return $nom_jour_fr[$nom_jour].' '. $this->enleveZero($jour).' '.$mois_fr[$mois] . ' '.
-                $this->enleveZero(date_format($date,('H'))) .'h00';        
+                $this->enleveZero(date_format($datDebut,('H')))
+                .'h - '
+                . $this->enleveZero(date_format($dateFin,('H')))
+                .'h'
+                .date_format($dateFin,('i'));        
     }
     
     public function enleveZero($chaine){
@@ -55,12 +59,12 @@ class BeezyExtension extends AbstractExtension{
 
 	
     public function sortReservations($tabResa){
-		foreach($tabResa as $key => $resa){			
-			if($resa->getEtatReservation()=="Fermer" or $resa->getDateReservation() < new DateTime('now')){				
-				unset($tabResa[$key]);
-			}			
-		}
-		return $tabResa;
+        foreach($tabResa as $key => $resa){			
+                if($resa->getEtat()=="Fermer" or $resa->getDateDebut() < new DateTime('now')){				
+                        unset($tabResa[$key]);
+                }			
+        }
+        return $tabResa;
     }
 	
 

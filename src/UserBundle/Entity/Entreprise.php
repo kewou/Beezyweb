@@ -31,7 +31,14 @@ class Entreprise {
      *
      * @ORM\Column(name="typePlageHoraire", type="integer", length=255)
      */
-    private $typePlageHoraire;        
+    private $typePlageHoraire;
+    
+    /**
+
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\Preferences")         
+
+     */
+    protected $preferences = null;
     
     function getId(){
             return $this->id;
