@@ -34,12 +34,36 @@ class Entreprise {
     private $typePlageHoraire;
     
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="prixResa", type="integer", length=255)
+     */
+    private $prixResa;
+    
+    /**
 
      * @ORM\ManyToOne(targetEntity="UserBundle\Entity\Preferences")         
 
      */
     protected $preferences = null;
     
+    function getPrixResa() {
+        return $this->prixResa;
+    }
+
+    function getPreferences() {
+        return $this->preferences;
+    }
+
+    function setPrixResa($prixResa) {
+        $this->prixResa = $prixResa;
+    }
+
+    function setPreferences($preferences) {
+        $this->preferences = $preferences;
+    }
+
+        
     function getId(){
             return $this->id;
     }

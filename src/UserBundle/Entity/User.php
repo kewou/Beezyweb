@@ -18,6 +18,7 @@ use Symfony\Component\Validator\Constraints\Email;
  * @ORM\Table(name="user")
 
  * @UniqueEntity(fields="telephone", message="Ce numéro de téléphone existe déja sur un autre compte !")
+ * @UniqueEntity(fields="nom", message="Ce nom de famille est déja utilisé !")
 
  */
 class User extends BaseUser {

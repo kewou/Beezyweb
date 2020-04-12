@@ -5,6 +5,7 @@ namespace PriveeBundle\Twig;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 use DateTime;
+use DateInterval;
 
 
 
@@ -35,19 +36,49 @@ class BeezyExtension extends AbstractExtension{
               ." ".$number[5].$number[6]." ".$number[7].$number[8];
     }
     
-    public function formatDateInFrench($datDebut,$dateFin){
+    public function formatDateInFrench($resa){
         $nom_jour_fr = array("Dimanche", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam");
         $mois_fr = Array("", "janv.", "févr.", "mars", "avril", "mai", "juin", "juill.", "août", 
                 "sept.", "octo.", "novem.", "décem.");
         // on extrait la date du jour
-        list($nom_jour, $jour, $mois, $annee) = explode('/', date_format($datDebut,("w/d/n/Y")));        
-
-        return $nom_jour_fr[$nom_jour].' '. $this->enleveZero($jour).' '.$mois_fr[$mois] . ' '.
-                $this->enleveZero(date_format($datDebut,('H')))
-                .'h - '
-                . $this->enleveZero(date_format($dateFin,('H')))
-                .'h'
-                .date_format($dateFin,('i'));        
+        list($nom_jour, $jour, $mois, $annee) = explode('/', date_format($resa->getDateDebut(),("w/d/n/Y")));        
+        if($resa->getClient()->getEntreprise()->getId()==2){
+            return $nom_jour_fr[$nom_jour].' '. $this->enleveZero($jour).' '.$mois_fr[$mois] . ' : '.
+                    $this->enleveZero(date_format($resa->getDateDebut(),('H')))
+                    .'h'
+                    .date_format($resa->getDateDebut(),('i')) 
+                    .'- '
+                    . $this->enleveZero(date_format($resa->getDateFin(),('H')))
+                    .'h'
+                    .date_format($resa->getDateFin(),('i')); 
+        }else{
+            if($resa->getTypeCoiffure()=="Complexe"){
+                $newDateFin = clone $resa->getDateFin();
+                $newDateFin->add(new DateInterval('PT30M'));
+                $resa->setDateFin($newDateFin);
+                
+                return $nom_jour_fr[$nom_jour].' '. $this->enleveZero($jour).' '.$mois_fr[$mois] . ' : '.
+                        $this->enleveZero(date_format($resa->getDateDebut(),('H')))
+                        .'h'
+                        .date_format($resa->getDateDebut(),('i')) 
+                        .'- '
+                        . $this->enleveZero(date_format($resa->getDateFin(),('H')))
+                        .'h'
+                        .date_format($resa->getDateFin(),('i'));
+            }else if($resa->getTypeCoiffure()=="Simple"){
+                return $nom_jour_fr[$nom_jour].' '. $this->enleveZero($jour).' '.$mois_fr[$mois] . ' : '.
+                        $this->enleveZero(date_format($resa->getDateDebut(),('H')))
+                        .'h'
+                        .date_format($resa->getDateDebut(),('i')) 
+                        .'- '
+                        . $this->enleveZero(date_format($resa->getDateFin(),('H')))
+                        .'h'
+                        .date_format($resa->getDateFin(),('i'));
+            }else{
+                return "";
+            }
+            
+        }
     }
     
     public function enleveZero($chaine){

@@ -8,13 +8,13 @@ use ReservationBundle\Entity\ResaDTO;
 /**
 
  * @ORM\Entity(repositoryClass="ReservationBundle\Entity\ResaRepository")
-
+   @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\Table(name="reservation")
 
  * @author joel
 
  */
-class Reservation {
+abstract class Reservation {
 
     /**
      * @var integer     
@@ -52,8 +52,10 @@ class Reservation {
      * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="reservations")
      * @ORM\JoinColumn(nullable=false)
      */
-    protected $client;
+    private $client;
     
+
+        
     function getDateDebut() {
         return $this->dateDebut;
     }

@@ -39,7 +39,7 @@ class GestionClientController extends Controller{
     public function infosClientByNomAdminAction(Request $request){        
         $nomClient = $request->request->get('nom');
         $userService = $this->get('user_service');
-		$moniteurs = $userService->getAllMoniteurs($this->getUser()->getEntreprise()->getId());
+        $moniteurs = $userService->getAllMoniteurs($this->getUser()->getEntreprise()->getId());
         $user = $userService->getUserByName($nomClient);      
         return $this->render('AdminBundle:GestionClient:unClientAdmin.html.twig',array('user' => $user,'moniteurs' => $moniteurs));        
     }

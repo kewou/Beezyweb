@@ -10,3 +10,10 @@ CREATE INDEX IDX_D19FA607CCD6FB7 ON entreprise (preferences_id);
 ALTER TABLE reservation ADD dateFin DATETIME NOT NULL, DROP duree, CHANGE date dateDebut DATETIME NOT NULL;
 
 ALTER TABLE user CHANGE solde solde DOUBLE PRECISION DEFAULT NULL;
+
+ALTER TABLE entreprise ADD prixResa INT NOT NULL;
+
+ALTER TABLE reservation ADD dtype VARCHAR(255) NOT NULL, ADD typeCoiffure VARCHAR(255) DEFAULT NULL;
+
+
+/////   PAS ENCORE MEP  ///

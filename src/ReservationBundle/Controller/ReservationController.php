@@ -37,11 +37,13 @@ class ReservationController extends Controller{
         return new Response("");                              
     }
     
+    // Réponse Ajax d'une annulation coté client
     function annulerContenuAction(Request $request){                      
         $idResa= $request->request->get('idResa');
+        $user=$this->getUser();
         $resaService = $this->get('reservation_service');        
-        $resaService->annuleDate($this->getUser(),$idResa);
-        return $this->render("PriveeBundle:Privee:mesResa.html.twig",array('user' => $this->getUser()));
+        $resaService->annuleDate($user,$idResa);
+        return $this->render("PriveeBundle:Privee:mesResa.html.twig",array('user' => $user));
     }
     
     function annulerMoniteurAction(Request $request){        

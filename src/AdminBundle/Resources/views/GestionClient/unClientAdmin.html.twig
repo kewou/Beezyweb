@@ -43,10 +43,11 @@
 			</td> 			
        
 		</tr>
-		<tr> {% if user.id==15 %}
-                            <td>Moniteurs</td>
+		<tr> 
+                    {% if user.administrateur.id==15 %} 
+                            <td>Moniteur</td>
                      {% else %}
-                            <td>Coiffeurs</td>
+                            <td>Coiffeur</td>
                      {% endif %}
 		    <td> 
 					{% for item in moniteurs %}

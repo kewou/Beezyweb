@@ -3,12 +3,11 @@ Entreprise     =>   iD : 1     Mark-coiffeur
 
                
 Administrateur =>   iD : 24    kewou.noumia@gmail.com    => Admin ( 1 ) 
-
                =>   iD : 15    stephaneromain@hotmail.fr => Admin ( 2 ) 
 
 Compte User
-1- id(25) - djodjoman@yahoo.fr delphine12   Admin => (24) Entreprise => (1)
-1- id(26) - joel.noumia@gfi.fr testtest     Admin => (15) Entreprise => (2)
+1- id(27) - djodjoman@yahoo.fr delphine12   Admin => (24) Entreprise => (1)  Coiffeur
+1- id(26) - joel.noumia@gfi.fr testtest     Admin => (15) Entreprise => (2)  Auto-Ecole
 
 
 Jmeter:

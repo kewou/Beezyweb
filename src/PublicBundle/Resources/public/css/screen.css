@@ -24,6 +24,10 @@ input[type=submit] {
   cursor: pointer;
 }
 
+span.swal2-label{
+    color:blue;
+}
+
 .autocomplete-items {
     display:block;
 	width:200px;
