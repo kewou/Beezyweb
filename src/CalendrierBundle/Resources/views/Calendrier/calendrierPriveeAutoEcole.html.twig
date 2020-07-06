@@ -71,7 +71,12 @@
         
 
         var date = new Date();
-        $(document).ready(function(){            
+		if(date.getDay()!=0){
+			x=date.getDay()-1;
+			date.setDate(date.getDate() - x);			
+		}
+		
+        $(document).ready(function(){			
             $('#nextSevenDay').click(function(){
                 date.setDate(date.getDate() + 7);
                 var dateEnvoyer = date.format("yyyy-MM-dd h:mm:ss");
@@ -137,6 +142,7 @@
             function actionReserver(tabResa,tabControle){
                  // Controle Front
                 controleReservation(tabResa,tabControle);
+				var dateEnvoyer = date.format("yyyy-MM-dd h:mm:ss");
                 if(tabControle.length !==0){                    
                     Swal.fire({
                         icon: 'error',
@@ -158,7 +164,7 @@
                                         });
                                         $("#reserveDate").css('display','block');
                                     }else{
-                                        $.post("{{ (path('Privee_reserver'))}}",{lesResaChoisi:tabResa},
+                                        $.post("{{ (path('Privee_reserver'))}}",{lesResaChoisi:tabResa,datePivot:dateEnvoyer},
                                             function(data){
                                                 $('.loader').hide();
                                                 $('#calendrier').html(data);

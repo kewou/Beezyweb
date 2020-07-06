@@ -108,7 +108,28 @@
     <script>
         var date = new Date();
         $(document).ready(function () {
-
+		    if(date.getDay()!=0){
+				x=date.getDay()-1;
+				date.setDate(date.getDate() - x);			
+			}
+            $('#nextSevenDay').click(function () {
+                date.setDate(date.getDate() + 7);
+                var dateEnvoyer = date.format("yyyy-MM-dd h:mm:ss");
+                $.post("{{ (path('Moniteur_calendrierPagination'))}}", {datePivot: dateEnvoyer},
+                        function (data) {
+                            $('#calendrier').html(data);
+                        });
+            });
+            $('#previousSevenDay').click(function () {
+                date.setDate(date.getDate() - 7);
+                var dateEnvoyer = date.format("yyyy-MM-dd h:mm:ss");
+                $.post("{{ (path('Moniteur_calendrierPagination'))}}", {datePivot: dateEnvoyer},
+                        function (data) {
+                            $('#calendrier').html(data);
+                        });
+            });						
+		
+		
             function couleurCaseExisteDeja(val, tab) {
                 exist = false;
                 for (var iter = 0; iter < tab.length; iter++) {
@@ -134,7 +155,7 @@
 
             function controleReservation(tabResa, tabControle) {
                 if(tabResa.length===0){
-                    tabControle.push("Veuillez sélectionner uau moins une case !");
+                    tabControle.push("Veuillez sélectionner au moins une case !");
                 }
             }
 
@@ -165,6 +186,7 @@
                 // Ajouter les controle Front
                 controleReservation(tabResa, tabControle);
                 controleCaseMemeEtat(tabControle);
+				var dateEnvoyer = date.format("yyyy-MM-dd h:mm:ss");
                 // Ajouter confirmation action 
                 if (tabControle.length !== 0) {
                     Swal.fire({
@@ -174,7 +196,7 @@
                     $('#myModal').modal('hide');
                 } else {
 
-                    $.post("{{ (path('Moniteur_valider',{"idMoniteur":idMoniteur}))}}", {lesResaChoisi: tabResa},
+                    $.post("{{ (path('Moniteur_valider',{"idMoniteur":idMoniteur}))}}", {lesResaChoisi: tabResa,datePivot:dateEnvoyer},
                             function (data) {
                                 $('#calendrier').html(data);
                             });
@@ -193,6 +215,7 @@
                 // Ajouter les controle Front
                 controleReservation(tabResa, tabControle);
                 controleCaseMemeEtat(tabControle);
+				var dateEnvoyer = date.format("yyyy-MM-dd h:mm:ss");
                 // Ajouter confirmation action
                 if (tabControle.length !== 0) {
                     Swal.fire({
@@ -200,7 +223,7 @@
                         text: tabControle[0]
                     });
                 } else {
-                    $.post("{{ path('Moniteur_fermer',{"idMoniteur":idMoniteur})}}", {lesResaChoisi: tabResa},
+                    $.post("{{ path('Moniteur_fermer',{"idMoniteur":idMoniteur})}}", {lesResaChoisi: tabResa,datePivot:dateEnvoyer},
                             function (data) {
                                 $('#calendrier').html(data);
                             });
@@ -222,6 +245,7 @@
                 controleReservation(tabResa, tabControle);
                 // Ajouter confirmation action
                 controleCaseMemeEtat(tabControle);
+				var dateEnvoyer = date.format("yyyy-MM-dd h:mm:ss");
                 if (tabControle.length !== 0) {
                     Swal.fire({
                         icon: 'error',
@@ -242,7 +266,7 @@
                                     text: data["responseText"]
                                 });
                             } else {
-                                $.post("{{ path('Moniteur_affecter',{"idMoniteur":idMoniteur})}}", {lesResaChoisi: tabResa, nom: nom,plusDemiHeure:plusDemiHeure },
+                                $.post("{{ path('Moniteur_affecter',{"idMoniteur":idMoniteur})}}", {lesResaChoisi: tabResa, nom: nom,plusDemiHeure:plusDemiHeure,datePivot:dateEnvoyer },
                                         function (data) {
                                             $('#calendrier').html(data);
                                         });
@@ -266,37 +290,21 @@
                 controleReservation(tabResa, tabControle);
                 // Ajouter confirmation action
                 controleCaseMemeEtat(tabControle);
+				var dateEnvoyer = date.format("yyyy-MM-dd h:mm:ss");
                 if (tabControle.length !== 0) {
                     Swal.fire({
                         icon: 'error',
                         text: tabControle[0]
                     });
                 } else {
-                    $.post("{{ (path('Moniteur_annuler',{"idMoniteur":idMoniteur}))}}", {lesResaChoisi: tabResa},
+                    $.post("{{ (path('Moniteur_annuler',{"idMoniteur":idMoniteur}))}}", {lesResaChoisi: tabResa,datePivot:dateEnvoyer},
                             function (data) {
                                 $('#calendrier').html(data);
                             });
                 }
                 var tabResa = [];
                 var tabControle = [];
-            }
-
-            $('#nextSevenDay').click(function () {
-                date.setDate(date.getDate() + 7);
-                var dateEnvoyer = date.format("yyyy-MM-dd h:mm:ss");
-                $.post("{{ (path('Moniteur_calendrierPagination'))}}", {datePivot: dateEnvoyer},
-                        function (data) {
-                            $('#calendrier').html(data);
-                        });
-            });
-            $('#previousSevenDay').click(function () {
-                date.setDate(date.getDate() - 7);
-                var dateEnvoyer = date.format("yyyy-MM-dd h:mm:ss");
-                $.post("{{ (path('Moniteur_calendrierPagination'))}}", {datePivot: dateEnvoyer},
-                        function (data) {
-                            $('#calendrier').html(data);
-                        });
-            });
+            }	
 
         });
         $('#myModal').on('shown.bs.modal', function () {

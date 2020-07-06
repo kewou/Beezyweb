@@ -71,7 +71,11 @@
         
 
         var date = new Date();
-        $(document).ready(function(){            
+		if(date.getDay()!=0){
+			x=date.getDay()-1;
+			date.setDate(date.getDate() - x);			
+		}        
+        $(document).ready(function(){			
             $('#nextSevenDay').click(function(){
                 date.setDate(date.getDate() + 7);
                 var dateEnvoyer = date.format("yyyy-MM-dd h:mm:ss");
@@ -115,15 +119,15 @@
                 })
 
                 const { value: color } = await Swal.fire({
-                  title: 'Choississez une coiffure',
+                  title: 'Choisissez une coiffure',				                                                                
+				  showCancelButton: true,				  
+				  cancelButtonColor: '#d33',
+				  cancelButtonText: 'Annuler',
                   input: 'radio',
-                  showCancelButton: true,
-                  cancelButtonColor: '#d33',
-                  cancelButtonText: 'Annuler',
                   inputOptions: inputOptions,
                   inputValidator: (value) => {
                     if (!value) {
-                      return 'Choississez une coiffure svp !'
+                      return 'Choisissez une coiffure svp !' 
                     }
                   }
                 })
@@ -152,6 +156,7 @@
             function actionReserver(tabResa,tabControle,color){
                  // Controle Front
                 controleReservation(tabResa,tabControle);
+				var dateEnvoyer = date.format("yyyy-MM-dd h:mm:ss");
                 if(tabControle.length !==0){                    
                     Swal.fire({
                         icon: 'error',
@@ -173,7 +178,7 @@
                                         });
                                         $("#reserveDate").css('display','block');
                                     }else{
-                                        $.post("{{ (path('Privee_reserver'))}}",{lesResaChoisi:tabResa,color:color},
+                                        $.post("{{ (path('Privee_reserver'))}}",{lesResaChoisi:tabResa,color:color,datePivot:dateEnvoyer},
                                             function(data){
                                                 $('.loader').hide();
                                                 $('#calendrier').html(data);

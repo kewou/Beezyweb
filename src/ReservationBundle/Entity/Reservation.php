@@ -54,8 +54,6 @@ abstract class Reservation {
      */
     private $client;
     
-
-        
     function getDateDebut() {
         return $this->dateDebut;
     }

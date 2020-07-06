@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use DateTime;
 
 
 /**
@@ -21,12 +22,15 @@ class ReservationController extends Controller{
     function reserverAction(Request $request){        
         $tabDate=$request->request->get('lesResaChoisi');
         $color=$request->request->get('color');
+		$datePivotString=$request->request->get('datePivot');
+		$datePivot=datetime::createfromformat('Y-m-d H:i:s',$datePivotString);		
         $resaService = $this->get('reservation_service'); 
         $resaService->reserveDates($this->getUser(),$tabDate,$color);       
         $user = $this->getUser();
         $userService = $this->get('user_service');                       
         $reservations = $userService->getAllReservationsFromClient($user->getId());
-        $cal = new CalendrierPrivee($reservations,$user);                
+        $cal = new CalendrierPrivee($reservations,$user);
+		$cal->setDateCourante($datePivot);
         return new Response($cal->display());                              
     }
     
@@ -37,29 +41,33 @@ class ReservationController extends Controller{
         return new Response("");                              
     }
     
-    // Réponse Ajax d'une annulation coté client
     function annulerContenuAction(Request $request){                      
         $idResa= $request->request->get('idResa');
-        $user=$this->getUser();
+		$user=$this->getUser();
         $resaService = $this->get('reservation_service');        
         $resaService->annuleDate($user,$idResa);
         return $this->render("PriveeBundle:Privee:mesResa.html.twig",array('user' => $user));
     }
     
     function annulerMoniteurAction(Request $request){        
-	$idMoniteur=$this->getMoniteurId($request);
+		$idMoniteur=$this->getMoniteurId($request);
         $tabDate=$request->request->get('lesResaChoisi');
+		$datePivotString=$request->request->get('datePivot');
+		$datePivot=datetime::createfromformat('Y-m-d H:i:s',$datePivotString);		
         $userService = $this->get('user_service'); 
         $resaService = $this->get('reservation_service'); 
         $resaService->annuleDates($this->getUser(),$tabDate);       
         $users = $userService->getAllUsersMoniteur($idMoniteur);                              
         $reservations = $userService->getAllReservationsFromClient($idMoniteur);
-        $cal = new CalendrierMoniteur($reservations,$this->getUser(),$users);                
+        $cal = new CalendrierMoniteur($reservations,$this->getUser(),$users); 
+		$cal->setDateCourante($datePivot);		
         return new Response($cal->display());                              
     }
     
     function validerAction(Request $request){
         $tabDate=$request->request->get('lesResaChoisi');
+		$datePivotString=$request->request->get('datePivot');
+		$datePivot=datetime::createfromformat('Y-m-d H:i:s',$datePivotString);		
         $userService = $this->get('user_service');  
         $resaService = $this->get('reservation_service');        
         $resaService->valideDates($tabDate);
@@ -67,24 +75,30 @@ class ReservationController extends Controller{
         $users = $userService->getAllUsersMoniteur($idMoniteur);
         $reservations=$userService->getAllReservationsFromMoniteur($idMoniteur);
         $cal = new CalendrierMoniteur($reservations,$this->getUser(),$users);
+		$cal->setDateCourante($datePivot); 
         return new Response($cal->display());                  
     }
     
     function fermerAction(Request $request){        
         $idMoniteur=$this->getMoniteurId($request);		
         $tabDate=$request->request->get('lesResaChoisi');
+		$datePivotString=$request->request->get('datePivot');
+		$datePivot=datetime::createfromformat('Y-m-d H:i:s',$datePivotString);
         $userService = $this->get('user_service');  
         $resaService = $this->get('reservation_service');        
         $resaService->fermeDates($userService->getUser($idMoniteur),$tabDate);				
         $users = $userService->getAllUsersMoniteur($idMoniteur);
         $reservations=$userService->getAllReservationsFromMoniteur($idMoniteur);              
-        $cal = new CalendrierMoniteur($reservations,$this->getUser(),$users);        
+        $cal = new CalendrierMoniteur($reservations,$this->getUser(),$users);
+		$cal->setDateCourante($datePivot);        
         return new Response($cal->display());        
     }
     
     function affecterAction(Request $request){        
-	$idMoniteur=$this->getMoniteurId($request);		
+		$idMoniteur=$this->getMoniteurId($request);		
         $tabDate=$request->request->get('lesResaChoisi');
+		$datePivotString=$request->request->get('datePivot');
+		$datePivot=datetime::createfromformat('Y-m-d H:i:s',$datePivotString);		
         $nomClient=$request->request->get('nom');
         $plusDemiehre=$request->request->get('plusDemiHeure');
         $userService = $this->get('user_service');  
@@ -94,6 +108,7 @@ class ReservationController extends Controller{
         $users = $userService->getAllUsersMoniteur($idMoniteur);		
         $reservations=$userService->getAllReservationsFromMoniteur($idMoniteur);
         $cal = new CalendrierMoniteur($reservations,$this->getUser(),$users);
+		$cal->setDateCourante($datePivot);
         return new Response($cal->display());  
     }  
     

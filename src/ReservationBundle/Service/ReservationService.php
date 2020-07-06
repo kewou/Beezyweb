@@ -122,7 +122,7 @@ class ReservationService {
                 $this->entityManager->persist($resa);                
             }
             $client=$this->entityManager->getRepository("UserBundle:User")->findOneById($clientId);
-            //$this->notifyValidation($client);
+            $this->notifyValidation($client);
         }
         $this->entityManager->flush();
         
@@ -237,16 +237,8 @@ class ReservationService {
     }
 	
     public function notifyValidation($client){
-		$message = "Bonjour " . $client->getPrenom() . ",<br>" .
-		"<br>" .
-		"Votre planning a été mis à jour. <br> Veuillez consulter votre calendrier des rendez-vous en cliquant sur le lien suivant : 
-		 https://beezyweb.net/privee/calendrier" ."<br>".
-		"<br>" .
-		"Bien cordialement" . "<br>" .
-		"<br>" .
-		"L'équipe Beezyweb." . "<br>" .
-		"<br>" .
-		"https://beezyweb.net";
+		$message = $this->contenuMail($client);
+		
 		$subject = 'Reservation validee';
 		$headers = 'From: beezyweb.net@beezyweb.net'  . "\r\n" .
 		'Reply-To: beezyweb.net@beezyweb.net' . "\r\n" .
@@ -255,5 +247,27 @@ class ReservationService {
         mail($client->getEmail(), $subject, $message, $headers);
 	}
 	
+	private function contenuMail($client){
+		return '
+		<!DOCTYPE html>
+		<html>
+		<head>
+		<meta charset="UTF-8">
+		</head>
 
+		<body>
+             <h3>Bonjour '  . $client->getPrenom() . ', </h3>.
+		
+		     <p>Votre planning a été mis à jour. <br> Veuillez consulter votre calendrier des rendez-vous en cliquant sur le lien suivant : </p> 
+		     <a href="https://beezyweb.net/privee/profile/profil">Mes rendez-vous</a> .<br>.
+		
+		     <p>Bien cordialement. <br>		
+		     L\' équipe Beezyweb.  </p>
+		
+		    <p><a href="https://beezyweb.net">https://beezyweb.net</a></p>
+		</body>
+
+		</html>';
+	}
+	
 }

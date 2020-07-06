@@ -25,10 +25,9 @@ abstract class AbstractCalendrier {
 
     function __construct($reservations,$userProprietaire) {        
         $this->reservations = $reservations;        
-        $this->dateCourante = new DateTime();
+        $this->dateCourante = $this->genereDatePivot();
         $this->userProprietaire = $userProprietaire;        
-        $this->tabHeure = $this->getTabHeure($userProprietaire->getEntreprise()->getTypePlageHoraire());
-        //$this->tabHeure = array('08h', '09h', '10h', '11h', '14h', '15h', '16h', '17h');
+        $this->tabHeure = $this->getTabHeure($userProprietaire->getEntreprise()->getTypePlageHoraire());        
         $this->tabJour = array('Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam');
         $this->tabMois = array("", "Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre");
     }
@@ -49,18 +48,24 @@ abstract class AbstractCalendrier {
     
     
     public function headCalendrier(){
-        $dateTemp = clone $this->dateCourante;           
-        echo ("<p id=titreCalendrier>".$this->tabMois[$dateTemp->format('n')] ." ".date("Y")."</p>");        
+        $dateTemp = clone $this->dateCourante;
+		$numeroToday = date("d");
+        echo ("<p id=titreCalendrier>".$this->tabMois[$dateTemp->format('n')] ." ".$dateTemp->format('Y')."</p>");       
         // Le calendrier
         echo ("<table border='1'>");
         echo ("<tr>\n<th></th>\n");
         for($indiceJour=0 ; $indiceJour<count($this->tabJour); $indiceJour++) {
             if($dateTemp->format('w')=="0"){               
                 $dateTemp->add(new DateInterval('P1D'));
-                continue; 
+                continue;
             }
-            echo ("<th class='jourFirstLine'>".$this->tabJour[$dateTemp->format('w')]." ".intval($dateTemp->format('d'))."</th>\n");	
-            $dateTemp->add(new DateInterval('P1D'));           
+			if($numeroToday===$dateTemp->format('d')){			
+				echo ("<th class='jourFirstLine today'>".$this->tabJour[$dateTemp->format('w')]." ".intval($dateTemp->format('d'))."</th>\n");	
+				$dateTemp->add(new DateInterval('P1D'));
+			}else{
+				echo ("<th class='jourFirstLine'>".$this->tabJour[$dateTemp->format('w')]." ".intval($dateTemp->format('d'))."</th>\n");
+				$dateTemp->add(new DateInterval('P1D'));
+			}
         }
         echo ("</tr>");
     }
@@ -82,6 +87,18 @@ abstract class AbstractCalendrier {
         }        
         echo ("</table>");        
     }
+	
+	function genereDatePivot(){ 
+		// Le debut de la semaine est Lundi
+		$dateDuJour=new DateTime();
+		if($dateDuJour->format('w')!=="0"){
+			$dateUpdate=clone $dateDuJour;
+			// valeur à modifier pour obtenir le lundi
+			$x=intval($dateDuJour->format('w'))-1;		
+			$dateUpdate->sub(new DateInterval('P'.$x.'D'));
+		}
+		return $dateUpdate;
+	}
     
     function getDateCase($heure){        
         $ch=explode('h',$heure);        

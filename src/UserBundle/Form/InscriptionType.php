@@ -23,7 +23,7 @@ class InscriptionType extends AbstractType{
             ->add('nom','text',array('label'=>'Nom','pattern'=>'.{2,}','max_length'=>'15'))
             ->add('prenom','text',array('label'=>'Prénom','pattern'=>'.{2,}','max_length'=>'15'))
             ->add('telephone','number',array('label'=>'Téléphone','max_length'=>'10'))
-            ->add('entreprise','choice',array(
+            ->add('entreprise','choice',array('label'=>'Choix de l établissement',
                 'choices' => array('Auto-Ecole Grande Delle'=>'Auto-Ecole Grande Delle','Marco Coiffure'=>'Marco Coiffure'),
                                    'multiple' => false,'preferred_choices' => array('Auto-Ecole Grande Delle')
             ))
