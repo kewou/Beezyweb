@@ -61,6 +61,14 @@ class UserRepository extends EntityRepository{
     /**
      * @Secure(roles="ROLE_ADMIN")     
      */
+    public function findReservationsAdmin($idUser){
+        $query = 'SELECT * FROM reservation R WHERE R.client_id =:idUser;';
+        $statement = $this->getEntityManager()->getConnection()->prepare($query);
+        $statement->bindValue('idUser', $idUser);
+        $statement->execute();
+        return $statement->fetchAll();        
+    }
+    
     public function findReservations($idUser){
         $query = 'SELECT * FROM reservation R WHERE R.client_id =:idUser AND R.dateDebut >= CAST(CURRENT_TIMESTAMP AS DATE);';
         $statement = $this->getEntityManager()->getConnection()->prepare($query);
