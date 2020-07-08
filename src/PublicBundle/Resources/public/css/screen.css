@@ -631,6 +631,9 @@ ul.typeahead a:hover{
         background-color: #4169E1;
         margin-left:18%;
         width:75px;
+        left: 55%;
+        position: fixed;
+        top: 500px;
     }
     
     /* calendrier privee  version telephone */
