@@ -11,7 +11,11 @@
             {% block menu %}
                 <nav id="nav">					
                     <a href="{{path("Admin_accueil")}}">Accueil</a>
-					<a href="{{path("Admin_moniteurs")}}">Moniteurs</a>
+                    {% if user.id==15 %}
+                        <a href="{{path("Admin_moniteurs")}}">Moniteurs</a>
+                    {% else %}
+                        <a href="{{path("Admin_moniteurs")}}">Coiffeurs</a>    
+                    {% endif %}		    
                     <a href="{{path("fos_user_security_logout")}}"  id="deconnexionBouton">Deconnexion</a>                   
                 </nav>  
             {% endblock %}        

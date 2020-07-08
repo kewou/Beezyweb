@@ -24,6 +24,10 @@ input[type=submit] {
   cursor: pointer;
 }
 
+span.swal2-label{
+    color:blue;
+}
+
 .autocomplete-items {
     display:block;
 	width:200px;
@@ -351,6 +355,7 @@ body{
 
 .error{
     color:red;
+    border-color:red;
 }
 
 
@@ -465,7 +470,7 @@ ul.typeahead a:hover{
 }
 
 #mesResa{
-    margin-left:25%;
+    margin-left:16%;
 }
 
 .numResaReserver{
@@ -482,9 +487,9 @@ ul.typeahead a:hover{
 }
 
 .dateResaShow{
-    margin-right: 10px;
-    margin-left: 15px;
-    width: 180px;
+    margin-right: 5%;
+    margin-left: 12%;
+    margin-bottom: 2%;
 }
 
 .idResa{
@@ -568,7 +573,7 @@ ul.typeahead a:hover{
     .dateResaShow{
         font-size:16px;
         margin-right: 0px;
-        width:177px;
+        margin-left: 6%;
     }    
     
 
@@ -626,6 +631,9 @@ ul.typeahead a:hover{
         background-color: #4169E1;
         margin-left:18%;
         width:75px;
+        left: 55%;
+        position: fixed;
+        top: 500px;
     }
     
     /* calendrier privee  version telephone */

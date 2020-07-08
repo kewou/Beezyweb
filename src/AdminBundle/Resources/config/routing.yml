@@ -41,5 +41,13 @@ Admin_client_add_jeton:
     defaults: { _controller: AdminBundle:GestionClient:addArgent }  
     
 Admin_client_remove_jeton:
-    path: /client/solde/debuter
-    defaults: { _controller: AdminBundle:GestionClient:removeArgent}    
+    path: /client/solde/debiter
+    defaults: { _controller: AdminBundle:GestionClient:removeArgent}
+    
+Admin_client_add_un_jeton:
+    path: /client/solde/correction/crediter
+    defaults: { _controller: AdminBundle:GestionClient:addUnArgent }  
+    
+Admin_client_remove_un_jeton:
+    path: /client/solde/correction/debiter
+    defaults: { _controller: AdminBundle:GestionClient:removeUnArgent}      

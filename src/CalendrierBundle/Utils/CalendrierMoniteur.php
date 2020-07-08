@@ -28,16 +28,16 @@ class CalendrierMoniteur extends AbstractCalendrier{
     public function afficheCase($date) {        
         $estDispo=true;        
         foreach ($this->reservations as $resa) {            
-            $heureResa = $resa['dateReservation']; 
+            $heureResa = $resa['dateDebut']; 
             if($date==$heureResa){
                 $estDispo=false;
-                if($resa['etatReservation']=="Fermer"){                    
+                if($resa['etat']=="Fermer"){                    
                     echo ("<td class='fermer'><p>Bloqué</p><input type='checkbox' class='fermer' value='".$date."'> </td>");
                     break;
-                }elseif($resa['etatReservation']=="Réserver"){                    
+                }elseif($resa['etat']=="Réserver"){                    
                     echo ("<td class='reserver'>" . '<p class=reserver>' . $this->getNomReserveur($this->users, $resa['client_id']) . "</p> <input type='checkbox' class='reserver' value='".$date."'>". '</td>');
                     break;
-                }elseif($resa['etatReservation']=="Valider"){                    
+                }elseif($resa['etat']=="Valider"){                    
                     echo ("<td class='valider'>" . '<p class=valider>'.$this->getNomReserveur($this->users, $resa['client_id'])."</p> <input type='checkbox' class='valider' value='".$date."'>".'</td>');
                     break;
                 }

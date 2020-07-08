@@ -12,7 +12,8 @@
                 {{ form_row(form.prenom, {'attr': {'placeholder': 'Votre prénom'}}) }}
                 <label class="register_error_label" id="error_surname"></label> 
                 {{ form_row(form.email, {'attr': {'placeholder': 'Votre email'}})}}
-                <label class="register_error_label" id="error_email"></label> 
+                <label class="register_error_label" id="error_email"></label>
+                {{ form_row(form.entreprise)}}
             </div>
 
             <div class="register_form_right_side">

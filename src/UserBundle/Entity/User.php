@@ -1,24 +1,13 @@
 <?php
 
-
-
 namespace UserBundle\Entity;
 
-
-
 use Doctrine\ORM\Mapping as ORM;
-
 use Doctrine\Common\Collections\ArrayCollection;
-
 use FOS\UserBundle\Model\User as BaseUser;
-
 use Symfony\Component\Validator\Constraints as Assert;
-
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-
 use Symfony\Component\Validator\Constraints\Email;
-
-
 
 /**
 
@@ -31,10 +20,7 @@ use Symfony\Component\Validator\Constraints\Email;
  * @UniqueEntity(fields="telephone", message="Ce numéro de téléphone existe déja sur un autre compte !")
 
  */
-
 class User extends BaseUser {
-
-
 
     /**
 
@@ -47,20 +33,32 @@ class User extends BaseUser {
      * @ORM\GeneratedValue(strategy="AUTO")
 
      */
-
     protected $id;
-
-
 
     public function __construct() {
 
         parent::__construct();
 
         $this->reservations = new ArrayCollection();
-
     }
 
+    /**
 
+     * @ORM\OneToMany(targetEntity="UserBundle\Entity\User",mappedBy="administrateur")
+
+     * @var User 
+
+     */
+    protected $moniteurs = null;
+
+    /**
+
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User",inversedBy="moniteurs")
+
+     * @var User 
+
+     */
+    protected $administrateur = null;
 
     /**
 
@@ -69,10 +67,7 @@ class User extends BaseUser {
      * @var User 
 
      */
-
     protected $clients = null;
-
-
 
     /**
 
@@ -81,48 +76,30 @@ class User extends BaseUser {
      * @var User 
 
      */
-
     protected $moniteur = null;
-
-        
 
     /**
 
      * @ORM\OneToMany(targetEntity="ReservationBundle\Entity\Reservation",mappedBy="client")
 
-	 * @ORM\OrderBy({"dateReservation" = "ASC"})
+     * @ORM\OrderBy({"dateDebut" = "ASC"})
 
      */
-
     protected $reservations = null;
 
-    
-
-     /**
+    /**
 
      * @ORM\ManyToOne(targetEntity="UserBundle\Entity\Entreprise")         
 
      */
-
-    protected $entreprise = null;    
-
-
-
-    
+    protected $entreprise = null;
 
     /**
-
      * @var integer
-
      * @ORM\Column(name="telephone", type="integer")
-
      * @Assert\Regex("/^[6-7][0-9]{8}$/",message = "Numero non valide : exemple => 615664758")
-
      */
-
     protected $telephone;
-
-
 
     /**
 
@@ -137,10 +114,7 @@ class User extends BaseUser {
      * minMessage = "Le nom est court")	 
 
      */
-
     protected $nom;
-
-
 
     /**
 
@@ -155,22 +129,16 @@ class User extends BaseUser {
      * minMessage = "Le prenom est court")	 
 
      */
-
     protected $prenom;
-
-
 
     /**
 
-     * @var integer	 
+     * @var float	 
 
-     * @ORM\Column(name="solde", type="integer",nullable=true)
+     * @ORM\Column(name="solde", type="float",nullable=true)
 
      */
-
     protected $solde = 0;
-
-
 
     /**
 
@@ -179,10 +147,7 @@ class User extends BaseUser {
      * @ORM\Column(name="money", type="float",nullable=true))
 
      */
-
     protected $money = 0;
-
-
 
     /**
 
@@ -191,148 +156,105 @@ class User extends BaseUser {
      * @Email()
 
      */
-
     protected $email;
-
-
 
     function getClients() {
 
         return $this->clients;
-
     }
-
-
 
     function getMoniteur() {
 
         return $this->moniteur;
-
     }
 
+    function getAdministrateur() {
+        return $this->administrateur;
+    }
 
+    function setAdministrateur(User $admin) {
+        $this->administrateur = $admin;
+    }
 
     function setClients(User $clients) {
 
         $this->clients = $clients;
-
     }
-
-
 
     function setMoniteur(User $moniteur) {
 
         $this->moniteur = $moniteur;
-
     }
-
-
 
     public function getId() {
 
         return $this->id;
-
     }
-
-
 
     public function getTelephone() {
 
         return $this->telephone;
-
     }
-
-
 
     public function setTelephone($telephone) {
 
         $this->telephone = $telephone;
 
         return $this;
-
     }
-
-
 
     public function getNom() {
 
         return $this->nom;
-
     }
-
-
 
     public function setNom($nom) {
 
         $this->nom = $nom;
 
         return $this;
-
     }
-
-
 
     public function getPrenom() {
 
         return $this->prenom;
-
     }
-
-
 
     public function setPrenom($prenom) {
 
         $this->prenom = $prenom;
 
         return $this;
-
     }
-
-
 
     public function getSolde() {
 
         return $this->solde;
-
     }
-
-
 
     public function setSolde($solde) {
 
         $this->solde = $solde;
 
         return $this;
-
     }
-
-
 
     public function getMoney() {
 
         return $this->money;
-
     }
-
-
 
     public function setMoney($money) {
 
         $this->money = $money;
 
         return $this;
-
     }
-
-
 
     public function getEmail() {
 
         return $this->email;
-
     }
-
-
 
     public function setEmail($email) {
 
@@ -341,43 +263,30 @@ class User extends BaseUser {
         $this->setUsername($email);
 
         return $this;
-
     }
-
-
 
     function getReservations() {
 
         return $this->reservations;
-
     }
-
-
 
     function setReservations($reservations) {
 
         $this->reservations = $reservations;
-
     }
-	
-
-    
 
     function getEntreprise() {
 
         return $this->entreprise;
-
     }
-
-
 
     function setEntreprise($entreprise) {
 
         $this->entreprise = $entreprise;
+    }
 
-    }    
-
-
+    function getMoniteurs() {
+        return $this->moniteurs;
+    }
 
 }
-

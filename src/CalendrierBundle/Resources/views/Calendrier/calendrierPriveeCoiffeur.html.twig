@@ -71,7 +71,11 @@
         
 
         var date = new Date();
-        $(document).ready(function(){            
+		if(date.getDay()!=0){
+			x=date.getDay()-1;
+			date.setDate(date.getDate() - x);			
+		}        
+        $(document).ready(function(){			
             $('#nextSevenDay').click(function(){
                 date.setDate(date.getDate() + 7);
                 var dateEnvoyer = date.format("yyyy-MM-dd h:mm:ss");
@@ -103,24 +107,39 @@
             });
             
             
-            function reserver(){                                                                                
-                Swal.fire({
-                    title: 'Confirmez la réservation',                                                                
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    cancelButtonText: 'Annuler',
-                    confirmButtonText: 'Ok'
-                  }).then(result => {
-                      if (result.value) {
-                            var tabResa = [];
-                            var tabControle=[]; 
-                            $("input[type='checkbox']:checked").each(function(){
-                                tabResa.push($(this).val());
-                            });                          
-                          actionReserver(tabResa,tabControle); 
-                      }                      
-                 });                  
+            async  function reserver(){
+
+                const inputOptions = new Promise((resolve) => {
+                  setTimeout(() => {
+                    resolve({
+                      '1': 'Simple',
+                      '2': 'Complexe'                      
+                    })
+                  }, 1000)
+                })
+
+                const { value: color } = await Swal.fire({
+                  title: 'Choisissez une coiffure',				                                                                
+				  showCancelButton: true,				  
+				  cancelButtonColor: '#d33',
+				  cancelButtonText: 'Annuler',
+                  input: 'radio',
+                  inputOptions: inputOptions,
+                  inputValidator: (value) => {
+                    if (!value) {
+                      return 'Choisissez une coiffure svp !' 
+                    }
+                  }
+                })
+
+                if (color) {
+                    var tabResa = [];
+                    var tabControle=[]; 
+                    $("input[type='checkbox']:checked").each(function(){
+                        tabResa.push($(this).val());
+                    });                          
+                   actionReserver(tabResa,tabControle,color); 
+                }
                                                                                                                      
                 var tabResa = [];
                 var tabControle= [];                
@@ -129,14 +148,15 @@
          
             
             function controleReservation(tabResa,tabControle){
-                if(tabResa.length > 2){
-                    tabControle.push("Pas plus de 2 réservations !");
+                if(tabResa.length > 1){
+                    tabControle.push("Pas plus d'une réservation !");
                 }            
             }
             
-            function actionReserver(tabResa,tabControle){
+            function actionReserver(tabResa,tabControle,color){
                  // Controle Front
                 controleReservation(tabResa,tabControle);
+				var dateEnvoyer = date.format("yyyy-MM-dd h:mm:ss");
                 if(tabControle.length !==0){                    
                     Swal.fire({
                         icon: 'error',
@@ -158,7 +178,7 @@
                                         });
                                         $("#reserveDate").css('display','block');
                                     }else{
-                                        $.post("{{ (path('Privee_reserver'))}}",{lesResaChoisi:tabResa},
+                                        $.post("{{ (path('Privee_reserver'))}}",{lesResaChoisi:tabResa,color:color,datePivot:dateEnvoyer},
                                             function(data){
                                                 $('.loader').hide();
                                                 $('#calendrier').html(data);

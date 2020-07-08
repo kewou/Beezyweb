@@ -18,8 +18,12 @@
 
 
 {% block contenu %}
-    <div id="globalAdmin">
-		<h2 id="titreAdmin">Les moniteurs</h2>
+    <div id="globalAdmin">        
+                {% if user.id==15 %}
+                    <h2 id="titreAdmin">Les moniteurs</h2>
+                {% else %}
+                    <h2 id="titreAdmin">Les coiffeurs</h2>
+                {% endif %}		
 		<div id="administrationMenu">
 			{% for item in moniteurs %}
 				<a href="{{path("Admin_moniteur_calendrier",{"idMoniteur":item.id})}}">{{item.nom}} {{item.prenom}}</a>
