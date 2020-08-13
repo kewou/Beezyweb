@@ -50,10 +50,6 @@ class UserService {
     public function getReservationsByClient($idUser) {
         return $this->entityManager->getRepository('UserBundle:User')->findReservations($idUser);
     }
-    
-    public function getAdminReservationsByClient($idUser) {
-        return $this->entityManager->getRepository('UserBundle:User')->findReservationsAdmin($idUser);
-    }
 
     public function switchMoniteur($user, $moniteur) {
         $user->setMoniteur($moniteur);
@@ -151,7 +147,7 @@ class UserService {
         $clients = $this->getAllUsersMoniteur($idMoniteur);
         $reservations = array();
         foreach ($clients as $client) {
-            $lesResas = $this->getAdminReservationsByClient($client['id']);
+            $lesResas = $this->getReservationsByClient($client['id']);
             foreach ($lesResas as $resa) {
                 array_push($reservations, $resa);
             }
