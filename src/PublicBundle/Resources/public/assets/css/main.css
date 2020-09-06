@@ -12,19 +12,17 @@
 
 
 
-	html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead,article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+	html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
 		margin: 0;
 		padding: 0;
 		border: 0;
 		font-size: 100%;
-		font: inherit;
-		vertical-align: baseline;
+		font: inherit;		
 	}
         
-        #presBeezyweb{
-            width:50%;
+        #presBeezyweb{           
             color:#fff;
-            font-size: 20px;
+            font-size: 22px;
         }
         
         #titreAccueil{
@@ -3056,8 +3054,7 @@
 	.wrapper {
 		padding: 6em 0 4em 0;
 	}
-        #presBeezyweb {
-            width: 35%;
+        #presBeezyweb {            
             color: #fff;
             font-size: 25px;
         }
@@ -3312,7 +3309,7 @@
                     text-decoration: none;
                     text-transform: uppercase;
                     transition: color 0.3s ease;
-                    margin-top: 20px;
+                    margin-top: 40px;
                 }
                 h2.major {
                         margin: 0 auto;
@@ -3475,9 +3472,8 @@
                 }
                 
                 #register_Bouton{
-                    width: 25%;
-                    margin-top: 3%;
-                    margin-left: 30%;
+                    width: 42%;
+                    margin-top: 20px;
                 }
 
                 .register_form_input {
@@ -3847,6 +3843,13 @@
 		/* Basic */
                         p{font-size:20px;}
                         
+                        #accueil_right{
+                            display:none
+                        }
+                        #contenu #accueil_left{
+                            width:100%;                            
+                        }
+                        
                         #presBeezyweb{
                             width:100%;
                         }
@@ -4162,25 +4165,36 @@
 			}
                         
                 /* Inscription version téléphone */
+				#main #fos_user_registration_form_entreprise{
+					width: 235px;
+					margin-top: 10px;
+					margin-left: 2px;
+				}
                 
                 #formInscription input{
                     width:235px;
-                }
+					margin-left: 5px;
+                } 
                #register_form_contenair{
                     width:100%;
                 }
                 #register_form_contenair label{
                     display:none;
                 }
+				#main #register_Bouton{
+					margin-left:30px;
+				}
                 
                 .register_form_left_side{
                     width:100%;
                     float: none;
+					margin-left: 25px;
                 }
                 
                 .register_form_right_side{
                     width:100%;
                     float: none;
+					margin-left: 25px;
                 }
                 
                 #register_Bouton {

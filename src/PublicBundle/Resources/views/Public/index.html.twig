@@ -29,10 +29,19 @@
 
 
 {% block contenu %}
-    <div>
-        <h2 id="titreAccueil">Beezyweb</h2>    
-        <p id="presBeezyweb">Votre plateforme de prise de rendez-vous entièrement en ligne.</p>
-        <a href="{{path("fos_user_registration_register")}}" id="creerCompteBis">Créer un compte</a>
+    <div>        
+        <div id="accueil_left">
+            <h2 id="titreAccueil">Beezyweb</h2>
+            <p id="presBeezyweb">Une plateforme vous permettant de réserver des heures de conduite en ligne.</p>
+            <p id="presBeezyweb"><br>Plus besoin de contacter votre auto-école,
+                synchroniser vos disponibilités avec leur planning via cette application. 
+            </p>
+            <a href="{{path("fos_user_registration_register")}}" id="creerCompteBis">Créer un compte</a>
+        </div>
+        <div id="accueil_right">
+            <img src="{{ asset('bundles/public/assets/css/images/brune_conduite.jpg')}}" alt="logo"/>
+        </div>
+        <div class="clearer"></div>
     </div>
 {% endblock %}
 

@@ -47,7 +47,10 @@ class PublicController extends Controller {
    
     function contactAction(){
         return $this->render("PublicBundle:Public:contact.html.twig");
-
+    }
+    
+    function Public_mentionLegaleAction(){
+       return $this->render("PublicBundle:Public:mentionLegale.html.twig"); 
     }
    
     function mailContactAction(){              

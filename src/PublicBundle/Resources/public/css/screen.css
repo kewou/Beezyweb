@@ -6,6 +6,10 @@ body {
   font: 16px Arial;  
 }
 
+.today{
+	color:indigo;
+}
+
 #iciLink{
 	color:yellow;
 	text-decoration:underline;
@@ -58,6 +62,24 @@ span.swal2-label{
   /*when navigating through the items using the arrow keys:*/
   background-color: DodgerBlue !important; 
   color: #ffffff; 
+}
+
+#linksFooter a{
+    color: white;
+}
+
+#linksFooter a:hover{
+    color: red;
+}
+
+#accueil_left{
+    float:left;
+    width:49%;
+}
+
+#accueil_right{
+    float:right;
+    width:50%;
 }
 
 #globalAdmin{
@@ -358,6 +380,12 @@ body{
     border-color:red;
 }
 
+#fos_user_registration_form_entreprise{
+	color:black;
+	width: 80%;
+    margin-top: 5px; 
+}
+
 
 #mesInfosCompte{
     width:62%;
@@ -633,7 +661,7 @@ ul.typeahead a:hover{
         width:75px;
 		left: 55%;
 		position: fixed;
-		top: 500px;
+		top: 500px;	
     }
     
     /* calendrier privee  version telephone */
