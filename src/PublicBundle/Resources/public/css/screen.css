@@ -1,4 +1,4 @@
-{
+﻿{
   box-sizing: border-box;
 }
 
@@ -10,7 +10,7 @@ body {
 	color:indigo;
 }
  
-#titleBar img{ 
+#div_logo img{ 
 	height:63px; 
 	width:100px;
 }
