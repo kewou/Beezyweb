@@ -1,4 +1,4 @@
-﻿{
+{
   box-sizing: border-box;
 }
 
@@ -8,6 +8,11 @@ body {
 
 .today{
 	color:indigo;
+}
+ 
+#titleBar img{ 
+	height:63px; 
+	width:100px;
 }
 
 #iciLink{
@@ -697,6 +702,11 @@ ul.typeahead a:hover{
     table td{
         width:46px;
     }
+	
+	#titleBar img{
+		height:60px; 
+		width:60px;
+	}
 	
 
     
