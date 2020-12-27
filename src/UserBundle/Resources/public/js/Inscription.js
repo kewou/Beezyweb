@@ -1,8 +1,5 @@
 
 $(document).ready(function(){
-    $(".logo").click(function(){
-        location.reload();
-    });
     $.validator.addMethod("validNom",function(value,element) {
             if(/.{2}/.test(value)){
                 return true;

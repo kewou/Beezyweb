@@ -1,6 +1,3 @@
-﻿{
-  box-sizing: border-box;
-}
 
 body {
   font: 16px Arial;  
@@ -9,10 +6,14 @@ body {
 .today{
 	color:indigo;
 }
- 
+
 #div_logo img{ 
 	height:63px; 
 	width:100px;
+}
+
+.logo:hover{
+  cursor:pointer;  
 }
 
 #iciLink{
@@ -25,7 +26,6 @@ body {
   position: relative;
   display: inline-block;
 }
-msg
 
 input[type=submit] {
   background-color: DodgerBlue;

@@ -36,8 +36,8 @@ class SessionHandler {
         }
 
         if ($this->maxIdleTime > 0) {
+		$this->session->start();
 
-            $this->session->start();
             $lapse = time() - $this->session->getMetadataBag()->getLastUsed();
 
             if ($lapse > $this->maxIdleTime) {
