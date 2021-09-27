@@ -1,0 +1,11 @@
+fos_user_profile_show:
+    pattern: profil
+    defaults: { _controller: FOSUserBundle:Profile:show }
+    
+fos_user_profile_edit:
+    pattern: /gestion-profil
+    defaults: { _controller: FOSUserBundle:Profile:edit}
+    
+    
+
+

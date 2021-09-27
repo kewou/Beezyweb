@@ -1,0 +1,46 @@
+
+{% extends "UserBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block contenu %}      
+    
+    {% if error %}
+        <div id="login_msg_error"  style="width:35%;margin:0 auto;margin-bottom: 10px;border:1px solid #e44c65;border-radius:5px;background-color:#e2c4c9;padding-top:10px;padding-bottom:10px;" >
+            <span class="login_msg_error_label" >{{ error.messageKey|trans(error.messageData, 'security') }} </span>
+            <button id="login_msg_error_button" class="login_msg_error_button" type="button" >x</button>
+        </div>
+    {% endif %}
+    
+    <div id="form_contenair_login" class="block_form">
+
+        <form action="{{ path("fos_user_security_check") }}" method="post">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+
+            <label for="username" class="label_connexion">Adresse mail</label>
+            <input type="text" id="username" class="input_form" name="_username" value="{{ last_username }}" required="required" placeholder="joelBeezyweb@ ..."/>
+
+            <label for="password" class="label_connexion">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
+            <input type="password" id="password" class="input_form"  name="_password" required="required" placeholder="Votre mot de passe"/>
+            
+            <div id="rememberBlock">
+                <label for="remember_me" id="label_remember">{{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}</label>
+                <input type="checkbox" id="remember_me_check_box"  name="_remember_me" value="on" />
+            </div>
+            
+            <div id="forget_password">
+                <a href="{{path("fos_user_resetting_request")}}">Mot de passe oublié ?</a>
+            </div>
+
+            <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" />
+        </form>    
+    </div>
+        
+    <script type="text/javascript">
+        document.getElementById ("login_msg_error_button").onclick = function() {
+        var element = document.getElementById ("login_msg_error");
+            element.parentNode.removeChild(element);
+        };
+    </script>
+
+{% endblock contenu %}

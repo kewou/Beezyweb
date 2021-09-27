@@ -1,0 +1,24 @@
+services:
+    autoecole_utilisateur.form.inscription_type:
+        class: UserBundle\Form\InscriptionType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: autoecole_inscription }
+    autoecole_utilisateur.form.editionProfil_type:
+        class: UserBundle\Form\EditionProfilType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: autoecole_edition_profil }
+    user_service:
+        class: UserBundle\Service\UserService
+        arguments: ["@doctrine.orm.entity_manager"]
+    mail_service:
+        class: UserBundle\Service\MailService
+        arguments: ["@mailer"]
+    my.handler.session_idle:
+        class: UserBundle\Handler\SessionHandler
+        arguments: ["@session", "@security.context", "@router", %session_max_idle_time%]
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+        
+        

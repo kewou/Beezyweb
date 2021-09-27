@@ -1,0 +1,51 @@
+{% extends "UserBundle::layout.html.twig" %}
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block contenu %}    
+
+    <div id="register_form_contenair" class="block_form">	                
+        <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" id="formInscription" class="form-vertical">
+
+            <div class="register_form_left_side">
+                {{ form_row(form.nom,{'attr': {'placeholder': 'Votre nom'}}) }}     
+                <label class="register_error_label" id="error_name"></label>        
+                {{ form_row(form.prenom, {'attr': {'placeholder': 'Votre prénom'}}) }}
+                <label class="register_error_label" id="error_surname"></label> 
+                {{ form_row(form.email, {'attr': {'placeholder': 'Votre email'}})}}
+                <label class="register_error_label" id="error_email"></label>
+                {{ form_row(form.entreprise)}}
+            </div>
+
+            <div class="register_form_right_side">
+                {{ form_row(form.telephone, {'attr': {'placeholder': 'Votre numéro de tel'}})}}
+                <label class="register_error_label" id="error_name"></label>    
+                {{ form_row(form.plainPassword.first, {'attr': {'placeholder': 'Créer votre password'}}) }}
+                <label class="register_error_label" id="error_name"></label>    
+                {% for errorItem in form.plainPassword.first.vars.errors %}
+                    <label class="control-label has-error" for="{{ form.plainPassword.vars.id }}">{{ errorItem.message }}</label>
+                {% endfor %}
+                {{ form_row(form.plainPassword.second, {'attr': {'placeholder': 'Répéter votre password'}}) }}
+                <label class="register_error_label" id="error_name"></label>    
+            </div>     
+            {{ form_rest(form) }}  
+
+            <input id="register_Bouton" type="submit" value="{{ 'registration.submit'|trans }}" />
+        </form>          
+    </div>
+     
+	<script type="text/javascript">
+	var labels = document.getElementsByTagName('label'), labelSize = labels.length;
+	for (var i=0 ; i<labelSize ; i++) {
+		if (labels[i].className=="required") {
+			labels[i].className = "form_label";
+		}
+	}
+	
+	var inputs = document.getElementsByTagName('input'), inputSize = inputs.length;
+	for (var i=0 ; i<inputSize ; i++) {
+		inputs[i].className = "register_form_input";
+	}
+	
+  	</script>
+
+{% endblock %}    

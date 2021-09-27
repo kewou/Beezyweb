@@ -1,0 +1,54 @@
+Moniteur_accueil:
+    path:     /
+    defaults: { _controller: MoniteurBundle:Moniteur:index }
+    
+Moniteur_calendrier:
+    path:     /calendrier
+    defaults: { _controller: CalendrierBundle:Calendrier:calendrierMoniteur }
+    
+Moniteur_calendrier:
+    path: /calendrierMoniteurContenu
+    defaults: {_controller: CalendrierBundle:Calendrier:calendrierContenu }    
+    
+Moniteur_calendrierPagination:
+    path: /calendrier/pagination
+    defaults: {_controller: CalendrierBundle:Calendrier:paginationMoniteur }
+    
+Moniteur_controle_nom_client:
+    path: /calendrier/action/controle
+    defaults: {_controller: ReservationBundle:Reservation:controleNomClient}
+    
+Moniteur_valider:
+    path: /calendrier/moniteur/valider
+    defaults: { _controller: ReservationBundle:Reservation:valider }
+    
+Moniteur_affecter:
+    path: /calendrier/moniteur/affecter
+    defaults: { _controller: ReservationBundle:Reservation:affecter }
+    
+Moniteur_annuler:
+    path: /calendrier/moniteur/annuler
+    defaults: { _controller: ReservationBundle:Reservation:annulerMoniteur }    
+    
+Moniteur_fermer:
+    path: /calendrier/fermer
+    defaults: { _controller: ReservationBundle:Reservation:fermer }
+    
+Moniteur_liste_nomCLient:
+    path: /calendrier/clients/
+    defaults: { _controller: ReservationBundle:Reservation:listeNomClient }          
+    
+fos_moniteur_profile_show:
+    pattern: /profil
+    defaults: { _controller: FOSUserBundle:Profile:showMoniteur }
+    
+fos_moniteur_profile_edit:
+    pattern: /gestion-profil
+    defaults: { _controller: FOSUserBundle:Profile:editMoniteur}
+    
+Moniteur_client:
+    path: /moniteur/fiche-client
+    defaults: { _controller: AdminBundle:GestionClient:infosClientByNom }    
+    
+    
+

@@ -1,0 +1,18 @@
+Public_accueil:
+    path: /
+    defaults: { _controller: PublicBundle:Public:index }
+    
+Public_forum:
+    path: /forum
+    defaults: { _controller: PublicBundle:Public:forum }  
+
+Public_contact:
+    pattern: /contact
+    defaults: { _controller: PublicBundle:Public:contact }
+    
+Public_mailContat:
+    pattern: /contact/send-mail
+    defaults: { _controller: PublicBundle:Public:mailContact }
+Public_mentionLegale:
+    pattern: /mention-legales
+    defaults: { _controller: PublicBundle:Public:Public_mentionLegale }

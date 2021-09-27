@@ -1,0 +1,7 @@
+{% extends "PublicBundle:Public:index.html.twig" %}
+{% trans_default_domain 'FOSUserBundle' %}
+
+
+{% block contenu %}
+    <p class="msg_info_generale">{{ 'registration.check_email'|trans({'%email%': user.email}, 'FOSUserBundle') }}</p>
+{% endblock %}   

@@ -1,0 +1,135 @@
+<div id="mesInfosCompte">        
+    <table>        
+        <th id="identiteUser">{{ user.prenom}} {{ user.nom }}</th>                                 
+        <tr><td>Email</td><td>{{ user.email }}</td></tr>
+        <tr><td>Téléphone</td><td>0{{ formatPhone(user.telephone) }}</td></tr>
+		{% if user.money<0 %}
+            <tr><td> Solde </td><td style="color:red">{{ user.money}} €</td></tr>
+        {% else %}
+            <tr><td> Solde </td><td>{{ user.money}} €</td></tr>
+        {% endif %} 
+        <tr><td> Jeton (s) </td><td>{{ user.solde}}</td></tr>
+        <tr><td> 
+				<div id="handleSomme">
+					<input type="number" id="sommeArgent" autocomplete=off placeholder="Montant en €" style="padding:15px;">
+                </div>
+			</td>          
+			<td>
+				<div class="handleJeton">						
+					<a href="#" id="removeJeton">
+							<img src="{{ asset('bundles/public/assets/css/images/remove_icon.jpg')}}" alt="Enlever" height="20" width="20"/>
+					</a>
+					&nbsp;&nbsp;                                           
+					<a href="#" id="addJeton">
+							<img src="{{ asset('bundles/public/assets/css/images/add_icon.png')}}" alt="Ajouter" height="20" width="20"/>
+					</a>																			
+				</div>
+			</td>                                                
+        </tr>
+		<tr id="handleJeton">
+			<td style="color:red"> CORRECTION</td>
+			<td>
+				<div id="handleCorrection">
+					<div id="handleAction">
+							<a href="#" id="removeUnJeton">
+									<img src="{{ asset('bundles/public/assets/css/images/remove_icon.jpg')}}" alt="Enlever" height="20" width="20"/>
+							</a>
+							&nbsp;&nbsp;                                           
+							<a href="#" id="addUnJeton">
+									<img src="{{ asset('bundles/public/assets/css/images/add_icon.png')}}" alt="Ajouter" height="20" width="20"/>
+							</a>													
+					</div>
+				</div>
+			</td> 			
+       
+		</tr>
+		<tr> {% if user.administrateur.id==15 %}
+                            <td>Moniteur</td>
+                     {% else %}
+                            <td>Coiffeur</td>
+                     {% endif %}
+		    <td> 
+					{% for item in moniteurs %}
+						{% if user.moniteur.id==item.id %}
+							<input type="radio" checked="checked" name="same" id="{{item.id}}" class="moniteurSelected"> {{item.nom}}<br>
+						{% else %}
+							<input type="radio" name="same" id="{{item.id}}" class="moniteurSelected"> {{item.nom}}<br>
+						{% endif %}	  
+					{% endfor %}				 
+			</td>
+    </ul>
+    </table>	
+    <input id="nom" type="hidden" value="{{user.nom}}">
+    <a id="retourProfilMoniteur" href="{{path("Admin_clients")}}">
+        <img src="{{ asset('bundles/public/assets/css/images/back.jpg')}}" alt="Back" height="90" width="110"/>
+    </a>
+</div>
+
+ <script>
+          $(document).on("click",".moniteurSelected",function(){  
+			var idMoniteur=$(this).attr('id');
+                        
+                        $.ajax({
+                            type:"POST",
+                            url:"{{ (path('Admin_controle_switch_moniteur'))}}",
+                            data:{idUser:"{{user.id}}"},                    
+                            async:false,
+                            complete: function(data){                        
+                                if(data["responseText"]!==""){
+                                    Swal.fire({
+                                        icon: 'error',
+                                        text: data["responseText"]
+                                    });
+                                }else{
+                                    $.post("{{path('Admin_switch_moniteur')}}",{idMoniteur:idMoniteur,idUser:"{{user.id}}"},function(data){
+                                            $("#contenu").html(data);
+                                    }); 
+                                }
+                           }
+							});                                                
+			});
+	 </script> 
+		
+	 <script>
+		var nom = $("#nom").val();		
+			$("#removeJeton").click(function(){
+				somme = $("#sommeArgent").val();
+				if(somme==""){
+					Swal.fire({
+						icon: 'error',
+						text: 'Veuillez saisir un montant'
+					});
+				}else{						
+						$.post("{{ (path('Admin_client_remove_jeton'))}}",{nom:nom,somme:somme},function( data ) {
+							$("#contenu").html(data);
+						});
+				}
+			});
+	
+    
+    $("#addJeton").click(function(){
+		somme = $("#sommeArgent").val();
+		if(somme==""){
+			Swal.fire({
+				icon: 'error',
+				text: 'Veuillez saisir un montant'
+			});
+		}else{
+			$.post("{{ (path('Admin_client_add_jeton'))}}",{nom:nom,somme:somme},function( data ) {
+				$("#contenu").html(data);
+			});
+		}
+    });
+	
+    $("#removeUnJeton").click(function(){		
+        $.post("{{ (path('Admin_client_remove_un_jeton'))}}",{nom:nom},function( data ) {
+            $("#contenu").html(data);
+        });
+    });
+    
+    $("#addUnJeton").click(function(){		
+        $.post("{{ (path('Admin_client_add_un_jeton'))}}",{nom:nom},function( data ) {
+            $("#contenu").html(data);
+        });
+    });    
+</script>

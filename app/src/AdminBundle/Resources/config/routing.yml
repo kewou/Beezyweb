@@ -1,0 +1,53 @@
+Admin_accueil:
+    path:  /
+    defaults: { _controller: AdminBundle:Admin:index }   
+    
+Admin_clients:
+    path: /clients
+    defaults: { _controller: AdminBundle:GestionClient:clients }    
+Admin_client:
+    path: /clients/compte-client
+    defaults: { _controller: AdminBundle:GestionClient:infosClient }
+Admin_client_recherche:
+    path: /clients/recherche-un-client
+    defaults: { _controller: AdminBundle:GestionClient:rechercheClient }
+Admin_client_admin:
+    path: /clients/un-client
+    defaults: { _controller: AdminBundle:GestionClient:infosClientByNomAdmin }
+Admin_client_delete:
+    path: /clients/{id}/supprimer-client
+    defaults: { _controller: AdminBundle:GestionClient:deleteUser }
+    
+Admin_moniteurs:
+    path: /moniteurs
+    defaults: { _controller: AdminBundle:GestionMoniteur:moniteurs }
+Admin_moniteur:
+    path: /moniteurs/{id}/compte-moniteur
+    defaults: { _controller: AdminBundle:GestionMoniteur:infosMoniteur }	
+Admin_moniteur_calendrier:
+    path: /moniteurs/compte-moniteur/{idMoniteur}/calendrier 
+    defaults: {_controller: CalendrierBundle:Calendrier:calendrierAdmin }	
+Admin_client_delete: 
+    path: /moniteurs/{id}/supprimer-moniteur
+    defaults: { _controller: AdminBundle:GestionMoniteur:deleteUser }    
+Admin_controle_switch_moniteur:
+    path: /controle/changement-moniteur
+    defaults: { _controller: AdminBundle:GestionClient:controleSwitchMoniteur }
+Admin_switch_moniteur:
+    path: /clients/client/change-moniteur
+    defaults: { _controller: AdminBundle:GestionClient:switchMoniteur }
+Admin_client_add_jeton:
+    path: /client/solde/crediter
+    defaults: { _controller: AdminBundle:GestionClient:addArgent }  
+    
+Admin_client_remove_jeton:
+    path: /client/solde/debiter
+    defaults: { _controller: AdminBundle:GestionClient:removeArgent}
+    
+Admin_client_add_un_jeton:
+    path: /client/solde/correction/crediter
+    defaults: { _controller: AdminBundle:GestionClient:addUnArgent }  
+    
+Admin_client_remove_un_jeton:
+    path: /client/solde/correction/debiter
+    defaults: { _controller: AdminBundle:GestionClient:removeUnArgent}      

@@ -1,0 +1,38 @@
+security:
+    encoders:
+        FOS\UserBundle\Model\UserInterface: sha512
+    providers:
+        fos_userbundle:
+            id: fos_user.user_provider.username
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt|error)|css|images|js)/
+            security: false            
+        main:
+            pattern: ^/
+            form_login:
+                provider: fos_userbundle
+                csrf_token_generator: security.csrf.token_manager
+                login_path:  fos_user_security_login
+                use_forward:        false
+                check_path:         fos_user_security_check
+                failure_path: null
+                default_target_path: /privee/
+                remember_me: false
+            logout:
+                path: fos_user_security_logout
+                target: /
+            anonymous: true 
+            
+        admin:
+            pattern: /admin(.*)
+            form_login:
+                provider:       fos_userbundle
+                login_path:     /admin/login
+                check_path:     /admin/login_check
+                default_target_path: /admin/
+            logout:
+                path:           /admin/logout
+                target:         /admin/login
+            anonymous: true  
+          

@@ -1,0 +1,133 @@
+{% extends "PublicBundle:Public:index.html.twig" %}
+
+{% block header %}
+        <header id="header" class="alt">
+        <div id="div_logo">
+            <h1 id="logo">
+                <a href="{{path("Privee_accueil")}}">
+                    <img src="{{ asset('bundles/public/assets/css/images/logo.jpg')}}" title="Accueil" alt="logo" height="60" width="60"/>
+                </a>
+            </h1>
+        </div>          
+            <!-- Menu -->
+            {% block menu %}
+                <nav id="nav">                    
+                    <a href="{{path("Privee_calendrier")}}">Calendrier</a>
+                    <a href="{{path("fos_user_profile_edit")}}">Paramètres</a>
+                    <a href="{{path("fos_user_security_logout")}}"  id="deconnexionBouton">Deconnexion</a>                    
+                </nav>  
+            {% endblock %}        
+        </header>        
+{% endblock %}
+
+
+{% block contenu %}	
+    <div id="mesInfosCompte">		
+        <h3>Mes réservations</h3>
+        <div id="mesResa">            
+            <ul>            
+                {% set iter=1 %} 
+                {% for resa in triTableauDate(user.reservations) %} 					
+                        <li class="idResa">
+                            {% if resa.typeCoiffure=="NA" %}
+                            {% else %}   
+                                {% if resa.etat=="Valider" %}                                    
+                                   <p class="numResaValider">{{iter}}</p>
+                                   <p class="dateResaShow">{{ fortmatDate(resa)}} </p>						   
+                                {% else %}
+                                    <p class="numResaReserver">{{iter}}</p>
+                                    <p class="dateResaShow">{{ fortmatDate(resa)}} </p>	
+                                    <a class="annuleResa" id="{{resa.id}}"><img src="{{ asset('bundles/public/assets/css/images/cancel.jpg')}}" alt="Annuler" title="Annuler" height="20" width="20"/></a></td>
+                                {% endif %}
+                            {% endif %}
+                        </li>                        
+                    {% set iter=iter + 1 %}                                                                            
+                {% endfor %}
+                {% if iter==1 %}
+                    <li>Vous n'avez pas de réservations en cours</li>
+                {% endif %}
+            </ul>            
+        </div>
+        <h3 id="mesInfosTitre">Mes informations</h3>
+        <ul id="mesInfosPerso">
+            <li id="infosKey">
+                <ul>                           
+                    <li>Solde </li>
+                    <li>Jeton (s)</li>
+                    <li>Identité</li>
+                    <li>Email</li>
+                    <li>Téléphone</li>
+                    {% if user.administrateur.id==15 %} 
+                        <li>Moniteur</li>
+                     {% else %}
+                        <li>Coiffeur</li>
+                    {% endif %}		    
+                </ul>
+            </li>
+            <li id="infosValue">
+                <ul>                            
+                    {% if user.money<0 %}
+                        <li style="color:red">{{ user.money}} €</li>
+                    {% else %}
+                        <li>{{ user.money}}</li>
+                    {% endif %} 
+                    <li>{{ user.solde}}</li>
+                    <li>{{ user.prenom}} {{ user.nom }}</li>
+                    <li>{{ user.email }}</li>
+                    <li>0{{ formatPhone(user.telephone) }}</li>
+		    <li>{{user.moniteur.nom}} : 0{{formatPhone(user.moniteur.telephone)}}</li>
+                </ul>
+            </li> 
+        </ul>      
+    </div>
+            
+    <script>
+        $(document).on("click",".annuleResa",function(){			
+            idResa=$(this).attr('id');            		
+            annuler(idResa); 
+        });
+        
+        function annuler(idResa){
+            Swal.fire({
+                title: "Confirmez l'annulation",                                                                
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Retour',
+                confirmButtonText: 'Ok'
+            }).then(result => {
+                    if (result.value) {
+						/* A faire plustard
+						if(!peutAnnuler){
+						    Swal.fire({
+								icon: 'error',
+								text: 'Votre réservation à été validé, veuillez contacter votre responsable'
+							});
+						}else{	*/					
+							$('.loader').show();
+							$.ajax({
+								type:"POST",
+								url:"{{ (path('Privee_annuler_contenu'))}}",
+								data:{idResa:idResa},				
+								success: function(data) {
+									$('.loader').hide(); 
+									$("#mesInfosCompte").html(data);
+									Swal.fire({
+										icon: 'success',
+										text: 'Votre annulation a été prise en compte'                                                
+									})
+								}      
+							});
+						//}
+				    }else{
+						return;
+					}
+			});                        
+        }		
+    </script>  
+
+
+    
+    
+
+{% endblock contenu %}

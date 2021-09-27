@@ -1,0 +1,13 @@
+{% extends "UserBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+
+{% block contenu %}
+ <p class="msg_info_generale">
+    Votre compte est activé !
+    Vous pouvez dès à présent profiter des fonctionnalités offertes par Beezyweb :) <br>
+	Connectez vous en cliquant <a id="iciLink" href="{{path("fos_user_security_login")}}">ICI</a>
+</p> 
+
+{% endblock %}   

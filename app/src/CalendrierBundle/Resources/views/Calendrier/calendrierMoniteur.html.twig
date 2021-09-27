@@ -1,0 +1,456 @@
+{% extends "PublicBundle:Public:index.html.twig" %}
+
+{% block header %}
+    <header id="header" class="alt">
+        <div id="div_logo">
+            <h1 id="logo">
+                <a href="{{path("Moniteur_accueil")}}">
+                    <img src="{{ asset('bundles/public/assets/css/images/logo.jpg')}}" alt="logo" height="60" width="60"/></a></h1>
+        </div>            
+        <!-- Menu -->
+        {% block menu %}
+            <nav id="nav">
+                <a href="{{path("Moniteur_accueil")}}">Accueil</a>
+                <a href="{{path("fos_moniteur_profile_show")}}">{{firstLetter(user.prenom)}}. {{user.nom}}<img src="{{ asset('bundles/public/assets/css/images/icon_user.png')}}" id="icon_user" alt="icon_user" height="15" width="20"/></a>                    
+                <a href="{{path("fos_moniteur_profile_edit")}}">Paramètres</a>
+                <a href="{{path("fos_user_security_logout")}}"  id="deconnexionBouton">Deconnexion</a>                   
+            </nav>  
+        {% endblock %}        
+    </header>        
+{% endblock %}
+
+{% block contenu %}
+    <ul id="commandeCalendrier">
+        <li><button type="button" id='valideDate' class="btn btn-success btn-lg">Valider</button></li>
+        <li><button type="button" id='annuleDate' class="btn-default btn-lg">Annuler</button></li>
+        <li><button type="button"  id='affecteModal' class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Affecter</button></li>
+        <li><button type="button" id='fermeDate' class="btn btn-danger btn-lg" >Bloquer</button></li>
+    </ul>
+
+    <!-- MODAL -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">    
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>          
+                    <h4 class='modal-title' id='myModalLabel'>Entrer le nom d'une personne</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="autocomplete" style="width:300px;">
+                        <input id="myInput" type="text" name="nom_client" placeholder="Saisit un nom" required autocomplete="off">                
+                    </div>
+                    <div>
+                        <input type="checkbox" class="ui-checkboxradio" name="plusDemiHeure"> +30min
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id='affecteDate' class="btn btn-success btn" data-dismiss="modal">Valider</button> 
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                </div>
+            </div>      
+        </div>
+    </div> 
+
+    <div id='paginationCalendrier'>
+        <ul class="pagination">
+            <li class="page-item">                
+                <a id="previousSevenDay" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only ">Previous</span>
+                </a>
+            </li>
+            <li class="page-item">
+                <a id="nextSevenDay" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </li>
+        </ul>
+    </div>              
+    <div id="calendrier">        
+        {{ cal.display() }}        
+    </div>
+    
+
+
+    <script>
+        $("#valideDate").css('display', 'none');
+        $("#annuleDate").css('display', 'none');
+        $("#fermeDate").css('display', 'none');
+        $("#affecteModal").css('display', 'none');
+        $(document).on('change', "input[type='checkbox']", function () {
+            if (this.checked) {
+                if (this.className === "fermer") {
+                    $("#annuleDate").css('display', 'block');
+                    $("#affecteDate").css('display', 'block');
+                } else if (this.className === "valider") {
+                    $("#annuleDate").css('display', 'block');
+                    $("#fermeDate").css('display', 'block');
+                } else if (this.className === "ui-checkboxradio") {
+                    $("#affecteModal").css('display', 'block');
+                    $("#fermeDate").css('display', 'block');
+                } else if (this.className === "reserver") {
+                    $("#annuleDate").css('display', 'block');
+                    $("#valideDate").css('display', 'block');
+                }
+            } else {
+                if ($("input:checked").length === 0) {
+                    $("#valideDate").css('display', 'none');
+                    $("#annuleDate").css('display', 'none');
+                    $("#fermeDate").css('display', 'none');
+                    $("#affecteModal").css('display', 'none');
+                }
+            }
+
+        });
+    </script>
+    <script>
+        var date = new Date();
+        $(document).ready(function () {
+		    if(date.getDay()!=0){
+				x=date.getDay()-1;
+				date.setDate(date.getDate() - x);			
+			}
+            $('#nextSevenDay').click(function () {
+                date.setDate(date.getDate() + 7);
+                var dateEnvoyer = date.format("yyyy-MM-dd h:mm:ss");
+                $.post("{{ (path('Moniteur_calendrierPagination'))}}", {datePivot: dateEnvoyer},
+                        function (data) {
+                            $('#calendrier').html(data);
+                        });
+            });
+            $('#previousSevenDay').click(function () {
+                date.setDate(date.getDate() - 7);
+                var dateEnvoyer = date.format("yyyy-MM-dd h:mm:ss");
+                $.post("{{ (path('Moniteur_calendrierPagination'))}}", {datePivot: dateEnvoyer},
+                        function (data) {
+                            $('#calendrier').html(data);
+                        });
+            });						
+		
+		
+            function couleurCaseExisteDeja(val, tab) {
+                exist = false;
+                for (var iter = 0; iter < tab.length; iter++) {
+                    if (val === tab[iter]) {
+                        exist = true;
+                    }
+                }
+                return exist;
+            }
+
+            function controleCaseMemeEtat(tabControle) {
+                var tabEtat = [];
+                $("input:checked").each(function () {
+                    var etat = $(this).attr('class');
+                    if (!couleurCaseExisteDeja(etat, tabEtat)) {
+                        tabEtat.push(etat);
+                    }
+                });
+                if (tabEtat.length > 1) {
+                    tabControle.push("Veuillez sélectionner uniquement des cases de même couleur svp !");
+                }
+            }
+
+            function controleReservation(tabResa, tabControle) {
+                if(tabResa.length===0){
+                    tabControle.push("Veuillez sélectionner au moins une case !");
+                }
+            }
+
+            $("#valideDate").click(function () {
+                valider();
+            });
+
+            $("#fermeDate").click(function () {
+                fermer();
+            });
+
+            $("#affecteDate").click(function () {
+                affecter();
+            });
+
+
+            $("#annuleDate").click(function () {
+                annuler();
+            });
+
+            function valider() {
+                var tabResa = [];
+                var tabControle = [];
+                $("input[type='checkbox']:checked").each(function () {
+                    tabResa.push($(this).val());
+                });
+
+                // Ajouter les controle Front
+                controleReservation(tabResa, tabControle);
+                controleCaseMemeEtat(tabControle);
+				var dateEnvoyer = date.format("yyyy-MM-dd h:mm:ss");
+                // Ajouter confirmation action 
+                if (tabControle.length !== 0) {
+                    Swal.fire({
+                        icon: 'error',
+                        text: tabControle[0]
+                    });
+                    $('#myModal').modal('hide');
+                } else {
+
+                    $.post("{{ (path('Moniteur_valider',{"idMoniteur":idMoniteur}))}}", {lesResaChoisi: tabResa,datePivot:dateEnvoyer},
+                            function (data) {
+                                $('#calendrier').html(data);
+                            });
+                }
+                var tabResa = [];
+                var tabControle = [];
+            }
+
+            function fermer() {
+                var tabResa = [];
+                var tabControle = [];
+                $("input[type='checkbox']:checked").each(function () {
+                    tabResa.push($(this).val());
+                });
+
+                // Ajouter les controle Front
+                controleReservation(tabResa, tabControle);
+                controleCaseMemeEtat(tabControle);
+				var dateEnvoyer = date.format("yyyy-MM-dd h:mm:ss");
+                // Ajouter confirmation action
+                if (tabControle.length !== 0) {
+                    Swal.fire({
+                        icon: 'error',
+                        text: tabControle[0]
+                    });
+                } else {
+                    $.post("{{ path('Moniteur_fermer',{"idMoniteur":idMoniteur})}}", {lesResaChoisi: tabResa,datePivot:dateEnvoyer},
+                            function (data) {
+                                $('#calendrier').html(data);
+                            });
+
+                }
+
+                var tabResa = [];
+                var tabControle = [];
+            }
+
+            function affecter() {
+                var tabResa = [];
+                var tabControle = [];
+                $("input[type='checkbox']:checked").each(function () {
+                    tabResa.push($(this).val());
+                });
+
+                // Ajouter les controle Front
+                controleReservation(tabResa, tabControle);
+                // Ajouter confirmation action
+                controleCaseMemeEtat(tabControle);
+				var dateEnvoyer = date.format("yyyy-MM-dd h:mm:ss");
+                if (tabControle.length !== 0) {
+                    Swal.fire({
+                        icon: 'error',
+                        text: tabControle[0]
+                    });
+                } else {
+                    var nom = $("#myInput").val();
+                    var plusDemiHeure = $("input[name='plusDemiHeure']:checked").length>0;
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ (path('Moniteur_controle_nom_client'))}}",
+                        data: {lesResaChoisi: tabResa, nom: nom ,plusDemiHeure:plusDemiHeure},
+                        async: false,
+                        complete: function (data) {
+                            if (data["responseText"] !== "") {
+                                Swal.fire({
+                                    icon: 'error',
+                                    text: data["responseText"]
+                                });
+                            } else {
+                                $.post("{{ path('Moniteur_affecter',{"idMoniteur":idMoniteur})}}", {lesResaChoisi: tabResa, nom: nom,plusDemiHeure:plusDemiHeure,datePivot:dateEnvoyer },
+                                        function (data) {
+                                            $('#calendrier').html(data);
+                                        });
+                            }
+                        }
+                    });
+                }
+
+                var tabResa = [];
+                var tabControle = [];
+            }
+
+            function annuler() {
+                var tabResa = [];
+                var tabControle = [];
+                $("input[type='checkbox']:checked").each(function () {
+                    tabResa.push($(this).val());
+                });
+
+                // Ajouter les controle Front
+                controleReservation(tabResa, tabControle);
+                // Ajouter confirmation action
+                controleCaseMemeEtat(tabControle);
+				var dateEnvoyer = date.format("yyyy-MM-dd h:mm:ss");
+                if (tabControle.length !== 0) {
+                    Swal.fire({
+                        icon: 'error',
+                        text: tabControle[0]
+                    });
+                } else {
+                    $.post("{{ (path('Moniteur_annuler',{"idMoniteur":idMoniteur}))}}", {lesResaChoisi: tabResa,datePivot:dateEnvoyer},
+                            function (data) {
+                                $('#calendrier').html(data);
+                            });
+                }
+                var tabResa = [];
+                var tabControle = [];
+            }	
+
+        });
+        $('#myModal').on('shown.bs.modal', function () {
+            $('#myInput').focus();
+        })
+
+        Date.prototype.format = function (format) { //author: meizz
+            var o = {
+                "M+": this.getMonth() + 1, //month
+                "d+": this.getDate(), //day
+                "h+": this.getHours(), //hour
+                "m+": this.getMinutes(), //minute
+                "s+": this.getSeconds(), //second
+                "q+": Math.floor((this.getMonth() + 3) / 3), //quarter
+                "S": this.getMilliseconds() //millisecond
+            }
+            if (/(y+)/.test(format))
+                format = format.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+            for (var k in o)
+                if (new RegExp("(" + k + ")").test(format))
+                    format = format.replace(RegExp.$1,
+                            RegExp.$1.length === 1 ? o[k] :
+                            ("00" + o[k]).substr(("" + o[k]).length));
+            return format;
+        }
+
+    </script>       
+
+
+
+
+    <script>
+        function autocomplete(inp, arr) {
+            /*the autocomplete function takes two arguments,
+             the text field element and an array of possible autocompleted values:*/
+            var currentFocus;
+            /*execute a function when someone writes in the text field:*/
+            inp.addEventListener("input", function (e) {
+                var a, b, i, val = this.value;
+                /*close any already open lists of autocompleted values*/
+                closeAllLists();
+                if (!val) {
+                    return false;
+                }
+                currentFocus = -1;
+                /*create a DIV element that will contain the items (values):*/
+                a = document.createElement("DIV");
+                a.setAttribute("id", this.id + "autocomplete-list");
+                a.setAttribute("class", "autocomplete-items");
+                /*append the DIV element as a child of the autocomplete container:*/
+
+                this.parentNode.appendChild(a);
+
+                /*for each item in the array...*/
+                for (i = 0; i < arr.length; i++) {
+                    /*check if the item starts with the same letters as the text field value:*/
+                    if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+                        /*create a DIV element for each matching element:*/
+                        b = document.createElement("DIV");
+                        /*make the matching letters bold:*/
+                        b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+                        b.innerHTML += arr[i].substr(val.length);
+                        /*insert a input field that will hold the current array item's value:*/
+                        b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+                        /*execute a function when someone clicks on the item value (DIV element):*/
+                        b.addEventListener("click", function (e) {
+                            /*insert the value for the autocomplete text field:*/
+                            inp.value = this.getElementsByTagName("input")[0].value;
+                            /*close the list of autocompleted values,
+                             (or any other open lists of autocompleted values:*/
+                            closeAllLists();
+                        });
+                        a.appendChild(b);
+                    }
+                }
+            });
+            /*execute a function presses a key on the keyboard:*/
+            inp.addEventListener("keydown", function (e) {
+                var x = document.getElementById(this.id + "autocomplete-list");
+                if (x)
+                    x = x.getElementsByTagName("div");
+                if (e.keyCode == 40) {
+                    /*If the arrow DOWN key is pressed,
+                     increase the currentFocus variable:*/
+                    currentFocus++;
+                    /*and and make the current item more visible:*/
+                    addActive(x);
+                } else if (e.keyCode == 38) { //up
+                    /*If the arrow UP key is pressed,
+                     decrease the currentFocus variable:*/
+                    currentFocus--;
+                    /*and and make the current item more visible:*/
+                    addActive(x);
+                } else if (e.keyCode == 13) {
+                    /*If the ENTER key is pressed, prevent the form from being submitted,*/
+                    e.preventDefault();
+                    if (currentFocus > -1) {
+                        /*and simulate a click on the "active" item:*/
+                        if (x)
+                            x[currentFocus].click();
+                    }
+                }
+            });
+            function addActive(x) {
+                /*a function to classify an item as "active":*/
+                if (!x)
+                    return false;
+                /*start by removing the "active" class on all items:*/
+                removeActive(x);
+                if (currentFocus >= x.length)
+                    currentFocus = 0;
+                if (currentFocus < 0)
+                    currentFocus = (x.length - 1);
+                /*add class "autocomplete-active":*/
+                x[currentFocus].classList.add("autocomplete-active");
+            }
+            function removeActive(x) {
+                /*a function to remove the "active" class from all autocomplete items:*/
+                for (var i = 0; i < x.length; i++) {
+                    x[i].classList.remove("autocomplete-active");
+                }
+            }
+            function closeAllLists(elmnt) {
+                /*close all autocomplete lists in the document,
+                 except the one passed as an argument:*/
+                var x = document.getElementsByClassName("autocomplete-items");
+                for (var i = 0; i < x.length; i++) {
+                    if (elmnt != x[i] && elmnt != inp) {
+                        x[i].parentNode.removeChild(x[i]);
+                    }
+                }
+            }
+            /*execute a function when someone clicks in the document:*/
+            document.addEventListener("click", function (e) {
+                closeAllLists(e.target);
+            });
+        }
+
+        /*An array containing all the country names in the world:*/
+
+        var users = $.parseJSON($.ajax({
+            url: "{{path('Moniteur_liste_nomCLient',{"idMoniteur":idMoniteur})}}",
+            dataType: "json",
+            async: false
+        }).responseText);
+
+        autocomplete(document.getElementById("myInput"), users);
+    </script>
+{% endblock %}

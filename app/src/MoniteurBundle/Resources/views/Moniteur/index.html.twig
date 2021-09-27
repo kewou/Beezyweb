@@ -1,0 +1,30 @@
+{% extends "PublicBundle:Public:index.html.twig" %}
+
+{% block header %}
+    <header id="header" class="alt">
+        <div id="div_logo">
+            <h1 id="logo">
+            <a href="{{path("Privee_accueil")}}">
+            <img src="{{ asset('bundles/public/assets/css/images/logo.jpg')}}" alt="logo" height="60" width="60"/></a></h1>
+        </div>  
+        <!-- Menu -->
+        {% block menu %}
+            <nav id="nav">
+                <a href="{{path("fos_moniteur_profile_show")}}">{{firstLetter(user.prenom)}}. {{user.nom}}<img src="{{ asset('bundles/public/assets/css/images/icon_user.png')}}" id="icon_user" alt="icon_user" height="15" width="20"/></a>
+                <a href="{{path("Moniteur_calendrier")}}">Calendrier</a>
+                <a href="{{path("fos_moniteur_profile_edit")}}">Paramètres</a>
+                <a href="{{path("fos_user_security_logout")}}"  id="deconnexionBouton">Deconnexion</a>                    
+            </nav>  
+        {% endblock %}          
+    </header>        
+{% endblock %}
+
+{% block contenu %}
+    <div>
+        <h2 id="titreAccueil">Beezyweb</h2>    
+        <p id="presBeezyweb">Vous êtes moniteur ! <br>
+            Planifier les réservations est désormais pour vous un jeu d'enfants.        
+        </p>
+        <a href="{{path("Moniteur_calendrier")}}" id="creerCompteBis">Calendrier</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,32 @@
+Privee_accueil:
+    path: /
+    defaults: { _controller: PriveeBundle:Privee:index }
+    
+Privee_calendrier:
+    path: /calendrier
+    defaults: {_controller: CalendrierBundle:Calendrier:calendrier }
+        
+Privee_calendrier:
+    path: /calendrierContenu
+    defaults: {_controller: CalendrierBundle:Calendrier:calendrierContenu }
+    
+Privee_calendrierPagination:
+    path: /calendrier/pagination
+    defaults: {_controller: CalendrierBundle:Calendrier:pagination }    
+        
+Privee_reserver_controle:
+    path: /calendrier/reserver/controle
+    defaults: {_controller: ReservationBundle:Reservation:controleReservation }
+    
+Privee_reserver:
+    path: /calendrier/reserver
+    defaults: { _controller: ReservationBundle:Reservation:reserver }
+    
+Privee_annuler:
+    path: /calendrier/annuler
+    defaults: { _controller: ReservationBundle:Reservation:annulerUser }
+    
+Privee_annuler_contenu:
+    path: /calendrier/annuler/contenu
+    defaults: { _controller: ReservationBundle:Reservation:annulerContenu }
+

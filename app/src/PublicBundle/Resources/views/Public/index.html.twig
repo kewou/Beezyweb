@@ -1,0 +1,54 @@
+{% extends "::base.html.twig" %}
+
+{% block stylesheets %}
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+    <link rel="stylesheet" href="{{ asset('bundles/public/assets/css/main.css')}}" />
+    <link rel="stylesheet" href="{{ asset('bundles/public/css/screen.css') }}" type="text/css" media="screen">
+    <!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+    <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+{% endblock %}
+
+{% block header %}
+    <header id="header">
+        <div id="div_logo">
+            <h1 id="logo"><a href="{{path("Public_accueil")}}"><img src="{{ asset('bundles/public/assets/css/images/logo.jpg')}}" alt="logo" /></a></h1>
+        </div>
+        <!-- Menu -->
+        {% block menu %}
+        <nav id="nav">            
+            <a href="{{path("Public_contact")}}">Contact</a>
+            <a href="{{path("fos_user_security_login")}}">Connexion</a>    
+            <a href="{{path("fos_user_registration_register")}}" id="creerCompte">Créer un compte</a>            
+        </nav>            
+        {% endblock %}        
+    </header>        
+{% endblock %}
+
+
+
+{% block contenu %}
+    <div>        
+        <div id="accueil_left">
+            <h2 id="titreAccueil">Beezyweb</h2>
+            <p id="presBeezyweb">Une plateforme vous permettant de réserver en ligne pour une prestation quelconque.</p>
+            <p id="presBeezyweb"><br>Plus besoin d'appeler, en quelques cliques, prenez rendez-vous avec votre coiffeur, medecin, moniteur ... 
+            </p>
+            <a href="{{path("fos_user_registration_register")}}" id="creerCompteBis">Créer un compte</a>
+        </div>
+        <div class="slides_container">
+            <div id="accueil_right">
+					<img src="{{ asset('bundles/public/images/coiffure_afro_homme.jpg')}}" alt="coiffure_homme"/>
+					<img src="{{ asset('bundles/public/images/coiffure_afro_femme.jpg')}}" alt="coiffure_femme"/>
+					<img src="{{ asset('bundles/public/images/auto-ecole.jpg')}}" alt="route"/>
+                    <img src="{{ asset('bundles/public/assets/css/images/brune_conduite.jpg')}}" alt="voiture"/>
+                    <img src="{{ asset('bundles/public/images/auto-ecole.jpg')}}" alt="route"/>
+                    <img src="{{ asset('bundles/public/images/panneau.jpg')}}" alt="panneau"/>
+                    <img src="{{ asset('bundles/public/images/conduite.jpg')}}" alt="permis"/>
+            </div>
+        </div>
+        <div class="clearer"></div>
+    </div>
+{% endblock %}
+

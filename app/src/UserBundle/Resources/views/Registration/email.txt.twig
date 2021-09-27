@@ -1,0 +1,29 @@
+{% block subject %}
+{% autoescape false %}
+{{ user.nom }} {{ user.prenom }}  Bienvenue chez Beezyweb !
+{% endautoescape %}
+{% endblock %}
+
+{% block body_text %}
+{% autoescape false %}
+Bonjour {{ user.prenom }},
+
+Bravo ! vous êtes désormais inscrit(e) chez Beezyweb.
+Une application qui vous facilitera les échanges avec votre établiessement.
+
+Merci d'activer votre compte en cliquant sur le lien suivant : 
+{{confirmationUrl}}
+
+Vous allez vite adopter la simplicité d'utilisation et toutes les possibilités offertes par Beezyweb.
+
+Bien cordialement
+L'équipe Beezyweb.
+
+https://beezyweb.net
+
+{% endautoescape %}
+{% endblock %}
+
+{% block body_html %}{% endblock %}
+
+
