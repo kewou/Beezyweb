@@ -96,7 +96,10 @@ abstract class AbstractCalendrier {
 			// valeur à modifier pour obtenir le lundi
 			$x=intval($dateDuJour->format('w'))-1;		
 			$dateUpdate->sub(new DateInterval('P'.$x.'D'));
-		}
+		}else {
+                $dateUpdate=clone $dateDuJour;
+                $dateUpdate->add(new DateInterval('P1D'));
+              }
 		return $dateUpdate;
 	}
     

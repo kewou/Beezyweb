@@ -22,6 +22,7 @@ class SessionHandler {
     protected $router;
     protected $maxIdleTime;
     
+	
     public function __construct(SessionInterface $session, TokenStorageInterface $securityToken, RouterInterface $router, $maxIdleTime = 0){    
         $this->session = $session;
         $this->securityToken = $securityToken;
@@ -36,7 +37,7 @@ class SessionHandler {
         }
 
         if ($this->maxIdleTime > 0) {
-		$this->session->start();
+			$this->session->start();
 
             $lapse = time() - $this->session->getMetadataBag()->getLastUsed();
 

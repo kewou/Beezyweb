@@ -31,13 +31,16 @@ class CalendrierService {
 	
 	function genereDatePivot(){ 
 		// Le debut de la semaine est Lundi
-		$dateDuJour=new DateTime();
-		if($dateDuJour->format('w')!=="0"){
+		$dateDuJour=new DateTime();		
+		if($dateDuJour->format('w')!=="0"){			
 			$dateUpdate=clone $dateDuJour;
 			// valeur à modifier pour obtenir le lundi
 			$x=intval($dateDuJour->format('w'))-1;		
 			$dateUpdate->sub(new DateInterval('P'.$x.'D'));
-		}
+			}else{ 				
+		        $dateUpdate=clone $dateDuJour;
+		        $dateUpdate->add(new DateInterval('P1D'));
+		      }		
 		return $dateUpdate;
 	}
 }

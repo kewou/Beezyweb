@@ -113,7 +113,7 @@ class UserService {
             $moniteur = $this->getUser(15);
             $entreprise = $moniteur->getEntreprise();
             // Mark coiffure : id Admin =24
-        } else if ($user->getEntreprise() == "Marco Coiffure") {
+        } else if ($user->getEntreprise() == "Campus") {
             $moniteur = $this->getUser(24);
             $entreprise = $moniteur->getEntreprise();
         }

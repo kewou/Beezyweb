@@ -24,8 +24,8 @@ class CalendrierController extends Controller{
         $userService = $this->get('user_service');          
         $calendrierService =$this->get('calendrier_service');        
         $reservations = $userService->getAllReservationsFromClient($user->getId());
-        $cal = CalendrierPrivee::getInstance($reservations,$user);
-        $cal->setDateCourante($calendrierService->getDatePivot());
+        $cal = CalendrierPrivee::getInstance($reservations,$user);		
+        $cal->setDateCourante($calendrierService->getDatePivot());		
         if($user->getEntreprise()->getId()==2){
             return $this->render("CalendrierBundle:Calendrier:calendrierPriveeAutoEcole.html.twig",array('cal'=>$cal,'user'=>$user) );
         }else{
