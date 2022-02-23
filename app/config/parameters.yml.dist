@@ -2,19 +2,22 @@
 # Set parameters here that may be different on each deployment target of the app, e.g. development, staging, production.
 # https://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
 parameters:
-    database_host: 127.0.0.1
+    database_host: beezyweb.net.mysql
     database_port: ~
-    database_name: symfony
-    database_user: root
-    database_password: ~
+    database_name: beezyweb_net
+    database_user: beezyweb_net
+    database_password: 3mKfxg9b
     # You should uncomment this if you want to use pdo_sqlite
     #database_path: "%kernel.root_dir%/data.db3"
      
     mailer_transport: smtp
-    mailer_host: 127.0.0.1
-    mailer_user: ~
-    mailer_password: ~	
+    mailer_host: mailout.one.com
+    mailer_user: beezyweb.net@beezyweb.net
+    mailer_password: ~elphine12	
               
     # A secret key that's used to generate certain security-related tokens
     secret: ThisTokenIsNotSoSecretChangeIt
     session_max_idle_time: 300	
+	
+	
+	

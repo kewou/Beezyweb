@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.min.css">        
         <title>{% block title %}Beezyweb{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
@@ -201,6 +201,12 @@
         <script src="{{ asset('bundles/user/js/message_fr.js')}}"></script> 
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
         <script type="text/javascript" src="{{ asset('bundles/public/bootstrap/js/bootstrap.min.js')}}"></script>
+        <script src="{{ asset('bundles/public/js/intlTelInput.js')}}"></script>
+        <script> $("#fos_user_registration_form_telephone").intlTelInput({
+        utilsScript: "{{ asset('bundles/public/js/utils.js')}}", //file from google’s libphonenumber library
+        autoPlaceholder:true});
+        </script>
+        
         <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
     </body>

@@ -20,17 +20,18 @@ class InscriptionType extends AbstractType{
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nom','text',array('label'=>'Nom','pattern'=>'.{2,}','max_length'=>'15'))
-            ->add('prenom','text',array('label'=>'Prénom','pattern'=>'.{2,}','max_length'=>'15'))
-            ->add('telephone','number',array('label'=>'Téléphone','max_length'=>'10'))
+            ->add('nom','text',array('label'=>' ','pattern'=>'.{2,}','max_length'=>'15'))
+            ->add('prenom','text',array('label'=>' ','pattern'=>'.{2,}','max_length'=>'15'))
+            ->add('email','email',array('label'=>' '))
+            ->add('telephone','number',array('label'=>' '))
             ->add('entreprise','choice',array('label'=>'Choix de l\'auto-école',
                 'choices' => array('Campus'=>'Campus','Auto-Ecole Grande Delle'=>'Auto-Ecole Grande Delle'),
                                    'multiple' => false,'preferred_choices' => array('Slimeur Coiffure')
             ))
             ->add('plainPassword', 'repeated', array(
                 'type' => 'password',            	                
-                'first_options' => array('label' => 'Mot de passe (mdp)','max_length'=>'20'),
-                'second_options' => array('label' => 'Confirmation mdp'),'max_length'=>'20',
+                'first_options' => array('label' => ' ','max_length'=>'20'),
+                'second_options' => array('label' => ' '),'max_length'=>'20',
                 'invalid_message' => 'fos_user.password.mismatch',
             ));
         $builder->remove('username');
