@@ -203,7 +203,8 @@
         <script type="text/javascript" src="{{ asset('bundles/public/bootstrap/js/bootstrap.min.js')}}"></script>
         <script src="{{ asset('bundles/public/js/intlTelInput.js')}}"></script>
         <script> $("#fos_user_registration_form_telephone").intlTelInput({
-        utilsScript: "{{ asset('bundles/public/js/utils.js')}}", //file from google’s libphonenumber library
+        utilsScript: "{{ asset('bundles/public/js/utils.js')}}", //file from google’s libphonenumber library,
+        onlyCountries: ["fr","cm","ga","ca"],
         autoPlaceholder:true});
         </script>
         
