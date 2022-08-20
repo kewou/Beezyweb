@@ -6,6 +6,7 @@
     <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
     <link rel="stylesheet" href="{{ asset('bundles/public/assets/css/main.css')}}" />
     <link rel="stylesheet" href="{{ asset('bundles/public/css/screen.css') }}" type="text/css" media="screen">
+    <link rel="stylesheet" href="{{ asset('bundles/public/css/intlTelInput.css')}}" />
     <!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
     <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 {% endblock %}
@@ -13,7 +14,7 @@
 {% block header %}
     <header id="header">
         <div id="div_logo">
-            <h1 id="logo"><a href="{{path("Public_accueil")}}"><img src="{{ asset('bundles/public/assets/css/images/logo.jpg')}}" alt="logo" height="60" width="60"/></a></h1>
+            <h1 id="logo"><a href="{{path("Public_accueil")}}"><img src="{{ asset('bundles/public/assets/css/images/logo.jpg')}}" alt="logo"/></a></h1>
         </div>
         <!-- Menu -->
         {% block menu %}
@@ -30,9 +31,24 @@
 
 {% block contenu %}
     <div>
-        <h2 id="titreAccueil">Beezyweb</h2>    
-        <p id="presBeezyweb">Votre plateforme de prise de rendez-vous entièrement en ligne.</p>
-        <a href="{{path("fos_user_registration_register")}}" id="creerCompteBis">Créer un compte</a>
+        <div id="accueil_left">
+            <h2 id="titreAccueil">Beezyweb</h2>
+            <p id="presBeezyweb">Une plateforme vous permettant de réserver des heures de conduite en ligne.</p>
+            <p id="presBeezyweb"><br>Plus besoin de contacter votre auto-école,
+                synchroniser vos disponibilités avec leur planning via cette application.
+            </p>
+            <a href="{{path("fos_user_registration_register")}}" id="creerCompteBis">Créer un compte</a>
+        </div>
+        <div class="slides_container">
+            <div id="accueil_right">					
+					<img src="{{ asset('bundles/public/images/auto-ecole.jpg')}}" alt="route"/>
+                    <img src="{{ asset('bundles/public/assets/css/images/brune_conduite.jpg')}}" alt="voiture"/>
+                    <img src="{{ asset('bundles/public/images/auto-ecole.jpg')}}" alt="route"/>
+                    <img src="{{ asset('bundles/public/images/panneau.jpg')}}" alt="panneau"/>
+                    <img src="{{ asset('bundles/public/images/conduite.jpg')}}" alt="permis"/>
+            </div>
+        </div>
+        <div class="clearer"></div>
     </div>
 {% endblock %}
 

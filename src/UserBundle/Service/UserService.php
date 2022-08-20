@@ -108,19 +108,20 @@ class UserService {
     }
 
     public function affecteDefault($user) {
-        // Grande Delle : id Admin =15
-        if ($user->getEntreprise() == "Auto-Ecole Grande Delle") {
+        // Grande Delle : id Admin = 48
+        if ($user->getEntreprise() == "Mami Hassan") {
             $moniteur = $this->getUser(15);
             $entreprise = $moniteur->getEntreprise();
             // Mark coiffure : id Admin =24
-        } else if ($user->getEntreprise() == "Marco Coiffure") {
-            $moniteur = $this->getUser(24);
+        } else if ($user->getEntreprise() == "Campus") {
+            $moniteur = $this->getUser(1);
             $entreprise = $moniteur->getEntreprise();
         }
         $user->setMoniteur($moniteur);
-        $user->setAdministrateur($moniteur);
+        $user->setAdministrateur($moniteur->getAdministrateur());
         $user->setEntreprise($entreprise);
         $this->entityManager->flush();
+        $user->setSolde(1);
     }
 
     public function affecteMoniteur($user, $idMoniteur) {

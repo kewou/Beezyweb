@@ -97,7 +97,6 @@ class User extends BaseUser {
     /**
      * @var integer
      * @ORM\Column(name="telephone", type="integer")
-     * @Assert\Regex("/^[6-7][0-9]{8}$/",message = "Numero non valide : exemple => 615664758")
      */
     protected $telephone;
 

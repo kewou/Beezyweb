@@ -39,8 +39,7 @@ class UserRepository extends EntityRepository{
      * @Secure(roles="ROLE_SUPER_ADMIN")
      */
     public function findAllMoniteurs($idEntreprise){		
-        $query = "SELECT * FROM user U where U.entreprise_id =:idEntreprise AND (U.roles like '%ROLE_SUPER_ADMIN%' 
-		          or U.roles like '%ROLE_ADMIN%') ";
+        $query = "SELECT * FROM user U where U.entreprise_id =:idEntreprise AND (U.roles like '%ROLE_ADMIN%')";
         $statement = $this->getEntityManager()->getConnection()->prepare($query);
 		$statement->bindValue('idEntreprise', $idEntreprise);
         $statement->execute();

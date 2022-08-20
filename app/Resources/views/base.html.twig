@@ -7,16 +7,13 @@
         <title>{% block title %}Beezyweb{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-<script
-  src="https://code.jquery.com/jquery-2.2.4.js"
-  integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
-  crossorigin="anonymous"></script>
+    <script
+        src="https://code.jquery.com/jquery-2.2.4.js"
+        integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+        crossorigin="anonymous">
+    </script>
 
-        <style> 
-            
 
-*
-</style>
     </head>
     <body class="landing">
         <!-- Header -->
@@ -38,6 +35,13 @@
         </div>            
         <!-- Footer -->
         <footer id="footer">
+            <div id="linksFooter">
+                <ul>
+                    <a href="{{path('Public_mentionLegale')}}">Mentions légales</a> |
+                    <a href="{{path('Public_contact')}}">Contact</a>  |                  
+                    <a href="{{path('fos_user_registration_register')}}">Inscription</a>
+                </ul>
+            </div>
             <p>
                 &copy; NOUMIA KEWOU. All rights reserved. 2015-{{ 'now'|date('Y') }}
             </p>
@@ -46,6 +50,38 @@
         <script type="text/javascript" src="{{ asset('bundles/public/js/toTop/js/easing.js')}}"></script> 
         <script type="text/javascript" src="{{ asset('bundles/public/js/toTop/js/jquery.ui.totop.js')}}"></script>
         <script type="text/javascript" src="{{ asset('bundles/public/js/toTop/js/launch.js')}}"></script>
+
+        <script type="text/javascript" src="{{ asset('bundles/public/assets/js/jquery.slides.min.js')}}"></script>
+		<script>
+			$(function() {
+			  $('#accueil_right').slidesjs({
+				width: 940,
+				height: 528,
+				play: {
+				  active: true,
+				  auto: true,
+				  interval: 4000,
+				  swap: true
+				}
+			  });
+			});
+		</script>
+        <script type="text/javascript" src="{{ asset('bundles/public/assets/js/jquery.slides.min.js')}}"></script>
+        <script>
+                $(function() {
+                  $('#accueil_right').slidesjs({
+                        width: 940,
+                        height: 528,
+                        play: {
+                          active: true,
+                          auto: true,
+                          interval: 4000,
+                          swap: true
+                        }
+                  });
+                });
+        </script>                
+		
         
         <script type="text/javascript" src="{{ asset('bundles/public/assets/js/skel.min.js')}}"></script> 
         <script type="text/javascript" src="{{ asset('bundles/public/assets/js/jquery.scrolly.min.js')}}"></script>
@@ -60,6 +96,12 @@
         <script src="{{ asset('bundles/user/js/message_fr.js')}}"></script> 
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
         <script type="text/javascript" src="{{ asset('bundles/public/bootstrap/js/bootstrap.min.js')}}"></script>
+        <script src="{{ asset('bundles/public/js/intlTelInput.js')}}"></script>
+        <script> $("#fos_user_registration_form_telephone").intlTelInput({
+            utilsScript: "{{ asset('bundles/public/js/utils.js')}}", //file from google’s libphonenumber library,
+            onlyCountries: ["fr","cm","ga","ca"],
+            autoPlaceholder:true});
+        </script>        
 
     </body>
 </html>

@@ -154,7 +154,9 @@ class PublicController extends Controller {
 
     
 
-    
+    function Public_mentionLegaleAction(){
+       return $this->render("PublicBundle:Public:mentionLegale.html.twig");
+    }
 
 
 

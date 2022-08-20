@@ -1,0 +1,9 @@
+{% extends  "PublicBundle:Public:index.html.twig" %}
+
+{% block contenu %}
+    <div>
+        <h2 id="titreAccueil">Beezyweb</h2>    
+        <p id="presBeezyweb">Votre message à bien été envoyé.</p>
+        <a href="{{path("fos_user_registration_register")}}" id="creerCompteBis">Créer un compte</a>
+    </div>
+{% endblock %}

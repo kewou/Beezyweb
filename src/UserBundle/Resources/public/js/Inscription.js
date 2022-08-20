@@ -17,12 +17,8 @@ $(document).ready(function(){
         }, "Veuillez saisir un prénom de 3 lettres min.");
         
     $.validator.addMethod("validPhone",function(value,element) {
-            if(/0[6|7]{1}[0-9]{8}/.test(value)){
-                return true;
-            }else{
-                return false;
-            };
-        }, "Veuillez saisir un numéro correct ! ex => 0615664758.");
+        return $("#fos_user_registration_form_telephone").intlTelInput("isValidNumber")
+        }, "Veuillez saisir un numéro correct !");
          
     var form = $("#formInscription");
     form.validate({
