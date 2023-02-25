@@ -1,13 +1,22 @@
-Entreprise     =>   iD : 1     Mark-coiffeur
-                    iD : 2     Auto-Ecole Grande Delle
+Entreprise     =>   iD : 1     Coiffeur                       Plage horaire 1
+                    iD : 2     Auto-Ecole Grande Delle        Plage horaire 2
 
                
-Administrateur =>   iD : 24    kewou.noumia@gmail.com    => Admin ( 1 ) 
-               =>   iD : 15    stephaneromain@hotmail.fr => Admin ( 2 ) 
+Administrateur =>   iD : 24    kewou.noumia@gmail.com    => Admin ( 1 )  pass = testtest
+               =>   iD : 15    stephaneromain@hotmail.fr => Admin ( 2 )  pass = bonjour1
+
+Gerant
+       Coiffeur
+                Entreprise 1, Admin 24
+                                        id => 1, email = joelderrik@gmail.com
 
 Compte User
 1- id(27) - djodjoman@yahoo.fr delphine12   Admin => (24) Entreprise => (1)  Coiffeur
 1- id(26) - joel.noumia@gfi.fr testtest     Admin => (15) Entreprise => (2)  Auto-Ecole
+
+WorkFlow Inscription :
+
+
 
 
 Jmeter:

@@ -17,3 +17,8 @@ ALTER TABLE reservation ADD dtype VARCHAR(255) NOT NULL, ADD typeCoiffure VARCHA
 
 
 /////   PAS ENCORE MEP  ///
+
+
+/////   Commit : beezyweb_2023_start  ///
+UPDATE `entreprise` SET `nom` = 'HairRashCut' WHERE `entreprise`.`id` = 1;
+UPDATE `user` SET `entreprise_id` = '1', `administrateur_id` = '24' WHERE `user`.`id` = 1;

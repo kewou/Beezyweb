@@ -9,56 +9,88 @@ use Doctrine\ORM\EntityManager as EM;
  *
  * @author frup73532
  */
-class UserService {
+class UserService
+{
 
-    private $entityManager;   
+    private $entityManager;
 
-    public function __construct(EM $em) {
+    public function __construct(EM $em)
+    {
         $this->entityManager = $em;
     }
 
-    public function getAllUsers() {
+    public function affecteDefault($user)
+    {
+        // Grande Delle : id Admin = 15
+        if ($user->getEntreprise() == "Mami Hassan") {
+            // Gerant par defaut : id =
+            $moniteur = $this->getUser(15);
+            $entreprise = $moniteur->getEntreprise();
+            // Coiffure : id Admin =24
+        } else if ($user->getEntreprise() == "HairRashCut") {
+            // Gerant par defaut : id = 1
+            $moniteur = $this->getUser(1);
+            $entreprise = $moniteur->getEntreprise();
+        }
+        $user->setMoniteur($moniteur);
+        $user->setAdministrateur($moniteur->getAdministrateur());
+        $user->setEntreprise($entreprise);
+        $this->entityManager->flush();
+        $user->setSolde(1);
+    }
+
+    public function getAllUsers()
+    {
         return $this->entityManager->getRepository('UserBundle:User')->findAllUsers();
     }
 
-    public function getAllUsersByFiltre($nomClient, $idAdmin) {
+    public function getAllUsersByFiltre($nomClient, $idAdmin)
+    {
         return $this->entityManager->getRepository('UserBundle:User')->findAllUsersByFiltre($nomClient, $idAdmin);
     }
 
-    public function getAllMoniteurs($idEntreprise) {
+    public function getAllMoniteurs($idEntreprise)
+    {
         return $this->entityManager->getRepository('UserBundle:User')->findAllMoniteurs($idEntreprise);
     }
 
-    public function getAllUsersMoniteur($idMoniteur) {
+    public function getAllUsersMoniteur($idMoniteur)
+    {
         return $this->entityManager->getRepository('UserBundle:User')->findUsersByMoniteur($idMoniteur);
     }
 
-    public function getUser($id) {
+    public function getUser($id)
+    {
         return $this->entityManager->getRepository('UserBundle:User')->findOneById($id);
     }
 
-    public function getUserByName($nom) {
+    public function getUserByName($nom)
+    {
         return $this->entityManager->getRepository('UserBundle:User')->findOneByNom($nom);
     }
 
-    public function deleteUser($id) {
+    public function deleteUser($id)
+    {
         $user = $this->entityManager->getRepository('UserBundle:User')->findOneById($id);
         $this->entityManager->remove($user);
         $this->entityManager->flush();
     }
 
-    public function getReservationsByClient($idUser) {
+    public function getReservationsByClient($idUser)
+    {
         return $this->entityManager->getRepository('UserBundle:User')->findReservations($idUser);
     }
 
-    public function switchMoniteur($user, $moniteur) {
+    public function switchMoniteur($user, $moniteur)
+    {
         $user->setMoniteur($moniteur);
         $this->entityManager->flush();
     }
 
-    public function addArgent($nom, $sommeArgent) {
+    public function addArgent($nom, $sommeArgent)
+    {
         $user = $this->getUserByName($nom);
-        $prixResa=$user->getEntreprise()->getPrixResa();
+        $prixResa = $user->getEntreprise()->getPrixResa();
         $money = $user->getMoney();
         if ($money >= 0) {
             $moneyUpdate = $money + $sommeArgent;
@@ -83,22 +115,25 @@ class UserService {
         return $user;
     }
 
-    public function removeUnArgent($nom) {
+    public function removeUnArgent($nom)
+    {
         $user = $this->getUserByName($nom);
         $user->setSolde($user->getSolde() - 1);
         $this->entityManager->flush();
         return $user;
     }
 
-    public function addUnArgent($nom) {
+    public function addUnArgent($nom)
+    {
         $user = $this->getUserByName($nom);
         $user->setSolde($user->getSolde() + 1);
         $this->entityManager->flush();
         return $user;
     }
 
-    public function removeArgent($nom, $sommeArgent) {
-        $prixResa=$user->getEntreprise()->getPrixResa();
+    public function removeArgent($nom, $sommeArgent)
+    {
+        $prixResa = $user->getEntreprise()->getPrixResa();
         $nbJeton = intdiv($sommeArgent, $prixResa);
         $user = $this->getUserByName($nom);
         $user->setSolde($user->getSolde() + $nbJeton);
@@ -107,31 +142,18 @@ class UserService {
         return $user;
     }
 
-    public function affecteDefault($user) {
-        // Grande Delle : id Admin = 48
-        if ($user->getEntreprise() == "Mami Hassan") {
-            $moniteur = $this->getUser(15);
-            $entreprise = $moniteur->getEntreprise();
-            // Mark coiffure : id Admin =24
-        } else if ($user->getEntreprise() == "Campus") {
-            $moniteur = $this->getUser(1);
-            $entreprise = $moniteur->getEntreprise();
-        }
-        $user->setMoniteur($moniteur);
-        $user->setAdministrateur($moniteur->getAdministrateur());
-        $user->setEntreprise($entreprise);
-        $this->entityManager->flush();
-        $user->setSolde(1);
-    }
 
-    public function affecteMoniteur($user, $idMoniteur) {
+
+    public function affecteMoniteur($user, $idMoniteur)
+    {
         $moniteur = $this->getUser($idMoniteur);
         $user->setMoniteur($moniteur);
         $this->entityManager->flush();
     }
 
     // Retourne toutes les réservations du moniteur de idClient
-    public function getAllReservationsFromClient($idClient) {
+    public function getAllReservationsFromClient($idClient)
+    {
         $clients = $this->getAllUsersMoniteur($this->getUser($idClient)->getMoniteur()->getId());
         $reservations = array();
         foreach ($clients as $client) {
@@ -144,7 +166,8 @@ class UserService {
     }
 
     // Retourne toutes les réservations d'un moniteur
-    public function getAllReservationsFromMoniteur($idMoniteur) {
+    public function getAllReservationsFromMoniteur($idMoniteur)
+    {
         $clients = $this->getAllUsersMoniteur($idMoniteur);
         $reservations = array();
         foreach ($clients as $client) {
@@ -156,16 +179,17 @@ class UserService {
         return $reservations;
     }
 
-    public function getEM() {
+    public function getEM()
+    {
         return $this->entityManager;
     }
 
     // Retourne un user DTO
-    public function getUserDTO($client) {
+    public function getUserDTO($client)
+    {
         $userDTO = $client['nom'];
         //$userDTO=array("id"=>$client['id'],"nom"=>$client['nom'],"prenom"=>$client['prenom']);
         //$userDTO = new UserDTO($client['id'],$client['nom'],$client['prenom']);
         return $userDTO;
     }
-
 }
